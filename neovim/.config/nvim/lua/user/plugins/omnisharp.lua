@@ -1,6 +1,5 @@
 return {
-  "Omnisharp/omnisharp-vim",
-  opts = {},
+  "OmniSharp/omnisharp-vim",
   event = "LspAttach",
 
   -- config = function()
