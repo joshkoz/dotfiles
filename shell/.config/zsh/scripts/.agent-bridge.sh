@@ -5,7 +5,6 @@ export SSH_AUTH_SOCK=$HOME/.ssh/agent.sock
 ALREADY_RUNNING=$(ps -auxww | grep -q "[n]piperelay.exe -ei -s //./pipe/openssh-ssh-agent"; echo $?)
 
 if [[ $ALREADY_RUNNING != "0" ]]; then
-    echo "got here"
     if [[ -S $SSH_AUTH_SOCK ]]; then
         # not expecting the socket to exist as the forwarding command isn't running (http://www.tldp.org/LDP/abs/html/fto.html)
         echo "removing previous socket..."
