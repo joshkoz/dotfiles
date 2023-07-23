@@ -9,6 +9,8 @@ Ensure [AstroNvim](https://astronvim.com/) is setup.
 
 2. Cd to the root of the repository and run the ./init_dotfiles.sh script. This will symlink
 
+3. Optionally copy shell/.config/zsh/secrets.template to shell/.config/zsh/secrets.zsh and set the secrets.
+
 # How it works
 
 The init script looks through all the directories in the root of this repo and runs stow on them with the target as $HOME.
