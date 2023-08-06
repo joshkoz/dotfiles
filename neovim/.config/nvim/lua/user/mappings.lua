@@ -33,6 +33,7 @@ return {
     d = { '"_d', desc = "Delete to black-hole register" },
     gh = { function() vim.lsp.buf.hover() end, desc = "Hover diagnostics" },
     gd = { function() vim.lsp.buf.definition() end, desc = "Go to definition" },
+    gs = { function() vim.lsp.buf.signature_help() end, desc = "Signature Help" },
     ["<leader>lr"] = { function() vim.lsp.buf.rename() end, desc = "Rename symbol" },
     ["<leader>b"] = { name = "Buffers" },
     ["<leader>bb"] = { "<cmd>tabnew<cr>", desc = "New tab" },
