@@ -5,6 +5,9 @@ export HISTSIZE=1000
 export SAVEHIST=1000
 unsetopt beep
 bindkey -v
+bindkey -e
+bindkey "^[[1;3C" forward-word
+bindkey "^[[1;3D" backward-word
 zstyle :compinstall filename '/home/joshua/.zshrc'
 
 autoload -Uz compinit
