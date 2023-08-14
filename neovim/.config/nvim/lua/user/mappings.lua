@@ -10,6 +10,7 @@ return {
     ["<C-k>"] = { "<S-{>", desc = "Jump to previous empty line" },
     ["<C-.>"] = { function() vim.lsp.buf.code_action() end, desc = "LSP code action" }, -- Ctrl+. comes through as ^N
     ["<C-n>"] = { function() vim.lsp.buf.code_action() end, desc = "LSP code action" },
+    ["<leader>fg"] = { function() require("telescope.builtin").git_files() end, desc = "Find Git Files" },
     ["<S-j>"] = { function() vim.cmd "wincmd j" end, desc = "Move split focus down" },
     ["<S-k>"] = { function() vim.cmd "wincmd k" end, desc = "Move split focus up" },
     ["<S-h>"] = { function() vim.cmd "wincmd h" end, desc = "Move split focus left" },
@@ -40,7 +41,7 @@ return {
     ["<leader>bc"] = { "<cmd>BufferLinePickClose<cr>", desc = "Pick to close" },
     ["<leader>bj"] = { "<cmd>BufferLinePick<cr>", desc = "Pick to jump" },
     ["<leader>bt"] = { "<cmd>BufferLineSortByTabs<cr>", desc = "Sort by tabs" },
-    ["<C-P>"] = { "<cmd>Telescope find_files<cr>", desc = "Find Files" },
+    ["<C-P>"] = { "<cmd>Telescope git_files<cr>", desc = "Find Git Files" },
     ["<C-f>"] = { "<cmd>Telescope live_grep<cr>", desc = "Search across all files" },
     ["<C-W>"] = { ":bd<Cr>", desc = "Close Buffer" },
     -- ["<C-B>"] = { "<cmd>Telescope buffers<cr>", desc = "Find buffers" }, // tmux/zellij replaces ctrl b
