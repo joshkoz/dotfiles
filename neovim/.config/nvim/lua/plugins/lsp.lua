@@ -84,7 +84,7 @@ return {
       capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
       capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-      local on_attach = function()
+      local on_attach = function(_, bufnr)
         local nmap = function(keys, func, desc)
           if desc then
             desc = 'LSP: ' .. desc
