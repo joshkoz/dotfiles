@@ -62,7 +62,15 @@ return {
         end,
         desc = "[G]it [S]tage Hunk"
       },
-      { "<leader>gr", ":Gitsigns reset_hunk<cr>", desc = "[G]it [R]eset Hunk" }
+      {
+        "<leader>gr",
+        function()
+          local gitsigns = require 'gitsigns';
+          gitsigns.reset_hunk()
+          refresh_fugitive()
+        end,
+        desc = "[G]it [R]eset Hunk"
+      }
     }
   },
   'tpope/vim-rhubarb',
