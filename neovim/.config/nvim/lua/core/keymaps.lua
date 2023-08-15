@@ -21,5 +21,5 @@ vim.keymap.set('n', 'gl', vim.diagnostic.open_float, { desc = 'Open floating dia
 vim.keymap.set('n', '<leader><leader>', "<cmd>b#<cr>", { desc = "Go to the last buffer" })
 vim.keymap.set('n', 'dd', '"_dd', { desc = "Delete line without yanking" })
 vim.keymap.set('n', 'd', '"_d', { desc = "Delete to black-hold register" })
-vim.keymap.set('n', "<C-j>", "<S-}>", { desc = "Jump to next empty line" })
-vim.keymap.set('n', '<C-k>', "<S-{>", { desc = "Jump to previous empty line" })
+-- vim.keymap.set('n', "<C-j>", "<S-}>", { desc = "Jump to next empty line" })
+-- vim.keymap.set('n', '<C-k>', "<S-{>", { desc = "Jump to previous empty line" })
