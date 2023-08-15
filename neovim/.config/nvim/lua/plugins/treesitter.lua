@@ -9,11 +9,11 @@ return {
   opts = {
     -- Add languages to be installed here that you want installed for treesitter
     -- https://github.com/nvim-treesitter/nvim-treesitter#supported-languages
-    ensure_installed = { 
+    ensure_installed = {
       'c', 'cpp', 'lua',
       'python', 'rust', 'tsx',
       'typescript', 'vimdoc', 'vim',
-      'c_sharp','markdown', 'html' 
+      'c_sharp', 'markdown', 'html'
     },
 
     -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)

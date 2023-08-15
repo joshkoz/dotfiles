@@ -7,7 +7,7 @@ return {
       "MasonUninstall",
       "MasonUninstallAll",
       "MasonLog",
-      "MasonUpdate", 
+      "MasonUpdate",
       "MasonUpdateAll",
     },
     opts = {
@@ -26,6 +26,6 @@ return {
       for _, plugin in ipairs { "mason-lspconfig", "mason-null-ls", "mason-nvim-dap" } do
         pcall(require, plugin)
       end
-    end 
+    end
   },
 }

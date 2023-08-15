@@ -49,12 +49,12 @@ return {
           require 'telescope.builtin'.find_files()
         end
       end,
-      desc = 'Search [G]it [F]iles'
+      desc = 'Smart Search [F]iles'
     },
     {
       '<C-f>',
       function() require('telescope.builtin').live_grep() end,
-      desc = 'Search [G]it [F]iles'
+      desc = 'Live Grep'
     },
     {
       '<leader>ff',
@@ -93,7 +93,7 @@ return {
     {
       '<leader>b',
       function() require('telescope.builtin').buffers() end,
-      desc = '[ ] Find existing buffers'
+      desc = 'Find existing [b]uffers'
     },
     {
       '<leader>/',
