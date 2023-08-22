@@ -1,8 +1,11 @@
 {
   "RoslynExtensionsOptions": {
+    "enableDecompilationSupport": true,
     "enableAnalyzersSupport": true
   },
   "FormattingOptions": {
-    "enableEditorConfigSupport": true
+    "enableEditorConfigSupport": true,
+    "TabSize": 4,
+    "UseTabs": false
   }
 }
