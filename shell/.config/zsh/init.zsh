@@ -1,4 +1,5 @@
 eval "$(starship init zsh)"
+eval "$(zoxide init zsh)"
 
 export HISTFILE=~/.histfile
 export HISTSIZE=1000
@@ -22,3 +23,4 @@ touch $HOME/.config/zsh/secrets.zsh
 source $HOME/.config/zsh/secrets.zsh
 
 source $HOME/.config/zsh/aliases.zsh
+
