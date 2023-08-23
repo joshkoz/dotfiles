@@ -107,6 +107,7 @@ return {
         -- See `:help K` for why this keymap
         nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
         nmap('<leader>lh', vim.lsp.buf.signature_help, 'Signature Documentation')
+        nmap('gh', vim.diagnostic.open_float, 'Hover Diagnostics')
 
         -- Lesser used LSP functionality
         nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
