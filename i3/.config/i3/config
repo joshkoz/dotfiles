@@ -31,6 +31,7 @@ font pango:SF Pro Display  10
 # https://wiki.archlinux.org/index.php/XDG_Autostart
 exec --no-startup-id dex --autostart --environment i3
 exec_always --no-startup-id autotiling
+exec_always --no-startup-id dunst -config ~/.config/dunst/dunstrc 
 
 
 exec --no-startup-id xrandr --output DP-0 --primary --mode 3840x2160 --pos 0x0 --rotate normal --output DP-1 --off --output HDMI-0 --off --output DP-2 --mode 3840x2160 --pos 3840x0 --rotate normal --output DP-3 --off --output HDMI-1 --off --output DP-4 --mode 3840x2160 --pos 7680x0 --rotate normal --output DP-5 --off --output HDMI-1-1 --off --output DP-1-1 --off --output DP-1-2 --off --output DP-1-3 --off
