@@ -3,8 +3,9 @@ return {
   'nvim-treesitter/nvim-treesitter',
   dependencies = {
     'nvim-treesitter/nvim-treesitter-textobjects',
+    'nvim-treesitter/playground',
   },
-  event = "BufEnter",
+  event = { "BufReadPost", "BufNewFile" },
   build = ':TSUpdate',
   opts = {
     -- Add languages to be installed here that you want installed for treesitter
@@ -21,6 +22,7 @@ return {
     highlight = {
       enable = true,
       disable = function(_, bufnr) return vim.api.nvim_buf_line_count(bufnr) > 10000 end, -- Disable if the buffer is too large
+      additional_vim_regex_highlighting = false,
     },
     indent = { enable = true },
     incremental_selection = {
