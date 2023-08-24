@@ -17,7 +17,7 @@ general {
 #order += "battery all"
 # order += "disk /"
 # order += "load"
-order += "memory"
+# order += "memory"
 order += "tztime local"
 
 
@@ -40,5 +40,6 @@ memory {
 }
 
 tztime local {
-        format = "%Y-%m-%d %I:%M   "
+        format = "%I:%M %p  "
+        # format = "%Y-%m-%d %I:%M %p   "
 }
