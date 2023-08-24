@@ -5,6 +5,11 @@ export HISTFILE=~/.histfile
 export HISTSIZE=1000
 export SAVEHIST=1000
 unsetopt beep
+setopt share_history 
+setopt APPEND_HISTORY
+# Immediately append history to the history file, not just when a shell exits
+setopt INC_APPEND_HISTORY
+
 bindkey -v
 bindkey -e
 bindkey "^[[1;3C" forward-word
