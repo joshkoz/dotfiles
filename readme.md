@@ -1,15 +1,14 @@
 # Prerequisites
 
 Ensure [GNU Stow](https://www.gnu.org/software/stow/) is installed.
-Ensure [AstroNvim](https://astronvim.com/) is setup.
 
 # Setup
 
 1. Clone this Repository
 
-2. Cd to the root of the repository and run the ./init_dotfiles.sh script. This will symlink
+2. Cd to the root of the repository and run the ./init_dotfiles.sh script. This will symlink paths into $HOME
 
-3. Optionally copy shell/.config/zsh/secrets.template to shell/.config/zsh/secrets.zsh and set the secrets.
+3. Use [1password](https://developer.1password.com/docs/cli/secrets-environment-variables/) to load secrets into the environment
 
 # How it works
 
