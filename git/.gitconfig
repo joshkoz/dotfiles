@@ -8,6 +8,7 @@
 	format = ssh
 [gpg "ssh"]
 	program = "/opt/1Password/op-ssh-sign"
+	allowedSignersFile = ~/.ssh/allowed_signers
 [init]
 	defaultBranch = master
 [core]
