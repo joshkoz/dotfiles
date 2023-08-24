@@ -51,7 +51,7 @@ return {
             vim.cmd('vert Git')
           end
         end,
-        desc = "[G]it [S]tage Hunk"
+        desc = "Open Git Fugitive"
       },
       {
         "<leader>gs",
