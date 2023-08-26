@@ -48,3 +48,5 @@ vim.o.incsearch = true
 vim.g.autoformat_enabled = true
 vim.g.cmd_enabled = true
 vim.o.wrap = false
+
+vim.o.pumheight = 15
