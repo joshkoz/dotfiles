@@ -46,9 +46,9 @@ window:
   #
   # Blank space added around the window in pixels. This padding is scaled
   # by DPI and the specified value is always added at both opposing sides.
-  #padding:
-  #  x: 0
-  #  y: 0
+  padding:
+   x: 0
+   y: 0
 
   # Spread additional padding evenly around the terminal content.
   #dynamic_padding: false
@@ -175,9 +175,9 @@ font:
   # Offset is the extra space around each character. `offset.y` can be thought
   # of as modifying the line spacing, and `offset.x` as modifying the letter
   # spacing.
-  #offset:
-  #  x: 0
-  #  y: 0
+  offset:
+   x: 0
+   y: 5 
 
   # Glyph offset determines the locations of the glyphs within their cells with
   # the default being at the bottom. Increasing `x` moves the glyph to the
@@ -195,6 +195,15 @@ font:
 
 # If `true`, bold text is drawn using the bright color variants.
 draw_bold_text_with_bright_colors: false
+
+
+import:
+ # uncomment the colorscheme:
+  - ~/.config/alacritty/colors/catppuccin-mocha.yml
+ # - ~/.config/alacritty/colors/catppuccin-macchiato.yml
+ # - ~/.config/alacritty/colors/catppuccin-frappe.yml
+ # - ~/.config/alacritty/colors/catppuccin-latte.yml
+ # - ~/.config/alacritty/colors/onedark.yml
 
 # Colors (Tomorrow Night)
 #colors:
