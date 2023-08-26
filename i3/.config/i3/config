@@ -233,7 +233,9 @@ bar {
 }
 
 
-gaps inner 10
+gaps inner 20 
+gaps outer 10 
+# smart_gaps on
 
 workspace $ws1 output $dpmiddle
 workspace $ws2 output $dpmiddle
