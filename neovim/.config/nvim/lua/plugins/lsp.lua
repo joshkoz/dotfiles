@@ -106,7 +106,39 @@ return {
         -- see :h mason-lspconfig.setup_handlers
         -- Use opts.servers above for configuration unless the lsp needs custom config.
         rust_analyzer = function()
-          require('rust-tools').setup()
+          require('rust-tools').setup({
+            capabilities = capabilities,
+            -- on_attach = on_attach,
+            tools = {
+              inlay_hints = {
+                auto = true,
+                parameter_hints_prefix = "<-",
+                other_hints_prefix = "->",
+              },
+              server = {
+                standalone = false,
+              },
+              dap = function()
+                local install_root_dir = vim.fn.stdpath "data" .. "/mason"
+                local extension_path = install_root_dir .. "/packages/codelldb/extension/"
+                local codelldb_path = extension_path .. "adapter/codelldb"
+                local liblldb_path = extension_path .. "lldb/lib/liblldb.so"
+
+                return {
+                  adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path)
+                }
+              end,
+            },
+            server = {
+              on_attach = on_attach,
+              settings = {
+                -- List of all options:
+                -- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
+                ["rust-analyzer"] = {},
+              },
+
+            }
+          })
         end,
         omnisharp = function()
           require("lspconfig").omnisharp.setup({

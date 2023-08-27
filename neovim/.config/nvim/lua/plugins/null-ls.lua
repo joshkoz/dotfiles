@@ -19,7 +19,7 @@ return {
         -- formatting.eslint,
         -- formatting.csharpier,
         -- formatting.prettierd,
-        formatting.rustfmt,
+        -- formatting.rustfmt,
         -- formatting.terraform_fmt,
       },
       on_attach = function(client, bufnr)
