@@ -17,10 +17,10 @@ return {
         -- diagnostics.terraform_validate,
         -- formatting.stylua,
         -- formatting.eslint,
-        -- formatting.csharpier,
-        -- formatting.prettierd,
+        formatting.csharpier,
+        formatting.prettierd,
         -- formatting.rustfmt,
-        -- formatting.terraform_fmt,
+        formatting.terraform_fmt,
       },
       on_attach = function(client, bufnr)
         -- Enable formatting on sync
