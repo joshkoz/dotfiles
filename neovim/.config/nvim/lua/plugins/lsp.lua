@@ -45,14 +45,15 @@ return {
       vim.keymap.set('n', '<leader>la', vim.lsp.buf.code_action, { buffer = bufnr, desc = '[L]SP: Code [A]ction' })
       vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { buffer = bufnr, desc = 'LSP: [G]oto [D]efinition' })
       vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, { buffer = bufnr, desc = 'LSP: [G]oto [I]mplementation' })
-      vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, { buffer = bufnr, desc = 'LSP: Type [D]efinition' })
+      vim.keymap.set('n', '<leader>lt', vim.lsp.buf.type_definition,
+        { buffer = bufnr, desc = '[L]SP: [T]ype Definition' })
       -- See `:help K` for why this keymap
       vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = bufnr, desc = 'LSP: Hover Documentation' })
       vim.keymap.set('n', '<leader>ls', vim.lsp.buf.signature_help,
         { buffer = bufnr, desc = '[L]SP: [S]ignature Documentation' })
       vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { buffer = bufnr, desc = 'LSP: [G]oto [D]eclaration' })
       vim.keymap.set('n', 'gh', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
-      vim.keymap.set('n', '<leader>ll', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+      vim.keymap.set('n', '<leader>ld', vim.diagnostic.setloclist, { desc = '[L]SP: List [D]iagnostics' })
       -- Create a command `:Format` local to the LSP buffer
       vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
         vim.lsp.buf.format()

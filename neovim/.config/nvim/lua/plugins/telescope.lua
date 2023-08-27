@@ -38,25 +38,25 @@ return {
   keys = {
     { 'gr', function() require('telescope.builtin').lsp_references() end, desc = '[G]oto [R]eferences' },
     {
-      '<leader>ds',
+      '<leader>lu',
+      function() require('telescope.builtin').lsp_references() end,
+      desc = '[L]SP: Find [U]sages'
+    },
+    {
+      '<leader>ls',
       function() require('telescope.builtin').lsp_document_symbols() end,
-      desc = '[D]ocument [S]ymbols'
+      desc = '[L]SP Document [S]ymbols'
     },
     {
-      '<leader>ws',
+      '<leader>ss',
       function() require('telescope.builtin').lsp_dynamic_workspace_symbols() end,
-      desc = '[W]orkspace [S]ymbols'
+      desc = '[S]earch [S]ymbols'
     },
     {
-      '<leader>wd',
-      function() require('telescope.builtin').diagnostics() end,
-      desc = '[W]orkspace [D]iagnostics'
-    },
-    {
-      '<leader>gf',
+      '<leader>sp',
       function() require('telescope.builtin').git_files() end,
       desc =
-      'Search [G]it [F]iles'
+      '[S]earch Git [P]roject Files'
     },
     {
       '<C-p>',
@@ -98,7 +98,7 @@ return {
       '<leader>sg',
       function() require('telescope.builtin').live_grep() end,
       desc =
-      '[S]earch by [G]rep'
+      '[S]earch by Re[G]ex'
     },
     {
       '<leader>sd',
