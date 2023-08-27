@@ -10,17 +10,17 @@ return {
     return {
       defaults = {
         initial_mode = 'insert',
-        vimgrep_arguments = {
-          'rg',
-          '--color=never',
-          '--no-heading',
-          '--with-filename',
-          '--line-number',
-          '--column',
-          '--smart-case',
-          '--hidden',
-          '-u'
-        },
+        -- vimgrep_arguments = {
+        --   'rg',
+        --   '--color=never',
+        --   '--no-heading',
+        --   '--with-filename',
+        --   '--line-number',
+        --   '--column',
+        --   '--smart-case',
+        --   '--hidden',
+        --   '-u'
+        -- },
         mappings = {
           n = { q = actions.close },
           i = {
@@ -46,6 +46,11 @@ return {
       '<leader>ws',
       function() require('telescope.builtin').lsp_dynamic_workspace_symbols() end,
       desc = '[W]orkspace [S]ymbols'
+    },
+    {
+      '<leader>wd',
+      function() require('telescope.builtin').diagnostics() end,
+      desc = '[W]orkspace [D]iagnostics'
     },
     {
       '<leader>gf',
