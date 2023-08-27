@@ -23,7 +23,7 @@ local function get_relative_path(root_path, file_path)
   return vim.fn.fnamemodify(relative, ":r") -- Removes the file extension
 end
 
-function get_csharp_namespace()
+local function get_csharp_namespace()
   local root_path = vim.fn.getcwd() -- Assuming you're always at the root of the project
   local current_file = vim.fn.expand("%:p")
 

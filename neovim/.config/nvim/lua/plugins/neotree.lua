@@ -6,6 +6,7 @@ return {
     "nvim-tree/nvim-web-devicons",
     "MunifTanjim/nui.nvim",
   },
+  event = 'BufEnter',
   keys = {
     { "<leader>e", "<cmd>Neotree toggle<cr>", desc = "Toggle [E]xplorer" },
     {
