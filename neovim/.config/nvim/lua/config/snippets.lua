@@ -9,27 +9,6 @@ local func = ls.function_node
 local choice = ls.choice_node
 local dynamicn = ls.dynamic_node
 
-
-local filename = function()
-  return vim.fn.expand "%:p"
-end
-
-local function path_to_namespace()
-  local dir = filename()
-
-
-  -- Remove root directory path and file extension from the path
-  relative_path = string.gsub(dir, ".cs", "")
-
-  -- Convert path separators to dots and return
-  return string.gsub(relative_path, "/", ".")
-end
-
--- Make the function available for LuaSnip to use
-_G.path_to_namespace = path_to_namespace
-
-
-
 local function get_solution_name(root_path)
   local sln_file = vim.fn.glob(root_path .. '/*.sln')
   if sln_file == "" then

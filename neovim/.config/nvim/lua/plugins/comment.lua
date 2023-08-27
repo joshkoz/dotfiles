@@ -1,3 +1,5 @@
 return {
-  { 'numToStr/Comment.nvim', opts = {} }
+  'numToStr/Comment.nvim',
+  config = true,
+  event = { 'BufReadPre', 'BufNewFile' }
 }

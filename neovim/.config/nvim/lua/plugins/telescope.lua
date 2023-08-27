@@ -1,14 +1,15 @@
 return {
   'nvim-telescope/telescope.nvim',
-  branch = '0.1.x',
   dependencies = {
     'nvim-lua/plenary.nvim',
+    { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
   },
-  event = "VimEnter",
-  config = function()
-    local actions = require "telescope.actions"
-    require('telescope').setup {
+  cmd = 'Telescope',
+  opts = function()
+    local actions = require("telescope.actions")
+    return {
       defaults = {
+        initial_mode = 'insert',
         vimgrep_arguments = {
           'rg',
           '--color=never',
@@ -23,6 +24,10 @@ return {
         mappings = {
           n = { q = actions.close },
           i = {
+            ["<esc>"] = actions.close,
+            ["jj"] = { "<esc>", type = "command" },
+            ["<C-j>"] = actions.move_selection_next,
+            ["<C-k>"] = actions.move_selection_previous,
             ['<C-u>'] = false,
             ['<C-d>'] = false,
           },
@@ -65,14 +70,14 @@ return {
     {
       '<C-f>',
       function() require('telescope.builtin').live_grep() end,
-      desc = 'Live Grep'
+      desc = 'Grep Project'
     },
     {
-      '<leader>ff',
+      '<leader>sf',
       function() require('telescope.builtin').find_files() end,
 
       desc =
-      'Search [G]it [F]iles'
+      '[S]earch [F]iles'
     },
     {
       '<leader>sh',

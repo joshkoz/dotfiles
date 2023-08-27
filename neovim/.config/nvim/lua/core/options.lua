@@ -49,4 +49,9 @@ vim.g.autoformat_enabled = true
 vim.g.cmd_enabled = true
 vim.o.wrap = false
 
+-- only suggest a maximum of 15 options
 vim.o.pumheight = 15
+
+-- ensure split opens to the right or below
+vim.o.splitright = true
+vim.o.splitbelow = true
