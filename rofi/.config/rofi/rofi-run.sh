@@ -1,6 +1,6 @@
 #!/bin/bash
 rofi \
--show run \
--dpi 1 \
+-show drun \
+-dpi 120 \
 -kb-cancel "Escape,Alt_L,Alt_R,Control+c"
-
+ 

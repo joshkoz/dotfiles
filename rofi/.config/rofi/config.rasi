@@ -1,23 +1,19 @@
-configuration {
-    font: "Envy Code R 10";
-    line-margin: 10;
-
-    display-ssh:    "";
-    display-run:    "";
-    display-drun:   "";
-    display-window: "";
-    display-combi:  "";
-    show-icons:     true;
+configuration{
+    modi: "run,drun,window";
+    icon-theme: "Oranchelo";
+    show-icons: true;
+    terminal: "alacritty";
+    drun-display-format: "{icon} {name}";
+    location: 0;
+    disable-history: false;
+    hide-scrollbar: true;
+    display-drun: "   Apps ";
+    display-run: "   Run ";
+    display-window: "   Window ";
+    display-Network: " 󰤨  Network ";
+    sidebar-mode: true;
 }
 
+@theme "~/.config/rofi/catppuccin-mocha.rasi"
 
-@theme "~/.config/rofi/nord.rasi"
 
-listview {
-	lines: 6;
-	columns: 2;
-}
-
-window {
-	width: 30%;
-}
