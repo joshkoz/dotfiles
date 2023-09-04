@@ -5,22 +5,15 @@ return {
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
   },
   cmd = 'Telescope',
-  opts = function()
+  config = function()
     local actions = require("telescope.actions")
-    return {
+    local telescope = require("telescope")
+    telescope.load_extension('fzf')
+    telescope.setup({
       defaults = {
-        initial_mode = 'insert',
-        -- vimgrep_arguments = {
-        --   'rg',
-        --   '--color=never',
-        --   '--no-heading',
-        --   '--with-filename',
-        --   '--line-number',
-        --   '--column',
-        --   '--smart-case',
-        --   '--hidden',
-        --   '-u'
-        -- },
+        file_ignore_patterns = {
+          "^.git/",
+        },
         mappings = {
           n = { q = actions.close },
           i = {
@@ -33,7 +26,7 @@ return {
           },
         },
       },
-    }
+    })
   end,
   keys = {
     { 'gr', function() require('telescope.builtin').lsp_references() end, desc = '[G]oto [R]eferences' },
@@ -67,7 +60,7 @@ return {
         if ok then
           require 'telescope.builtin'.git_files()
         else
-          require 'telescope.builtin'.find_files()
+          require 'telescope.builtin'.find_files({ hidden = true })
         end
       end,
       desc = 'Smart Search [F]iles'
@@ -79,7 +72,7 @@ return {
     },
     {
       '<leader>sf',
-      function() require('telescope.builtin').find_files() end,
+      function() require('telescope.builtin').find_files({ hidden = true }) end,
 
       desc =
       '[S]earch [F]iles'
