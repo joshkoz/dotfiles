@@ -13,7 +13,11 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-local opts = {
+-- Setup Plugins
+-- Will automatically load plugins from lua/plugins/*lua
+require('lazy').setup({
+  { import = "plugins" },
+  { import = 'plugins.lsp' },
   install = {
     -- try to load one of these colorschemes when starting an installation during startup.
     -- This is the theme for the Lazy UI before everything is set up.
@@ -28,8 +32,4 @@ local opts = {
     -- don't notify that lazy has reloaded after detecting changes
     notify = false
   }
-}
-
--- Setup Plugins
--- Will automatically load plugins from lua/plugins/*lua
-require('lazy').setup("plugins", opts)
+})

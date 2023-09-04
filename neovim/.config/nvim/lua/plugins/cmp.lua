@@ -2,12 +2,12 @@ return
 {
   'hrsh7th/nvim-cmp',
   dependencies = {
-    'hrsh7th/cmp-path',
-    'hrsh7th/cmp-buffer',
-    'hrsh7th/cmp-nvim-lsp',         -- Adds LSP completion capabilities
-    'L3MON4D3/LuaSnip',             -- Snippet Engine & its associated nvim-cmp source
-    'saadparwaiz1/cmp_luasnip',
-    'rafamadriz/friendly-snippets', -- useful snippets
+    'hrsh7th/cmp-path',             -- source from filesystem paths
+    'hrsh7th/cmp-buffer',           -- source from strings in buffer
+    'hrsh7th/cmp-nvim-lsp',         -- source from lsp
+    'L3MON4D3/LuaSnip',             -- Snippet Engine
+    'saadparwaiz1/cmp_luasnip',     -- source from snippet engine
+    'rafamadriz/friendly-snippets', -- source from friendly snippets
   },
   event = 'InsertEnter',
   opts = function()
@@ -18,7 +18,7 @@ return
 
     luasnip.config.setup({})
 
-    require('config.snippets');
+    require('plugins.snippets');
 
     return {
       snippet = {
