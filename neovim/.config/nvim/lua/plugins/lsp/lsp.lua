@@ -60,16 +60,22 @@ return {
       vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, opts)
 
       opts.desc = 'LSP: [G]oto [D]efinition'
-      vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+      vim.keymap.set('n', 'gd', '<cmd>Telescope lsp_definitions<CR>', opts)
+
+      opts.desc = 'LSP: [G]oto [R]eferences'
+      vim.keymap.set('n', 'gR', '<cmd>Telescope lsp_references<CR>', opts)
 
       opts.desc = 'LSP: [G]oto [I]mplementation'
-      vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+      vim.keymap.set('n', 'gi', '<cmd>Telescope lsp_implementations<CR>', opts)
 
       opts.desc = '[L]SP: [T]ype Definition'
-      vim.keymap.set('n', '<leader>lt', vim.lsp.buf.type_definition, opts)
+      vim.keymap.set('n', '<leader>lt', '<cmd>Telescope lsp_type_definitions<CR>', opts)
 
       opts.desc = 'LSP: Hover Documentation'
       vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts) -- See `:help K` for why this keymap
+
+      opts.desc = 'Show buffer diagnostics'
+      vim.keymap.set('n', '<leader>D', '<cmd>Telescope diagnostics bufnr=0<CR>', opts) -- See `:help K` for why this keymap
 
       opts.desc = '[L]SP: [S]ignature Documentation'
       vim.keymap.set('n', '<leader>ls', vim.lsp.buf.signature_help, opts)

@@ -47,7 +47,7 @@ return {
     },
     {
       '<leader>fp',
-      function() require('telescope.builtin').git_files() end,
+      function() require('telescope.builtin').git_files({ show_untracked = true }) end,
       desc =
       '[F]ind Git [P]roject Files'
     },
@@ -58,7 +58,7 @@ return {
         local ok = exit_code == 0
         print(ok)
         if ok then
-          require 'telescope.builtin'.git_files()
+          require 'telescope.builtin'.git_files({ show_untracked = true })
         else
           require 'telescope.builtin'.find_files({ hidden = true })
         end
@@ -78,14 +78,19 @@ return {
       '[F]ind [F]iles'
     },
     {
+      '<leader>fr',
+      function() require('telescope.builtin').oldfiles() end,
+      desc = '[F]ind [R]ecent files'
+    },
+    {
       '<leader>fh',
       function() require('telescope.builtin').help_tags() end,
       desc = '[F]ind [H]elp'
     },
     {
-      '<leader>fw',
+      '<leader>fc',
       function() require('telescope.builtin').grep_string() end,
-      desc = '[F]ind current [W]ord'
+      desc = '[F]ind string under [C]ursor'
     },
     {
       '<leader>fg',
