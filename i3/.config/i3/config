@@ -34,7 +34,7 @@ exec_always --no-startup-id autotiling
 exec_always --no-startup-id dunst -config ~/.config/dunst/dunstrc 
 exec_always --no-startup-id setxkbmap -option caps:escape 
 # exec_always --no-startup-id /usr/bin/dumb-polkit-agent
-exec_always --no-startup-id picom & 
+exec_always --no-startup-id picom -b 
 exec_always --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
 
@@ -259,7 +259,8 @@ bindsym $mod+shift+x exec i3lock --color=000000
 
 
 # Set wallpaper
-exec_always feh --bg-scale /home/joshua/Pictures/wallpaper.jpg 
+# exec_always feh --bg-scale /home/joshua/Pictures/wallpaper.jpg 
+exec_always feh --bg-scale --no-xinerama /home/joshua/Pictures/wide2.jpg 
 # Set sound tray icon
 exec --no-startup-id pasystray
 
