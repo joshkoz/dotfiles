@@ -41,15 +41,15 @@ return {
       desc = '[L]SP Document [S]ymbols'
     },
     {
-      '<leader>ss',
+      '<leader>fs',
       function() require('telescope.builtin').lsp_dynamic_workspace_symbols() end,
-      desc = '[S]earch [S]ymbols'
+      desc = '[F]ind [S]ymbols'
     },
     {
-      '<leader>sp',
+      '<leader>fp',
       function() require('telescope.builtin').git_files() end,
       desc =
-      '[S]earch Git [P]roject Files'
+      '[F]ind Git [P]roject Files'
     },
     {
       '<C-p>',
@@ -71,33 +71,33 @@ return {
       desc = 'Grep Project'
     },
     {
-      '<leader>sf',
+      '<leader>ff',
       function() require('telescope.builtin').find_files({ hidden = true }) end,
 
       desc =
-      '[S]earch [F]iles'
+      '[F]ind [F]iles'
     },
     {
-      '<leader>sh',
+      '<leader>fh',
       function() require('telescope.builtin').help_tags() end,
-      desc = '[S]earch [H]elp'
+      desc = '[F]ind [H]elp'
     },
     {
-      '<leader>sw',
+      '<leader>fw',
       function() require('telescope.builtin').grep_string() end,
-      desc = '[S]earch current [W]ord'
+      desc = '[F]ind current [W]ord'
     },
     {
-      '<leader>sg',
+      '<leader>fg',
       function() require('telescope.builtin').live_grep() end,
       desc =
-      '[S]earch by Re[G]ex'
+      '[F]ind [G]rep'
     },
     {
-      '<leader>sd',
+      '<leader>fd',
       function() require('telescope.builtin').diagnostics() end,
       desc =
-      '[S]earch [D]iagnostics'
+      '[F]ind [D]iagnostics'
     },
     {
       '<leader>?',

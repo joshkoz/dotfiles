@@ -53,9 +53,11 @@ return {
       -- Setup keymaps for when when an LSP attaches to the buffer.
       opts.desc = '[L]SP: [R]ename'
       vim.keymap.set('n', '<leader>lr', vim.lsp.buf.rename, opts)
+      vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
 
       opts.desc = '[L]SP: Code [A]ction'
       vim.keymap.set('n', '<leader>la', vim.lsp.buf.code_action, opts)
+      vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, opts)
 
       opts.desc = 'LSP: [G]oto [D]efinition'
       vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
