@@ -1,0 +1,53 @@
+(defcfg
+  ;; For Linux users
+  input  (device-file "/dev/input/by-id/usb-Metadot_-_Das_Keyboard_Das_Keyboard-event-kbd")
+  output (uinput-sink "My KMonad output" "/bin/sleep 1")
+
+  fallthrough true
+)
+
+(defsrc
+    esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
+    `    1    2    3    4    5    6    7    8    9    0    -    =    bspc
+    tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+    caps a    s    d    f    g    h    j    k    l    ;    '    ret
+    lsft z    x    c    v    b    n    m    ,    .    /    rsft
+    lctl lalt lmet spc rmet ralt rctl
+)
+
+
+
+(defalias
+    ;; Home row mods
+    gui_a (tap-hold-next-release 300 a lmet)
+    alt_s (tap-hold-next-release 300 s lalt)
+    sft_d (tap-hold-next-release 200 d lsft)
+    ctl_f (tap-hold-next-release 200 f lctl)
+
+    ctrl_j (tap-hold-next-release 200 j rctl)
+    sft_k (tap-hold-next-release 200 k rsft)
+    alt_l (tap-hold-next-release 200 l ralt)
+    gui_; (tap-hold-next-release 200 ; rmet)
+	
+	;; Space layer symbols switch
+	space-layer-switch (tap-hold-next-release 200 spc (layer-toggle symbols-numbers))
+)
+
+(deflayer default
+    esc   f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
+    `     1    2    3    4    5    6    7    8    9    0    -    =    bspc
+    tab   q    w    e    r    t    y    u    i    o    p    [    ]    \
+    esc @gui_a @alt_s @sft_d @ctl_f g    h    @ctrl_j @sft_k @alt_l @gui_; '    ret
+    lsft  z    x    c    v    b    n    m    ,    .    /    rsft
+    lctl  lalt  lmet  @space-layer-switch rmet  ralt  rctl
+)
+
+(deflayer symbols-numbers
+    esc   f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
+    `     1    2    3    4    5    6    7    8    9    0    -    =    bspc
+    tab   !    @    #    $    %    ^    &    *    \(   \)   \_   +    |
+    esc 1    2    3    4    5    6    7    8    9    0    -    ret
+    lsft  [    ]    {    }    \    |    <    >    ?    /    rsft
+    lctl  lalt  lmet  spc  rmet  ralt  rctl
+)
+
