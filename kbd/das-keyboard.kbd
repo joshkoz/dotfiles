@@ -21,11 +21,13 @@
     ;; Home row mods
     gui_a (tap-hold-next-release 300 a lmet)
     alt_s (tap-hold-next-release 300 s lalt)
-    sft_d (tap-hold-next-release 200 d lsft)
-    ctl_f (tap-hold-next-release 200 f lctl)
+    ctl_d (tap-hold-next-release 200 d lctl)
+    sft_f (tap-hold-next-release 200 f lsft)
 
-    ctrl_j (tap-hold-next-release 200 j rctl)
-    sft_k (tap-hold-next-release 200 k rsft)
+    sft_j (tap-hold-next-release 200 j rsft)
+    ctl_k (tap-hold-next-release 200 k rctl)
+    ;; sft_j (around-next-timeout 200 rsft j)
+    ;; ctl_k (around-next-timeout 200 rctl k)
     alt_l (tap-hold-next-release 200 l ralt)
     gui_; (tap-hold-next-release 200 ; rmet)
 	
@@ -37,7 +39,7 @@
     esc   f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
     `     1    2    3    4    5    6    7    8    9    0    -    =    bspc
     tab   q    w    e    r    t    y    u    i    o    p    [    ]    \
-    esc @gui_a @alt_s @sft_d @ctl_f g    h    @ctrl_j @sft_k @alt_l @gui_; '    ret
+    esc @gui_a @alt_s @ctl_d @sft_f g    h    @sft_j @ctl_k @alt_l @gui_; '    ret
     XX     z    x    c    v    b    n    m    ,    .    /    rsft
     XX  XX  XX @space-layer-switch rmet  ralt  rctl
 )
