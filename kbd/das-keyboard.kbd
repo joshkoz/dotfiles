@@ -40,7 +40,7 @@
     `     1    2    3    4    5    6    7    8    9    0    -    =    bspc
     tab   q    w    e    r    t    y    u    i    o    p    [    ]    \
     esc @gui_a @alt_s @ctl_d @sft_f g    h    @sft_j @ctl_k @alt_l @gui_; '    ret
-    XX     z    x    c    v    b    n    m    ,    .    /    rsft
+    XX     z    x    c    v    b    n    m    ,    .    /   XX 
     XX  XX  XX @space-layer-switch rmet  ralt  rctl
 )
 
