@@ -245,13 +245,10 @@ bar {
 
 gaps inner 20 
 gaps outer 10 
-# smart_gaps on
+smart_gaps on
 
-# workspace $ws1 output $dpleft
-# workspace $ws2 output $dpleft
-# workspace $ws9 output $dpright
-# workspace $ws10 output $dpright
-
+workspace $ws9 output $dpleft
+workspace $ws10 output $dpleft
 
 # Configure locking the screen
 bindsym $mod+shift+x exec i3lock --color=000000
@@ -262,11 +259,6 @@ bindsym $mod+shift+x exec i3lock --color=000000
 exec_always feh --bg-scale --no-xinerama /home/joshua/Pictures/wide2.jpg 
 # Set sound tray icon
 exec --no-startup-id pasystray
-
-
-assign [class="obsidian"] $ws8
-# assign [class="discord"] $ws9
-# assign [class="Spotify"] $ws10
 
 # Disable titlebars
 for_window [class="^.*"] border pixel 2  
