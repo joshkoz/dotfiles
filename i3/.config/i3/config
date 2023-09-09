@@ -221,7 +221,7 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-set $bg-color            #82858b
+set $bg-color            #ab68ff
 set $inactive-bg-color   #2f343f
 set $text-color          #f3f4f5
 set $inactive-text-color #676E7D
@@ -240,6 +240,9 @@ bar {
         status_command i3status
         # Ensure i3bar libindicators appear on the middle monitor.
         tray_output $dpright
+        colors {
+                focused_workspace  #8b48ef #AB68FF #FFFFFF
+        }
 }
 
 
