@@ -19,15 +19,13 @@
 
 (defalias
     ;; Home row mods
-    gui_a (tap-hold-next-release 300 a lmet)
-    alt_s (tap-hold-next-release 300 s lalt)
+    gui_a (tap-hold-next-release 200 a lmet)
+    alt_s (tap-hold-next-release 200 s lalt)
     ctl_d (tap-hold-next-release 200 d lctl)
     sft_f (tap-hold-next-release 200 f lsft)
 
     sft_j (tap-hold-next-release 200 j rsft)
     ctl_k (tap-hold-next-release 200 k rctl)
-    ;; sft_j (around-next-timeout 200 rsft j)
-    ;; ctl_k (around-next-timeout 200 rctl k)
     alt_l (tap-hold-next-release 200 l ralt)
     gui_; (tap-hold-next-release 200 ; rmet)
 	
@@ -46,10 +44,10 @@
 
 (deflayer symbols-numbers
     esc   f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
-    `     1    2    3    4    5    6    7    8    9    0    -    =    bspc
-    tab   !    @    #    $    %    ^    &    *    \(   \)   \_   +    |
-    esc 1    2    3    4    5    6    7    8    9    0    -    ret
-    lsft  [    ]    {    }    \    |    <    >    ?    /    rsft
+    _     1    2    3    4    5    6    7    8    9    0    _    _    bspc
+    tab   !    @    #    $    %    ^    &    *    \(   \)   _    _    _
+    esc   `    \(    \)  '    =    \    -    {    }    ;    _    ret
+    lsft  ~    <    >    "    +    |    \_   [    ]    ;    rsft
     lctl  lalt  lmet  spc  rmet  ralt  rctl
 )
 
