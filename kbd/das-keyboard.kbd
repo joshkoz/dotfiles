@@ -47,7 +47,7 @@
     _     1    2    3    4    5    6    7    8    9    0    _    _    bspc
     tab   !    @    #    $    %    ^    &    *    \(   \)   _    _    _
     esc   `    \(    \)  '    =    \    -    {    }    ;    _    ret
-    lsft  ~    <    >    "    +    |    \_   [    ]    ;    rsft
+    lsft  ~    <    >    "    +    |    \_   [    ]    :    rsft
     lctl  lalt  lmet  spc  rmet  ralt  rctl
 )
 
