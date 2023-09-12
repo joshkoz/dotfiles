@@ -11,11 +11,6 @@ setopt APPEND_HISTORY
 setopt INC_APPEND_HISTORY
 
 bindkey -v
-bindkey -e
-bindkey "^[[1;3C" forward-word # alt + →
-bindkey "^[[1;3D" backward-word # alt + ← 
-bindkey '^b' backward-word # ctrl + b
-bindkey '^f' forward-word # ctrl + f
  
 zstyle :compinstall filename '/home/joshua/.zshrc'
 
