@@ -11,6 +11,8 @@ setopt APPEND_HISTORY
 setopt INC_APPEND_HISTORY
 
 bindkey -v
+bindkey '^R' history-incremental-search-backward
+export KEYTIMEOUT=10
  
 zstyle :compinstall filename '/home/joshua/.zshrc'
 
