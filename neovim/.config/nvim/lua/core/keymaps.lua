@@ -22,3 +22,26 @@ vim.keymap.set('n', 'dd', '"_dd', { desc = "Delete line without yanking" })
 vim.keymap.set('n', 'd', '"_d', { desc = "Delete to black-hold register" })
 -- vim.keymap.set('n', "<C-j>", "<S-}>", { desc = "Jump to next empty line" })
 -- vim.keymap.set('n', '<C-k>', "<S-{>", { desc = "Jump to previous empty line" })
+--
+
+-- Marks
+--
+-- Make marks slightly more user friendly.
+-- This makes ' behave like ` so that it goes to the column and not the beginning of the line.
+vim.keymap.set('n', "'",
+  function()
+    local mark_char = vim.fn.nr2char(vim.fn.getchar())
+    if mark_char:match("%l") then -- If the mark is a lowercase letter
+      mark_char = mark_char:upper()
+    end
+    vim.cmd(string.format("normal! `%s", mark_char))
+  end,
+  { desc = "Jump to Mark" })
+
+-- Capital letter marks are global by default. Since I only really use one mark at a time
+-- It works better if all marks just behave as global.
+local opts = { noremap = true, silent = true }
+for _, letter in ipairs({ 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's',
+  't', 'u', 'v', 'w', 'x', 'y', 'z' }) do
+  vim.api.nvim_set_keymap('n', 'm' .. letter, 'm' .. letter:upper(), opts)
+end
