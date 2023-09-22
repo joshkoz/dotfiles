@@ -20,7 +20,7 @@ autoload -Uz compinit
 compinit
 # Only use the 1Password agent bridge if we're in WSL
 if grep -iq microsoft /proc/version; then
-  source $HOME/.config/zsh/scripts/.agent-bridge.sh
+  source wsl-agent-bridge
 fi
 
 
