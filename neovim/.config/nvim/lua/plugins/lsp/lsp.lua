@@ -152,6 +152,22 @@ return {
       }
     })
 
+    -- configure pylsp server
+    lspconfig["pyright"].setup({})
+    -- configure pylsp server
+    -- lspconfig["pylsp"].setup({
+    --   settings = {
+    --     pylsp = {
+    --       plugins = {
+    --         pycodestyle = {
+    --           ignore = { 'W391' },
+    --           maxLineLength = 100
+    --         }
+    --       }
+    --     }
+    --   }
+    -- })
+    --
     -- configure omnisharp server
     lspconfig["omnisharp"].setup({
       cmd = { "omnisharp", "--languageserver", "--hostPID", tostring(vim.fn.getpid()) },

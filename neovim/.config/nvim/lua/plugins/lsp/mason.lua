@@ -43,6 +43,8 @@ return {
         'lua_ls',
         'cssls',
         'emmet_ls',
+        'pylsp',
+        'pyright',
       },
       automatic_installation = true
     })
