@@ -18,7 +18,7 @@ return
 
     luasnip.config.setup({})
 
-    require('plugins.snippets');
+    require('josh.plugins.snippets');
 
     return {
       snippet = {
