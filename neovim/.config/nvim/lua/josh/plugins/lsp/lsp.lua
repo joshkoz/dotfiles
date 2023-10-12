@@ -4,12 +4,12 @@ return {
   dependencies = {
     'hrsh7th/cmp-nvim-lsp', -- Adds LSP completion capabilities
     { 'antosha417/nvim-lsp-file-operations', config = true },
-    { 'folke/neodev.nvim',                   opts = {} },
-    "Hoffs/omnisharp-extended-lsp.nvim",
+    { 'folke/neodev.nvim', opts = {} },
+    'Hoffs/omnisharp-extended-lsp.nvim',
     'simrat39/rust-tools.nvim',
-    "williamboman/mason.nvim",
+    'williamboman/mason.nvim',
     { 'williamboman/mason-lspconfig.nvim', opts = {} },
-    { 'j-hui/fidget.nvim',                 tag = 'legacy', opts = {} },
+    { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
   },
   opts = {
     diagnostics = {
@@ -17,9 +17,9 @@ return {
       update_in_insert = false,
       virtual_text = {
         spacing = 4,
-        source = "if_many",
-        prefix = "●",
-        severity = { min = vim.diagnostic.severity.WARN }
+        source = 'if_many',
+        prefix = '●',
+        severity = { min = vim.diagnostic.severity.WARN },
         -- this will set set the prefix to a function that returns the diagnostics icon based on the severity
         -- this only works on a recent 0.10.0 build. Will be set to "●" when not supported
         -- prefix = "icons",
@@ -41,9 +41,9 @@ return {
     },
   },
   config = function()
-    local lspconfig = require("lspconfig")
+    local lspconfig = require 'lspconfig'
 
-    local cmp_nvim_lsp = require("cmp_nvim_lsp")
+    local cmp_nvim_lsp = require 'cmp_nvim_lsp'
 
     local opts = { noremap = true, silent = true }
 
@@ -96,40 +96,40 @@ return {
     end
 
     -- Change the Diagnostic symbols in the sign column (gutter)
-    local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
+    local signs = { Error = ' ', Warn = ' ', Hint = '󰠠 ', Info = ' ' }
     for type, icon in pairs(signs) do
-      local hl = "DiagnosticSign" .. type
-      vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+      local hl = 'DiagnosticSign' .. type
+      vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = '' })
     end
 
     -- used to enable autocompletion (assign to every lsp server config)
     local capabilities = cmp_nvim_lsp.default_capabilities()
 
     -- configure html server
-    lspconfig["html"].setup({
+    lspconfig['html'].setup {
       capabilities = capabilities,
       on_attach = on_attach,
-    })
+    }
 
     -- configure typescript server with plugin
-    lspconfig["tsserver"].setup({
+    lspconfig['tsserver'].setup {
       capabilities = capabilities,
       on_attach = on_attach,
-    })
+    }
 
     -- configure css server
-    lspconfig["cssls"].setup({
+    lspconfig['cssls'].setup {
       capabilities = capabilities,
       on_attach = on_attach,
-    })
+    }
 
-    lspconfig["jsonls"].setup({
+    lspconfig['jsonls'].setup {
       capabilities = capabilities,
       on_attach = on_attach,
-    })
+    }
 
     -- configure lua server
-    lspconfig["lua_ls"].setup({
+    lspconfig['lua_ls'].setup {
       capabilities = capabilities,
       on_attach = on_attach,
       settings = {
@@ -137,40 +137,40 @@ return {
           workspace = {
             checkThirdParty = false,
             library = {
-              [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-              [vim.fn.stdpath("config") .. "/lua"] = true,
+              [vim.fn.expand '$VIMRUNTIME/lua'] = true,
+              [vim.fn.stdpath 'config' .. '/lua'] = true,
             },
           },
           diagnostics = {
-            globals = { "vim" }
+            globals = { 'vim' },
           },
           telemetry = { enable = false },
           completion = {
-            callSnippet = "Replace",
+            callSnippet = 'Replace',
           },
         },
-      }
-    })
+      },
+    }
 
     -- configure pylsp server
-    lspconfig["pyright"].setup({})
+    lspconfig['pyright'].setup {}
     -- configure pylsp server
-    -- lspconfig["pylsp"].setup({
+    -- lspconfig['pylsp'].setup {
     --   settings = {
     --     pylsp = {
     --       plugins = {
     --         pycodestyle = {
     --           ignore = { 'W391' },
-    --           maxLineLength = 100
-    --         }
-    --       }
-    --     }
-    --   }
-    -- })
+    --           maxLineLength = 100,
+    --         },
+    --       },
+    --     },
+    --   },
+    -- }
     --
     -- configure omnisharp server
-    lspconfig["omnisharp"].setup({
-      cmd = { "omnisharp", "--languageserver", "--hostPID", tostring(vim.fn.getpid()) },
+    lspconfig['omnisharp'].setup {
+      cmd = { 'omnisharp', '--languageserver', '--hostPID', tostring(vim.fn.getpid()) },
       capabilities = capabilities,
       on_attach = on_attach,
       settings = {
@@ -184,40 +184,39 @@ return {
         enable_ms_build_load_projects_on_demand = false,
         enable_editorconfig_support = true,
         enable_import_completion = true,
-        enable_roslyn_analyzers = true
+        enable_roslyn_analyzers = true,
       },
       handlers = {
         -- https://github.com/Hoffs/omnisharp-extended-lsp.nvim
-        ["textDocument/definition"] = require('omnisharp_extended').handler,
+        ['textDocument/definition'] = require('omnisharp_extended').handler,
         -- Make warning the minimum level shown for csharp
-        ["textDocument/publishDiagnostics"] = vim.lsp.with(
-          vim.lsp.diagnostic.on_publish_diagnostics, {
-            virtual_text = {
-              severity_limit = 'Warning',
-            },
-          })
-      }
-    })
+        ['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+          virtual_text = {
+            severity_limit = 'Warning',
+          },
+        }),
+      },
+    }
 
     -- configure rust server using rust-tools
-    require('rust-tools').setup({
+    require('rust-tools').setup {
       tools = {
         inlay_hints = {
           auto = true,
-          parameter_hints_prefix = "<-",
-          other_hints_prefix = "->",
+          parameter_hints_prefix = '<-',
+          other_hints_prefix = '->',
         },
         server = {
           standalone = false,
         },
         dap = function()
-          local install_root_dir = vim.fn.stdpath "data" .. "/mason"
-          local extension_path = install_root_dir .. "/packages/codelldb/extension/"
-          local codelldb_path = extension_path .. "adapter/codelldb"
-          local liblldb_path = extension_path .. "lldb/lib/liblldb.so"
+          local install_root_dir = vim.fn.stdpath 'data' .. '/mason'
+          local extension_path = install_root_dir .. '/packages/codelldb/extension/'
+          local codelldb_path = extension_path .. 'adapter/codelldb'
+          local liblldb_path = extension_path .. 'lldb/lib/liblldb.so'
 
           return {
-            adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path)
+            adapter = require('rust-tools.dap').get_codelldb_adapter(codelldb_path, liblldb_path),
           }
         end,
       },
@@ -226,9 +225,9 @@ return {
         settings = {
           -- List of all options:
           -- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
-          ["rust-analyzer"] = {},
+          ['rust-analyzer'] = {},
         },
-      }
-    })
+      },
+    }
   end,
 }

@@ -1,11 +1,4 @@
-source ~/.vimrc
-
-noremap <C-J> }
-noremap <C-K> {
-vnoremap <C-J> }
-vnoremap <C-K> {
 
 nnoremap gh :action ShowErrorDescription<CR>
 map gc :action CommentByLineComment<CR>
-map :w :action Macro.Reformat and save<CR>
 
