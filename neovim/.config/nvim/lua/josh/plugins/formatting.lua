@@ -24,6 +24,7 @@ return {
         lsp_fallback = true,
         async = false,
         timeout_ms = 1000,
+        quiet = true, -- If there's a syntax error we don't want to report an erroor
       },
     }
 
