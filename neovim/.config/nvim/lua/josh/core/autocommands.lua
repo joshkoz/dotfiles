@@ -36,3 +36,16 @@ vim.cmd 'command! -range RemoveQFItems lua Remove_qf_items(vim.fn.line("\'<"), v
 -- filetype is 'qf' (quickfix)
 vim.cmd 'autocmd FileType qf nnoremap <buffer> dd :RemoveQFItem<CR>'
 vim.cmd 'autocmd FileType qf xnoremap <buffer> dd :RemoveQFItems<CR>'
+
+local theme_overrides_group = vim.api.nvim_create_augroup('ThemeOverrides', { clear = true })
+
+-- Create the autocmd for the Colorscheme event
+vim.api.nvim_create_autocmd('Colorscheme', {
+  callback = function()
+    -- Ensure splits dont have a background color
+    vim.cmd.hi 'VertSplit guibg=NONE'
+    vim.cmd.hi 'HorizSplit guibg=NONE'
+  end,
+  group = theme_overrides_group,
+  pattern = '*',
+})

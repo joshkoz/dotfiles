@@ -15,13 +15,13 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Setup Plugins
 -- Will automatically load plugins from lua/plugins/*lua
-require('lazy').setup({
-  { import = "josh.plugins" },
+require('lazy').setup {
+  { import = 'josh.plugins' },
   { import = 'josh.plugins.lsp' },
   install = {
     -- try to load one of these colorschemes when starting an installation during startup.
     -- This is the theme for the Lazy UI before everything is set up.
-    colorscheme = { "onedark" },
+    colorscheme = { 'nightfly' },
   },
   checker = {
     -- check for updates but don't notify about them on launch
@@ -30,6 +30,6 @@ require('lazy').setup({
   },
   change_detection = {
     -- don't notify that lazy has reloaded after detecting changes
-    notify = false
-  }
-})
+    notify = false,
+  },
+}
