@@ -1,38 +1,37 @@
 return {
-  "williamboman/mason.nvim",
+  'williamboman/mason.nvim',
   dependencies = {
-    "williamboman/mason-lspconfig.nvim",
-    "WhoIsSethDaniel/mason-tool-installer.nvim",
+    'williamboman/mason-lspconfig.nvim',
+    'WhoIsSethDaniel/mason-tool-installer.nvim',
   },
   cmd = {
-    "Mason",
-    "MasonInstall",
-    "MasonUninstall",
-    "MasonUninstallAll",
-    "MasonLog",
-    "MasonUpdate",
-    "MasonUpdateAll",
+    'Mason',
+    'MasonInstall',
+    'MasonUninstall',
+    'MasonUninstallAll',
+    'MasonLog',
+    'MasonUpdate',
+    'MasonUpdateAll',
   },
-  build = ":MasonUpdate",
+  build = ':MasonUpdate',
   config = function(_, opts)
-    pcall(require, "mason-nvim-dap")
+    local mason = require 'mason'
+    local mason_lspconfig = require 'mason-lspconfig'
 
-    local mason = require("mason");
-    local mason_lspconfig = require("mason-lspconfig")
+    local mason_dap = require 'mason-nvim-dap'
+    local mason_tool_installer = require 'mason-tool-installer'
 
-    local mason_tool_installer = require("mason-tool-installer")
-
-    mason.setup({
+    mason.setup {
       ui = {
         icons = {
-          package_installed = "✓",
-          package_uninstalled = "✗",
-          package_pending = "⟳",
+          package_installed = '✓',
+          package_uninstalled = '✗',
+          package_pending = '⟳',
         },
       },
-    })
+    }
 
-    mason_lspconfig.setup({
+    mason_lspconfig.setup {
       ensure_installed = {
         'jsonls',
         'rust_analyzer',
@@ -45,18 +44,30 @@ return {
         'pylsp',
         'pyright',
       },
-      automatic_installation = true
-    })
+      automatic_installation = true,
+    }
 
-    mason_tool_installer.setup({
+    mason_dap.setup {
+      automatic_setup = true,
+      automatic_installation = true,
+      handlers = {},
       ensure_installed = {
-        "prettier", -- prettier formatter
-        "stylua",   -- lua formatter
-        "isort",    -- python formatter
-        "black",    -- python formatter
-        "pylint",   -- python linter
-        "eslint_d", -- js linter
-      }
-    })
-  end
+        'netcoredb',
+        'codelldb',
+        'debugpy',
+        'js-debug-adapter',
+      },
+    }
+
+    mason_tool_installer.setup {
+      ensure_installed = {
+        'prettier', -- prettier formatter
+        'stylua', -- lua formatter
+        'isort', -- python formatter
+        'black', -- python formatter
+        'pylint', -- python linter
+        'eslint_d', -- js linter
+      },
+    }
+  end,
 }

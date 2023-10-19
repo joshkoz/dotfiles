@@ -115,6 +115,11 @@ return {
     lspconfig['tsserver'].setup {
       capabilities = capabilities,
       on_attach = on_attach,
+      init_options = {
+        preferences = {
+          disableSuggestions = true,
+        },
+      },
     }
 
     -- configure css server
@@ -152,27 +157,6 @@ return {
       },
     }
 
-    -- configure pylsp server
-    lspconfig['pyright'].setup {
-      capabilities = capabilities,
-      on_attach = on_attach,
-    }
-    -- configure pylsp server
-    -- lspconfig['pylsp'].setup {
-    --   capabilities = capabilities,
-    --   on_attach = on_attach,
-    --   settings = {
-    --     pylsp = {
-    --       plugins = {
-    --         pycodestyle = {
-    --           ignore = { 'W391' },
-    --           maxLineLength = 100,
-    --         },
-    --       },
-    --     },
-    --   },
-    -- }
-    --
     -- configure omnisharp server
     lspconfig['omnisharp'].setup {
       cmd = { 'omnisharp', '--languageserver', '--hostPID', tostring(vim.fn.getpid()) },
