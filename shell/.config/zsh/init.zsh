@@ -35,4 +35,4 @@ touch $HOME/.config/zsh/secrets.zsh
 source $HOME/.config/zsh/secrets.zsh
 
 source $HOME/.config/zsh/aliases.zsh
-
+source /usr/share/nvm/init-nvm.sh

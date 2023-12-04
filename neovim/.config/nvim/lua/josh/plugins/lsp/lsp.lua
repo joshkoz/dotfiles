@@ -157,6 +157,21 @@ return {
       },
     }
 
+    lspconfig['biome'].setup {
+      capabilities = capabilities,
+      on_attach = on_attach,
+      cmd = { 'biome', 'lsp-proxy' },
+      filetypes = {
+        'javascript',
+        'javascriptreact',
+        'json',
+        'jsonc',
+        'typescript',
+        'typescript.tsx',
+        'typescriptreact',
+      },
+    }
+
     -- configure omnisharp server
     lspconfig['omnisharp'].setup {
       cmd = { 'omnisharp', '--languageserver', '--hostPID', tostring(vim.fn.getpid()) },

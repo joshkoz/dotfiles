@@ -4,15 +4,30 @@ return {
   config = function()
     local conform = require 'conform'
 
+    local function js_formatter(bufnr)
+      -- Choose the formatter based on the presence of biome.json
+      -- Function to check for the existence of biome.json in the project root
+      local function has_biome_config()
+        local root = vim.fn.getcwd() -- Get the current working directory
+        local biome_config_path = root .. '/biome.json' -- Construct the path to biome.json
+        return vim.fn.filereadable(biome_config_path) == 1 -- Check if biome.json exists and is readable
+      end
+      if has_biome_config() then
+        return { 'biome' } -- Use biome as the formatter
+      else
+        return { 'prettier', 'eslint' } -- Default to prettier and eslint
+      end
+    end
+
     conform.setup {
       formatters_by_ft = {
-        javascript = { 'prettier', 'eslint' },
-        typescript = { 'prettier', 'eslint' },
-        javascriptreact = { 'prettier', 'eslint' },
-        typescriptreact = { 'prettier', 'eslint' },
+        javascript = js_formatter,
+        typescript = js_formatter,
+        javascriptreact = js_formatter,
+        typescriptreact = js_formatter,
+        json = js_formatter,
         css = { 'prettier' },
         html = { 'prettier' },
-        json = { 'prettier' },
         yaml = { 'prettier' },
         markdown = { 'prettier' },
         graphql = { 'prettier' },

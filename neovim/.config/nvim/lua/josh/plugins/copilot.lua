@@ -1,9 +1,9 @@
 return {
-  {
-    'github/copilot.vim',
-    lazy = false,
-    config = function() end,
-  },
+  -- {
+  --   'github/copilot.vim',
+  --   lazy = false,
+  --   config = function() end,
+  -- },
   -- {
   --   'zbirenbaum/copilot-cmp',
   --   dependencies = { 'github/copilot.vim' },
