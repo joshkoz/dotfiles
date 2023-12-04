@@ -6,10 +6,10 @@ return {
 
     local function js_formatter(bufnr)
       -- Choose the formatter based on the presence of biome.json
-      -- Function to check for the existence of biome.json in the project root
       local function has_biome_config()
         local root = vim.fn.getcwd() -- Get the current working directory
         local biome_config_path = root .. '/biome.json' -- Construct the path to biome.json
+
         return vim.fn.filereadable(biome_config_path) == 1 -- Check if biome.json exists and is readable
       end
       if has_biome_config() then
