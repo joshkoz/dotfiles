@@ -1,1 +1,1 @@
-return { 'folke/which-key.nvim', config = true, enabled = true }
+return { 'folke/which-key.nvim', config = true, enabled = false }

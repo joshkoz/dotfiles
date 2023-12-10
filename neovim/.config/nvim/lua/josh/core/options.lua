@@ -33,6 +33,8 @@ vim.o.scrolloff = 8
 -- Decrease update time
 vim.o.updatetime = 250
 vim.o.timeoutlen = 300
+vim.o.ttimeout = false
+vim.o.timeout = false
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
