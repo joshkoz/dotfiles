@@ -8,8 +8,8 @@
     fg-col2: #f38ba8;
     grey: #6c7086;
 
-    width: 600;
-    font: "CaskaydiaCove NFM";
+    width: 1200;
+	font: "CaskaydiaCove NF Regular ms 16";
 }
 
 element-text, element-icon , mode-switcher {
