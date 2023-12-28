@@ -1,0 +1,57 @@
+import = ["/home/joshua/.config/alacritty/colors/nightfly.toml"]
+live_config_reload = true
+
+[colors]
+draw_bold_text_with_bright_colors = false
+
+[env]
+TERM = "alacritty"
+
+[font]
+size = 12
+
+[font.normal]
+family = "CaskaydiaCove NFM"
+
+[font.offset]
+x = 0
+y = 15
+
+[hints]
+alphabet = "jfkdls;ahgurieowpq"
+
+[[hints.enabled]]
+command = "xdg-open"
+hyperlinks = true
+post_processing = true
+regex = "(ipfs:|ipns:|magnet:|mailto:|gemini:|gopher:|https:|http:|news:|file:|git:|ssh:|ftp:)[^\u0000-\u001F\u007F-<>\"\\s{-}\\^⟨⟩`]+"
+
+[hints.enabled.binding]
+key = "U"
+mods = "Control|Shift"
+
+[hints.enabled.mouse]
+enabled = true
+mods = "None"
+
+[[keyboard.bindings]]
+chars = "\u001B[1;Pf"
+key = "F"
+mods = "Super"
+
+[[keyboard.bindings]]
+chars = "\u001B[1;Pb"
+key = "B"
+mods = "Super"
+
+[shell]
+args = ["--login"]
+program = "/usr/bin/zsh"
+
+[window]
+decorations = "full"
+opacity = 1.0
+
+[window.padding]
+x = 0
+y = 0
