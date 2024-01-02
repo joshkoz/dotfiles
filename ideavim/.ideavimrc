@@ -9,9 +9,11 @@ nnoremap <Leader><Leader> <C-6>
 nnoremap <Leader>la :action ShowIntentionActions<CR>
 nnoremap <leader>e :action ActivateProjectToolWindow<CR>
 nnoremap <leader>lr :action RenameElement<CR>
-set surround
 set clipboard+=unnamed
 set scrolloff=8
 :set relativenumber
 :set number 
 
+" Plugins
+set surround
+set NERDTree
