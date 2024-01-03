@@ -3,19 +3,24 @@ return {
   'nvim-treesitter/nvim-treesitter',
   dependencies = {
     'nvim-treesitter/playground',
-    "windwp/nvim-ts-autotag",
+    'windwp/nvim-ts-autotag',
   },
-  event = { "BufReadPost", "BufNewFile" },
+  event = { 'BufReadPost', 'BufNewFile' },
   build = ':TSUpdate',
   config = function()
-    local treesitter = require('nvim-treesitter.configs')
+    local treesitter = require 'nvim-treesitter.configs'
 
     -- https://github.com/nvim-treesitter/nvim-treesitter#supported-languages
-    treesitter.setup({
+    treesitter.setup {
+      modules = {},
+      sync_install = false,
+      ignore_install = {},
       highlight = {
         enable = true,
-        disable = function(_, bufnr) return vim.api.nvim_buf_line_count(bufnr) > 10000 end, -- Disable if the buffer is too large
-        additional_vim_regex_highlighting = { "markdown" },
+        disable = function(_, bufnr)
+          return vim.api.nvim_buf_line_count(bufnr) > 10000
+        end, -- Disable if the buffer is too large
+        additional_vim_regex_highlighting = { 'markdown' },
       },
       ensure_installed = {
         'json',
@@ -45,12 +50,12 @@ return {
       indent = { enable = true },
       auto_tag = { enable = true },
       incremental_selection = {
-        enable = true
+        enable = true,
       },
       context_commentstring = {
         enable = true,
-        enable_autocmd = false
+        enable_autocmd = false,
       },
-    })
-  end
+    }
+  end,
 }

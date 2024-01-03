@@ -18,7 +18,7 @@ return {
     local mason = require 'mason'
     local mason_lspconfig = require 'mason-lspconfig'
 
-    local mason_dap = require 'mason-nvim-dap'
+    -- local mason_dap = require 'mason-nvim-dap'
     local mason_tool_installer = require 'mason-tool-installer'
 
     mason.setup {
@@ -47,17 +47,17 @@ return {
       automatic_installation = true,
     }
 
-    mason_dap.setup {
-      automatic_setup = true,
-      automatic_installation = true,
-      handlers = {},
-      ensure_installed = {
-        'netcoredb',
-        'codelldb',
-        'debugpy',
-        'js-debug-adapter',
-      },
-    }
+    -- mason_dap.setup {
+    --   automatic_setup = true,
+    --   automatic_installation = true,
+    --   handlers = {},
+    --   ensure_installed = {
+    --     'netcoredb',
+    --     'codelldb',
+    --     'debugpy',
+    --     'js-debug-adapter',
+    --   },
+    -- }
 
     mason_tool_installer.setup {
       ensure_installed = {

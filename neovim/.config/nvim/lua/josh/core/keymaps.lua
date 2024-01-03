@@ -21,7 +21,11 @@ vim.keymap.set('n', 'dd', '"_dd', { desc = 'Delete line without yanking' })
 vim.keymap.set('n', 'd', '"_d', { desc = 'Delete to black-hold register' })
 -- vim.keymap.set('n', "<C-j>", "<S-}>", { desc = "Jump to next empty line" })
 -- vim.keymap.set('n', '<C-k>', "<S-{>", { desc = "Jump to previous empty line" })
---
+
+-- Clipboard remaps. Leader y to yank to clipbard
+vim.keymap.set('n', '<leader>y', '"+y')
+vim.keymap.set('v', '<leader>y', '"+Y')
+vim.keymap.set('n', '<leader>Y', '"+Y')
 
 -- Marks
 --
@@ -61,11 +65,5 @@ vim.keymap.set('n', '<leader>co', function()
     vim.cmd 'copen'
   end
 end, { desc = 'Toggle the Quickfix list' })
-vim.keymap.set('n', '<leader>cn', '<cmd>cnext<CR>', { desc = 'Go to next item in Quickfix List' })
-vim.keymap.set('n', ']q', '<cmd>cnext<CR>', { desc = 'Go to next item in Quickfix List' })
-vim.keymap.set('n', '<leader>j', '<cmd>cnext<CR>', { desc = 'Go to next item in Quickfix List' })
-vim.keymap.set('n', '<C-S-j>', '<cmd>cnext<CR>', { desc = 'Go to next item in Quickfix List' })
-vim.keymap.set('n', '<leader>cp', '<cmd>cprev<CR>', { desc = 'Go to previous item in Quickfix List' })
-vim.keymap.set('n', '<leader>k', '<cmd>cprev<CR>', { desc = 'Go to previous item in Quickfix List' })
-vim.keymap.set('n', '<C-S-k>', '<cmd>cprev<CR>', { desc = 'Go to previous item in Quickfix List' })
-vim.keymap.set('n', '[q', '<cmd>cprev<CR>', { desc = 'Go to previous item in Quickfix List' })
+vim.keymap.set('n', '<leader>j', '<cmd>cnext<CR>zz', { desc = 'Go to next item in Quickfix List' })
+vim.keymap.set('n', '<leader>k', '<cmd>cprev<CR>zz', { desc = 'Go to previous item in Quickfix List' })

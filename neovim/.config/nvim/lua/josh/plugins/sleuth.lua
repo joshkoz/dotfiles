@@ -1,4 +1,5 @@
 return {
   'tpope/vim-sleuth',
-  event = 'BufEnter'
+  enabled = true,
+  event = 'BufEnter',
 }
