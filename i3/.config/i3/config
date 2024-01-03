@@ -266,6 +266,8 @@ bindsym $mod+shift+x exec i3lock --color=000000
 # Set wallpaper
 # exec_always feh --bg-scale /home/joshua/Pictures/wallpaper.jpg 
 exec_always feh --bg-scale --no-xinerama /home/joshua/Pictures/wide2.jpg 
+# exec_always nasa-wallpaper -q earth -d $(date -d "yesterday" '+%Y-%m-%d') 
+
 # Set sound tray icon
 exec --no-startup-id pasystray
 
