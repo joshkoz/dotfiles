@@ -1,10 +1,10 @@
 return {
   -- Add indentation guides even on blank lines
-  'lukas-reineke/indent-blankline.nvim',
-  main = 'ibl',
+  "lukas-reineke/indent-blankline.nvim",
+  main = "ibl",
   opts = {
     indent = {
-      char = '┊',
+      char = "┊",
     },
     whitespace = {
       remove_blankline_trail = true,

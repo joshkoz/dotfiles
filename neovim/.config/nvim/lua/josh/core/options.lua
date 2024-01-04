@@ -9,7 +9,7 @@ vim.o.incsearch = true
 vim.wo.number = true
 
 -- Enable mouse mode
-vim.o.mouse = 'a'
+vim.o.mouse = "a"
 
 -- Sync clipboard between OS and Neovim. Try use <leader>y instead
 -- vim.o.clipboard = 'unnamedplus'
@@ -34,7 +34,7 @@ vim.o.shiftwidth = 4
 vim.o.expandtab = true
 
 -- Keep signcolumn on by default
-vim.wo.signcolumn = 'yes'
+vim.wo.signcolumn = "yes"
 
 -- Enable Relative Line Numbers
 vim.o.relativenumber = true
@@ -47,7 +47,7 @@ vim.o.ttimeout = false
 vim.o.timeout = false
 
 -- Set completeopt to have a better completion experience
-vim.o.completeopt = 'menuone,noselect'
+vim.o.completeopt = "menuone,noselect"
 
 vim.o.termguicolors = true
 

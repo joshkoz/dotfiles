@@ -1,4 +1,4 @@
-local ls = require "luasnip"
+local ls = require("luasnip")
 
 -- some shorthands...
 local snip = ls.snippet
@@ -10,7 +10,7 @@ local choice = ls.choice_node
 local dynamicn = ls.dynamic_node
 
 local function get_solution_name(root_path)
-  local sln_file = vim.fn.glob(root_path .. '/*.sln')
+  local sln_file = vim.fn.glob(root_path .. "/*.sln")
   if sln_file == "" then
     return nil
   end
@@ -48,11 +48,11 @@ ls.add_snippets(nil, {
       namr = "NamespaceClass",
       dscr = "C# Class inside a namespace based on file path",
     }, {
-      text "namespace ",
+      text("namespace "),
       func(get_csharp_namespace, {}),
-      text { ";", "", "internal sealed class " },
+      text({ ";", "", "internal sealed class " }),
       insert(1, "ClassName"),
-      text { "", "{", "\t", "}" },
+      text({ "", "{", "\t", "}" }),
     }),
   },
 })

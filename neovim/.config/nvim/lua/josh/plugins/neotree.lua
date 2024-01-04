@@ -6,31 +6,31 @@ return {
     "nvim-tree/nvim-web-devicons",
     "MunifTanjim/nui.nvim",
   },
-  event = 'BufEnter',
+  event = "BufEnter",
   keys = {
     { "<leader>e", "<cmd>Neotree toggle<cr>", desc = "Toggle [E]xplorer" },
     {
       "<leader>o",
       function()
         if vim.bo.filetype == "neo-tree" then
-          vim.cmd.wincmd "p"
+          vim.cmd.wincmd("p")
         else
-          vim.cmd.Neotree "focus"
+          vim.cmd.Neotree("focus")
         end
       end,
-      desc = "Toggle F[o]cus Explorer"
-    }
+      desc = "Toggle F[o]cus Explorer",
+    },
   },
   opts = {
     close_if_last_window = true,
     filesystem = {
       use_libuv_file_watcher = true,
       follow_current_file = {
-        enabled = true
+        enabled = true,
       },
       filtered_items = {
         hide_dotfiles = false,
-      }
+      },
     },
     default_component_configs = {
       git_status = {
@@ -45,7 +45,7 @@ return {
           staged = "✓",
           conflict = "",
         },
-      }
-    }
-  }
+      },
+    },
+  },
 }
