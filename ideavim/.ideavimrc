@@ -7,9 +7,10 @@ nnoremap <C-h> :action NextSplitter<CR>
 noremap <C-l> :action NextSplitter<CR>
 nnoremap <Leader><Leader> <C-6>
 nnoremap <Leader>la :action ShowIntentionActions<CR>
-nnoremap <leader>e :action ActivateProjectToolWindow<CR>
+" nnoremap <leader>e :action ActivateProjectToolWindow<CR>
 nnoremap <leader>lr :action RenameElement<CR>
-map <leader>x :NERDTreeToggle<CR>
+map <leader>e :NERDTreeToggle<CR>
+map <leader>o :NERDTreeClose<CR>
 
 set clipboard+=unnamed
 set scrolloff=10
