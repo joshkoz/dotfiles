@@ -1,1 +1,1 @@
-require('josh.core')
+require("josh.core")

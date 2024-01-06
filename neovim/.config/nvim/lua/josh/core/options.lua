@@ -68,3 +68,5 @@ vim.o.splitbelow = true
 -- https://github.com/nvim-neo-tree/neo-tree.nvim/issues/983
 vim.g.loaded_netrw = 0
 vim.g.loaded_netrwPlugin = 0
+
+vim.o.inccommand = "nosplit"
