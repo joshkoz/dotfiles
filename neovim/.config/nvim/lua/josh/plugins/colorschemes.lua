@@ -1,4 +1,4 @@
-local colorscheme = "nightfly"
+local colorscheme = "catppuccin"
 
 return {
   {

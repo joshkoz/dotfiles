@@ -1,4 +1,5 @@
-import = ["/home/joshua/.config/alacritty/colors/nightfly.toml"]
+# import = ["/home/joshua/.config/alacritty/colors/nightfly.toml"]
+import = ["/home/joshua/.config/alacritty/colors/catppuccin-mocha.toml"]
 live_config_reload = true
 
 [colors]
