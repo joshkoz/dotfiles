@@ -19,8 +19,6 @@ vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next diagnos
 vim.keymap.set("n", "<leader><leader>", "<cmd>b#<cr>", { desc = "Go to the last buffer" })
 vim.keymap.set("n", "dd", "\"_dd", { desc = "Delete line without yanking" })
 vim.keymap.set("n", "d", "\"_d", { desc = "Delete to black-hold register" })
--- vim.keymap.set('n', "<C-j>", "<S-}>", { desc = "Jump to next empty line" })
--- vim.keymap.set('n', '<C-k>', "<S-{>", { desc = "Jump to previous empty line" })
 
 -- Clipboard remaps. Leader y to yank to clipbard
 vim.keymap.set("n", "<leader>y", "\"+y")
@@ -31,24 +29,29 @@ vim.keymap.set("n", "<leader>Y", "\"+Y")
 --
 -- Make marks slightly more user friendly.
 -- This makes ' behave like ` so that it goes to the column and not the beginning of the line.
-vim.keymap.set("n", "'", function()
-  local mark_char = vim.fn.nr2char(vim.fn.getchar())
-  if mark_char:match("%l") then -- If the mark is a lowercase letter
-    mark_char = mark_char:upper()
-  end
-  vim.cmd(string.format("normal! `%s", mark_char))
-end, { desc = "Jump to Mark" })
+vim.keymap.set("n", "'", "`", { desc = "Jump to Mark" })
 
+-- vim.keymap.set("n", "'", function()
+--   local mark_char = vim.fn.nr2char(vim.fn.getchar())
+--   if mark_char:match("%l") then -- If the mark is a lowercase letter
+--     mark_char = mark_char:upper()
+--   end
+--   vim.cmd(string.format("normal! `%s", mark_char))
+-- end, { desc = "Jump to Mark" })
+--
 -- Capital letter marks are global by default. Since I only really use one mark at a time
 -- It works better if all marks just behave as global.
-local opts = { noremap = true, silent = true }
-for _, letter in ipairs({ "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z" }) do
-  vim.api.nvim_set_keymap("n", "m" .. letter, "m" .. letter:upper(), opts)
-end
-vim.keymap.set("n", "<C-n>", "'N")
-vim.keymap.set("n", "<C-m>", "'M")
+-- local opts = { noremap = true, silent = true }
+-- for _, letter in ipairs({ "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z" }) do
+--   vim.api.nvim_set_keymap("n", "m" .. letter, "m" .. letter:upper(), opts)
+-- end
+-- vim.keymap.set("n", "<C-n>", "'N")
+-- vim.keymap.set("n", "<C-m>", "'M")
 
 --- Quickfix list shortcuts
+vim.keymap.set("n", "<leader>j", "<cmd>cnext<CR>zz", { desc = "Go to next item in Quickfix List" })
+vim.keymap.set("n", "<leader>k", "<cmd>cprev<CR>zz", { desc = "Go to previous item in Quickfix List" })
+-- Toggle the quickfix list
 vim.keymap.set("n", "<leader>co", function()
   local is_open = false
   local win_list = vim.api.nvim_list_wins()
@@ -67,5 +70,3 @@ vim.keymap.set("n", "<leader>co", function()
     vim.cmd("copen")
   end
 end, { desc = "Toggle the Quickfix list" })
-vim.keymap.set("n", "<leader>j", "<cmd>cnext<CR>zz", { desc = "Go to next item in Quickfix List" })
-vim.keymap.set("n", "<leader>k", "<cmd>cprev<CR>zz", { desc = "Go to previous item in Quickfix List" })

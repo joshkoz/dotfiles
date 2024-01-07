@@ -1,174 +1,188 @@
 return {
-  'nvim-telescope/telescope.nvim',
+  "nvim-telescope/telescope.nvim",
   dependencies = {
-    'nvim-lua/plenary.nvim',
-    { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+    "nvim-lua/plenary.nvim",
+    { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
   },
-  cmd = 'Telescope',
+  cmd = "Telescope",
   config = function()
-    local actions = require 'telescope.actions'
-    local telescope = require 'telescope'
-    telescope.load_extension 'fzf'
-    telescope.setup {
+    local actions = require("telescope.actions")
+    local telescope = require("telescope")
+    telescope.load_extension("fzf")
+    telescope.setup({
       defaults = {
         file_ignore_patterns = {
-          '^.git/',
+          "^.git/",
         },
         vimgrep_arguments = {
-          'rg',
-          '--color=never',
-          '--no-heading',
-          '--with-filename',
-          '--line-number',
-          '--column',
-          '--smart-case',
-          '--hidden',
+          "rg",
+          "--color=never",
+          "--no-heading",
+          "--with-filename",
+          "--line-number",
+          "--column",
+          "--smart-case",
+          "--hidden",
         },
         mappings = {
           n = { q = actions.close },
           i = {
-            ['<esc>'] = actions.close,
-            ['jj'] = { '<esc>', type = 'command' },
-            ['<C-j>'] = actions.move_selection_next,
-            ['<C-k>'] = actions.move_selection_previous,
-            ['<C-u>'] = false,
-            ['<C-d>'] = false,
+            ["<esc>"] = actions.close,
+            ["jj"] = { "<esc>", type = "command" },
+            ["<C-j>"] = actions.move_selection_next,
+            ["<C-k>"] = actions.move_selection_previous,
+            ["<C-u>"] = false,
+            ["<C-d>"] = false,
           },
         },
       },
-    }
+    })
   end,
   keys = {
     {
-      'gr',
+      "gr",
       function()
-        require('telescope.builtin').lsp_references()
+        require("telescope.builtin").lsp_references()
       end,
-      desc = '[G]oto [R]eferences',
+      desc = "[G]oto [R]eferences",
     },
     {
-      '<leader>lu',
+      "<leader>lu",
       function()
-        require('telescope.builtin').lsp_references()
+        require("telescope.builtin").lsp_references()
       end,
-      desc = '[L]SP: Find [U]sages',
+      desc = "[L]SP: Find [U]sages",
     },
     {
-      '<leader>ls',
+      "<leader>ls",
       function()
-        require('telescope.builtin').lsp_document_symbols()
+        require("telescope.builtin").lsp_document_symbols()
       end,
-      desc = '[L]SP Document [S]ymbols',
+      desc = "[L]SP Document [S]ymbols",
     },
     {
-      '<leader>fs',
+      "<leader>fs",
       function()
-        require('telescope.builtin').lsp_dynamic_workspace_symbols()
+        require("telescope.builtin").lsp_dynamic_workspace_symbols()
       end,
-      desc = '[F]ind [S]ymbols',
+      desc = "[F]ind [S]ymbols",
     },
     {
-      '<leader>fp',
+      "<leader>fp",
       function()
-        require('telescope.builtin').git_files { show_untracked = true }
+        require("telescope.builtin").git_files({ show_untracked = true })
       end,
-      desc = '[F]ind Git [P]roject Files',
+      desc = "[F]ind Git [P]roject Files",
     },
     {
-      '<C-p>',
+      "<C-p>",
       function()
-        local exit_code = os.execute 'git rev-parse --is-inside-work-tree > /dev/null 2>&1'
+        local exit_code = os.execute("git rev-parse --is-inside-work-tree > /dev/null 2>&1")
         local ok = exit_code == 0
         print(ok)
         if ok then
-          require('telescope.builtin').git_files { show_untracked = true }
+          require("telescope.builtin").git_files({ show_untracked = true })
         else
-          require('telescope.builtin').find_files { hidden = true }
+          require("telescope.builtin").find_files({ hidden = true })
         end
       end,
-      desc = 'Smart Search [F]iles',
+      desc = "Smart Search [F]iles",
     },
     {
-      '<C-f>',
+      "<C-f>",
       function()
-        require('telescope.builtin').live_grep()
+        require("telescope.builtin").live_grep()
       end,
-      desc = 'Grep Project',
+      desc = "Grep Project",
     },
     {
-      '<leader>ff',
+      "<leader>ff",
       function()
-        require('telescope.builtin').find_files { hidden = true }
+        require("telescope.builtin").find_files({ hidden = true })
       end,
 
-      desc = '[F]ind [F]iles',
+      desc = "[F]ind [F]iles",
     },
     {
-      '<leader>fr',
+      "<leader>'",
       function()
-        require('telescope.builtin').oldfiles()
+        require("telescope.builtin").marks()
       end,
-      desc = '[F]ind [R]ecent files',
+      desc = "Find [M]arks",
     },
     {
-      '<leader>fh',
+      "<leader>;",
       function()
-        require('telescope.builtin').help_tags()
+        require("telescope.builtin").marks()
       end,
-      desc = '[F]ind [H]elp',
+      desc = "Find [M]arks",
     },
     {
-      '<leader>fc',
+      "<leader>fr",
       function()
-        require('telescope.builtin').grep_string()
+        require("telescope.builtin").oldfiles()
       end,
-      desc = '[F]ind string under [C]ursor',
+      desc = "[F]ind [R]ecent files",
     },
     {
-      '<leader>fg',
+      "<leader>fh",
       function()
-        require('telescope.builtin').live_grep()
+        require("telescope.builtin").help_tags()
       end,
-      desc = '[F]ind [G]rep',
+      desc = "[F]ind [H]elp",
     },
     {
-      '<leader>fd',
+      "<leader>fc",
       function()
-        require('telescope.builtin').diagnostics()
+        require("telescope.builtin").grep_string()
       end,
-      desc = '[F]ind [D]iagnostics',
+      desc = "[F]ind string under [C]ursor",
     },
     {
-      '<leader>?',
+      "<leader>fg",
       function()
-        require('telescope.builtin').oldfiles()
+        require("telescope.builtin").live_grep()
       end,
-      desc = '[?] Find recently opened files',
+      desc = "[F]ind [G]rep",
     },
     {
-      '<leader>b',
+      "<leader>fd",
       function()
-        require('telescope.builtin').buffers()
+        require("telescope.builtin").diagnostics()
       end,
-      desc = 'Find existing [b]uffers',
+      desc = "[F]ind [D]iagnostics",
     },
     {
-      '<leader>ct',
+      "<leader>?",
       function()
-        require('telescope.builtin').colorscheme()
+        require("telescope.builtin").oldfiles()
       end,
-      desc = '[C]hange [T]heme',
+      desc = "[?] Find recently opened files",
     },
     {
-      '<leader>/',
+      "<leader>b",
+      function()
+        require("telescope.builtin").buffers()
+      end,
+      desc = "Find existing [b]uffers",
+    },
+    {
+      "<leader>ct",
+      function()
+        require("telescope.builtin").colorscheme()
+      end,
+      desc = "[C]hange [T]heme",
+    },
+    {
+      "<leader>/",
       function()
         -- You can pass additional configuration to telescope to change theme, layout, etc.
-        require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
+        require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
           winblend = 10,
           previewer = false,
-        })
+        }))
       end,
-      desc = '[/] Fuzzily search in current buffer',
+      desc = "[/] Fuzzily search in current buffer",
     },
   },
 }
