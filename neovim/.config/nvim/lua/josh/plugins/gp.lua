@@ -1,6 +1,6 @@
 return {
-  'robitx/gp.nvim',
+  "robitx/gp.nvim",
   config = function()
-    require('gp').setup()
+    require("gp").setup()
   end,
 }

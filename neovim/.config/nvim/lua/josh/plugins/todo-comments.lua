@@ -4,6 +4,6 @@ return {
   opts = {
     highlight = {
       pattern = [[(KEYWORDS)\s*(\([^\)]*\))?:]],
-    }
-  }
+    },
+  },
 }
