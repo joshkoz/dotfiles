@@ -31,22 +31,13 @@ vim.keymap.set("n", "<leader>Y", "\"+Y")
 -- This makes ' behave like ` so that it goes to the column and not the beginning of the line.
 vim.keymap.set("n", "'", "`", { desc = "Jump to Mark" })
 
--- vim.keymap.set("n", "'", function()
---   local mark_char = vim.fn.nr2char(vim.fn.getchar())
---   if mark_char:match("%l") then -- If the mark is a lowercase letter
---     mark_char = mark_char:upper()
---   end
---   vim.cmd(string.format("normal! `%s", mark_char))
--- end, { desc = "Jump to Mark" })
---
--- Capital letter marks are global by default. Since I only really use one mark at a time
--- It works better if all marks just behave as global.
--- local opts = { noremap = true, silent = true }
--- for _, letter in ipairs({ "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z" }) do
---   vim.api.nvim_set_keymap("n", "m" .. letter, "m" .. letter:upper(), opts)
--- end
--- vim.keymap.set("n", "<C-n>", "'N")
--- vim.keymap.set("n", "<C-m>", "'M")
+-- Keep focus in center when moving up or down the page.
+vim.keymap.set("n", "<C-d>", "<C-d>zz")
+vim.keymap.set("n", "<C-u>", "<C-u>zz")
+
+-- Allow moving a visual selection up or down a line
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
 --- Quickfix list shortcuts
 vim.keymap.set("n", "<leader>j", "<cmd>cnext<CR>zz", { desc = "Go to next item in Quickfix List" })
