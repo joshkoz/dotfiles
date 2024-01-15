@@ -2,8 +2,8 @@ eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
 
 export HISTFILE=~/.histfile
-export HISTSIZE=1000
-export SAVEHIST=1000
+export HISTSIZE=100000
+export SAVEHIST=100000
 unsetopt beep
 setopt share_history 
 setopt APPEND_HISTORY
