@@ -227,7 +227,8 @@ mode "resize" {
 
 bindsym $mod+Ctrl+r mode "resize"
 
-set $bg-color            #ab68ff
+# set $bg-color          #ab68ff // the accent color 
+set $accent-color        #ea999c
 set $inactive-bg-color   #2f343f
 set $text-color          #f3f4f5
 set $inactive-text-color #676E7D
@@ -235,10 +236,10 @@ set $urgent-bg-color     #E53935
 
 # window colors
 #                       border              background         text                 indicator
-client.focused          $bg-color           $bg-color          $text-color         $bg-color 
-client.unfocused        $inactive-bg-color $inactive-bg-color $inactive-text-color $bg-color 
-client.focused_inactive $inactive-bg-color $inactive-bg-color $inactive-text-color $bg-color 
-client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color         $bg-color 
+client.focused          $accent-color      $accent-color      $text-color          $accent-color 
+client.unfocused        $inactive-bg-color $inactive-bg-color $inactive-text-color $accent-color 
+client.focused_inactive $inactive-bg-color $inactive-bg-color $inactive-text-color $accent-color 
+client.urgent           $urgent-bg-color   $urgent-bg-color   $text-color          $accent-color 
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
@@ -247,14 +248,14 @@ bar {
         # Ensure i3bar libindicators appear on the middle monitor.
         tray_output $dpright
         colors {
-                focused_workspace  #8b48ef #AB68FF #FFFFFF
+                focused_workspace  $accent-color $accent-color #000000
         }
 }
 
 
 gaps inner 20 
 gaps outer 10 
-smart_gaps on
+# smart_gaps on
 
 workspace $ws9 output $dpleft
 workspace $ws10 output $dpleft
@@ -284,3 +285,7 @@ bindsym Shift+Print exec --no-startup-id maim --select "/home/$USER/Pictures/$(d
 bindsym Ctrl+Print exec --no-startup-id maim | xclip -selection clipboard -t image/png
 bindsym Ctrl+$mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) | xclip -selection clipboard -t image/png
 bindsym Ctrl+Shift+S exec --no-startup-id maim --select | xclip -selection clipboard -t image/png
+
+## Pick audio output
+bindsym Ctrl+Shift+A exec --no-startup-id /home/joshua/.local/bin/pick-output-audio.sh
+bindsym Ctrl+Shift+M exec --no-startup-id /home/joshua/.local/bin/pick-input-audio.sh
