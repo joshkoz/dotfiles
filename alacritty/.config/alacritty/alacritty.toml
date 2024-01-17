@@ -45,6 +45,11 @@ chars = "\u001B[1;Pb"
 key = "B"
 mods = "Super"
 
+[[keyboard.bindings]]
+action = "Paste"
+key = "V"
+mods = "Control"
+
 [shell]
 args = ["--login"]
 program = "/usr/bin/zsh"
