@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Get the current default browser
+current_browser=$(xdg-settings get default-web-browser)
+
+# Check if the current browser is Chrome
+if [[ $current_browser == *"google-chrome"* ]]; then
+    # Set Firefox as the default browser
+    xdg-settings set default-web-browser firefox.desktop
+    echo "Default browser set to Firefox."
+else
+    # Set Chrome as the default browser
+    xdg-settings set default-web-browser google-chrome.desktop
+    echo "Default browser set to Google Chrome."
+fi
