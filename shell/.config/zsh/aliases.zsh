@@ -1,6 +1,5 @@
 alias k=kubectl
 
-
 # Use eza Aliases if eza is installed 
 if command -v eza &> /dev/null; then
   alias ls=eza
@@ -12,4 +11,4 @@ if command -v eza &> /dev/null; then
   alias lx='eza -lbhHigUmuSa@ --time-style=long-iso --color-scale'
 fi
 
-bindkey -s '^f' "tmux-sessionizer\n"
+bindkey -s '^f' "^utmux-sessionizer^M"
