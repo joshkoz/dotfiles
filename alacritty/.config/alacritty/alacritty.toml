@@ -9,14 +9,14 @@ draw_bold_text_with_bright_colors = true
 TERM = "alacritty"
 
 [font]
-size = 12
+size = 11
 
 [font.normal]
 family = "CaskaydiaCove NFM"
 
 [font.offset]
 x = 0
-y = 18
+y = 14 
 
 [hints]
 alphabet = "jfkdls;ahgurieowpq"
@@ -45,10 +45,10 @@ chars = "\u001B[1;Pb"
 key = "B"
 mods = "Super"
 
-[[keyboard.bindings]]
-action = "Paste"
-key = "V"
-mods = "Control"
+# [[keyboard.bindings]]
+# action = "Paste"
+# key = "V"
+# mods = "Control"
 
 [shell]
 args = ["--login"]
