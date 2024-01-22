@@ -24,6 +24,9 @@ vim.keymap.set("n", "d", "\"_d", { desc = "Delete to black-hold register" })
 vim.keymap.set("n", "<leader>y", "\"+y")
 vim.keymap.set("v", "<leader>y", "\"+Y")
 vim.keymap.set("n", "<leader>Y", "\"+Y")
+vim.keymap.set("n", "<leader>p", "\"+p")
+vim.keymap.set("v", "<leader>p", "\"+p")
+vim.keymap.set("n", "<leader>p", "\"+p")
 
 -- Marks
 --
