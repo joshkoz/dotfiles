@@ -1,28 +1,67 @@
 #!/bin/bash
 
-declare -A sink_map
+# List of device descriptions to exclude
+declare -a exclude_list=(
+    # "fifine Microphone"
+    # "MH752"
+    # "Family 17h/19h HD Audio Controller"
+    # "GA102 High Definition Audio Controller"
+)
+
+declare -A source_map
+active_source=$(pactl get-default-source)
+
 while IFS= read -r line; do
-    # Extract the sink name
+    # Extract the source name
     if [[ $line == *Name:* ]]; then
-        sink_name=$(echo "$line" | awk '{print $NF}')
+        source_name=$(echo "$line" | awk '{print $NF}')
     fi
 
-    # Extract and map the description to the sink name
+    # Extract and map the description to the source name
     if [[ $line == *Description:* ]]; then
         description=$(echo "$line" | cut -d ':' -f2- | xargs)
-        sink_map["$description"]=$sink_name
+
+        # Check if this source should be excluded
+        exclude=false
+        for exclude_item in "${exclude_list[@]}"; do
+             if [[ $description == *"$exclude_item"* ]]; then
+                exclude=true
+                break
+            fi
+        done
+
+        if [ "$exclude" = false ]; then
+            source_map["$description"]=$source_name
+        fi
     fi
-done < <(pactl list sinks | grep -vi GA102 | grep -vi family)
+done < <(pactl list sources)
 
-# Generate a menu with descriptions
-menu=$(for key in "${!sink_map[@]}"; do echo "$key"; done | rofi -dmenu -i -p "Select Audio Input Device:")
+# Prepare the menu entries, putting the active source first
+menu_entries=()
+active_description=""
 
-# Get the selected sink name and set it as the default
-selected_sink=${sink_map[$menu]}
-if [ -n "$selected_sink" ]; then
-    pactl set-default-sink "$selected_sink"
-    pactl list short sink-inputs | cut -f1 | while read -r input; do
-        pactl move-sink-input "$input" "$selected_sink"
+for description in "${!source_map[@]}"; do
+    if [[ ${source_map[$description]} == "$active_source" ]]; then
+        active_description=$description
+    else
+        menu_entries+=("$description")
+    fi
+done
+
+# If there is an active source, prepend it to the menu entries
+if [ -n "$active_description" ]; then
+    menu_entries=("$active_description" "${menu_entries[@]}")
+fi
+
+# Generate the menu with descriptions
+menu=$(printf '%s\n' "${menu_entries[@]}" | rofi -dmenu -i -p "Select Audio Source:")
+
+# Get the selected source name and set it as the default
+selected_source=${source_map[$menu]}
+if [ -n "$selected_source" ]; then
+    pactl set-default-source "$selected_source"
+    pactl list short source-outputs | cut -f1 | while read -r output; do
+        pactl move-source-output "$output" "$selected_source"
     done
 fi
 
