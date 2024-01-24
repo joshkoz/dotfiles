@@ -1,4 +1,5 @@
 alias k=kubectl
+alias vim=nvim
 
 # Use eza Aliases if eza is installed 
 if command -v eza &> /dev/null; then

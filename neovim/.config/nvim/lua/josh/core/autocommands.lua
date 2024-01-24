@@ -45,6 +45,10 @@ vim.api.nvim_create_autocmd("Colorscheme", {
     -- Ensure splits dont have a background color
     vim.cmd.hi("VertSplit guibg=NONE")
     vim.cmd.hi("HorizSplit guibg=NONE")
+    if vim.g.colors_name == "onedark" then
+      -- vim.cmd.hi("NeoTreeWinSeparator guibg=NONE guifg=NONE")
+      vim.cmd.hi("NeoTreeWinSeparator guibg=#1b1c1e guifg=#1b1c1e")
+    end
   end,
   group = theme_overrides_group,
   pattern = "*",
