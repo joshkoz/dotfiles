@@ -45,10 +45,13 @@ vim.api.nvim_create_autocmd("Colorscheme", {
     -- Ensure splits dont have a background color
     vim.cmd.hi("VertSplit guibg=NONE")
     vim.cmd.hi("HorizSplit guibg=NONE")
+    -- Ensure that the onedark theme NeoTree Area seperator
     if vim.g.colors_name == "onedark" then
-      -- vim.cmd.hi("NeoTreeWinSeparator guibg=NONE guifg=NONE")
-      vim.cmd.hi("NeoTreeWinSeparator guibg=#1b1c1e guifg=#1b1c1e")
+      vim.api.nvim_command("highlight link NeoTreeWinSeparator WinSeparator")
     end
+    -- Hide the status line
+    vim.api.nvim_set_hl(0, "StatuslineNC", { link = "Normal" })
+    vim.api.nvim_command("highlight link MyStatusLine WinSeparator")
   end,
   group = theme_overrides_group,
   pattern = "*",

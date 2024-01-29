@@ -79,7 +79,6 @@ return {
       function()
         local exit_code = os.execute("git rev-parse --is-inside-work-tree > /dev/null 2>&1")
         local ok = exit_code == 0
-        print(ok)
         if ok then
           require("telescope.builtin").git_files({ show_untracked = true })
         else

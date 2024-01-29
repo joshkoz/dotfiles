@@ -12,22 +12,31 @@ return {
   -- },
   dependencies = {
     "nvim-lua/plenary.nvim",
+    "hrsh7th/nvim-cmp",
   },
-  opts = {
-    detect_cwd = true,
-    daily_notes = {
-      folder = "📅 Journal",
-    },
+  config = function()
+    require("obsidian").setup({
+      disable_frontmatter = true,
+      completion = { nvim_cmp = true },
+      detect_cwd = true,
+      daily_notes = {
+        folder = "📅 Journal",
+      },
 
-    workspaces = {
-      {
-        name = "personal",
-        path = "~/vaults/second-brain",
+      workspaces = {
+        {
+          name = "second-brain",
+          path = "/home/joshua/vaults/second-brain/",
+        },
+        {
+          name = "work",
+          path = "/home/joshua/vaults/work-journal/",
+        },
+        {
+          name = "Test",
+          path = "/home/joshua/Desktop/Test/Test/",
+        },
       },
-      {
-        name = "work",
-        path = "~/vaults/work",
-      },
-    },
-  },
+    })
+  end,
 }

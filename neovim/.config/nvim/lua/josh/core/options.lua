@@ -72,3 +72,11 @@ vim.g.loaded_netrwPlugin = 0
 vim.o.inccommand = "nosplit"
 
 vim.o.conceallevel = 2
+
+-- Disable the statusline
+vim.o.laststatus = 0
+-- Sets the status line as a line: https://github.com/neovim/neovim/issues/18965
+vim.o.statusline = "%#MyStatusLine#%{repeat('─',winwidth('.'))}%*"
+
+-- Hide the command line when not in use
+vim.o.cmdheight = 0
