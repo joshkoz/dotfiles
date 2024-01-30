@@ -22,19 +22,14 @@ return {
       daily_notes = {
         folder = "📅 Journal",
       },
-
       workspaces = {
         {
-          name = "second-brain",
+          name = "Second Brain",
           path = "/home/joshua/vaults/second-brain/",
         },
         {
-          name = "work",
-          path = "/home/joshua/vaults/work-journal/",
-        },
-        {
-          name = "Test",
-          path = "/home/joshua/Desktop/Test/Test/",
+          name = "Work Vault",
+          path = "/home/joshua/vaults/work-vault/",
         },
       },
     })
