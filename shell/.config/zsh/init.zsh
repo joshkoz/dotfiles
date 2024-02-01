@@ -14,14 +14,10 @@ bindkey -v
 bindkey '^R' history-incremental-search-backward
 export KEYTIMEOUT=1
  
-zstyle :compinstall filename '/home/joshua/.zshrc'
+zstyle :compinstall filename '/Users/joshua/.zshrc'
 
 autoload -Uz compinit
 compinit
-# Only use the 1Password agent bridge if we're in WSL
-if grep -iq microsoft /proc/version; then
-  source wsl-agent-bridge
-fi
 
 # pnpm
 export PNPM_HOME="/home/joshua/.local/share/pnpm"
@@ -35,8 +31,8 @@ touch $HOME/.config/zsh/secrets.zsh
 source $HOME/.config/zsh/secrets.zsh
 
 source $HOME/.config/zsh/aliases.zsh
-source /usr/share/nvm/init-nvm.sh
+# source /usr/share/nvm/init-nvm.sh
 
 # Requires installing zsh-syntax-highlighting and zsh-autosuggestions
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+# source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
