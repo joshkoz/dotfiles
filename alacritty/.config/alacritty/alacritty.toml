@@ -1,12 +1,11 @@
-
-
 [colors]
 draw_bold_text_with_bright_colors = true 
-[env]
-TERM = "alacritty"
+
+# [env]
+# TERM = "alacritty"
 
 [font]
-size = 10 
+size = 15
 
 [font.normal]
 family = "CaskaydiaCove NFM SemiLight"
@@ -52,7 +51,7 @@ mods = "Super"
 
 [terminal.shell]
 args = ["--login"]
-program = "/usr/bin/zsh"
+program = "/bin/zsh"
 
 [window]
 decorations = "full"
@@ -66,6 +65,6 @@ y = 0
 live_config_reload = true
 # import = ["/home/joshua/.config/alacritty/colors/nightfly.toml"]
 # import = ["/home/joshua/.config/alacritty/colors/catppuccin-mocha.toml"]
-import = ["/home/joshua/.config/alacritty/colors/kanagawa.toml"]
+import = ["/Users/joshua/.config/alacritty/colors/catppuccin-mocha.toml"]
 
 [terminal]

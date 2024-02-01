@@ -22,6 +22,9 @@ bindkey '^R' history-incremental-search-backward
 # bindkey '^X^E' edit-command-line
 
 zstyle :compinstall filename '/home/joshua/.zshrc'
+export KEYTIMEOUT=1
+ 
+zstyle :compinstall filename '/Users/joshua/.zshrc'
 
 autoload -Uz compinit
 compinit
@@ -38,10 +41,9 @@ touch $HOME/.config/zsh/secrets.zsh
 source $HOME/.config/zsh/secrets.zsh
 
 source $HOME/.config/zsh/aliases.zsh
-source /usr/share/nvm/init-nvm.sh
+# source /usr/share/nvm/init-nvm.sh
 
 # Requires installing zsh-syntax-highlighting and zsh-autosuggestions
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-
 source <(fzf --zsh)
+# source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
