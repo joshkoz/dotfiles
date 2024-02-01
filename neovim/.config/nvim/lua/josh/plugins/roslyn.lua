@@ -2,6 +2,7 @@ return {
   "seblj/roslyn.nvim",
   ft = "cs",
   opts = {
+    exe = 'Microsoft.CodeAnalysis.LanguageServer',
     config = {
       settings = {
         ["csharp|background_analysis"] = {

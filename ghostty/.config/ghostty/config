@@ -1,11 +1,11 @@
 theme = kanagawabones 
 font-family = "JetBrains Mono NFM"
 font-feature = -calt
-window-decoration = false
 shell-integration-features = no-cursor
 cursor-style-blink = false
 confirm-close-surface = false
-font-size = 11 
+quit-after-last-window-closed = true
+font-size = 14 
 adjust-cell-height = 20% 
 window-padding-x = 0
 window-padding-y = 10,0

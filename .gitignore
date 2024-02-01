@@ -2,3 +2,5 @@ secrets.zsh
 *.add
 *.spl
 spell/
+scripts/.local/share
+scripts/.local/state

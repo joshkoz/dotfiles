@@ -4,8 +4,8 @@
 	signingkey = ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDcY3B808jUEjX7YtYTKZ6CMvGBB3KYu7NBLQEpR/5o8h+t/3kxO70T1Rj05XSP0MDWq0D+mnvXTAOp7R8rDF0JqvVahA6kveK93lltKUE9ETbU3C3Y4GpfTwt1Ig0enG4HFHsOLsplt89sSttLhxopsYTvTQaxE2tZqUCxRDP/6V11CXuA2ObglIuw4S/3WfnWNI4zxTfPFS4xnzc/DTs57/w22JfSkF0cxCwT2LXvLd4y4qu1Sm92LQIxJknFv8jl2qEhH5ffXWmzWkrhia18BGuJUUvk6T5li8w1NODYnWoSVkww94PHjUk+obx7hB5jE+52+hudsiJCVnIYHOd1
 [commit]
 	template = ~/.git-templates/git-commit-template
-	gpgsign = true
     verbose = true
+	gpgsign = false
 [gpg]
 	format = ssh
 [gpg "ssh"]

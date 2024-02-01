@@ -1,0 +1,72 @@
+[colors]
+draw_bold_text_with_bright_colors = true 
+
+# [env]
+# TERM = "alacritty"
+
+[font]
+size = 15
+
+[font.normal]
+family = "CaskaydiaCove NFM SemiLight"
+
+[font.offset]
+x = 0
+y = 10 
+
+[font.glyph_offset]
+y = 5 
+
+[hints]
+alphabet = "jfkdls;ahgurieowpq"
+
+[[hints.enabled]]
+command = "xdg-open"
+hyperlinks = true
+post_processing = true
+regex = "(ipfs:|ipns:|magnet:|mailto:|gemini:|gopher:|https:|http:|news:|file:|git:|ssh:|ftp:)[^\u0000-\u001F\u007F-<>\"\\s{-}\\^⟨⟩`]+"
+
+[hints.enabled.binding]
+key = "U"
+mods = "Control|Shift"
+
+[hints.enabled.mouse]
+enabled = true
+mods = "None"
+
+[[keyboard.bindings]]
+chars = "\u001B[1;Pf"
+key = "F"
+mods = "Super"
+
+[[keyboard.bindings]]
+chars = "\u001B[1;Pb"
+key = "B"
+mods = "Super"
+
+# [[keyboard.bindings]]
+# action = "Paste"
+# key = "V"
+# mods = "Control"
+
+[terminal.shell]
+args = ["--login"]
+program = "/bin/zsh"
+
+[window]
+decorations = "full"
+option_as_alt = "Both"
+
+# opacity = 0.98 
+
+[window.padding]
+x = 10
+y = 0
+
+[general]
+live_config_reload = true
+# import = ["/home/joshua/.config/alacritty/colors/nightfly.toml"]
+# import = ["/home/joshua/.config/alacritty/colors/catppuccin-mocha.toml"]
+import = ["/Users/joshua/.config/alacritty/colors/catppuccin-mocha.toml"]
+
+[terminal]
