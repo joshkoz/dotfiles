@@ -1,1 +1,3 @@
 secrets.zsh
+scripts/.local/share
+scripts/.local/state
