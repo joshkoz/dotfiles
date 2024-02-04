@@ -9,6 +9,7 @@ return {
     "williamboman/mason.nvim",
     { "williamboman/mason-lspconfig.nvim", opts = {} },
     "j-hui/fidget.nvim",
+    "jmederosalvarado/roslyn.nvim",
   },
   opts = {
     diagnostics = {
@@ -171,38 +172,45 @@ return {
       },
     })
 
-    -- configure omnisharp server
-    lspconfig["omnisharp"].setup({
-      cmd = { "omnisharp", "--languageserver", "--hostPID", tostring(vim.fn.getpid()) },
+    require("roslyn").setup({
+      dotnet_cmd = "dotnet", -- this is the default
+      roslyn_version = "4.8.0-3.23475.7", -- this is the default
       capabilities = capabilities,
       on_attach = on_attach,
-      settings = {
-        -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#omnisharp
-        -- If true, MSBuild project system will only load projects for files that
-        -- were opened in the editor. This setting is useful for big C# codebases
-        -- and allows for faster initialization of code navigation features only
-        -- for projects that are relevant to code that is being edited. With this
-        -- setting enabled OmniSharp may load fewer projects and may thus display
-        -- incomplete reference lists for symbols.
-        enable_ms_build_load_projects_on_demand = false,
-        enable_editorconfig_support = true,
-        enable_import_completion = true,
-        enable_roslyn_analyzers = true,
-        organize_imports_on_format = false,
-      },
-      handlers = {
-        -- https://github.com/Hoffs/omnisharp-extended-lsp.nvim
-        ["textDocument/definition"] = require("omnisharp_extended").handler,
-        -- Make warning the minimum level shown for csharp
-        ["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-          virtual_text = {
-            severity_limit = "Warning",
-          },
-          -- underline = {
-          --   severity_limit = "Warning",
-          -- },
-        }),
-      },
     })
+
+    -- configure omnisharp server
+    -- lspconfig["omnisharp"].setup({
+    --   cmd = { "omnisharp", "--languageserver", "--hostPID", tostring(vim.fn.getpid()) },
+    --   capabilities = capabilities,
+    --   on_attach = on_attach,
+    --   settings = {
+    --     -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#omnisharp
+    --     -- If true, MSBuild project system will only load projects for files that
+    --     -- were opened in the editor. This setting is useful for big C# codebases
+    --     -- and allows for faster initialization of code navigation features only
+    --     -- for projects that are relevant to code that is being edited. With this
+    --     -- setting enabled OmniSharp may load fewer projects and may thus display
+    --     -- incomplete reference lists for symbols.
+    --     enable_ms_build_load_projects_on_demand = false,
+    --     enable_editorconfig_support = true,
+    --     enable_import_completion = true,
+    --     enable_roslyn_analyzers = true,
+    --     organize_imports_on_format = false,
+    --   },
+    --   handlers = {
+    --     -- https://github.com/Hoffs/omnisharp-extended-lsp.nvim
+    --     ["textDocument/definition"] = require("omnisharp_extended").handler,
+    --     -- Make warning the minimum level shown for csharp
+    --     ["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+    --       virtual_text = {
+    --         severity_limit = "Warning",
+    --       },
+    --       -- underline = {
+    --       --   severity_limit = "Warning",
+    --       -- },
+    --     }),
+    --   },
+    -- })
   end,
 }
