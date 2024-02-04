@@ -32,7 +32,8 @@ vim.keymap.set("n", "<leader>p", "\"+p")
 --
 -- Make marks slightly more user friendly.
 -- This makes ' behave like ` so that it goes to the column and not the beginning of the line.
-vim.keymap.set("n", "'", "`", { desc = "Jump to Mark" })
+-- No longer need the below keymap as layer(1)m is the ` symbol
+-- vim.keymap.set("n", "'", "`", { desc = "Jump to Mark" })
 
 -- Keep focus in center when moving up or down the page.
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
