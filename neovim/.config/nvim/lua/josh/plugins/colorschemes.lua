@@ -59,7 +59,6 @@ return {
     "rebelot/kanagawa.nvim",
     priority = 1000,
     config = function()
-      vim.cmd.colorscheme(colorscheme)
       require("kanagawa").setup({
         colors = {
           theme = {
@@ -71,6 +70,7 @@ return {
           },
         },
       })
+      vim.cmd.colorscheme(colorscheme)
     end,
   },
 }
