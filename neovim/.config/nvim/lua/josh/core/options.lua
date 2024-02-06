@@ -71,7 +71,7 @@ vim.g.loaded_netrwPlugin = 0
 
 vim.o.inccommand = "nosplit"
 
-vim.o.conceallevel = 2
+-- vim.o.conceallevel = 2
 
 -- Disable the statusline
 vim.o.laststatus = 0

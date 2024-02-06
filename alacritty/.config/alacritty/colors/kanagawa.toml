@@ -1,0 +1,39 @@
+# Alacritty color scheme in TOML format for Kanagawa theme
+
+[colors]
+
+draw_bold_text_with_bright_colors = true
+
+[colors.bright]
+black = "#727169" # altblack for bright black
+red = "#c34043"   # red
+green = "#76946a" # green
+yellow = "#c0a36e" # yellow
+blue = "#7e9cd8"  # blue
+magenta = "#957fb8" # magenta
+cyan = "#6a9589"  # cyan
+white = "#dcd7ba" # fg for bright white
+
+[colors.cursor]
+cursor = "#dcd8ba" # fg as cursor color
+# text = "#16161d"   # bg as cursor text color
+
+[colors.normal]
+black = "#090618" # black
+red = "#c34043"   # red
+green = "#76946a" # green
+yellow = "#c0a36e" # yellow
+blue = "#7e9cd8"  # blue
+magenta = "#957fb8" # magenta
+cyan = "#6a9589"  # cyan
+white = "#dcd7ba" # fg for white
+
+[colors.primary]
+background = "#1f1f28" # bg
+foreground = "#dcd7ba" # fg
+bright_foreground = "#dcd7ba" # fg as bright_foreground for consistency
+
+[colors.selection]
+background = "#363646" # gray as selection background
+text = "#dcd7ba"       # fg as selection text
+
