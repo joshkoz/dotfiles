@@ -39,12 +39,11 @@ return {
     "Mofiqul/vscode.nvim",
     priority = 1000,
     config = function()
-      vim.cmd.colorscheme(colorscheme)
       require("vscode").setup({
         italic_comments = true,
         disabale_nvimtree_bg = false,
       })
-      require("vscode").load()
+      vim.cmd.colorscheme(colorscheme)
     end,
   },
   {
