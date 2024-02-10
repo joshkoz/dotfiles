@@ -46,6 +46,13 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 --- Quickfix list shortcuts
 vim.keymap.set("n", "<leader>j", "<cmd>cnext<CR>zz", { desc = "Go to next item in Quickfix List" })
 vim.keymap.set("n", "<leader>k", "<cmd>cprev<CR>zz", { desc = "Go to previous item in Quickfix List" })
+vim.keymap.set("n", "]q", "<cmd>cnext<CR>zz", { desc = "Go to next item in Quickfix List" })
+vim.keymap.set("n", "<leader>k", "<cmd>cprev<CR>zz", { desc = "Go to previous item in Quickfix List" })
+vim.keymap.set("n", "[q", "<cmd>cprev<CR>zz", { desc = "Go to previous item in Quickfix List" })
+
+vim.keymap.set("n", "]b", "<cmd>bnext<CR>zz", { desc = "Go to next buffer" })
+vim.keymap.set("n", "[b", "<cmd>bprev<CR>zz", { desc = "Go to previous buffer" })
+
 -- Toggle the quickfix list
 vim.keymap.set("n", "<leader>co", function()
   local is_open = false
