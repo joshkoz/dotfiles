@@ -10,9 +10,6 @@ vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
--- Diagnostic keymaps
-vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })
-vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next diagnostic message" })
 -- vim.keymap.set('n', 'gh', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 -- vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
@@ -40,18 +37,22 @@ vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 
 -- Allow moving a visual selection up or down a line
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+vim.keymap.set("v", "K", ":m '<-2<CR>gvgv=gv") -- weird timing bug with only gv=gv for more than 3 lines selected
+vim.keymap.set("v", "J", ":m '>+1<CR>gvgv=gv")
 
---- Quickfix list shortcuts
-vim.keymap.set("n", "<leader>j", "<cmd>cnext<CR>zz", { desc = "Go to next item in Quickfix List" })
-vim.keymap.set("n", "<leader>k", "<cmd>cprev<CR>zz", { desc = "Go to previous item in Quickfix List" })
-vim.keymap.set("n", "]q", "<cmd>cnext<CR>zz", { desc = "Go to next item in Quickfix List" })
-vim.keymap.set("n", "<leader>k", "<cmd>cprev<CR>zz", { desc = "Go to previous item in Quickfix List" })
-vim.keymap.set("n", "[q", "<cmd>cprev<CR>zz", { desc = "Go to previous item in Quickfix List" })
-
+-- Buffers
 vim.keymap.set("n", "]b", "<cmd>bnext<CR>zz", { desc = "Go to next buffer" })
 vim.keymap.set("n", "[b", "<cmd>bprev<CR>zz", { desc = "Go to previous buffer" })
+
+-- Diagnostic
+vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })
+vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next diagnostic message" })
+
+--- Quickfix
+-- vim.keymap.set("n", "<leader>j", "<cmd>cnext<CR>zz", { desc = "Go to next item in Quickfix List" })
+-- vim.keymap.set("n", "<leader>k", "<cmd>cprev<CR>zz", { desc = "Go to previous item in Quickfix List" })
+vim.keymap.set("n", "]q", "<cmd>cnext<CR>zz", { desc = "Go to next item in Quickfix List" })
+vim.keymap.set("n", "[q", "<cmd>cprev<CR>zz", { desc = "Go to previous item in Quickfix List" })
 
 -- Toggle the quickfix list
 vim.keymap.set("n", "<leader>co", function()
@@ -60,7 +61,7 @@ vim.keymap.set("n", "<leader>co", function()
 
   for _, win in ipairs(win_list) do
     local buf = vim.api.nvim_win_get_buf(win)
-    if vim.api.nvim_buf_get_option(buf, "buftype") == "quickfix" then
+    if vim.api.nvim_get_option_value("buftype", { buf = buf }) == "quickfix" then
       is_open = true
       break
     end
