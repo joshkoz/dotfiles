@@ -265,7 +265,7 @@ bindsym $mod+shift+x exec i3lock --color=000000
 
 
 # Set wallpaper
-exec_always /home/joshua/.local/bin/set-wallpaper.sh
+exec_always /home/joshua/.local/bin/set-wallpaper.sh /home/joshua/Pictures/wallpapers/karman-line-wide.jpg
 
 # Set sound tray icon
 exec --no-startup-id pasystray
@@ -287,3 +287,6 @@ bindsym Ctrl+Shift+S exec --no-startup-id maim --select | xclip -selection clipb
 ## Pick audio output
 bindsym Ctrl+Shift+A exec --no-startup-id /home/joshua/.local/bin/pick-output-audio.sh
 bindsym Ctrl+Shift+M exec --no-startup-id /home/joshua/.local/bin/pick-input-audio.sh
+
+## Swap out the wallpaper
+bindsym $mod+Shift+W exec --no-startup-id /home/joshua/.local/bin/set-wallpaper.sh 
