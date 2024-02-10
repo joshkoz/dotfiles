@@ -73,3 +73,7 @@ vim.keymap.set("n", "<leader>co", function()
     vim.cmd("copen")
   end
 end, { desc = "Toggle the Quickfix list" })
+
+-- 3 Way diff get left or right side
+vim.keymap.set("n", "<leader>gh", "<cmd>diffget  //2<CR>")
+vim.keymap.set("n", "<leader>gl", "<cmd>diffget  //3<CR>")
