@@ -46,7 +46,7 @@ git_branch="#(cd #{pane_current_path}; git rev-parse --abbrev-ref HEAD)"
 
 show_directory="#[fg=$thm_green,bg=$thm_gray]  #{pane_current_path} #{?$git_branch,#[fg=$thm_fg]on #[fg=$thm_magenta] $git_branch,}"
 
-show_session="#{?client_prefix,#[fg=$thm_orange],#[fg=$thm_fg]}#[bg=$thm_bg]  #S  |  "
+show_session="#{?client_prefix,#[fg=$thm_orange],#{?pane_in_mode,#[fg=$thm_orange],#[fg=$thm_fg]}}#[bg=$thm_bg] #S | "
 
 window_status_format="#[fg=$thm_fg,bg=$thm_bg,italics] #I: #W "
 
