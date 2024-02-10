@@ -10,7 +10,6 @@ wallpaper_directory="/home/joshua/Pictures/wallpapers/"
 # uncooment the below to randomise 
 if [ -z "$1" ]; then
   selected_file=$(find "$wallpaper_directory" -type f | shuf -n 1)
-  dunstify -i "$selected_file" "Wallpaper Changed" "Wallpaper set to $filename"
 else
   selected_file=$1
 fi
@@ -25,5 +24,4 @@ filename=$(basename "$selected_file")
 
 # Send notification with Dunst
 # Note: Dunst may have limitations on image sizes and types it can display
-
-
+dunstify -i "$selected_file" "Wallpaper Changed" "Wallpaper set to $filename"
