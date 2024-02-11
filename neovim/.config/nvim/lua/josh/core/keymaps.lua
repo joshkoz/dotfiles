@@ -18,12 +18,9 @@ vim.keymap.set("n", "dd", "\"_dd", { desc = "Delete line without yanking" })
 vim.keymap.set("n", "d", "\"_d", { desc = "Delete to black-hold register" })
 
 -- Clipboard remaps. Leader y to yank to clipbard
-vim.keymap.set("n", "<leader>y", "\"+y")
-vim.keymap.set("v", "<leader>y", "\"+Y")
+vim.keymap.set({ "v", "n" }, "<leader>y", "\"+y")
 vim.keymap.set("n", "<leader>Y", "\"+Y")
-vim.keymap.set("n", "<leader>p", "\"+p")
-vim.keymap.set("v", "<leader>p", "\"+p")
-vim.keymap.set("n", "<leader>p", "\"+p")
+vim.keymap.set({ "v", "n" }, "<leader>p", "\"+p")
 
 -- Marks
 --
@@ -33,8 +30,8 @@ vim.keymap.set("n", "<leader>p", "\"+p")
 -- vim.keymap.set("n", "'", "`", { desc = "Jump to Mark" })
 
 -- Keep focus in center when moving up or down the page.
-vim.keymap.set("n", "<C-d>", "<C-d>zz")
-vim.keymap.set("n", "<C-u>", "<C-u>zz")
+-- vim.keymap.set("n", "<C-d>", "<C-d>zz")
+-- vim.keymap.set("n", "<C-u>", "<C-u>zz")
 
 -- Allow moving a visual selection up or down a line
 vim.keymap.set("v", "K", ":m '<-2<CR>gvgv=gv") -- weird timing bug with only gv=gv for more than 3 lines selected
@@ -55,7 +52,7 @@ vim.keymap.set("n", "]q", "<cmd>cnext<CR>zz", { desc = "Go to next item in Quick
 vim.keymap.set("n", "[q", "<cmd>cprev<CR>zz", { desc = "Go to previous item in Quickfix List" })
 
 -- Toggle the quickfix list
-vim.keymap.set("n", "<leader>co", function()
+vim.keymap.set("n", "<leader>cc", function()
   local is_open = false
   local win_list = vim.api.nvim_list_wins()
 
