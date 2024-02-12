@@ -290,3 +290,7 @@ bindsym Ctrl+Shift+M exec --no-startup-id /home/joshua/.local/bin/pick-input-aud
 
 ## Swap out the wallpaper
 bindsym $mod+Shift+W exec --no-startup-id /home/joshua/.local/bin/set-wallpaper.sh 
+
+smart_borders no_gaps  
+smart_gaps on
+
