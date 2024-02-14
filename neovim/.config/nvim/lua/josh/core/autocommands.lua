@@ -1,4 +1,6 @@
+--
 -- Highlight on yank
+--
 local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
 vim.api.nvim_create_autocmd("TextYankPost", {
   callback = function()
@@ -8,8 +10,10 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   pattern = "*",
 })
 
+--
+-- Remove quickfix items
+--
 local qf_remove_item_group = vim.api.nvim_create_augroup("QfRemoveItemsGroup", { clear = true })
--- Define the function to remove quickfix items
 local function Remove_qf_items(start_line, end_line)
   local qfall = vim.fn.getqflist()
   for i = end_line, start_line, -1 do
@@ -40,7 +44,9 @@ vim.api.nvim_create_autocmd("FileType", {
 
 local theme_overrides_group = vim.api.nvim_create_augroup("ThemeOverrides", { clear = true })
 
+--
 -- Create the autocmd for the Colorscheme event
+--
 vim.api.nvim_create_autocmd("Colorscheme", {
   callback = function()
     -- Ensure splits dont have a background color

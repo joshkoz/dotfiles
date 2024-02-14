@@ -2,11 +2,9 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
-
 -- Keymaps for better default experience
--- See `:help vim.keymap.set()`
 vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
+vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 
 -- Remap for dealing with word wrap
 vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
@@ -23,17 +21,6 @@ vim.keymap.set("n", "d", "\"_d", { desc = "Delete to black-hold register" })
 vim.keymap.set({ "v", "n" }, "<leader>y", "\"+y")
 vim.keymap.set("n", "<leader>Y", "\"+Y")
 vim.keymap.set({ "v", "n" }, "<leader>p", "\"+p")
-
--- Marks
---
--- Make marks slightly more user friendly.
--- This makes ' behave like ` so that it goes to the column and not the beginning of the line.
--- No longer need the below keymap as layer(1)m is the ` symbol
--- vim.keymap.set("n", "'", "`", { desc = "Jump to Mark" })
-
--- Keep focus in center when moving up or down the page.
--- vim.keymap.set("n", "<C-d>", "<C-d>zz")
--- vim.keymap.set("n", "<C-u>", "<C-u>zz")
 
 -- Allow moving a visual selection up or down a line
 vim.keymap.set("v", "K", ":m '<-2<CR>gvgv=gv") -- weird timing bug with only gv=gv for more than 3 lines selected

@@ -22,7 +22,7 @@ return {
     },
   },
   opts = {
-    close_if_last_window = false, -- This behaviour sucks are breaks :bd
+    close_if_last_window = false, -- This behaviour sucks. It breaks :bd
     filesystem = {
       use_libuv_file_watcher = true,
       follow_current_file = {
