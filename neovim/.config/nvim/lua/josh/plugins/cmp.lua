@@ -7,6 +7,7 @@ return {
     "L3MON4D3/LuaSnip", -- Snippet Engine
     "saadparwaiz1/cmp_luasnip", -- source from snippet engine
     "rafamadriz/friendly-snippets", -- source from friendly snippets
+    "f3fora/cmp-spell",
   },
   event = "InsertEnter",
   opts = function()
@@ -43,6 +44,15 @@ return {
         { name = "luasnip" },
         { name = "buffer" },
         { name = "path" },
+        {
+          name = "spell",
+          option = {
+            keep_all_entries = false,
+            enable_in_context = function()
+              return true
+            end,
+          },
+        },
       },
     }
   end,

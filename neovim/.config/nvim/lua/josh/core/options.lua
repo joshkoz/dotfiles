@@ -76,8 +76,11 @@ vim.o.statusline = "%#MyStatusLine#%{repeat('─',winwidth('.'))}%*"
 -- Hide the command line when not in use
 -- vim.o.cmdheight = 0
 
+vim.o.wildmode = "longest,list,full"
 -- Make the command prompt fuzzy search
 vim.o.wop = "fuzzy"
+
+vim.opt.spelllang = { "en_au", "en_us" }
 
 -- Make netrw less bad
 vim.g.netrw_browse_split = 0
