@@ -1,7 +1,5 @@
--- [[ Highlight on yank ]]
--- See `:help vim.highlight.on_yank()`
+-- Highlight on yank
 local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
-
 vim.api.nvim_create_autocmd("TextYankPost", {
   callback = function()
     vim.highlight.on_yank()
@@ -10,32 +8,35 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   pattern = "*",
 })
 
--- Define a Lua function to remove the items from the quickfix list
-function Remove_qf_items(start_line, end_line)
-  -- Get all items in the quickfix list
+local qf_remove_item_group = vim.api.nvim_create_augroup("QfRemoveItemsGroup", { clear = true })
+-- Define the function to remove quickfix items
+local function Remove_qf_items(start_line, end_line)
   local qfall = vim.fn.getqflist()
-
-  -- Remove the items from the quickfix list
-  -- Loop backwards to preserve the indices of the items to be removed
   for i = end_line, start_line, -1 do
     table.remove(qfall, i)
   end
-
-  -- Replace the quickfix list with the updated list
   vim.fn.setqflist(qfall, "r")
-
-  -- Reopen the quickfix window
   vim.cmd("copen")
 end
 
 -- Create commands to call the Lua function
-vim.cmd("command! RemoveQFItem lua Remove_qf_items(vim.fn.line(\".\"), vim.fn.line(\".\"))")
-vim.cmd("command! -range RemoveQFItems lua Remove_qf_items(vim.fn.line(\"'<\"), vim.fn.line(\"'>\"))")
+vim.api.nvim_create_user_command("RemoveQFItem", function()
+  Remove_qf_items(vim.fn.line("."), vim.fn.line("."))
+end, {})
 
--- Set up an autocommand to map 'dd' to remove the quickfix item(s) when the
--- filetype is 'qf' (quickfix)
-vim.cmd("autocmd FileType qf nnoremap <buffer> dd :RemoveQFItem<CR>")
-vim.cmd("autocmd FileType qf xnoremap <buffer> dd :RemoveQFItems<CR>")
+vim.api.nvim_create_user_command("RemoveQFItems", function(range)
+  Remove_qf_items(vim.fn.line("'<"), vim.fn.line("'>"))
+end, { range = true })
+
+-- Autocommands for key mappings in 'qf' filetype
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "qf",
+  group = qf_remove_item_group,
+  callback = function()
+    vim.api.nvim_buf_set_keymap(0, "n", "dd", ":RemoveQFItem<CR>", { noremap = true, silent = true })
+    vim.api.nvim_buf_set_keymap(0, "x", "dd", ":RemoveQFItems<CR>", { noremap = true, silent = true })
+  end,
+})
 
 local theme_overrides_group = vim.api.nvim_create_augroup("ThemeOverrides", { clear = true })
 

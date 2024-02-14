@@ -17,8 +17,6 @@ return {
 
     luasnip.config.setup({})
 
-    require("josh.plugins.snippets")
-
     return {
       snippet = {
         expand = function(args)

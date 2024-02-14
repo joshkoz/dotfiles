@@ -1,6 +1,3 @@
--- [[ Setting options ]]
--- See `:help vim.o`
-
 -- Set highlight on search
 vim.o.hlsearch = false
 vim.o.incsearch = true
@@ -71,15 +68,18 @@ vim.o.splitbelow = true
 
 vim.o.inccommand = "nosplit"
 
--- vim.o.conceallevel = 2
-
 -- Disable the statusline
 vim.o.laststatus = 0
 -- Sets the status line as a line: https://github.com/neovim/neovim/issues/18965
 vim.o.statusline = "%#MyStatusLine#%{repeat('─',winwidth('.'))}%*"
 
 -- Hide the command line when not in use
-vim.o.cmdheight = 0
+-- vim.o.cmdheight = 0
 
 -- Make the command prompt fuzzy search
 vim.o.wop = "fuzzy"
+
+-- Make netrw less bad
+vim.g.netrw_browse_split = 0
+vim.g.netrw_banner = 0
+vim.g.netrw_winsize = 25
