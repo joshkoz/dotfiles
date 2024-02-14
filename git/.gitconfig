@@ -21,6 +21,7 @@
 	ff = only
 [alias]
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	bl = blame -w -C -C -C
 [interactive]
     diffFilter = delta --color-only
 [delta]
@@ -31,3 +32,17 @@
     conflictstyle = diff3
 [diff]
     colorMoved = default
+[maintenance]
+	repo = /home/joshua/work/core-api
+	repo = /home/joshua/projects/dotfiles
+[rerere]
+	enabled = true
+[tag]
+	gpgsign = true
+
+[includeIf "gitdir:~/work/"]
+	path = ~/work/.gitconfig
+[branch]
+	sort = -committerdate
+[column]
+	ui = auto
