@@ -61,12 +61,9 @@ vim.o.pumheight = 15
 vim.o.splitright = true
 vim.o.splitbelow = true
 
--- ensure netrw doesn't load with neotree
--- https://github.com/nvim-neo-tree/neo-tree.nvim/issues/983
--- vim.g.loaded_netrw = 0
--- vim.g.loaded_netrwPlugin = 0
-
 vim.o.inccommand = "nosplit"
+
+vim.o.foldenable = false
 
 -- Disable the statusline
 vim.o.laststatus = 0
@@ -86,3 +83,9 @@ vim.opt.spelllang = { "en_au", "en_us" }
 vim.g.netrw_browse_split = 0
 vim.g.netrw_banner = 0
 vim.g.netrw_winsize = 25
+-- ensure netrw doesn't load with neotree
+-- https://github.com/nvim-neo-tree/neo-tree.nvim/issues/983
+-- vim.g.loaded_netrw = 0
+-- vim.g.loaded_netrwPlugin = 0
+
+vim.g.colorscheme = "kanagawa"
