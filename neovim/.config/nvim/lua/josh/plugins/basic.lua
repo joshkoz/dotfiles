@@ -1,13 +1,9 @@
 return {
   {
-    "tpope/vim-commentary",
-    event = "BufEnter",
+    "numToStr/Comment.nvim",
+    config = true,
+    event = { "BufReadPre", "BufNewFile" },
   },
-  -- {
-  --   "numToStr/Comment.nvim",
-  --   config = true,
-  --   event = { "BufReadPre", "BufNewFile" },
-  -- },
   -- automatically guess and set shiftwidth for the buffer
   {
     "tpope/vim-sleuth",
