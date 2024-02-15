@@ -1,3 +1,4 @@
+---@diagnostic disable: missing-fields
 return {
   {
     -- Highlight, edit, and navigate code
@@ -68,7 +69,8 @@ return {
     },
     event = { "BufReadPost", "BufNewFile" },
     config = function()
-      require("nvim-treesitter.configs").setup({
+      local treesitter = require("nvim-treesitter.configs")
+      treesitter.setup({
         textobjects = {
           lsp_interop = {
             enable = true,
@@ -123,19 +125,6 @@ return {
               ["[C"] = { query = "@class.outer", desc = "Previous class end" },
               ["[F"] = { query = "@function.outer", desc = "Previous function end" },
               ["[A"] = { query = "@parameter.outer", desc = "Previous parameter end" },
-            },
-          },
-          swap = {
-            enable = true,
-            swap_next = {
-              [">k"] = { query = "@block.outer", desc = "Swap next block" },
-              [">f"] = { query = "@function.outer", desc = "Swap next function" },
-              [">a"] = { query = "@parameter.inner", desc = "Swap next parameter" },
-            },
-            swap_previous = {
-              ["<k"] = { query = "@block.outer", desc = "Swap previous block" },
-              ["<f"] = { query = "@function.outer", desc = "Swap previous function" },
-              ["<a"] = { query = "@parameter.inner", desc = "Swap previous parameter" },
             },
           },
         },

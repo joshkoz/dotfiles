@@ -1,3 +1,4 @@
+---@diagnostic disable: missing-fields
 return {
   "epwalsh/obsidian.nvim",
   version = "*", -- recommended, use latest release instead of latest commit

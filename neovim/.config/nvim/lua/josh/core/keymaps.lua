@@ -9,6 +9,8 @@ vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 -- Remap for dealing with word wrap
 vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+--vim.keymap.set("v", "<leader>s", ":s/\\%V\\(.*\\)\\%V/(&)/<left><left>", { desc = "test" })
+vim.keymap.set("v", "<leader>s", ":s/\\%V.*\\%V/(&)", { desc = "Wrap selection with" })
 
 -- vim.keymap.set('n', 'gh', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 -- vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
