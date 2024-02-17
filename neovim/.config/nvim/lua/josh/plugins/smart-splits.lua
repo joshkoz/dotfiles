@@ -10,9 +10,9 @@ return {
     vim.keymap.set({ "n", "i" }, "<C-j>", smartsplits.move_cursor_down, { desc = "Move to below split" })
     vim.keymap.set({ "n", "i" }, "<C-k>", smartsplits.move_cursor_up, { desc = "Move to above split" })
     vim.keymap.set({ "n", "i" }, "<C-l>", smartsplits.move_cursor_right, { desc = "Move to right split" })
-    vim.keymap.set({ "n", "i" }, "<C-Left>", smartsplits.resize_up, { desc = "Resize split up" })
+    vim.keymap.set({ "n", "i" }, "<C-Left>", smartsplits.resize_left, { desc = "Resize split left" })
     vim.keymap.set({ "n", "i" }, "<C-Down>", smartsplits.resize_down, { desc = "Resize split down" })
-    vim.keymap.set({ "n", "i" }, "<C-Right>", smartsplits.resize_left, { desc = "Resize split left" })
-    vim.keymap.set({ "n", "i" }, "<C-Up>", smartsplits.resize_right, { desc = "Move to above right" })
+    vim.keymap.set({ "n", "i" }, "<C-Up>", smartsplits.resize_up, { desc = "Move to above up" })
+    vim.keymap.set({ "n", "i" }, "<C-Right>", smartsplits.resize_right, { desc = "Resize split right" })
   end,
 }
