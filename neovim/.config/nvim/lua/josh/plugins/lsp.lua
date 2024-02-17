@@ -81,14 +81,17 @@ return {
         opts.desc = "[L]SP: [S]ignature Documentation"
         vim.keymap.set("n", "<leader>ls", vim.lsp.buf.signature_help, opts)
 
+        opts.desc = "[L]SP: Add Re[f]erences to Quickfix list"
+        vim.keymap.set("n", "<leader>lf", vim.lsp.buf.references, opts)
+
         opts.desc = "LSP: [G]oto [D]eclaration"
         vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
 
         opts.desc = "Open floating diagnostic message"
         vim.keymap.set("n", "gh", vim.diagnostic.open_float, opts)
 
-        opts.desc = "[L]SP: List [D]iagnostics"
-        vim.keymap.set("n", "<leader>ld", vim.diagnostic.setloclist, opts)
+        opts.desc = "[L]SP: Add [D]iagnostics Quickfix"
+        vim.keymap.set("n", "<leader>ld", vim.diagnostic.setqflist, opts)
 
         -- Create a command `:Format` local to the LSP buffer
         vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)

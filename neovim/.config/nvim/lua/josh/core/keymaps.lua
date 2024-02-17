@@ -41,6 +41,8 @@ vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next diagnos
 -- vim.keymap.set("n", "<leader>k", "<cmd>cprev<CR>zz", { desc = "Go to previous item in Quickfix List" })
 vim.keymap.set("n", "]q", "<cmd>cnext<CR>zz", { desc = "Go to next item in Quickfix List" })
 vim.keymap.set("n", "[q", "<cmd>cprev<CR>zz", { desc = "Go to previous item in Quickfix List" })
+vim.keymap.set("n", "<A-j>", "<cmd>cnext<CR>zz", { desc = "Go to next item in Quickfix List" })
+vim.keymap.set("n", "<A-k>", "<cmd>cprev<CR>zz", { desc = "Go to previous item in Quickfix List" })
 
 -- Toggle the quickfix list
 vim.keymap.set("n", "<leader>cc", function()
