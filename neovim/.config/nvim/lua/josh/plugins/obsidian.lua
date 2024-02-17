@@ -16,7 +16,6 @@ return {
     require("obsidian").setup({
       disable_frontmatter = true,
       completion = { nvim_cmp = true },
-      detect_cwd = true,
       daily_notes = {
         folder = "📅 Journal",
       },
