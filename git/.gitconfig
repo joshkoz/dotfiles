@@ -17,6 +17,7 @@
 	editor = nvim
 [push]
 	default = current
+	autoSetupRemote = true
 [pull]
 	ff = only
 [alias]
@@ -29,9 +30,11 @@
     light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
     side-by-side = true
 [merge]
-    conflictstyle = diff3
+	conflictStyle = zdiff3
+	tool = nvim
 [diff]
     colorMoved = default
+	algorithm = histogram
 [maintenance]
 	repo = /home/joshua/work/core-api
 	repo = /home/joshua/projects/dotfiles
@@ -46,3 +49,5 @@
 	sort = -committerdate
 [column]
 	ui = auto
+[fetch]
+	prune = true
