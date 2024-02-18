@@ -81,8 +81,8 @@ return {
         opts.desc = "[L]SP: [S]ignature Documentation"
         vim.keymap.set("n", "<leader>ls", vim.lsp.buf.signature_help, opts)
 
-        opts.desc = "[L]SP: Add Re[f]erences to Quickfix list"
-        vim.keymap.set("n", "<leader>lf", vim.lsp.buf.references, opts)
+        opts.desc = "[L]SP: Add References to Quickfix list"
+        vim.keymap.set("n", "<leader>lc", vim.lsp.buf.references, opts)
 
         opts.desc = "LSP: [G]oto [D]eclaration"
         vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)

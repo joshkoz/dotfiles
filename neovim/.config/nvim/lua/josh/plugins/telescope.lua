@@ -68,11 +68,8 @@ return {
       builtins.find_files({ hidden = true })
     end, opts)
 
-    opts.desc = "[F]ind string under [C]ursor"
-    vim.keymap.set("n", "<leader>fc", builtins.grep_string, opts)
-
     opts.desc = "[F]ind [D]iagnostics"
-    vim.keymap.set("n", "<leader>fd", builtins.diagnostics, opts)
+    vim.keymap.set("n", "<leader>d", builtins.diagnostics, opts)
 
     opts.desc = "Fuzzy Find [H]elp Tags"
     vim.keymap.set("n", "<leader>h", builtins.help_tags, opts)
