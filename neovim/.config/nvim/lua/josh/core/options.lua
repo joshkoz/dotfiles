@@ -8,9 +8,6 @@ vim.wo.number = true
 -- Enable mouse mode
 vim.o.mouse = "a"
 
--- Sync clipboard between OS and Neovim. Try use <leader>y instead
--- vim.o.clipboard = 'unnamedplus'
-
 -- Enable break indent
 vim.o.breakindent = true
 
@@ -70,24 +67,10 @@ vim.o.laststatus = 0
 -- Sets the status line as a line: https://github.com/neovim/neovim/issues/18965
 vim.o.statusline = "%#MyStatusLine#%{repeat('─',winwidth('.'))}%*"
 
--- Hide the command line when not in use
--- vim.o.cmdheight = 0
-
 vim.o.wildmode = "longest,list,full"
 -- Make the command prompt fuzzy search
 vim.o.wop = "fuzzy"
 
 vim.opt.spelllang = { "en_au", "en_us" }
-
--- Make netrw less bad
--- vim.g.netrw_banner = 0
--- vim.g.netrw_browse_split = 0
--- vim.g.netrw_winsize = 0
--- vim.g.netrw_liststyle = 3
--- vim.g.netrw_altv = 1
--- ensure netrw doesn't load with neotree
--- https://github.com/nvim-neo-tree/neo-tree.nvim/issues/983
--- vim.g.loaded_netrw = 0
--- vim.g.loaded_netrwPlugin = 0
 
 vim.g.colorscheme = "kanagawa"

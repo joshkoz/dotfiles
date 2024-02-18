@@ -39,23 +39,6 @@ vim.keymap.set("n", "]q", "<cmd>cnext<CR>zz", { desc = "Go to next item in Quick
 vim.keymap.set("n", "[q", "<cmd>cprev<CR>zz", { desc = "Go to previous item in Quickfix List" })
 vim.keymap.set("n", "<A-j>", "<cmd>cnext<CR>zz", { desc = "Go to next item in Quickfix List" })
 vim.keymap.set("n", "<A-k>", "<cmd>cprev<CR>zz", { desc = "Go to previous item in Quickfix List" })
-vim.keymap.set("n", "<leader>cc", function()
-  local is_open = false
-  local win_list = vim.api.nvim_list_wins()
-
-  for _, win in ipairs(win_list) do
-    local buf = vim.api.nvim_win_get_buf(win)
-    if vim.api.nvim_get_option_value("buftype", { buf = buf }) == "quickfix" then
-      is_open = true
-      break
-    end
-  end
-
-  if is_open then
-    vim.cmd("cclose")
-  else
-    vim.cmd("copen")
-  end
-end, { desc = "Toggle the Quickfix list" })
+vim.keymap.set("n", "<leader>co", "<cmd>copen<cr>", { desc = "Open the Quickfix list" })
 
 vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
