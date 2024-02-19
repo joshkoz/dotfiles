@@ -46,7 +46,7 @@ vim.opt.completeopt = "menuone,noselect"
 vim.opt.wildmode = "longest,list,full"
 vim.opt.wop = "fuzzy" -- Make the command prompt fuzzy search
 
-vim.opt.termguicolors = true
+-- vim.opt.termguicolors = true -- causes flicker if set manually. Seems to be the default now anyways
 
 vim.opt.scrolloff = 8
 
@@ -64,6 +64,6 @@ vim.opt.foldenable = false
 -- Disable the statusline
 vim.opt.laststatus = 0
 -- Sets the status line as a line: https://github.com/neovim/neovim/issues/18965
-vim.opt.statusline = "%#MyStatusLine#%{repeat('─',winwidth('.'))}%*"
+vim.opt.statusline = "%#WinSeparator#%{repeat('─',winwidth('.'))}%*"
 
 vim.opt.spelllang = { "en_au", "en_us" }

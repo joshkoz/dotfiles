@@ -58,35 +58,21 @@ return {
     -- Theme inspired by Atom
     "navarasu/onedark.nvim",
     priority = 1000,
-    config = function()
-      require("onedark").setup({
-        style = "warmer",
-      })
-      vim.cmd.colorscheme(vim.g.colorscheme)
-    end,
+    config = function() end,
   },
   {
     "catppuccin/nvim",
     name = "catppuccin",
     priority = 1000,
-    config = function()
-      vim.cmd.colorscheme(vim.g.colorscheme)
-    end,
   },
   {
     "bluz71/vim-nightfly-guicolors",
     priority = 1000, -- make sure to load this before all the other start plugins
-    config = function()
-      vim.cmd.colorscheme(vim.g.colorscheme)
-    end,
   },
   {
     "rose-pine/neovim",
     name = "rose-pine",
     priority = 1000,
-    config = function()
-      vim.cmd.colorscheme(vim.g.colorscheme)
-    end,
   },
   {
     "Mofiqul/vscode.nvim",
@@ -96,16 +82,12 @@ return {
         italic_comments = true,
         disabale_nvimtree_bg = false,
       })
-      vim.cmd.colorscheme(vim.g.colorscheme)
     end,
   },
   {
     "ellisonleao/gruvbox.nvim",
     priority = 1000,
     opts = {},
-    config = function()
-      vim.cmd.colorscheme(vim.g.colorscheme)
-    end,
   },
   {
     "rebelot/kanagawa.nvim",

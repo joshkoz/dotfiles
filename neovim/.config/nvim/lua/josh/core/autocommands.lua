@@ -41,25 +41,3 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.api.nvim_buf_set_keymap(0, "x", "dd", ":RemoveQFItems<CR>", { noremap = true, silent = true })
   end,
 })
-
-local theme_overrides_group = vim.api.nvim_create_augroup("ThemeOverrides", { clear = true })
-
---
--- Create the autocmd for the Colorscheme event
---
-vim.api.nvim_create_autocmd("Colorscheme", {
-  callback = function()
-    -- Ensure splits dont have a background color
-    vim.cmd.hi("VertSplit guibg=NONE")
-    vim.cmd.hi("HorizSplit guibg=NONE")
-    -- Ensure that the onedark theme NeoTree Area seperator
-    if vim.g.colors_name == "onedark" then
-      vim.api.nvim_command("highlight link NeoTreeWinSeparator WinSeparator")
-    end
-    -- Hide the status line
-    vim.api.nvim_set_hl(0, "StatuslineNC", { link = "Normal" })
-    vim.api.nvim_command("highlight link MyStatusLine WinSeparator")
-  end,
-  group = theme_overrides_group,
-  pattern = "*",
-})
