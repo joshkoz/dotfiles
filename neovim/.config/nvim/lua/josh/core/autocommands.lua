@@ -1,19 +1,13 @@
---
 -- Highlight on yank
---
-local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
 vim.api.nvim_create_autocmd("TextYankPost", {
   callback = function()
     vim.highlight.on_yank()
   end,
-  group = highlight_group,
+  group = vim.api.nvim_create_augroup("YankHighlight", { clear = true }),
   pattern = "*",
 })
 
---
 -- Remove quickfix items
---
-local qf_remove_item_group = vim.api.nvim_create_augroup("QfRemoveItemsGroup", { clear = true })
 local function Remove_qf_items(start_line, end_line)
   local qfall = vim.fn.getqflist()
   for i = end_line, start_line, -1 do
@@ -28,14 +22,14 @@ vim.api.nvim_create_user_command("RemoveQFItem", function()
   Remove_qf_items(vim.fn.line("."), vim.fn.line("."))
 end, {})
 
-vim.api.nvim_create_user_command("RemoveQFItems", function(range)
+vim.api.nvim_create_user_command("RemoveQFItems", function()
   Remove_qf_items(vim.fn.line("'<"), vim.fn.line("'>"))
 end, { range = true })
 
 -- Autocommands for key mappings in 'qf' filetype
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "qf",
-  group = qf_remove_item_group,
+  group = vim.api.nvim_create_augroup("QfRemoveItemsGroup", { clear = true }),
   callback = function()
     vim.api.nvim_buf_set_keymap(0, "n", "dd", ":RemoveQFItem<CR>", { noremap = true, silent = true })
     vim.api.nvim_buf_set_keymap(0, "x", "dd", ":RemoveQFItems<CR>", { noremap = true, silent = true })

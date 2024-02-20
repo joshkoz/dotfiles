@@ -1,22 +1,14 @@
 -- Set space as the leader key
 vim.g.mapleader = " "
-vim.g.maplocalleader = " "
 
 -- Keymap for better default experience
 vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
--- Remap for dealing with word wrap
-vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- Go to alternate buffer
 vim.keymap.set("n", "<leader><leader>", "<cmd>b#<cr>", { desc = "Go to the alternate buffer" })
 
---- Clipboard ---
-vim.keymap.set({ "n", "v" }, "<leader>y", "\"+y", { desc = "Yank visual selection into clipboard" })
-vim.keymap.set("n", "<leader>Y", "\"+Y", { desc = "Yank line into clipboard" })
-vim.keymap.set("n", "d", "\"_d", { desc = "Delete to black-hold register" })
--- TODO: Remove above mapping in place of the following
-vim.keymap.set("x", "<leader>p", "\"_dP", { desc = "Delete and and paste without yank" })
+-- Clipboard
+vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "Yank visual selection into clipboard" })
 
 -- Moving a visual selection up or down a line with J and K
 vim.keymap.set("v", "K", ":m '<-2<CR>gvgv=gv", { desc = "Move visual selection up a line" }) -- weird timing bug with only gv=gv for more than 3 lines selected
@@ -41,4 +33,5 @@ vim.keymap.set("n", "<A-j>", "<cmd>cnext<CR>zz", { desc = "Go to next item in Qu
 vim.keymap.set("n", "<A-k>", "<cmd>cprev<CR>zz", { desc = "Go to previous item in Quickfix List" })
 vim.keymap.set("n", "<leader>co", "<cmd>copen<cr>", { desc = "Open the Quickfix list" })
 
+-- Tmux
 vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
