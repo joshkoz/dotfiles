@@ -9,6 +9,7 @@ vim.keymap.set("n", "<leader><leader>", "<cmd>b#<cr>", { desc = "Go to the alter
 
 -- Clipboard
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "Yank visual selection into clipboard" })
+-- vim.keymap.set("n", "d", "\"_d", { desc = "Delete to black-hold register" })
 
 -- Moving a visual selection up or down a line with J and K
 vim.keymap.set("v", "K", ":m '<-2<CR>gvgv=gv", { desc = "Move visual selection up a line" }) -- weird timing bug with only gv=gv for more than 3 lines selected
