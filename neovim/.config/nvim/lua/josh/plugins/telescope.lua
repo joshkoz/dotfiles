@@ -53,18 +53,9 @@ return {
 
     local opts = { noremap = true, silent = true }
 
-    -- keymaps
-    opts.desc = "[G]oto [R]eferences"
-    vim.keymap.set("n", "gr", builtins.lsp_references, opts)
-
-    opts.desc = "[L]SP: Find [U]sages"
-    vim.keymap.set("n", "<leader>lu", builtins.lsp_references, opts)
-
-    opts.desc = "[L]SP Document [S]ymbols"
-    vim.keymap.set("n", "<leader>ls", builtins.lsp_document_symbols, opts)
-
+    -- Keymaps
     opts.desc = "[F]ind [F]iles"
-    vim.keymap.set("n", "<leader>ff", function()
+    vim.keymap.set("n", "<leader>f", function()
       builtins.find_files({ hidden = true })
     end, opts)
 
@@ -81,7 +72,7 @@ return {
     vim.keymap.set("n", "<leader>b", builtins.buffers, opts)
 
     opts.desc = "Grep The Project"
-    vim.keymap.set("n", "<leader>lg", function()
+    vim.keymap.set("n", "<leader>t", function()
       builtins.live_grep({ hidden = true })
     end, opts)
 

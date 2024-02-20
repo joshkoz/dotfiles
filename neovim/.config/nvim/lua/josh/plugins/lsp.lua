@@ -54,44 +54,33 @@ return {
         -- Setup keymaps for when when an LSP attaches to the buffer.
         opts.desc = "[L]SP: [R]ename"
         vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, opts)
-        vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
 
         opts.desc = "[L]SP: Code [A]ction"
         vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, opts)
-        vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
 
         opts.desc = "LSP: [G]oto [D]efinition"
         vim.keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts)
 
+        opts.desc = "LSP: [G]oto [D]eclaration"
+        vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+
         opts.desc = "LSP: [G]oto [R]eferences"
-        vim.keymap.set("n", "gR", "<cmd>Telescope lsp_references<CR>", opts)
+        vim.keymap.set("n", "gr", "<cmd>Telescope lsp_references<CR>", opts)
 
         opts.desc = "LSP: [G]oto [I]mplementation"
         vim.keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<CR>", opts)
 
-        opts.desc = "[L]SP: [T]ype Definition"
-        vim.keymap.set("n", "<leader>lt", "<cmd>Telescope lsp_type_definitions<CR>", opts)
-
         opts.desc = "LSP: Hover Documentation"
         vim.keymap.set("n", "K", vim.lsp.buf.hover, opts) -- See `:help K` for why this keymap
-
-        opts.desc = "Show buffer diagnostics"
-        vim.keymap.set("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", opts) -- See `:help K` for why this keymap
-
-        opts.desc = "[L]SP: [S]ignature Documentation"
-        vim.keymap.set("n", "<leader>ls", vim.lsp.buf.signature_help, opts)
-
-        opts.desc = "[L]SP: Add References to Quickfix list"
-        vim.keymap.set("n", "<leader>lc", vim.lsp.buf.references, opts)
-
-        opts.desc = "LSP: [G]oto [D]eclaration"
-        vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
 
         opts.desc = "Open floating diagnostic message"
         vim.keymap.set("n", "gh", vim.diagnostic.open_float, opts)
 
         opts.desc = "[L]SP: Add [D]iagnostics Quickfix"
         vim.keymap.set("n", "<leader>ld", vim.diagnostic.setqflist, opts)
+
+        opts.desc = "[L]SP: Add References to Quickfix list"
+        vim.keymap.set("n", "<leader>lc", vim.lsp.buf.references, opts)
 
         -- Create a command `:Format` local to the LSP buffer
         vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
