@@ -22,6 +22,10 @@ vim.opt.smartcase = true
 vim.opt.autoindent = true
 vim.opt.smartindent = true
 
+-- Show whitespace
+-- vim.opt.list = true
+-- vim.opt.listchars = "tab:>\\ ,trail:-,eol:⏎"
+
 -- Tabs
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
