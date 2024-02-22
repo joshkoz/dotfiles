@@ -32,7 +32,8 @@ return {
       end
 
       -- Keymaps
-      vim.keymap.set("n", "<leader>gs", toggle_fugitive_status, { desc = "Open [G]it Fugitive" })
+      vim.keymap.set("n", "<leader>gs", toggle_fugitive_status, { desc = "[G]it Status" })
+      vim.keymap.set("n", "<leader>gb", "<cmd>Git blame -w -C -C -C<CR>", { desc = "[G]it [B]lame" })
     end,
   },
   {
