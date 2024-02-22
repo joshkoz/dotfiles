@@ -4,6 +4,7 @@ return {
   -- Show notifications in the corner
   {
     "j-hui/fidget.nvim",
+    event = "VeryLazy",
     opts = {},
   },
   -- region Have hex codes show their color
@@ -16,6 +17,7 @@ return {
   -- Have todo comments highlight
   {
     "folke/todo-comments.nvim",
+    event = "BufReadPre",
     dependencies = { "nvim-lua/plenary.nvim" },
     opts = {
       highlight = {
@@ -25,7 +27,8 @@ return {
   },
   {
     "stevearc/dressing.nvim",
-    event = "VeryLazy",
+    event = "BufEnter",
+    enabled = false,
     opts = {
       input = {
         default_prompt = "➤ ",
@@ -36,6 +39,37 @@ return {
         builtin = { win_options = { winhighlight = "Normal:Normal,NormalNC:Normal" } },
       },
     },
+  },
+  {
+    -- Set lualine as statusline
+    "nvim-lualine/lualine.nvim",
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
+      -- "bluz71/vim-nightfly-guicolors",
+    },
+    config = function()
+      local custom_auto = require("lualine.themes.auto")
+      custom_auto.normal.c.bg = "None"
+      custom_auto.normal.b.bg = "None"
+      custom_auto.insert.b.bg = "None"
+      custom_auto.replace.b.bg = "None"
+      custom_auto.visual.b.bg = "None"
+      custom_auto.command.b.bg = "None"
+      --
+      require("lualine").setup({
+        options = {
+          theme = custom_auto,
+          icons_enabled = true,
+          globalstatus = true,
+          component_separators = "|",
+          section_separators = "",
+          disabled_filetypes = {
+            statusline = {},
+            winbar = {},
+          },
+        },
+      })
+    end,
   },
   -- Add indentation guides even on blank lines
   {
@@ -57,26 +91,26 @@ return {
   {
     -- Theme inspired by Atom
     "navarasu/onedark.nvim",
-    priority = 1000,
+    lazy = true,
     config = function() end,
   },
   {
     "catppuccin/nvim",
     name = "catppuccin",
-    priority = 1000,
+    lazy = true,
   },
   {
     "bluz71/vim-nightfly-guicolors",
-    priority = 1000, -- make sure to load this before all the other start plugins
+    lazy = true,
   },
   {
     "rose-pine/neovim",
     name = "rose-pine",
-    priority = 1000,
+    lazy = true,
   },
   {
     "Mofiqul/vscode.nvim",
-    priority = 1000,
+    lazy = true,
     config = function()
       require("vscode").setup({
         italic_comments = true,
@@ -86,7 +120,7 @@ return {
   },
   {
     "ellisonleao/gruvbox.nvim",
-    priority = 1000,
+    lazy = true,
     opts = {},
   },
   {

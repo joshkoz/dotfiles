@@ -47,8 +47,9 @@ vim.opt.timeout = false
 
 -- Set completeopt to have a better completion experience
 vim.opt.completeopt = "menuone,noselect"
-vim.opt.wildmode = "longest,list,full"
+vim.opt.wildmode = "longest,full,full"
 vim.opt.wildoptions = "fuzzy" -- Make the command prompt fuzzy search
+vim.opt.smoothscroll = true
 
 vim.opt.scrolloff = 8
 vim.opt.wrap = false
@@ -62,5 +63,5 @@ vim.opt.splitright = true
 vim.opt.splitbelow = true
 
 -- Disable the statusline and sets the status line as a line: https://github.com/neovim/neovim/issues/18965
-vim.opt.statusline = "%#WinSeparator#%{repeat('─',winwidth('.'))}%*"
-vim.opt.laststatus = 0
+-- vim.opt.statusline = "%#WinSeparator#%{repeat('─',winwidth('.'))}%*"
+vim.opt.laststatus = 3

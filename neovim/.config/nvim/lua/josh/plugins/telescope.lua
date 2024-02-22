@@ -8,8 +8,7 @@ return {
   event = "BufEnter",
   config = function()
     local telescope = require("telescope")
-    local builtins = require("telescope.builtin")
-    telescope.load_extension("fzf")
+
     telescope.setup({
       extensions = {
         fzf = {
@@ -41,6 +40,9 @@ return {
       },
     })
 
+    pcall(telescope.load_extension, "fzf")
+
+    local builtins = require("telescope.builtin")
     local smart_find = function()
       local exit_code = os.execute("git rev-parse --is-inside-work-tree > /dev/null 2>&1")
       local ok = exit_code == 0
