@@ -1,58 +1,37 @@
--- [[ Highlight on yank ]]
--- See `:help vim.highlight.on_yank()`
-local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
-
+-- Highlight on yank
 vim.api.nvim_create_autocmd("TextYankPost", {
   callback = function()
     vim.highlight.on_yank()
   end,
-  group = highlight_group,
+  group = vim.api.nvim_create_augroup("YankHighlight", { clear = true }),
   pattern = "*",
 })
 
--- Define a Lua function to remove the items from the quickfix list
-function Remove_qf_items(start_line, end_line)
-  -- Get all items in the quickfix list
+-- Remove quickfix items
+local function Remove_qf_items(start_line, end_line)
   local qfall = vim.fn.getqflist()
-
-  -- Remove the items from the quickfix list
-  -- Loop backwards to preserve the indices of the items to be removed
   for i = end_line, start_line, -1 do
     table.remove(qfall, i)
   end
-
-  -- Replace the quickfix list with the updated list
   vim.fn.setqflist(qfall, "r")
-
-  -- Reopen the quickfix window
   vim.cmd("copen")
 end
 
 -- Create commands to call the Lua function
-vim.cmd("command! RemoveQFItem lua Remove_qf_items(vim.fn.line(\".\"), vim.fn.line(\".\"))")
-vim.cmd("command! -range RemoveQFItems lua Remove_qf_items(vim.fn.line(\"'<\"), vim.fn.line(\"'>\"))")
+vim.api.nvim_create_user_command("RemoveQFItem", function()
+  Remove_qf_items(vim.fn.line("."), vim.fn.line("."))
+end, {})
 
--- Set up an autocommand to map 'dd' to remove the quickfix item(s) when the
--- filetype is 'qf' (quickfix)
-vim.cmd("autocmd FileType qf nnoremap <buffer> dd :RemoveQFItem<CR>")
-vim.cmd("autocmd FileType qf xnoremap <buffer> dd :RemoveQFItems<CR>")
+vim.api.nvim_create_user_command("RemoveQFItems", function()
+  Remove_qf_items(vim.fn.line("'<"), vim.fn.line("'>"))
+end, { range = true })
 
-local theme_overrides_group = vim.api.nvim_create_augroup("ThemeOverrides", { clear = true })
-
--- Create the autocmd for the Colorscheme event
-vim.api.nvim_create_autocmd("Colorscheme", {
+-- Autocommands for key mappings in 'qf' filetype
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "qf",
+  group = vim.api.nvim_create_augroup("QfRemoveItemsGroup", { clear = true }),
   callback = function()
-    -- Ensure splits dont have a background color
-    vim.cmd.hi("VertSplit guibg=NONE")
-    vim.cmd.hi("HorizSplit guibg=NONE")
-    -- Ensure that the onedark theme NeoTree Area seperator
-    if vim.g.colors_name == "onedark" then
-      vim.api.nvim_command("highlight link NeoTreeWinSeparator WinSeparator")
-    end
-    -- Hide the status line
-    vim.api.nvim_set_hl(0, "StatuslineNC", { link = "Normal" })
-    vim.api.nvim_command("highlight link MyStatusLine WinSeparator")
+    vim.api.nvim_buf_set_keymap(0, "n", "dd", ":RemoveQFItem<CR>", { noremap = true, silent = true })
+    vim.api.nvim_buf_set_keymap(0, "x", "dd", ":RemoveQFItems<CR>", { noremap = true, silent = true })
   end,
-  group = theme_overrides_group,
-  pattern = "*",
 })

@@ -17,10 +17,12 @@
 	editor = nvim
 [push]
 	default = current
+	autoSetupRemote = true
 [pull]
 	ff = only
 [alias]
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	bl = blame -w -C -C -C
 [interactive]
     diffFilter = delta --color-only
 [delta]
@@ -28,6 +30,24 @@
     light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
     side-by-side = true
 [merge]
-    conflictstyle = diff3
+	conflictStyle = zdiff3
+	tool = nvim
 [diff]
     colorMoved = default
+	algorithm = histogram
+[maintenance]
+	repo = /home/joshua/work/core-api
+	repo = /home/joshua/projects/dotfiles
+[rerere]
+	enabled = true
+[tag]
+	gpgsign = true
+
+[includeIf "gitdir:~/work/"]
+	path = ~/work/.gitconfig
+[branch]
+	sort = -committerdate
+[column]
+	ui = auto
+[fetch]
+	prune = true

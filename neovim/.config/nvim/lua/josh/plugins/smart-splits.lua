@@ -1,65 +1,19 @@
 return {
   "mrjones2014/smart-splits.nvim",
+  event = "VeryLazy",
   opts = {
     ignored_filetypes = { "nofile", "quickfix", "qf", "prompt" },
     ignored_buftypes = { "nofile" },
   },
-  keys = {
-    {
-      "<C-h>",
-      function()
-        require("smart-splits").move_cursor_left()
-      end,
-      desc = "Move to left split",
-    },
-    {
-      "<C-j>",
-      function()
-        require("smart-splits").move_cursor_down()
-      end,
-      desc = "Move to below split",
-    },
-    {
-      "<C-k>",
-      function()
-        require("smart-splits").move_cursor_up()
-      end,
-      desc = "Move to above split",
-    },
-    {
-      "<C-l>",
-      function()
-        require("smart-splits").move_cursor_right()
-      end,
-      desc = "Move to right split",
-    },
-    {
-      "<C-Up>",
-      function()
-        require("smart-splits").resize_up()
-      end,
-      desc = "Resize split up",
-    },
-    {
-      "<C-Down>",
-      function()
-        require("smart-splits").resize_down()
-      end,
-      desc = "Resize split down",
-    },
-    {
-      "<C-Left>",
-      function()
-        require("smart-splits").resize_left()
-      end,
-      desc = "Resize split left",
-    },
-    {
-      "<C-Right>",
-      function()
-        require("smart-splits").resize_right()
-      end,
-      desc = "Resize split right",
-    },
-  },
+  config = function()
+    local smartsplits = require("smart-splits")
+    vim.keymap.set({ "n", "i" }, "<C-h>", smartsplits.move_cursor_left, { desc = "Move to left split" })
+    vim.keymap.set({ "n", "i" }, "<C-j>", smartsplits.move_cursor_down, { desc = "Move to below split" })
+    vim.keymap.set({ "n", "i" }, "<C-k>", smartsplits.move_cursor_up, { desc = "Move to above split" })
+    vim.keymap.set({ "n", "i" }, "<C-l>", smartsplits.move_cursor_right, { desc = "Move to right split" })
+    vim.keymap.set({ "n", "i" }, "<C-Left>", smartsplits.resize_left, { desc = "Resize split left" })
+    vim.keymap.set({ "n", "i" }, "<C-Down>", smartsplits.resize_down, { desc = "Resize split down" })
+    vim.keymap.set({ "n", "i" }, "<C-Up>", smartsplits.resize_up, { desc = "Move to above up" })
+    vim.keymap.set({ "n", "i" }, "<C-Right>", smartsplits.resize_right, { desc = "Resize split right" })
+  end,
 }

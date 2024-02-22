@@ -71,7 +71,7 @@ bindsym XF86AudioMute        exec --no-startup-id i3-volume -n -t i3status -u SI
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
 # Media player controls
-bindsym XF86AudioPlay exec playerctl play
+bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioPause exec playerctl pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
@@ -265,9 +265,7 @@ bindsym $mod+shift+x exec i3lock --color=000000
 
 
 # Set wallpaper
-# exec_always feh --bg-scale /home/joshua/Pictures/wallpaper.jpg 
-exec_always feh --bg-scale --no-xinerama /home/joshua/Pictures/wide2.jpg 
-# exec_always nasa-wallpaper -q earth -d $(date -d "yesterday" '+%Y-%m-%d') 
+exec_always /home/joshua/.local/bin/set-wallpaper.sh /home/joshua/Pictures/wallpapers/karman-line-wide.jpg
 
 # Set sound tray icon
 exec --no-startup-id pasystray
@@ -289,3 +287,10 @@ bindsym Ctrl+Shift+S exec --no-startup-id maim --select | xclip -selection clipb
 ## Pick audio output
 bindsym Ctrl+Shift+A exec --no-startup-id /home/joshua/.local/bin/pick-output-audio.sh
 bindsym Ctrl+Shift+M exec --no-startup-id /home/joshua/.local/bin/pick-input-audio.sh
+
+## Swap out the wallpaper
+bindsym $mod+Shift+W exec --no-startup-id /home/joshua/.local/bin/set-wallpaper.sh 
+
+smart_borders no_gaps  
+smart_gaps on
+
