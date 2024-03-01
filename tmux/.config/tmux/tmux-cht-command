@@ -36,3 +36,4 @@ chmod
 chown
 make
 fdisk
+xclip

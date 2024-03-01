@@ -1,5 +1,6 @@
 -- Set space as the leader key
 vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
 -- Keymap for better default experience
 vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
