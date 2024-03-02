@@ -21,11 +21,14 @@ return {
     vim.keymap.set("n", "<A-w>", function()
       harpoon:list():select(2)
     end)
-    vim.keymap.set("n", "<A-r>", function()
+    vim.keymap.set("n", "<A-e>", function()
       harpoon:list():select(3)
     end)
-    vim.keymap.set("n", "<A-t>", function()
+    vim.keymap.set("n", "<A-r>", function()
       harpoon:list():select(4)
+    end)
+    vim.keymap.set("n", "<A-t>", function()
+      harpoon:list():select(5)
     end)
 
     -- Toggle previous & next buffers stored within Harpoon list
