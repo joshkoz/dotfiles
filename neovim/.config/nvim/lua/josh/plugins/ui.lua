@@ -8,11 +8,17 @@ return {
     opts = {},
   },
   -- region Have hex codes show their color
+  -- {
+  --   "NvChad/nvim-colorizer.lua",
+  --   event = { "BufReadPre", "BufNewFile" },
+  --   enabled = true,
+  --   config = true,
+  -- },
   {
-    "NvChad/nvim-colorizer.lua",
-    event = { "BufReadPre", "BufNewFile" },
-    enabled = true,
-    config = true,
+    "brenoprata10/nvim-highlight-colors",
+    opts = {
+      render = "virtual",
+    },
   },
   -- Have todo comments highlight
   {
@@ -28,7 +34,7 @@ return {
   {
     "stevearc/dressing.nvim",
     event = "BufEnter",
-    enabled = false,
+    enabled = true,
     opts = {
       input = {
         default_prompt = "➤ ",
@@ -43,6 +49,7 @@ return {
   {
     -- Set lualine as statusline
     "nvim-lualine/lualine.nvim",
+    enabled = true,
     dependencies = {
       "nvim-tree/nvim-web-devicons",
       -- "bluz71/vim-nightfly-guicolors",
