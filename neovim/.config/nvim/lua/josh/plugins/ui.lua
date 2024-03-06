@@ -37,6 +37,7 @@ return {
     enabled = true,
     opts = {
       input = {
+        insert_only = false,
         default_prompt = "➤ ",
         win_options = { winhighlight = "Normal:Normal,NormalNC:Normal" },
       },
