@@ -5,6 +5,9 @@ vim.g.maplocalleader = " "
 -- Keymap for better default experience
 vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 
+-- Open the file explorer
+vim.keymap.set({ "n", "v" }, "<Space>e", vim.cmd.Ex, { silent = true })
+
 -- Go to alternate buffer
 vim.keymap.set("n", "<leader><leader>", "<cmd>b#<cr>", { desc = "Go to the alternate buffer" })
 

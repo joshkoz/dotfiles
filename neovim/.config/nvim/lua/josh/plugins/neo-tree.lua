@@ -39,15 +39,6 @@ return {
       },
     })
 
-    vim.keymap.set("n", "<leader>e", "<cmd>Neotree toggle<cr>", { desc = "Toggle [E]xplorer" })
-    vim.keymap.set("n", "<leader>o", function()
-      if vim.bo.filetype == "neo-tree" then
-        vim.cmd.wincmd("p")
-      else
-        vim.cmd.Neotree("focus")
-      end
-    end, {
-      desc = "Toggle F[o]cus Explorer",
-    })
+    vim.keymap.set("n", "<leader>o", "<cmd>Neotree toggle<cr>", { desc = "Toggle Neo-Tree" })
   end,
 }

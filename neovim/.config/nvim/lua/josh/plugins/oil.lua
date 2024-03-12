@@ -1,10 +1,17 @@
 return {
   "stevearc/oil.nvim",
   opts = {},
-  enabled = false,
+  enabled = true,
   -- Optional dependencies
   dependencies = { "nvim-tree/nvim-web-devicons" },
   config = function()
+    -- Replace netrw
+    vim.api.nvim_create_user_command("Explore", "Oil <args>", { nargs = "?", complete = "dir" })
+    vim.api.nvim_create_user_command("E", "Explore <args>", { nargs = "?", complete = "dir" })
+    vim.api.nvim_create_user_command("Sexplore", "belowright split | Oil <args>", { nargs = "?", complete = "dir" })
+    vim.api.nvim_create_user_command("Vexplore", "rightbelow vsplit | Oil <args>", { nargs = "?", complete = "dir" })
+    vim.api.nvim_create_user_command("Texplore", "tabedit % | Oil <args>", { nargs = "?", complete = "dir" })
+
     local oil = require("oil")
     oil.setup({
       default_file_explorer = true,
@@ -38,10 +45,5 @@ return {
       -- Set to false to disable all of the above keymaps
       use_default_keymaps = false,
     })
-    -- keymaps
-    vim.keymap.set("n", "<leader>e", oil.open, { desc = "Toggle [E]xplorer" })
-    vim.keymap.set("n", "<leader>o", function()
-      oil.open(".")
-    end, { desc = "Toggle [E]xplorer at Current Working Directory" })
   end,
 }
