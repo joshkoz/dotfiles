@@ -10,16 +10,10 @@ return {
     "tpope/vim-sleuth",
     event = "BufEnter",
   },
-  -- {
-  --   "tpope/vim-surround",
-  --   event = "BufEnter",
-  -- },
   {
     "echasnovski/mini.surround",
     version = "*",
     event = "BufEnter",
-    config = function()
-      require("mini.surround").setup()
-    end,
+    opts = {},
   },
 }

@@ -9,7 +9,7 @@ return {
     "rafamadriz/friendly-snippets", -- source from friendly snippets
   },
   event = "InsertEnter",
-  opts = function()
+  config = function()
     local cmp = require("cmp")
     local luasnip = require("luasnip")
 
@@ -17,7 +17,7 @@ return {
 
     luasnip.config.setup({})
 
-    return {
+    cmp.setup({
       snippet = {
         expand = function(args)
           luasnip.lsp_expand(args.body)
@@ -42,6 +42,6 @@ return {
         { name = "buffer" },
         { name = "path" },
       },
-    }
+    })
   end,
 }
