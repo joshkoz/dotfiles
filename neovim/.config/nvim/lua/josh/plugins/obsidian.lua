@@ -5,7 +5,7 @@ return {
   lazy = true,
   -- ft = "markdown",
   event = {
-    "BufReadPre /home/joshua/vaults/work-vault/**.md",
+    "BufReadPre /home/joshua/vaults/work-journal/**.md",
     "BufReadPre /home/joshua/vaults/second-brain/**.md",
   },
   dependencies = {
@@ -29,7 +29,7 @@ return {
         },
         {
           name = "Work Vault",
-          path = "/home/joshua/vaults/work-vault/",
+          path = "/home/joshua/vaults/work-journal/",
         },
       },
     })
