@@ -44,8 +44,6 @@ return {
     config = function()
       local lspconfig = require("lspconfig")
 
-      local cmp_nvim_lsp = require("cmp_nvim_lsp")
-
       local opts = { noremap = true, silent = true }
 
       local on_attach = function(client, bufnr)
@@ -81,11 +79,6 @@ return {
 
         opts.desc = "[L]SP: Add References to Quickfix list"
         vim.keymap.set("n", "<leader>lc", vim.lsp.buf.references, opts)
-
-        -- Create a command `:Format` local to the LSP buffer
-        vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
-          vim.lsp.buf.format()
-        end, { desc = "Format current buffer with LSP" })
       end
 
       -- Change the Diagnostic symbols in the sign column (gutter)

@@ -1,4 +1,3 @@
----@diagnostic disable: missing-fields
 return {
   "epwalsh/obsidian.nvim",
   version = "*", -- recommended, use latest release instead of latest commit
@@ -12,26 +11,24 @@ return {
     "nvim-lua/plenary.nvim",
     "hrsh7th/nvim-cmp",
   },
-  config = function()
-    require("obsidian").setup({
-      disable_frontmatter = true,
-      completion = { nvim_cmp = true },
-      daily_notes = {
-        folder = "📅 Journal",
+  opts = {
+    disable_frontmatter = true,
+    completion = { nvim_cmp = true },
+    daily_notes = {
+      folder = "📅 Journal",
+    },
+    ui = {
+      enable = false,
+    },
+    workspaces = {
+      {
+        name = "Second Brain",
+        path = "/home/joshua/vaults/second-brain/",
       },
-      ui = {
-        enable = false,
+      {
+        name = "Work Vault",
+        path = "/home/joshua/vaults/work-journal/",
       },
-      workspaces = {
-        {
-          name = "Second Brain",
-          path = "/home/joshua/vaults/second-brain/",
-        },
-        {
-          name = "Work Vault",
-          path = "/home/joshua/vaults/work-journal/",
-        },
-      },
-    })
-  end,
+    },
+  },
 }

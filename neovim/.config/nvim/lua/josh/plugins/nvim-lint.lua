@@ -42,6 +42,6 @@ return {
 
     vim.keymap.set("n", "<leader>ll", function()
       select_linter_and_try_lint()
-    end, { desc = "[L]SP: Trigger [l]inting for current file" })
+    end, { desc = "Trigger [l]inting for current file" })
   end,
 }

@@ -14,10 +14,9 @@ return {
     "MasonUpdateAll",
   },
   build = ":MasonUpdate",
-  config = function(_, opts)
+  config = function()
     local mason = require("mason")
     local mason_lspconfig = require("mason-lspconfig")
-
     local mason_tool_installer = require("mason-tool-installer")
 
     mason.setup({

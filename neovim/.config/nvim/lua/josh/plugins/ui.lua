@@ -8,12 +8,6 @@ return {
     opts = {},
   },
   -- region Have hex codes show their color
-  -- {
-  --   "NvChad/nvim-colorizer.lua",
-  --   event = { "BufReadPre", "BufNewFile" },
-  --   enabled = true,
-  --   config = true,
-  -- },
   {
     "brenoprata10/nvim-highlight-colors",
     opts = {
@@ -53,7 +47,6 @@ return {
     enabled = true,
     dependencies = {
       "nvim-tree/nvim-web-devicons",
-      -- "bluz71/vim-nightfly-guicolors",
     },
     config = function()
       local custom_auto = require("lualine.themes.auto")
