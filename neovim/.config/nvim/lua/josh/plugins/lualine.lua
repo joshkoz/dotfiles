@@ -2,7 +2,6 @@ return {
   "nvim-lualine/lualine.nvim",
   dependencies = {
     "nvim-tree/nvim-web-devicons",
-    "letieu/harpoon-lualine",
   },
   config = function()
     -- LSP clients attached to buffer
@@ -46,12 +45,7 @@ return {
         lualine_a = { "mode" },
         lualine_b = { { "branch", icon = "" }, "filename" },
         lualine_c = {
-          {
-            "harpoon2",
-            icon = "♥",
-            indicators = { "1", "2", "3", "4" },
-            active_indicators = { "[1]", "[2]", "[3]", "[4]" },
-          },
+          "grapple",
         },
         lualine_x = { { "diagnostics", symbols = { error = " ", warn = " ", info = " " }, colored = false }, "diff", "filetype" },
         lualine_y = { "progress", "location" },
