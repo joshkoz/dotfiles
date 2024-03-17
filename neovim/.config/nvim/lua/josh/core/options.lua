@@ -1,5 +1,5 @@
 -- Set highlight on search
-vim.opt.hlsearch = false
+vim.opt.hlsearch = true
 
 -- Make line numbers default
 vim.opt.number = true
@@ -37,7 +37,7 @@ vim.opt.signcolumn = "yes"
 
 -- Enable Relative Line Numbers
 vim.opt.relativenumber = true
-vim.opt.scrolloff = 8
+vim.opt.scrolloff = 10
 
 -- Decrease update time
 vim.opt.updatetime = 50

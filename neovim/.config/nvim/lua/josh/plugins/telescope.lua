@@ -64,9 +64,6 @@ return {
     opts.desc = "[F]ind [F]iles with Frecency"
     vim.keymap.set("n", "<leader>f", "<Cmd>Telescope frecency workspace=CWD<CR>", opts)
 
-    opts.desc = "[F]ind [D]iagnostics"
-    vim.keymap.set("n", "<leader>d", builtins.diagnostics, opts)
-
     opts.desc = "Fuzzy Find [H]elp Tags"
     vim.keymap.set("n", "<leader>h", builtins.help_tags, opts)
 
