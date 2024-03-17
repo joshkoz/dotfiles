@@ -1,8 +1,11 @@
 return {
   "robitx/gp.nvim",
   event = "VeryLazy",
-  opts = {},
   config = function()
-    vim.keymap.set("n", "<leader>cp", "<CMD>GpChatNew popup<CR>", { desc = "" })
+    local gp = require("gp")
+    gp.setup({
+      openai_api_key = os.getenv("OPENAI_API_KEY"),
+    })
+    vim.keymap.set("n", "<leader>cp", "<CMD>GpChatNew vsplit<CR>", { desc = "" })
   end,
 }
