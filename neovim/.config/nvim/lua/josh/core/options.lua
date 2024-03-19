@@ -45,6 +45,9 @@ vim.opt.timeoutlen = 300
 vim.opt.ttimeout = false
 vim.opt.timeout = false
 
+-- Disable folds in diffs
+vim.opt.diffopt:append("context:99999")
+
 -- Set completeopt to have a better completion experience
 vim.opt.completeopt = "menuone,noselect"
 vim.opt.wildmode = "longest,full,full"
