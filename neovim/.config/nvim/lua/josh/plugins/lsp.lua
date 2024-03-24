@@ -6,6 +6,7 @@ return {
       "hrsh7th/cmp-nvim-lsp", -- Adds LSP completion capabilities
       { "antosha417/nvim-lsp-file-operations", config = true },
       { "folke/neodev.nvim", opts = {} },
+      "williamboman/mason.nvim",
       "jmederosalvarado/roslyn.nvim",
     },
     opts = {

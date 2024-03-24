@@ -31,11 +31,13 @@ return {
     enabled = true,
     opts = {
       input = {
+        border = "single",
         insert_only = false,
         default_prompt = "➤ ",
         win_options = { winhighlight = "Normal:Normal,NormalNC:Normal" },
       },
       select = {
+        border = "single",
         backend = { "telescope", "builtin" },
         builtin = { win_options = { winhighlight = "Normal:Normal,NormalNC:Normal" } },
       },
