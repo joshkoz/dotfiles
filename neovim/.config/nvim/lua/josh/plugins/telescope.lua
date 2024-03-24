@@ -14,6 +14,7 @@ return {
       extensions = {
         frecency = {
           ignore_patterns = { "*.git/*", "*/tmp/*", "oil://*", "fugitive://*" },
+          db_safe_mode = false,
         },
         fzf = {
           fuzzy = false,

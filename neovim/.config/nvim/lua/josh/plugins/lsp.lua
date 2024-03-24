@@ -42,45 +42,6 @@ return {
       },
     },
     config = function()
-      local lspconfig = require("lspconfig")
-
-      local opts = { noremap = true, silent = true }
-
-      local on_attach = function(client, bufnr)
-        opts.buffer = bufnr
-
-        -- Setup keymaps for when when an LSP attaches to the buffer.
-        opts.desc = "[L]SP: [R]ename"
-        vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, opts)
-
-        opts.desc = "[L]SP: Code [A]ction"
-        vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, opts)
-
-        opts.desc = "LSP: [G]oto [D]efinition"
-        vim.keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts)
-
-        opts.desc = "LSP: [G]oto [D]eclaration"
-        vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-
-        opts.desc = "LSP: [G]oto [R]eferences"
-        vim.keymap.set("n", "gr", "<cmd>Telescope lsp_references<CR>", opts)
-
-        opts.desc = "LSP: [G]oto [I]mplementation"
-        vim.keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<CR>", opts)
-
-        opts.desc = "LSP: Hover Documentation"
-        vim.keymap.set("n", "K", vim.lsp.buf.hover, opts) -- See `:help K` for why this keymap
-
-        opts.desc = "Open floating diagnostic message"
-        vim.keymap.set("n", "gh", vim.diagnostic.open_float, opts)
-
-        opts.desc = "[L]SP: Add [D]iagnostics Quickfix"
-        vim.keymap.set("n", "<leader>ld", vim.diagnostic.setqflist, opts)
-
-        opts.desc = "[L]SP: Add References to Quickfix list"
-        vim.keymap.set("n", "<leader>lc", vim.lsp.buf.references, opts)
-      end
-
       -- Change the Diagnostic symbols in the sign column (gutter)
       local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
       for type, icon in pairs(signs) do
@@ -91,16 +52,16 @@ return {
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
+      local lspconfig = require("lspconfig")
+
       -- configure html server
       lspconfig["html"].setup({
         capabilities = capabilities,
-        on_attach = on_attach,
       })
 
       -- configure typescript server with plugin
       lspconfig["tsserver"].setup({
         capabilities = capabilities,
-        on_attach = on_attach,
         init_options = {
           preferences = {
             disableSuggestions = true,
@@ -111,18 +72,15 @@ return {
       -- configure css server
       lspconfig["cssls"].setup({
         capabilities = capabilities,
-        on_attach = on_attach,
       })
 
       lspconfig["jsonls"].setup({
         capabilities = capabilities,
-        on_attach = on_attach,
       })
 
       -- configure lua server
       lspconfig["lua_ls"].setup({
         capabilities = capabilities,
-        on_attach = on_attach,
         settings = {
           Lua = {
             workspace = {
@@ -145,7 +103,6 @@ return {
 
       lspconfig["biome"].setup({
         capabilities = capabilities,
-        on_attach = on_attach,
         cmd = { "biome", "lsp-proxy" },
         filetypes = {
           "javascript",
@@ -162,56 +119,11 @@ return {
         dotnet_cmd = "dotnet", -- this is the default
         roslyn_version = "4.8.0-3.23475.7", -- this is the default
         capabilities = capabilities,
-        on_attach = on_attach,
+        on_attach = function() end,
       })
+    end,
 
-      -- configure omnisharp server
-      -- lspconfig["omnisharp"].setup({
-      --   cmd = { "omnisharp", "--languageserver", "--hostPID", tostring(vim.fn.getpid()) },
-      --   capabilities = capabilities,
-      --   on_attach = on_attach,
-      --   settings = {
-      --     -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#omnisharp
-      --     -- If true, MSBuild project system will only load projects for files that
-      --     -- were opened in the editor. This setting is useful for big C# codebases
-      --     -- and allows for faster initialization of code navigation features only
-      --     -- for projects that are relevant to code that is being edited. With this
-      --     -- setting enabled OmniSharp may load fewer projects and may thus display
-      --     -- incomplete reference lists for symbols.
-      --     enable_ms_build_load_projects_on_demand = false,
-      --     enable_editorconfig_support = true,
-      --     enable_import_completion = true,
-      --     enable_roslyn_analyzers = true,
-      --     organize_imports_on_format = false,
-      --   },
-      --   handlers = {
-      --     -- https://github.com/Hoffs/omnisharp-extended-lsp.nvim
-      --     ["textDocument/definition"] = require("omnisharp_extended").handler,
-      --     -- Make warning the minimum level shown for csharp
-      --     ["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-      --       virtual_text = {
-      --         severity_limit = "Warning",
-      --       },
-      --       -- underline = {
-      --       --   severity_limit = "Warning",
-      --       -- },
-      --     }),
-      --   },
-      -- })
-    end,
-  },
-  {
-    "iabdelkareem/csharp.nvim",
-    enabled = false,
-    dependencies = {
-      "williamboman/mason.nvim", -- Required, automatically installs omnisharp
-      "mfussenegger/nvim-dap",
-      "Tastyep/structlog.nvim", -- Optional, but highly recommended for debugging
-    },
-    config = function()
-      -- require("mason").setup() -- Mason setup must run before csharp
-      require("csharp").setup()
-    end,
+    -- add additional lspconfig's here
   },
   {
     "mrcjkb/rustaceanvim",

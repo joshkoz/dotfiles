@@ -7,6 +7,47 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   pattern = "*",
 })
 
+-- LSP keymaps on attach
+vim.api.nvim_create_autocmd("LspAttach", {
+  group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+  callback = function(ev)
+    -- Enable completion triggered by <c-x><c-o>
+    vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
+
+    local opts = { buffer = ev.buf, noremap = true, silent = true }
+
+    opts.desc = "[L]SP: [R]ename"
+    vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, opts)
+
+    opts.desc = "[L]SP: Code [A]ction"
+    vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, opts)
+
+    opts.desc = "LSP: [G]oto [D]efinition"
+    vim.keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts)
+
+    opts.desc = "LSP: [G]oto [D]eclaration"
+    vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+
+    opts.desc = "LSP: [G]oto [R]eferences"
+    vim.keymap.set("n", "gr", "<cmd>Telescope lsp_references<CR>", opts)
+
+    opts.desc = "LSP: [G]oto [I]mplementation"
+    vim.keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<CR>", opts)
+
+    opts.desc = "LSP: Hover Documentation"
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts) -- See `:help K` for why this keymap
+
+    opts.desc = "Open floating diagnostic message"
+    vim.keymap.set("n", "gh", vim.diagnostic.open_float, opts)
+
+    opts.desc = "[L]SP: Add [D]iagnostics Quickfix"
+    vim.keymap.set("n", "<leader>ld", vim.diagnostic.setqflist, opts)
+
+    opts.desc = "[L]SP: Add References to Quickfix list"
+    vim.keymap.set("n", "<leader>lc", vim.lsp.buf.references, opts)
+  end,
+})
+
 -- Remove quickfix items
 local function Remove_qf_items(start_line, end_line)
   local qfall = vim.fn.getqflist()
