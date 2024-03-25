@@ -1,4 +1,4 @@
-vim.g.colorscheme = "catppuccin"
+vim.g.colorscheme = "kanagawa"
 
 return {
   -- Show notifications in the corner
