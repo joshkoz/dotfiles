@@ -32,7 +32,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set("n", "gr", "<cmd>Telescope lsp_references<CR>", opts)
 
     opts.desc = "LSP: [G]oto [I]mplementation"
-    vim.keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<CR>", opts)
+    vim.keymap.set("n", "gI", "<cmd>Telescope lsp_implementations<CR>", opts)
 
     opts.desc = "LSP: Hover Documentation"
     vim.keymap.set("n", "K", vim.lsp.buf.hover, opts) -- See `:help K` for why this keymap
