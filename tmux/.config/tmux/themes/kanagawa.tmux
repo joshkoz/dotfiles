@@ -1,7 +1,8 @@
 
 # --> Kanagawa
 # thm_bg="#16161d"
-thm_bg="#1f1f28"
+# thm_bg="#1f1f28" 
+thm_bg="#15141A"
 thm_fg="#dcd7ba"
 thm_cyan="#6a9589"
 thm_black="#090618"

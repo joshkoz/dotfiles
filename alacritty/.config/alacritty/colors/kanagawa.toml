@@ -29,7 +29,8 @@ cyan = "#6a9589"  # cyan
 white = "#dcd7ba" # fg for white
 
 [colors.primary]
-background = "#1f1f28" # bg
+#background = "#1f1f28" # bg
+background = "#15141A" # bg
 foreground = "#dcd7ba" # fg
 bright_foreground = "#dcd7ba" # fg as bright_foreground for consistency
 
