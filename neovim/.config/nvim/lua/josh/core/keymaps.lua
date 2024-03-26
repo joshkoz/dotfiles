@@ -19,8 +19,8 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gvgv=gv", { desc = "Move visual selection u
 vim.keymap.set("v", "J", ":m '>+1<CR>gvgv=gv", { desc = "Move visual selection down a line" })
 
 -- Diffs
-vim.keymap.set("n", "<leader>dl", "<CMD>diffget //2<CR><CMD>diffupdate<CR>", { desc = "Diffget from the left" })
-vim.keymap.set("n", "<leader>dh", "<CMD>diffget //3<CR><CMD>diffupdate<CR>", { desc = "Diffget from the right" })
+vim.keymap.set("n", "<leader>dh", "<CMD>diffget //2<CR><CMD>diffupdate<CR>", { desc = "Diffget from the left" })
+vim.keymap.set("n", "<leader>dl", "<CMD>diffget //3<CR><CMD>diffupdate<CR>", { desc = "Diffget from the right" })
 
 --- Quickfix
 vim.keymap.set("n", "<A-j>", "<CMD>cnext<CR>zz", { desc = "Go to next item in Quickfix List" })
