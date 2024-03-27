@@ -30,7 +30,7 @@ font pango:SF Pro Display 11
 # Start XDG autostart .desktop files using dex. See also
 # https://wiki.archlinux.org/index.php/XDG_Autostart
 exec --no-startup-id dex --autostart --environment i3
-exec_always --no-startup-id autotiling
+# exec_always --no-startup-id autotiling
 exec_always --no-startup-id dunst -config ~/.config/dunst/dunstrc 
 exec_always --no-startup-id setxkbmap -option caps:escape 
 # exec_always --no-startup-id /usr/bin/dumb-polkit-agent
@@ -102,10 +102,10 @@ bindsym $mod+$up focus up
 bindsym $mod+$right focus right
 
 # alternatively, you can use the cursor keys:
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
+# bindsym $mod+Left focus left
+# bindsym $mod+Down focus down
+# bindsym $mod+Up focus up
+# bindsym $mod+Right focus right
 
 # move focused window
 bindsym $mod+Shift+$left move left
@@ -120,7 +120,7 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+g split h
+bindsym $mod+g split toggle 
 
 # split in vertical orientation
 bindsym $mod+v split v
@@ -200,18 +200,18 @@ bindsym $mod+Shift+less move container to output left
 bindsym $mod+Ctrl+greater move workspace to output right
 bindsym $mod+Ctrl+less move workspace to output left
 
+bindsym $mod+Left resize shrink width 10 px or 10 ppt
+bindsym $mod+Down resize grow height 10 px or 10 ppt
+bindsym $mod+Up resize shrink height 10 px or 10 ppt
+bindsym $mod+Right resize grow width 10 px or 10 ppt
+
 # resize window (you can also use the mouse for that)
 mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
 
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
-        bindsym $left resize shrink width 10 px or 10 ppt
+        bindsym $left resize shrink right 10 px or 10 ppt
         bindsym $down resize grow height 10 px or 10 ppt
         bindsym $up resize shrink height 10 px or 10 ppt
-        bindsym $right resize grow width 10 px or 10 ppt
+        bindsym $right resize grow right 10 px or 10 ppt
 
         # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
@@ -227,6 +227,8 @@ mode "resize" {
 
 bindsym $mod+Ctrl+r mode "resize"
 
+
+set $indicator #fab387
 # set $bg-color          #ab68ff // the accent color 
 set $accent-color        #ea999c
 set $inactive-bg-color   #2f343f
@@ -236,8 +238,8 @@ set $urgent-bg-color     #E53935
 
 # window colors
 #                       border              background         text                 indicator
-client.focused          $accent-color      $accent-color      $text-color          $accent-color 
-client.unfocused        $inactive-bg-color $inactive-bg-color $inactive-text-color $accent-color 
+client.focused          $accent-color      $accent-color      $text-color          $indicator
+client.unfocused        $inactive-bg-color $inactive-bg-color $inactive-text-olor $accent-color 
 client.focused_inactive $inactive-bg-color $inactive-bg-color $inactive-text-color $accent-color 
 client.urgent           $urgent-bg-color   $urgent-bg-color   $text-color          $accent-color 
 
