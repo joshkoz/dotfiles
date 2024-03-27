@@ -23,7 +23,14 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, opts)
 
     opts.desc = "LSP: [G]oto [D]efinition"
-    vim.keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts)
+    vim.keymap.set("n", "gd", function()
+      if vim.bo[0].filetype == "cs" then
+        require("csharp").go_to_definition()
+      else
+        local builtins = require("telescope.builtin")
+        builtins.lsp_definitions()
+      end
+    end, opts)
 
     opts.desc = "LSP: [G]oto [D]eclaration"
     vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
@@ -74,5 +81,12 @@ vim.api.nvim_create_autocmd("FileType", {
   callback = function()
     vim.api.nvim_buf_set_keymap(0, "n", "dd", ":RemoveQFItem<CR>", { noremap = true, silent = true })
     vim.api.nvim_buf_set_keymap(0, "x", "dd", ":RemoveQFItems<CR>", { noremap = true, silent = true })
+  end,
+})
+
+vim.api.nvim_create_autocmd("BufRead", {
+  pattern = "*.Build.props",
+  callback = function()
+    vim.bo.filetype = "xml"
   end,
 })

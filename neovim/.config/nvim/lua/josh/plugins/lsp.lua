@@ -112,16 +112,24 @@ return {
         },
       })
 
-      require("roslyn").setup({
-        dotnet_cmd = "dotnet", -- this is the default
-        roslyn_version = "4.8.0-3.23475.7", -- this is the default
-        capabilities = capabilities,
-        on_attach = function() end,
-      })
+      -- require("roslyn").setup({
+      --   dotnet_cmd = "dotnet", -- this is the default
+      --   roslyn_version = "4.8.0-3.23475.7", -- this is the default
+      --   capabilities = capabilities,
+      --   on_attach = function() end,
+      -- })
     end,
-
-    -- add additional lspconfig's here
   },
+  {
+    "iabdelkareem/csharp.nvim",
+    dependencies = {
+      "williamboman/mason.nvim", -- Required, automatically installs omnisharp
+      "mfussenegger/nvim-dap",
+      "Tastyep/structlog.nvim", -- Optional, but highly recommended for debugging
+    },
+    opts = {},
+  },
+
   {
     "mrcjkb/rustaceanvim",
     version = "^3",
