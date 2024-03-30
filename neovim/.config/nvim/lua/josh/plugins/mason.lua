@@ -41,6 +41,7 @@ return {
         "emmet_ls",
         "pylsp",
         "pyright",
+        "omnisharp",
       },
       automatic_installation = true,
     })
@@ -53,6 +54,7 @@ return {
         "black", -- python formatter
         "pylint", -- python linter
         "eslint_d", -- js linter
+        "csharpier", -- csharp formatter
       },
     })
   end,

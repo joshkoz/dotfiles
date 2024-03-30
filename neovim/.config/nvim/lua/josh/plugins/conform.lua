@@ -34,6 +34,13 @@ return {
         lua = { "stylua" },
         python = { "isort", "black" },
         terraform = { "terraform_fmt" },
+        cs = { "csharpier" },
+      },
+      formatters = {
+        csharpier = {
+          command = "dotnet-csharpier",
+          args = { "--write-stdout" },
+        },
       },
       format_on_save = {
         lsp_fallback = true,

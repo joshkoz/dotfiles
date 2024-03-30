@@ -23,14 +23,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, opts)
 
     opts.desc = "LSP: [G]oto [D]efinition"
-    vim.keymap.set("n", "gd", function()
-      if vim.bo[0].filetype == "cs" then
-        require("csharp").go_to_definition()
-      else
-        local builtins = require("telescope.builtin")
-        builtins.lsp_definitions()
-      end
-    end, opts)
+    vim.keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts)
 
     opts.desc = "LSP: [G]oto [D]eclaration"
     vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
@@ -42,7 +35,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set("n", "gI", "<cmd>Telescope lsp_implementations<CR>", opts)
 
     opts.desc = "LSP: Hover Documentation"
-    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts) -- See `:help K` for why this keymap
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
 
     opts.desc = "Open floating diagnostic message"
     vim.keymap.set("n", "gh", vim.diagnostic.open_float, opts)
