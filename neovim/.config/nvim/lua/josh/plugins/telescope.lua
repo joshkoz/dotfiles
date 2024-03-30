@@ -68,14 +68,11 @@ return {
     opts.desc = "Fuzzy Find [H]elp Tags"
     vim.keymap.set("n", "<leader>h", builtins.help_tags, opts)
 
-    opts.desc = "Fuzzy Find [M]arks"
-    vim.keymap.set("n", "<leader>m", builtins.marks, opts)
-
     opts.desc = "Fuzzy Find [B]uffers"
     vim.keymap.set("n", "<leader>b", builtins.buffers, opts)
 
     opts.desc = "Grep The Project"
-    vim.keymap.set("n", "<leader>t", function()
+    vim.keymap.set("n", "<leader>s", function()
       builtins.live_grep({ hidden = true })
     end, opts)
 

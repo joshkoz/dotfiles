@@ -1,5 +1,6 @@
 return {
   "chentoast/marks.nvim",
+  enabled = false,
   event = "BufEnter",
   opts = {
     -- whether to map keybinds or not. default true
