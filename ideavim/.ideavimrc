@@ -1,5 +1,6 @@
-
 let mapleader = " "
+
+source ~/.vimrc
 
 nnoremap gh :action ShowErrorDescription<CR>
 map gc :action CommentByLineComment<CR>
@@ -12,21 +13,18 @@ nnoremap <leader>lr :action RenameElement<CR>
 map <leader>e :NERDTreeToggle<CR>
 map <leader>o :NERDTreeClose<CR>
 
-" nnoremap <C-d> <C-d>zz
-" nnoremap <C-u> <C-u>zz
 
-
-set clipboard+=unnamed
-set scrolloff=10
-set linenumber
-set showmode
-set showcmd
-set visualbell 
-set ignorecase
-set smartcase
-set incsearch
-set notimeout
-set inccommand
+" set clipboard+=unnamed
+" set scrolloff=10
+" set linenumber
+" set showmode
+" set showcmd
+" set visualbell 
+" set ignorecase
+" set smartcase
+" set incsearch
+" set notimeout
+" set inccommand
 
 vnoremap < <gv
 vnoremap > >gv
@@ -38,9 +36,9 @@ vnoremap > >gv
 set surround
 set NERDTree
 set highlightedyank
-set completeopt = "menuone,noselect"
-set wildmode = "longest,list,full"
-set breakindent
+" set completeopt = "menuone,noselect"
+" set wildmode = "longest,list,full"
+" set breakindent
 
 
 set which-key
