@@ -81,8 +81,5 @@ return {
 
     opts.desc = "Smart Search Files"
     vim.keymap.set("n", "<C-p>", smart_find, opts)
-
-    opts.desc = "[S]earch Files"
-    vim.keymap.set("n", "<leader>s", smart_find, { desc = "[S]earch Files" })
   end,
 }
