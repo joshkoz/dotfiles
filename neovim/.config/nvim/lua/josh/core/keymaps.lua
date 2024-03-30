@@ -14,9 +14,9 @@ vim.keymap.set("n", "<leader>d", [["_d]], { desc = "Cut to blank hole register" 
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "Yank into clipboard register" })
 vim.keymap.set("n", "<leader>Y", [["+Y]], { desc = "Yank line into clipboard register" })
 
--- Moving a visual selection up or down a line with J and K
-vim.keymap.set("v", "K", ":m '<-2<CR>gvgv=gv", { desc = "Move visual selection up a line" }) -- weird timing bug with only gv=gv for more than 3 lines selected
-vim.keymap.set("v", "J", ":m '>+1<CR>gvgv=gv", { desc = "Move visual selection down a line" })
+-- Move visual selection
+vim.keymap.set("v", "<Up>", ":m '<-2<CR>gv=gv", { desc = "Move visual selection up a line" })
+vim.keymap.set("v", "<Down>", ":m '>+1<CR>gv=gv", { desc = "Move visual selection down a line" })
 
 -- Diffs
 vim.keymap.set("n", "<leader>dh", "<CMD>diffget //2<CR><CMD>diffupdate<CR>", { desc = "Diffget from the left" })
