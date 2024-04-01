@@ -51,7 +51,7 @@ vim.opt.diffopt:append("context:99999")
 -- Set completeopt to have a better completion experience
 vim.opt.completeopt = "menuone,noselect"
 vim.opt.wildmode = "longest,full,full"
-vim.opt.wildoptions = "fuzzy" -- Make the command prompt fuzzy search
+vim.opt.wildoptions = "pum,fuzzy"
 vim.opt.smoothscroll = true
 
 vim.opt.scrolloff = 8
