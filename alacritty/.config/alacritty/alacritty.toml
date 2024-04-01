@@ -10,7 +10,7 @@ draw_bold_text_with_bright_colors = true
 TERM = "alacritty"
 
 [font]
-size = 9 
+size = 10
 
 [font.normal]
 family = "CaskaydiaCove NFM"

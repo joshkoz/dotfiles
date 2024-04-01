@@ -54,8 +54,13 @@ if [ -n "$active_description" ]; then
     menu_entries=("$active_description" "${menu_entries[@]}")
 fi
 
+if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
+    echo "Session type is Wayland."
+    menu=$(printf '%s\n' "${menu_entries[@]}" | wofi --dmenu -i -p "Select Audio Sink:")
+else
+    menu=$(printf '%s\n' "${menu_entries[@]}" | rofi -dmenu -i -p "Select Audio Sink:")
+fi
 # Generate the menu with descriptions
-menu=$(printf '%s\n' "${menu_entries[@]}" | rofi -dmenu -i -p "Select Audio Sink:")
 
 # Get the selected sink name and set it as the default
 selected_sink=${sink_map[$menu]}
