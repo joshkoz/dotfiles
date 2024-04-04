@@ -24,6 +24,7 @@ return {
         },
       },
       defaults = {
+        path_display = { "smart" },
         mappings = {
           i = {
             ["<esc>"] = require("telescope.actions").close,

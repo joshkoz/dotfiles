@@ -1,4 +1,5 @@
 return {
+  "nvim-lua/plenary.nvim",
   -- automatically guess and set the commentstring
   {
     "numToStr/Comment.nvim",
