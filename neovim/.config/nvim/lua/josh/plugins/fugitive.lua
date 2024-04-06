@@ -51,6 +51,7 @@ return {
         topdelete = { text = "‾" },
         changedelete = { text = "~" },
       },
+      current_line_blame = true,
       on_attach = function(bufnr)
         local gitsigns = require("gitsigns")
         vim.keymap.set("n", "]n", gitsigns.next_hunk, { buffer = bufnr, desc = "Go to Next Hunk" })

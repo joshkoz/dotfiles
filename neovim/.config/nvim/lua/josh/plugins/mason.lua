@@ -39,9 +39,12 @@ return {
         "lua_ls",
         "cssls",
         "emmet_ls",
-        "pylsp",
         "pyright",
         "omnisharp",
+        "biome",
+        "dockerls",
+        "yamlls",
+        "marksman",
       },
       automatic_installation = true,
     })

@@ -1,10 +1,8 @@
----@diagnostic disable: missing-fields
 return {
   -- Highlight, edit, and navigate code
   "nvim-treesitter/nvim-treesitter",
   dependencies = {
-    "nvim-treesitter/playground",
-    "windwp/nvim-ts-autotag",
+    { "windwp/nvim-ts-autotag", opts = {} },
   },
   event = { "BufReadPost", "BufNewFile" },
   build = ":TSUpdate",

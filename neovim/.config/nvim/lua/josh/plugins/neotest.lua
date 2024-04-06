@@ -1,5 +1,6 @@
 return {
   "nvim-neotest/neotest",
+  ft = "cs",
   dependencies = {
     "nvim-neotest/nvim-nio",
     "nvim-lua/plenary.nvim",

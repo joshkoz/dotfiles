@@ -116,6 +116,25 @@ return {
         capabilities = capabilities,
       })
 
+      lspconfig["biome"].setup({
+        capabilities = capabilities,
+      })
+
+      lspconfig["pyright"].setup({
+        capabilities = capabilities,
+      })
+
+      lspconfig["dockerls"].setup({
+        capabilities = capabilities,
+      })
+      lspconfig["yamlls"].setup({
+        capabilities = capabilities,
+      })
+
+      lspconfig["emmet_ls"].setup({
+        capabilities = capabilities,
+      })
+
       -- configure lua server
       lspconfig["lua_ls"].setup({
         capabilities = capabilities,
@@ -137,6 +156,10 @@ return {
             },
           },
         },
+      })
+
+      lspconfig["marksman"].setup({
+        capabilities = capabilities,
       })
 
       lspconfig["biome"].setup({

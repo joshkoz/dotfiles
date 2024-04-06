@@ -4,9 +4,16 @@ return {
     "hrsh7th/cmp-path", -- source from filesystem paths
     "hrsh7th/cmp-buffer", -- source from strings in buffer
     "hrsh7th/cmp-nvim-lsp", -- source from lsp
-    "L3MON4D3/LuaSnip", -- Snippet Engine
-    "saadparwaiz1/cmp_luasnip", -- source from snippet engine
-    "rafamadriz/friendly-snippets", -- source from friendly snippets
+    "hrsh7th/cmp-nvim-lsp-signature-help",
+    "hrsh7th/cmp-cmdline",
+    {
+      -- Snippets
+      "L3MON4D3/LuaSnip",
+      dependencies = {
+        "rafamadriz/friendly-snippets",
+        "saadparwaiz1/cmp_luasnip", -- source from snippet engine
+      },
+    },
   },
   event = "InsertEnter",
   config = function()
@@ -16,6 +23,26 @@ return {
     require("luasnip.loaders.from_vscode").lazy_load()
 
     luasnip.config.setup({})
+    cmp.setup.cmdline("/", {
+      mapping = cmp.mapping.preset.cmdline(),
+      sources = {
+        { name = "buffer" },
+      },
+    })
+
+    cmp.setup.cmdline(":", {
+      mapping = cmp.mapping.preset.cmdline(),
+      sources = cmp.config.sources({
+        { name = "path" },
+      }, {
+        { name = "cmdline" },
+      }),
+      completion = {
+        keyword_length = 2,
+      },
+      ---@diagnostic disable-next-line: missing-fields
+      matching = { disallow_symbol_nonprefix_matching = false },
+    })
 
     cmp.setup({
       snippet = {
@@ -39,6 +66,7 @@ return {
       }),
       sources = {
         { name = "nvim_lsp" },
+        { name = "nvim_lsp_signature_help" },
         { name = "luasnip" },
         { name = "buffer" },
         { name = "path" },
