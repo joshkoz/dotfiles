@@ -45,6 +45,7 @@ return {
         "dockerls",
         "yamlls",
         "marksman",
+        "bashls",
       },
       automatic_installation = true,
     })
