@@ -11,8 +11,9 @@ nnoremap <Leader>la :action ShowIntentionActions<CR>
 " nnoremap <leader>e :action ActivateProjectToolWindow<CR>
 nnoremap <leader>lr :action RenameElement<CR>
 map <leader>e :NERDTreeToggle<CR>
-map <leader>o :NERDTreeClose<CR>
-
+map <Leader>o :action ViewToolButtons<CR>
+map <Leader>d :action ActivateDebugToolWindow<CR>
+map <Leader>j :action HideActiveToolWindow<CR>
 
 " set clipboard+=unnamed
 " set scrolloff=10
