@@ -2,8 +2,7 @@ return {
   "stevearc/conform.nvim",
   event = { "BufReadPre", "BufNewFile" },
   config = function()
-    local conform = require("conform")
-    conform.setup({
+    require("conform").setup({
       formatters_by_ft = {
         javascript = { "prettier", "eslint" },
         javascriptreact = { "prettier", "eslint" },
@@ -32,12 +31,6 @@ return {
       },
     })
 
-    vim.keymap.set({ "n", "v" }, "<leader>lf", function()
-      conform.format({
-        lsp_fallback = true,
-        async = false,
-        timeout_ms = 1000,
-      })
-    end, { desc = "[L]SP: [F]ormat file or range (in visual mode)" })
+    vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
   end,
 }
