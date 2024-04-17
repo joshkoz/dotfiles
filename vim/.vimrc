@@ -101,7 +101,7 @@ nnoremap <Leader> <Nop>
 vnoremap <Leader> <Nop> 
 nnoremap <Leader>e :Ex<CR>
 nnoremap <silent> <Leader><Leader> :b#<CR> 
-nnoremap <Leader>/ :noh<CR> 
+nnoremap <ESC> :noh<CR> 
 
 nnoremap <Leader>p "0p
 xnoremap <Leader>p "0p

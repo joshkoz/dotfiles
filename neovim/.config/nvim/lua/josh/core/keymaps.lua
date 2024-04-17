@@ -5,7 +5,7 @@ vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true, desc = "Unmap 
 vim.keymap.set({ "n", "v" }, "<Space>e", vim.cmd.Ex, { silent = true, desc = "Open the file explorer" })
 
 vim.keymap.set("n", "<leader><leader>", "<CMD>b#<CR>", { desc = "Go to the alternate buffer" })
-vim.keymap.set("n", "<leader>/", "<CMD>noh<CR>", { desc = "Turn off hlsearch" })
+vim.keymap.set("n", "<ESC>", "<CMD>noh<CR>", { desc = "Turn off hlsearch" })
 
 vim.keymap.set({ "n", "x" }, "<leader>p", [["0p]], { desc = "Paste from yank register" })
 vim.keymap.set({ "n", "x" }, "<leader>d", [["_d]], { desc = "Cut to blank hole register" })
