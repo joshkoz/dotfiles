@@ -3,6 +3,8 @@ let mapleader = " "
 source ~/.vimrc
 
 nnoremap gh :action ShowErrorDescription<CR>
+nnoremap <leader>gI <Action>(GotoImplementation)
+nnoremap <leader>gt <Action>(GotoTest)
 map gc :action CommentByLineComment<CR>
 nnoremap <C-h> :action NextSplitter<CR>
 noremap <C-l> :action NextSplitter<CR>
@@ -15,33 +17,21 @@ map <Leader>o :action ViewToolButtons<CR>
 map <Leader>d :action ActivateDebugToolWindow<CR>
 map <Leader>j :action HideActiveToolWindow<CR>
 
-" set clipboard+=unnamed
-" set scrolloff=10
-" set linenumber
-" set showmode
-" set showcmd
-" set visualbell 
-" set ignorecase
-" set smartcase
-" set incsearch
-" set notimeout
-" set inccommand
+map <leader>f <action>(GotoFile)
 
-vnoremap < <gv
-vnoremap > >gv
-
-:set relativenumber
-:set number 
+set showmode
+set showcmd
+set incsearch
+set notimeout
+set inccommand
+set relativenumber
+set number 
 
 " Plugins
+set breakindent
 set surround
 set NERDTree
 set highlightedyank
-" set completeopt = "menuone,noselect"
-" set wildmode = "longest,list,full"
-" set breakindent
-
-
 set which-key
 let g:WhichKey_FontSize = 16
 let g:WhichKey_CommandColor = "#41ead4"
