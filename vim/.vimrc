@@ -106,9 +106,6 @@ nnoremap <ESC> :noh<CR>
 nnoremap <Leader>p "0p
 xnoremap <Leader>p "0p
 
-nnoremap <Leader>d "_d
-xnoremap <Leader>d "_d
-
 nnoremap <Leader>y "+y
 xnoremap <Leader>y "+y
 
