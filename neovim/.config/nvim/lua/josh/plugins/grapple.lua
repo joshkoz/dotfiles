@@ -14,8 +14,9 @@ return {
     { "<A-e>", "<cmd>Grapple select index=3<cr>", desc = "Select third tag" },
     { "<A-r>", "<cmd>Grapple select index=4<cr>", desc = "Select fourth tag" },
     { "<A-t>", "<cmd>Grapple select index=4<cr>", desc = "Select fourth tag" },
-
-    { "<c-s-p>", "<cmd>Grapple cycle backward<cr>", desc = "Go to previous tag" },
-    { "<c-s-n>", "<cmd>Grapple cycle forward<cr>", desc = "Go to next tag" },
+    { "<A-y>", "<cmd>Grapple select index=1<cr>", desc = "Select first tag" },
+    { "<A-u>", "<cmd>Grapple select index=2<cr>", desc = "Select second tag" },
+    { "<A-i>", "<cmd>Grapple select index=3<cr>", desc = "Select third tag" },
+    { "<A-o>", "<cmd>Grapple select index=4<cr>", desc = "Select fourth tag" },
   },
 }

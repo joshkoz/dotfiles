@@ -65,12 +65,10 @@ return {
     -- Keymaps
     opts.desc = "[F]ind [F]iles with Frecency"
     vim.keymap.set("n", "<leader>f", "<Cmd>Telescope frecency workspace=CWD<CR>", opts)
+    vim.keymap.set("n", "<C-p>", "<Cmd>Telescope frecency workspace=CWD<CR>", opts)
 
     opts.desc = "Fuzzy Find [H]elp Tags"
     vim.keymap.set("n", "<leader>h", builtins.help_tags, opts)
-
-    opts.desc = "Fuzzy Find [B]uffers"
-    vim.keymap.set("n", "<leader>b", builtins.buffers, opts)
 
     opts.desc = "Live Grep The Project"
     vim.keymap.set("n", "<leader>S", function()
@@ -91,7 +89,7 @@ return {
       builtins.grep_string({ search = lines[1], hidden = true })
     end)
 
-    opts.desc = "Smart Search Files"
-    vim.keymap.set("n", "<C-p>", smart_find, opts)
+    -- opts.desc = "Smart Search Files"
+    -- vim.keymap.set("n", "<C-p>", smart_find, opts)
   end,
 }

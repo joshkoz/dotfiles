@@ -55,35 +55,29 @@ return {
 
           local opts = { buffer = ev.buf, noremap = true, silent = true }
 
-          opts.desc = "[L]SP: [R]ename"
-          vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, opts)
-
-          opts.desc = "[L]SP: Code [A]ction"
-          vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, opts)
-
-          opts.desc = "LSP: [G]oto [D]efinition"
-          vim.keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts)
-
-          opts.desc = "LSP: [G]oto [D]eclaration"
-          vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-
-          opts.desc = "LSP: [G]oto [R]eferences"
-          vim.keymap.set("n", "gr", "<cmd>Telescope lsp_references<CR>", opts)
-
-          opts.desc = "LSP: [G]oto [I]mplementation"
-          vim.keymap.set("n", "gI", "<cmd>Telescope lsp_implementations<CR>", opts)
-
-          opts.desc = "LSP: Hover Documentation"
+          opts.desc = "Hover Documentation"
           vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
 
-          opts.desc = "Open floating diagnostic message"
-          vim.keymap.set("n", "gh", vim.diagnostic.open_float, opts)
+          -- Will be a default in new versions of Neovim.
+          opts.desc = "[C]ode [R]efactor [R]ename"
+          vim.keymap.set("n", "crn", vim.lsp.buf.rename, opts)
 
-          opts.desc = "[L]SP: Add [D]iagnostics Quickfix"
-          vim.keymap.set("n", "<leader>ld", vim.diagnostic.setqflist, opts)
+          -- Will be a default in new versions of Neovim.
+          opts.desc = "[C]ode [R]efactor Action"
+          vim.keymap.set("n", "crr", vim.lsp.buf.code_action, opts)
 
-          opts.desc = "[L]SP: Add References to Quickfix list"
-          vim.keymap.set("n", "<leader>lc", vim.lsp.buf.references, opts)
+          -- Will be a default in new versions of Neovim.
+          opts.desc = "[G]oto [R]eferences"
+          vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+
+          opts.desc = "[G]oto [D]efinition"
+          vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+
+          opts.desc = "[G]oto [D]eclaration"
+          vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+
+          opts.desc = "[G]oto [I]mplementation"
+          vim.keymap.set("n", "gI", vim.lsp.buf.implementation, opts)
         end,
       })
 

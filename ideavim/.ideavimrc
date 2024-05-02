@@ -3,21 +3,25 @@ let mapleader = " "
 source ~/.vimrc
 
 nnoremap gh :action ShowErrorDescription<CR>
+nnoremap <C-w>d :action ShowErrorDescription<CR>
 nnoremap <leader>gI <Action>(GotoImplementation)
 nnoremap <leader>gt <Action>(GotoTest)
 map gc :action CommentByLineComment<CR>
 nnoremap <C-h> :action NextSplitter<CR>
 noremap <C-l> :action NextSplitter<CR>
 nnoremap <Leader><Leader> <C-6>
-nnoremap <Leader>la :action ShowIntentionActions<CR>
+nnoremap crr :action ShowIntentionActions<CR>
 " nnoremap <leader>e :action ActivateProjectToolWindow<CR>
-nnoremap <leader>lr :action RenameElement<CR>
+nnoremap crn :action RenameElement<CR>
 map <leader>e :NERDTreeToggle<CR>
 map <Leader>o :action ViewToolButtons<CR>
 map <Leader>d :action ActivateDebugToolWindow<CR>
 map <Leader>j :action HideActiveToolWindow<CR>
-
+map <Leader>S :action FindInPath<CR>
+map <Leader>s :action FindInPath<CR>
 map <leader>f <action>(GotoFile)
+map <A-j> <action>(ActivateFindToolWindow)
+map <A-k> <action>(ActivateFindToolWindow)
 
 set showmode
 set showcmd
@@ -32,7 +36,7 @@ set breakindent
 set surround
 set NERDTree
 set highlightedyank
-set which-key
+set which-ke
 let g:WhichKey_FontSize = 16
 let g:WhichKey_CommandColor = "#41ead4"
 let g:WhichKey_PrefixColor = "#f335b2"
