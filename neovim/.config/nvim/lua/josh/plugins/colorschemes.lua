@@ -30,6 +30,13 @@ return {
             -- crust = "#15141A",
           },
         },
+        highlight_overrides = {
+          mocha = function(colors)
+            return {
+              WinSeparator = { fg = "#363646" },
+            }
+          end,
+        },
       })
       vim.cmd.colorscheme("catppuccin-mocha")
     end,
