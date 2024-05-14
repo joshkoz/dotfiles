@@ -71,17 +71,17 @@ return {
     vim.keymap.set("n", "<leader>h", builtins.help_tags, opts)
 
     opts.desc = "Live Grep The Project"
-    vim.keymap.set("n", "<leader>S", function()
+    vim.keymap.set("n", "gS", function()
       builtins.live_grep({ hidden = true })
     end, opts)
 
     opts.desc = "Grep the word under the cursor"
-    vim.keymap.set("n", "<leader>ss", function()
+    vim.keymap.set("n", "gss", function()
       builtins.grep_string({ hidden = true })
     end, opts)
 
     -- <leader>s as a search operator
-    require("yop").op_map({ "n", "v" }, "<leader>s", function(lines)
+    require("yop").op_map({ "n", "v" }, "gs", function(lines)
       -- Multiple lines can't be searched for
       if #lines > 1 then
         return
