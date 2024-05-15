@@ -89,7 +89,7 @@ return {
       builtins.grep_string({ search = lines[1], hidden = true })
     end)
 
-    -- opts.desc = "Smart Search Files"
-    -- vim.keymap.set("n", "<C-p>", smart_find, opts)
+    opts.desc = "Smart Search Files"
+    vim.keymap.set("n", "<C-p>", smart_find, opts)
   end,
 }

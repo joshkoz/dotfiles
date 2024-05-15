@@ -17,11 +17,14 @@ map <leader>e :NERDTreeToggle<CR>
 map <Leader>o :action ViewToolButtons<CR>
 map <Leader>d :action ActivateDebugToolWindow<CR>
 map <Leader>j :action HideActiveToolWindow<CR>
-map <Leader>S :action FindInPath<CR>
-map <Leader>s :action FindInPath<CR>
+map gS :action FindInPath<CR>
 map <leader>f <action>(GotoFile)
 map <A-j> <action>(ActivateFindToolWindow)
 map <A-k> <action>(ActivateFindToolWindow)
+
+map <leader>db <action>(RiderUnitTestDebugContextAction)
+map <leader>ds <action>(Stop)
+map <leader>tb <action>(ToggleLineBreakpoint)
 
 set showmode
 set showcmd

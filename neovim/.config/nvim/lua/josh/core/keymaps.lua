@@ -2,8 +2,7 @@
 vim.g.mapleader = " "
 
 vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true, desc = "Unmap space from moving right" })
-vim.keymap.set({ "n", "v" }, "<Space>e", vim.cmd.Ex, { silent = true, desc = "Open the file explorer" })
-vim.keymap.set({ "n", "v" }, "<Space>E", "<CMD>15Lex<CR>", { silent = true, desc = "Open the file explorer to the left" })
+vim.keymap.set({ "n", "v" }, "-", vim.cmd.Ex, { silent = true, desc = "Open the file explorer" })
 
 vim.keymap.set("n", "<leader><leader>", "<CMD>b#<CR>", { desc = "Go to the alternate buffer" })
 vim.keymap.set("n", "<ESC>", "<CMD>noh<CR>", { desc = "Turn off hlsearch" })
