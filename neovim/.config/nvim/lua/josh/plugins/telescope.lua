@@ -5,7 +5,6 @@ return {
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     "nvim-telescope/telescope-frecency.nvim",
   },
-  commit = "bb96303397a0616e665dbbbb1d7d376cea735de7",
   cmd = "Telescope",
   event = "BufEnter",
   config = function()

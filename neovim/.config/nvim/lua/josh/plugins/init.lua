@@ -2,13 +2,6 @@ return {
   { "nvim-lua/plenary.nvim" },
   { "zdcthomas/yop.nvim" },
   {
-    -- Automatically guess and set the commentstring
-    -- NOTE: Plugin might not be needed in 0.10 stable with new default gc mapping
-    "numToStr/Comment.nvim",
-    config = true,
-    event = { "BufReadPre", "BufNewFile" },
-  },
-  {
     -- Automatically guess and set shiftwidth for the buffer
     "tpope/vim-sleuth",
     event = "BufEnter",

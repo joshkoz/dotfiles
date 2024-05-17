@@ -1,3 +1,5 @@
+vim.deprecate = function() end ---@diagnostic disable-line: duplicate-set-field
+
 -- Bootstrap the lazy.nvim package package manager
 --    https://github.com/folke/lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
