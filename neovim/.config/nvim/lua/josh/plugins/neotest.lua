@@ -12,6 +12,16 @@ return {
     local neotest = require("neotest")
     ---@diagnostic disable-next-line: missing-fields
     neotest.setup({
+      status = { virtual_text = true },
+      output = { enabled = true, open_on_run = "short" },
+      quickfix = {
+        open = function()
+          vim.cmd("copen")
+        end,
+      },
+      summary = {
+        open = "botright split | resize 15",
+      },
       adapters = {
         require("neotest-dotnet")({
           dap = {
