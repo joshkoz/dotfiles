@@ -20,7 +20,7 @@ return {
         end,
       },
       summary = {
-        open = "botright split | resize 15",
+        open = "botright split | resize ",
       },
       adapters = {
         require("neotest-dotnet")({

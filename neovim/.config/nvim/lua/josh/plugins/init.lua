@@ -13,10 +13,17 @@ return {
     opts = {},
   },
   {
-    "j-hui/fidget.nvim",
-    event = "VeryLazy",
+    "echasnovski/mini.ai",
+    version = "*",
+    event = "BufEnter",
     opts = {},
   },
+  { "echasnovski/mini.notify", version = "*", opts = {} },
+  -- {
+  --   "j-hui/fidget.nvim",
+  --   event = "VeryLazy",
+  --   opts = {},
+  -- },
   {
     -- region Have hex codes show their color
     "brenoprata10/nvim-highlight-colors",

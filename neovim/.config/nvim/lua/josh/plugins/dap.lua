@@ -11,8 +11,8 @@ return {
       vim.keymap.set("n", "<F10>", dap.step_over)
       vim.keymap.set("n", "<F11>", dap.step_into)
       vim.keymap.set("n", "<F12>", dap.step_out)
-      vim.keymap.set("n", "<Leader>db", dap.toggle_breakpoint)
-      vim.keymap.set("n", "<Leader>dB", dap.set_breakpoint)
+      vim.keymap.set("n", "<Leader>db", dap.toggle_breakpoint, { desc = "Toggle Breakpoint" })
+      vim.keymap.set("n", "<Leader>dB", dap.set_breakpoint, { desc = "Set Breakpoint" })
       dap.listeners.before.attach.dapui_config = function()
         dapui.open()
       end
