@@ -12,7 +12,11 @@ return {
     -- keymaps
     local neotree = require("neo-tree")
     neotree.setup({
-      close_if_last_window = true, -- This behaviour sucks. It breaks :bd
+      window = {
+        position = "right",
+        width = 100,
+      },
+      close_if_last_window = false, -- This behaviour sucks. It breaks :bd
       filesystem = {
         use_libuv_file_watcher = true,
         follow_current_file = {
