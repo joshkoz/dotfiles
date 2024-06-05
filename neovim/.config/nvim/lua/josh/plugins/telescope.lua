@@ -3,19 +3,13 @@ return {
   dependencies = {
     "nvim-lua/plenary.nvim",
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-    "nvim-telescope/telescope-frecency.nvim",
   },
   cmd = "Telescope",
   event = "BufEnter",
   config = function()
     local telescope = require("telescope")
-
     telescope.setup({
       extensions = {
-        frecency = {
-          ignore_patterns = { "*.git/*", "*/tmp/*", "oil://*", "fugitive://*" },
-          db_safe_mode = false,
-        },
         fzf = {
           fuzzy = false,
           override_generic_sorter = true,
@@ -47,7 +41,6 @@ return {
     })
 
     pcall(telescope.load_extension, "fzf")
-    pcall(telescope.load_extension, "frecency")
 
     local builtins = require("telescope.builtin")
     local smart_find = function()
@@ -63,9 +56,10 @@ return {
     local opts = { noremap = true, silent = true }
 
     -- Keymaps
-    opts.desc = "[F]ind [F]iles with Frecency"
-    vim.keymap.set("n", "<leader>f", "<Cmd>Telescope frecency workspace=CWD<CR>", opts)
-    vim.keymap.set("n", "<C-p>", "<Cmd>Telescope frecency workspace=CWD<CR>", opts)
+    opts.desc = "[F]ind [F]iles"
+    vim.keymap.set("n", "<leader>f", function()
+      builtins.find_files({ hidden = true })
+    end, opts)
 
     opts.desc = "Fuzzy Find [H]elp Tags"
     vim.keymap.set("n", "<leader>h", builtins.help_tags, opts)
@@ -90,6 +84,8 @@ return {
     end)
 
     opts.desc = "Smart Search Files"
-    vim.keymap.set("n", "<C-p>", smart_find, opts)
+    vim.keymap.set("n", "<C-p>", function()
+      builtins.git_files({ show_untracked = true })
+    end, opts)
   end,
 }

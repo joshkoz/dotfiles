@@ -1,6 +1,6 @@
 return {
   "nvim-neo-tree/neo-tree.nvim",
-  enabled = false,
+  enabled = true,
   branch = "v3.x",
   dependencies = {
     "nvim-lua/plenary.nvim",
@@ -39,6 +39,6 @@ return {
       },
     })
 
-    vim.keymap.set("n", "<leader>e", "<cmd>Neotree toggle<cr>", { desc = "Toggle Neo-Tree" })
+    vim.keymap.set("n", "<leader>e", "<cmd>Neotree toggle right<cr>", { desc = "Toggle Neo-Tree" })
   end,
 }

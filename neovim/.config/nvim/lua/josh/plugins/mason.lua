@@ -59,6 +59,7 @@ return {
         "pylint", -- python linter
         "eslint_d", -- js linter
         "csharpier", -- csharp formatter
+        "netcoredbg", -- csharp debugger
       },
     })
   end,
