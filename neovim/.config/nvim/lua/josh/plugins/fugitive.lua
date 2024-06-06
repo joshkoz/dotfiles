@@ -27,7 +27,7 @@ return {
           vim.api.nvim_win_close(fugitive_win_id, true)
         else
           -- Otherwise, open it in a vertical split
-          vim.cmd("vert Git")
+          vim.cmd("Git")
         end
       end
 
