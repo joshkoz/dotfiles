@@ -23,12 +23,12 @@ return {
           args = { "--write-stdout" },
         },
       },
-      format_on_save = {
-        lsp_fallback = true,
-        async = false,
-        timeout_ms = 1000,
-        quiet = true, -- If there's a syntax error we don't want to report an erroor
-      },
+      -- format_on_save = {
+      --   lsp_fallback = true,
+      --   async = false,
+      --   timeout_ms = 1000,
+      --   quiet = true, -- If there's a syntax error we don't want to report an erroor
+      -- },
     })
 
     vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
