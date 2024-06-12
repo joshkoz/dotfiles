@@ -17,18 +17,24 @@ return {
         python = { "isort", "black" },
         cs = { "csharpier" },
       },
+      format = {
+        timeout_ms = 3000,
+        async = false,
+        quiet = false,
+        lsp_fallback = true,
+      },
       formatters = {
         csharpier = {
           command = "dotnet-csharpier",
           args = { "--write-stdout" },
         },
       },
-      -- format_on_save = {
-      --   lsp_fallback = true,
-      --   async = false,
-      --   timeout_ms = 1000,
-      --   quiet = true, -- If there's a syntax error we don't want to report an erroor
-      -- },
+      format_on_save = {
+        lsp_fallback = true,
+        async = false,
+        timeout_ms = 1000,
+        quiet = true, -- If there's a syntax error we don't want to report an erroor
+      },
     })
 
     vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
