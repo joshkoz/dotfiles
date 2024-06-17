@@ -11,7 +11,10 @@ return {
       "hrsh7th/cmp-nvim-lsp", -- Adds LSP completion capabilities
       { "antosha417/nvim-lsp-file-operations", config = true },
       "williamboman/mason.nvim",
-      -- "jmederosalvarado/roslyn.nvim",
+      "seblj/roslyn.nvim",
+      -- {
+      --   dir = "/home/joshua/projects/roslyn.nvim",
+      -- },
     },
     opts = {
       diagnostics = {
@@ -184,42 +187,66 @@ return {
         },
       })
 
-      -- require("roslyn").setup({
-      --   dotnet_cmd = "dotnet", -- this is the default
-      --   roslyn_version = "4.8.0-3.23475.7", -- this is the default
-      --   capabilities = capabilities,
-      --   on_attach = function() end,
-      -- })
+      require("roslyn").setup({
+        dotnet_cmd = "dotnet", -- this is the default
+        roslyn_version = "4.8.0-3.23475.7", -- this is the default
+        capabilities = vim.tbl_deep_extend("force", capabilities or {}, {
+          textDocument = {
+            diagnostic = {
+              dynamicRegistration = true,
+            },
+          },
+        }),
+        on_attach = function()
+          vim.cmd([[compiler dotnet]])
+        end,
+        settings = {
+          ["csharp|inlay_hints"] = {
+            ["csharp_enable_inlay_hints_for_implicit_object_creation"] = true,
+            ["csharp_enable_inlay_hints_for_implicit_variable_types"] = true,
+            ["csharp_enable_inlay_hints_for_lambda_parameter_types"] = true,
+            ["csharp_enable_inlay_hints_for_types"] = true,
+            ["dotnet_enable_inlay_hints_for_indexer_parameters"] = true,
+            ["dotnet_enable_inlay_hints_for_literal_parameters"] = true,
+            ["dotnet_enable_inlay_hints_for_object_creation_parameters"] = true,
+            ["dotnet_enable_inlay_hints_for_other_parameters"] = true,
+            ["dotnet_enable_inlay_hints_for_parameters"] = true,
+            ["dotnet_suppress_inlay_hints_for_parameters_that_differ_only_by_suffix"] = true,
+            ["dotnet_suppress_inlay_hints_for_parameters_that_match_argument_name"] = true,
+            ["dotnet_suppress_inlay_hints_for_parameters_that_match_method_intent"] = true,
+          },
+        },
+      })
     end,
   },
-  {
-    "iabdelkareem/csharp.nvim",
-    dependencies = {
-      "williamboman/mason.nvim", -- Required, automatically installs omnisharp
-      "mfussenegger/nvim-dap",
-      "Tastyep/structlog.nvim", -- Optional, but highly recommended for debugging
-      { "Hoffs/omnisharp-extended-lsp.nvim", lazy = true },
-    },
-    opts = {
-      lsp = {
-        on_attach = function(_, bufnr)
-          local omnisharp = require("omnisharp_extended")
-          vim.keymap.set("n", "gd", function()
-            omnisharp.telescope_lsp_definitions()
-          end, { buffer = bufnr, noremap = true, silent = true, desc = "LSP: [G]oto [D]efinition" })
-          vim.keymap.set("n", "gI", function()
-            omnisharp.telescope_lsp_implementation()
-          end, { buffer = bufnr, noremap = true, silent = true, desc = "LSP: [G]oto [I]mplementation" })
-          vim.keymap.set("n", "gr", function()
-            omnisharp.telescope_lsp_references()
-          end, { buffer = bufnr, noremap = true, silent = true, desc = "LSP: [G]oto [R]eferences" })
-        end,
-        enable_roslyn_analyzers = true,
-        organize_imports_on_format = true,
-        enable_import_completion = true,
-      },
-    },
-  },
+  -- {
+  --   "iabdelkareem/csharp.nvim",
+  --   dependencies = {
+  --     "williamboman/mason.nvim", -- Required, automatically installs omnisharp
+  --     "mfussenegger/nvim-dap",
+  --     "Tastyep/structlog.nvim", -- Optional, but highly recommended for debugging
+  --     { "Hoffs/omnisharp-extended-lsp.nvim", lazy = true },
+  --   },
+  --   opts = {
+  --     lsp = {
+  --       on_attach = function(_, bufnr)
+  --         local omnisharp = require("omnisharp_extended")
+  --         vim.keymap.set("n", "gd", function()
+  --           omnisharp.telescope_lsp_definitions()
+  --         end, { buffer = bufnr, noremap = true, silent = true, desc = "LSP: [G]oto [D]efinition" })
+  --         vim.keymap.set("n", "gI", function()
+  --           omnisharp.telescope_lsp_implementation()
+  --         end, { buffer = bufnr, noremap = true, silent = true, desc = "LSP: [G]oto [I]mplementation" })
+  --         vim.keymap.set("n", "gr", function()
+  --           omnisharp.telescope_lsp_references()
+  --         end, { buffer = bufnr, noremap = true, silent = true, desc = "LSP: [G]oto [R]eferences" })
+  --       end,
+  --       enable_roslyn_analyzers = true,
+  --       organize_imports_on_format = true,
+  --       enable_import_completion = true,
+  --     },
+  --   },
+  -- },
   {
     "mrcjkb/rustaceanvim",
     version = "^3",

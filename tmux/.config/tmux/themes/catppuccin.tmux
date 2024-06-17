@@ -1,5 +1,5 @@
 # --> Catppuccin (Mocha)
-thm_bg="#1e1e2e"
+thm_bg="#0d1117"
 thm_fg="#cdd6f4"
 thm_cyan="#89dceb"
 thm_black="#181825"

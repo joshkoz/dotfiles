@@ -19,16 +19,16 @@ return {
   },
   {
     "catppuccin/nvim",
-    lazy = true,
-    -- priority = 1000,
+    lazy = false,
+    priority = 1000,
     name = "catppuccin",
     config = function()
       require("catppuccin").setup({
         color_overrides = {
           mocha = {
-            base = "#15141A",
-            mantle = "#15141A",
-            -- crust = "#15141A",
+            base = "#0d1117",
+            mantle = "#0d1117",
+            crust = "#0d1117",
           },
         },
         highlight_overrides = {
@@ -45,7 +45,7 @@ return {
   {
     "folke/tokyonight.nvim",
     lazy = true,
-    priority = 1000,
+    -- priority = 1000,
     opts = {},
     config = function()
       vim.cmd.colorscheme("tokyonight-night")
@@ -55,10 +55,10 @@ return {
     "bluz71/vim-nightfly-colors",
     name = "nightfly",
     lazy = false,
-    priority = 1000,
+    -- priority = 1000,
     config = function()
       vim.g.nightflyWinSeparator = 2
-      vim.cmd.colorscheme("nightfly")
+      -- vim.cmd.colorscheme("nightfly")
     end,
   },
 }

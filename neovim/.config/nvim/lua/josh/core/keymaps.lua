@@ -23,12 +23,18 @@ vim.keymap.set("n", "<A-j>", "<CMD>cnext<CR>", { desc = "Go to next item in Quic
 vim.keymap.set("n", "<A-k>", "<CMD>cprev<CR>", { desc = "Go to previous item in Quickfix List" })
 vim.keymap.set("n", "<A-l>", "<CMD>cnewer<CR>", { desc = "Go to next Quickfix List" })
 vim.keymap.set("n", "<A-h>", "<CMD>colder<CR>", { desc = "Go to previous Quickfix List" })
-
--- Tmux
-vim.keymap.set("n", "<C-f>", "<CMD>silent !tmux neww tmux-sessionizer<CR>")
-
--- Diagnostics
 vim.keymap.set("n", "<leader>wd", function()
   vim.diagnostic.setqflist()
   vim.cmd.copen()
 end, { desc = "Open Workspace Quickfix Diagnostics" })
+
+-- Loclist
+vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>")
+vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>")
+vim.keymap.set("n", "<leader>ld", function()
+  vim.diagnostic.setloclist()
+  vim.cmd.lopen()
+end, { desc = "Open File Diagnostics" })
+
+-- Tmux
+vim.keymap.set("n", "<C-f>", "<CMD>silent !tmux neww tmux-sessionizer<CR>")
