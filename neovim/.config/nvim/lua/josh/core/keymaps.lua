@@ -29,8 +29,8 @@ vim.keymap.set("n", "<leader>wd", function()
 end, { desc = "Open Workspace Quickfix Diagnostics" })
 
 -- Loclist
-vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>")
-vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>")
+vim.keymap.set("n", "<leader>j", "<cmd>lnext<CR>")
+vim.keymap.set("n", "<leader>k", "<cmd>lprev<CR>")
 vim.keymap.set("n", "<leader>ld", function()
   vim.diagnostic.setloclist()
   vim.cmd.lopen()
