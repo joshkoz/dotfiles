@@ -2,7 +2,8 @@ return {
   "stevearc/conform.nvim",
   event = { "BufReadPre", "BufNewFile" },
   config = function()
-    require("conform").setup({
+    local conform = require("conform")
+    conform.setup({
       formatters_by_ft = {
         javascript = { "prettier", "eslint" },
         javascriptreact = { "prettier", "eslint" },
@@ -23,12 +24,6 @@ return {
         quiet = false,
         lsp_fallback = true,
       },
-      formatters = {
-        csharpier = {
-          command = "dotnet-csharpier",
-          args = { "--write-stdout" },
-        },
-      },
       format_on_save = {
         lsp_fallback = true,
         async = false,
@@ -36,6 +31,7 @@ return {
         quiet = true, -- If there's a syntax error we don't want to report an erroor
       },
     })
+    -- vim.keymap.set("n", "<leader>crm", conform.format, { desc = "Format" })
 
     vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
   end,
