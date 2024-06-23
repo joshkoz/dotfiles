@@ -37,3 +37,5 @@ source /usr/share/nvm/init-nvm.sh
 # Requires installing zsh-syntax-highlighting and zsh-autosuggestions
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+source <(fzf --zsh)
