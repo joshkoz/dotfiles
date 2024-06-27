@@ -43,16 +43,6 @@ return {
     pcall(telescope.load_extension, "fzf")
 
     local builtins = require("telescope.builtin")
-    local smart_find = function()
-      local exit_code = os.execute("git rev-parse --is-inside-work-tree > /dev/null 2>&1")
-      local ok = exit_code == 0
-      if ok then
-        builtins.git_files({ show_untracked = true })
-      else
-        builtins.find_files({ hidden = true })
-      end
-    end
-
     local opts = { noremap = true, silent = true }
 
     -- Keymaps
@@ -65,12 +55,12 @@ return {
     vim.keymap.set("n", "<leader>h", builtins.help_tags, opts)
 
     opts.desc = "Live Grep The Project"
-    vim.keymap.set("n", "S", function()
+    vim.keymap.set("n", "<leader>/", function()
       builtins.live_grep({ hidden = true })
     end, opts)
 
     opts.desc = "Grep the word under the cursor"
-    vim.keymap.set("n", "ss", function()
+    vim.keymap.set("n", "<leader>sw", function()
       builtins.grep_string({ hidden = true })
     end, opts)
 
