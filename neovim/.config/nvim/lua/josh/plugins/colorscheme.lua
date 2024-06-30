@@ -54,11 +54,17 @@ return {
   {
     "bluz71/vim-nightfly-colors",
     name = "nightfly",
-    lazy = false,
+    lazy = true,
     -- priority = 1000,
     config = function()
       vim.g.nightflyWinSeparator = 2
       -- vim.cmd.colorscheme("nightfly")
     end,
+  },
+  {
+    "Mofiqul/vscode.nvim",
+    name = "nightfly",
+    lazy = true,
+    opts = {},
   },
 }
