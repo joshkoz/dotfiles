@@ -14,7 +14,11 @@ setopt INC_APPEND_HISTORY
 
 # bindkey -v  # Vim mode
 bindkey '^R' history-incremental-search-backward
- 
+
+autoload -z edit-command-line
+zle -N edit-command-line
+bindkey '^X^E' edit-command-line
+
 zstyle :compinstall filename '/home/joshua/.zshrc'
 
 autoload -Uz compinit
