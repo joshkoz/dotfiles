@@ -14,11 +14,14 @@ TERM = "alacritty"
 size = 11
 
 [font.normal]
-family = "CaskaydiaCove NFM"
+family = "CaskaydiaCove NFM SemiLight"
 
 [font.offset]
 x = 0
-y = 14 
+y = 10 
+
+[font.glyph_offset]
+y = 5 
 
 [hints]
 alphabet = "jfkdls;ahgurieowpq"
@@ -61,5 +64,5 @@ decorations = "full"
 opacity = 0.95
 
 [window.padding]
-x = 0
+x = 10
 y = 0
