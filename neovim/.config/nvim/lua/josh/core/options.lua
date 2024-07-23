@@ -22,6 +22,8 @@ vim.opt.smartcase = true
 vim.opt.autoindent = true
 vim.opt.smartindent = true
 
+vim.opt.cursorline = true
+
 -- Show whitespace
 -- vim.opt.list = true
 -- vim.opt.listchars = "tab:>\\ ,trail:-,eol:⏎"
