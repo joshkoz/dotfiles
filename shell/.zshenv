@@ -5,3 +5,4 @@ export DOTNET_CLI_TELEMETRY_OPTOUT=1
 export DOTNET_NOLOGO=1
 export XDG_CONFIG_HOME=$HOME/.config
 export EDITOR=nvim
+export VISUAL=nvim
