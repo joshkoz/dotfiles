@@ -90,6 +90,7 @@ alt-slash = 'layout tiles horizontal vertical'
 alt-comma = 'layout accordion horizontal vertical'
 
 alt-enter = 'exec-and-forget open -n /Applications/Alacritty.app'
+alt-shift-x = 'exec-and-forget pmset displaysleepnow'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#focus
 alt-h = 'focus left'
