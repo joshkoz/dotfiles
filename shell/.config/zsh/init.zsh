@@ -45,5 +45,5 @@ source $HOME/.config/zsh/aliases.zsh
 
 # Requires installing zsh-syntax-highlighting and zsh-autosuggestions
 source <(fzf --zsh)
-# source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-# source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
