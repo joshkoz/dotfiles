@@ -72,7 +72,7 @@ return {
           vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
 
           -- Will be a default in new versions of Neovim.
-          opts.desc = "[C]ode [R]efactor [R]ename"
+          opts.desc = "[C]ode [R]efactor Re[n]ame"
           vim.keymap.set("n", "crn", vim.lsp.buf.rename, opts)
 
           -- Will be a default in new versions of Neovim.
