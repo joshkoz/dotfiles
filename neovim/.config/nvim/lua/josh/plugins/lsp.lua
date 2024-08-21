@@ -1,55 +1,11 @@
 return {
   {
-    "folke/lazydev.nvim",
-    ft = "lua",
-    opt = {},
-  },
-  {
-    "pmizio/typescript-tools.nvim",
-    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-    opts = {
-      filetypes = {
-        "javascript",
-        "javascriptreact",
-        "json",
-        "jsonc",
-        "typescript",
-        "typescript.tsx",
-        "typescriptreact",
-      },
-      on_attach = function() end,
-      settings = {
-        separate_diagnostic_server = true,
-        tsserver_max_memory = "auto",
-        expose_as_code_action = "all",
-        tsserver_plugins = {
-          "@styled/typescript-styled-plugin",
-        },
-        include_completions_with_insert_text = true,
-        tsserver_file_preferences = {
-          includeInlayParameterNameHints = "all",
-          includeCompletionsForModuleExports = true,
-          quotePreference = "auto",
-          includeInlayEnumMemberValueHints = true,
-          includeInlayFunctionLikeReturnTypeHints = true,
-          includeInlayVariableTypeHints = true,
-        },
-        code_lens = "off",
-        jsx_close_tag = {
-          enable = false,
-          filetypes = { "javascriptreact", "typescriptreact" },
-        },
-      },
-    },
-  },
-  {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       "hrsh7th/cmp-nvim-lsp", -- Adds LSP completion capabilities
       { "antosha417/nvim-lsp-file-operations", config = true },
       "williamboman/mason.nvim",
-      "seblj/roslyn.nvim",
     },
     opts = {
       diagnostics = {
@@ -158,16 +114,6 @@ return {
         capabilities = capabilities,
       })
 
-      -- configure typescript server with plugin
-      -- lspconfig["tsserver"].setup({
-      --   capabilities = capabilities,
-      --   init_options = {
-      --     preferences = {
-      --       disableSuggestions = true,
-      --     },
-      --   },
-      -- })
-
       -- configure css server
       lspconfig["cssls"].setup({
         capabilities = capabilities,
@@ -222,55 +168,80 @@ return {
       lspconfig["bashls"].setup({
         capabilities = capabilities,
       })
-
-      -- lspconfig["biome"].setup({
-      --   capabilities = capabilities,
-      --   cmd = { "biome", "lsp-proxy" },
-      --   filetypes = {
-      --     "javascript",
-      --     "javascriptreact",
-      --     "json",
-      --     "jsonc",
-      --     "typescript",
-      --     "typescript.tsx",
-      --     "typescriptreact",
-      --   },
-      -- })
-      require("typescript-tools").setup({
-        filetypes = {
-          "javascript",
-          "javascriptreact",
-          "json",
-          "jsonc",
-          "typescript",
-          "typescript.tsx",
-          "typescriptreact",
-        },
-        on_attach = function() end,
-        settings = {
-          separate_diagnostic_server = true,
-          tsserver_max_memory = "auto",
-          expose_as_code_action = "all",
-          tsserver_plugins = {
-            "@styled/typescript-styled-plugin",
-          },
-          include_completions_with_insert_text = true,
-          tsserver_file_preferences = {
-            includeInlayParameterNameHints = "all",
-            includeCompletionsForModuleExports = true,
-            quotePreference = "auto",
-            includeInlayEnumMemberValueHints = true,
-            includeInlayFunctionLikeReturnTypeHints = true,
-            includeInlayVariableTypeHints = true,
-          },
-          code_lens = "all",
-          jsx_close_tag = {
-            enable = false,
-            filetypes = { "javascriptreact", "typescriptreact" },
-          },
-        },
-      })
     end,
+  },
+  {
+    "folke/lazydev.nvim",
+    ft = "lua",
+    opt = {},
+  },
+  {
+    "pmizio/typescript-tools.nvim",
+    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+    opts = {
+      filetypes = {
+        "javascript",
+        "javascriptreact",
+        "json",
+        "jsonc",
+        "typescript",
+        "typescript.tsx",
+        "typescriptreact",
+      },
+      on_attach = function() end,
+      settings = {
+        separate_diagnostic_server = true,
+        tsserver_max_memory = "auto",
+        expose_as_code_action = "all",
+        tsserver_plugins = {
+          "@styled/typescript-styled-plugin",
+        },
+        include_completions_with_insert_text = true,
+        tsserver_file_preferences = {
+          includeInlayParameterNameHints = "all",
+          includeCompletionsForModuleExports = true,
+          quotePreference = "auto",
+          includeInlayEnumMemberValueHints = true,
+          includeInlayFunctionLikeReturnTypeHints = true,
+          includeInlayVariableTypeHints = true,
+        },
+        code_lens = "off",
+        jsx_close_tag = {
+          enable = false,
+          filetypes = { "javascriptreact", "typescriptreact" },
+        },
+      },
+    },
+  },
+  {
+    "seblj/roslyn.nvim",
+    opts = {
+      exe = {
+        "dotnet",
+        vim.fs.joinpath(vim.fn.stdpath("data"), "roslyn", "Microsoft.CodeAnalysis.LanguageServer.dll"),
+      },
+      config = {
+        on_attach = function()
+          vim.cmd([[compiler dotnet]])
+        end,
+        settings = {
+          ["csharp|inlay_hints"] = {
+            ["csharp_enable_inlay_hints_for_implicit_object_creation"] = true,
+            ["csharp_enable_inlay_hints_for_implicit_variable_types"] = true,
+            ["csharp_enable_inlay_hints_for_lambda_parameter_types"] = true,
+            ["csharp_enable_inlay_hints_for_types"] = true,
+            ["dotnet_enable_inlay_hints_for_indexer_parameters"] = true,
+            ["dotnet_enable_inlay_hints_for_literal_parameters"] = true,
+            ["dotnet_enable_inlay_hints_for_object_creation_parameters"] = true,
+            ["dotnet_enable_inlay_hints_for_other_parameters"] = true,
+            ["dotnet_enable_inlay_hints_for_parameters"] = true,
+            ["dotnet_suppress_inlay_hints_for_parameters_that_differ_only_by_suffix"] = true,
+            ["dotnet_suppress_inlay_hints_for_parameters_that_match_argument_name"] = true,
+            ["dotnet_suppress_inlay_hints_for_parameters_that_match_method_intent"] = true,
+          },
+        },
+      },
+    },
   },
   {
     "mrcjkb/rustaceanvim",
