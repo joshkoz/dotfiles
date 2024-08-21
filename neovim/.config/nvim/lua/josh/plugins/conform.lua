@@ -5,9 +5,10 @@ return {
     local conform = require("conform")
     conform.setup({
       formatters_by_ft = {
-        javascript = { "prettier", "eslint" },
-        javascriptreact = { "prettier", "eslint" },
-        typescriptreact = { "prettier", "eslint" },
+        javascript = { "prettierd", "eslint" },
+        javascriptreact = { "prettierd", "eslint" },
+        typescriptreact = { "prettierd", "eslint" },
+        typescript = { "prettierd", "eslint" },
         json = { "prettier", "eslint" },
         css = { "prettier" },
         html = { "prettier" },
@@ -31,7 +32,7 @@ return {
         quiet = true, -- If there's a syntax error we don't want to report an erroor
       },
     })
-    -- vim.keymap.set("n", "<leader>crm", conform.format, { desc = "Format" })
+    vim.keymap.set("n", "<leader>crm", conform.format, { desc = "Format" })
 
     vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
   end,
