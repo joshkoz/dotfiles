@@ -10,9 +10,9 @@ map gc :action CommentByLineComment<CR>
 nnoremap <C-h> :action NextSplitter<CR>
 noremap <C-l> :action NextSplitter<CR>
 nnoremap <Leader><Leader> <C-6>
-nnoremap crr :action ShowIntentionActions<CR>
+nnoremap gra :action ShowIntentionActions<CR>
 " nnoremap <leader>e :action ActivateProjectToolWindow<CR>
-nnoremap crn :action RenameElement<CR>
+nnoremap grn :action RenameElement<CR>
 map <leader>e :NERDTreeToggle<CR>
 map <Leader>o :action ViewToolButtons<CR>
 map <Leader>d :action ActivateDebugToolWindow<CR>

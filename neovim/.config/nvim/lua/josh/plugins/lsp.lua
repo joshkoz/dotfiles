@@ -76,29 +76,29 @@ return {
           opts.desc = "Hover Documentation"
           vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
 
-          -- Will be a default in new versions of Neovim.
-          opts.desc = "[C]ode [R]efactor Re[n]ame"
-          vim.keymap.set("n", "crn", vim.lsp.buf.rename, opts)
+          -- Will be a default in new versions of Neovim. (See https://github.com/neovim/neovim/pull/28650/files)
+          opts.desc = "vim.lsp.buf.rename()"
+          vim.keymap.set("n", "grn", vim.lsp.buf.rename, opts)
 
-          -- Will be a default in new versions of Neovim.
-          opts.desc = "[C]ode [R]efactor Action"
-          vim.keymap.set("n", "crr", vim.lsp.buf.code_action, opts)
+          -- Will be a default in new versions of Neovim. (See https://github.com/neovim/neovim/pull/28650/files)
+          opts.desc = "vim.lsp.buf.code_action()"
+          vim.keymap.set("n", "gra", vim.lsp.buf.code_action, opts)
 
-          -- Will be a default in new versions of Neovim.
-          opts.desc = "[G]oto [R]eferences"
-          vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+          -- Will be a default in new versions of Neovim. (See https://github.com/neovim/neovim/pull/28650/files)
+          opts.desc = "vim.lsp.buf.references()"
+          vim.keymap.set("n", "grr", vim.lsp.buf.references, opts)
 
-          opts.desc = "[G]oto [D]efinition"
+          opts.desc = "vim.lsp.buf.definition()"
           vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
 
-          opts.desc = "[G]oto [D]eclaration"
+          opts.desc = "vim.lsp.buf.declaration()"
           vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
 
-          opts.desc = "[G]oto [I]mplementation"
+          opts.desc = "vim.lsp.buf.implementation()"
           vim.keymap.set("n", "gI", vim.lsp.buf.implementation, opts)
 
-          opts.desc = "[C]ode [R]efactoring: Toggle [I]nlay Hints"
-          vim.keymap.set("n", "cri", function()
+          opts.desc = "LSP: Toggle Inlay Hints"
+          vim.keymap.set("n", "gri", function()
             vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({}))
           end, opts)
         end,
