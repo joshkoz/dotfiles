@@ -33,7 +33,7 @@ return {
       ensure_installed = {
         "jsonls",
         "rust_analyzer",
-        "tsserver",
+        "ts_ls",
         "html",
         "omnisharp",
         "lua_ls",
