@@ -17,8 +17,8 @@ set $down j
 set $up k
 set $right l
 
-set $dpleft "DP-2"
-set $dpright "DP-4"
+set $dpleft "DP-0"
+set $dpright "DP-2"
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -41,11 +41,10 @@ exec_always --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-ag
 exec_always --no-startup-id xmodmap -e "clear lock"  
 exec_always --no-startup-id xmodmap -e "keysym Caps_Lock = Escape" 
 
-# Three display setup
-# exec --no-startup-id xrandr --output DP-0 --primary --mode 3840x2160 --pos 0x0 --rotate normal --output DP-1 --off --output HDMI-0 --off --output DP-2 --mode 3840x2160 --pos 3840x0 --rotate normal --output DP-3 --off --output HDMI-1 --off --output DP-4 --mode 3840x2160 --pos 7680x0 --rotate normal --output DP-5 --off --output HDMI-1-1 --off --output DP-1-1 --off --output DP-1-2 --off --output DP-1-3 --off
-
 # Two display setup
-exec --no-startup-id xrandr --output DP-0 --off --output DP-1 --off --output HDMI-0 --off --output DP-2 --mode 3840x2160 --pos 0x0 --rotate normal --output DP-3 --off --output HDMI-1 --off --output DP-4 --mode 3840x2160 --pos 3840x0 --rotate normal --output DP-5 --off
+## Use arandar to generate:
+exec --no-startup-id xrandr --output DP-0 --mode 3840x2160 --pos 0x0 --rotate normal --output DP-1 --off --output HDMI-0 --off --output DP-2 --primary --mode 3840x2160 --pos 3840x0 --rotate normal --output DP-3 --off --output HDMI-1 --off --output DP-4 --off --output DP-5 --off
+
 
 
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
