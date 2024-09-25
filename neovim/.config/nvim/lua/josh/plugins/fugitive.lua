@@ -65,17 +65,25 @@ return {
         vim.keymap.set("n", "]n", gitsigns.next_hunk, { buffer = bufnr, desc = "Go to Next Hunk" })
         vim.keymap.set("n", "[n", gitsigns.prev_hunk, { buffer = bufnr, desc = "Go to Previous Hunk" })
         vim.keymap.set("n", "<leader>gp", gitsigns.preview_hunk, { buffer = bufnr, desc = "[G]it [P]review Hunk" })
-        vim.keymap.set("n", "<leader>ga", gitsigns.stage_hunk, { buffer = bufnr, desc = "[G]it [A]dd Hunk to Stage" })
+        vim.keymap.set("n", "<leader>ga", gitsigns.stage_hunk, { buffer = bufnr, desc = "[G]it [A]dd Hunk" })
+        vim.keymap.set("n", "<leader>gu", gitsigns.undo_stage_hunk, { buffer = bufnr, desc = "[G]it [U]ndo Stage Hunk" })
+        vim.keymap.set("n", "<leader>gr", gitsigns.reset_hunk, { buffer = bufnr, desc = "[G]it [R]eset Hunk" })
+        vim.keymap.set("n", "<leader>gd", gitsigns.toggle_word_diff, { desc = "Toggle word diff" })
+        vim.keymap.set("n", "<leader>gd", function()
+          gitsigns.toggle_linehl()
+          gitsigns.toggle_deleted()
+          gitsigns.toggle_word_diff()
+        end, { desc = "Toggle word diff" })
       end,
     },
   },
   {
     "sindrets/diffview.nvim",
     config = function()
-      vim.keymap.set("n", "<leader>dp", "<cmd>DiffviewFileHistory<cr>", { desc = "[G]it [H]istory" })
-      vim.keymap.set("n", "<leader>df", "<cmd>DiffviewFileHistory --follow %<cr>", { desc = "[D]iff [F]ile History" })
-      vim.keymap.set("v", "<leader>df", "<Esc><Cmd>'<,'>DiffviewFileHistory --follow<CR>", { desc = "[D]iff [F]ile History (Range)" })
-      vim.keymap.set("n", "<leader>ds", "<cmd>DiffviewOpen<cr>", { desc = "Repo diff" })
+      vim.keymap.set("n", "<leader>dp", "<cmd>DiffviewFileHistory<cr>", { desc = "[D]iff view [p]roject history" })
+      vim.keymap.set("n", "<leader>df", "<cmd>DiffviewFileHistory --follow %<cr>", { desc = "[D]iff view [f]ile history" })
+      vim.keymap.set("v", "<leader>dr", "<Esc><Cmd>'<,'>DiffviewFileHistory --follow<CR>", { desc = "[D]iff file [r]ange" })
+      vim.keymap.set("n", "<leader>ds", "<cmd>DiffviewOpen<cr>", { desc = "[D]iff against HEAD" })
       local function get_default_branch_name()
         local res = vim.system({ "git", "rev-parse", "--verify", "main" }, { capture_output = true }):wait()
         return res.code == 0 and "main" or "master"
@@ -84,12 +92,12 @@ return {
       -- Diff against local master branch
       vim.keymap.set("n", "<leader>dm", function()
         vim.cmd("DiffviewOpen " .. get_default_branch_name())
-      end, { desc = "Diff against master" })
+      end, { desc = "[D]iff against master" })
 
       -- Diff against remote master branch
       vim.keymap.set("n", "<leader>dM", function()
         vim.cmd("DiffviewOpen HEAD..origin/" .. get_default_branch_name())
-      end, { desc = "Diff against origin/master" })
+      end, { desc = "[D]iff against origin/master" })
     end,
   },
 }
