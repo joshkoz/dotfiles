@@ -29,6 +29,25 @@ return {
       require("mini.notify").setup({ window = { config = win_config } })
     end,
   },
+  {
+    "echasnovski/mini.icons",
+    lazy = true,
+    opts = {
+      file = {
+        [".keep"] = { glyph = "󰊢", hl = "MiniIconsGrey" },
+        ["devcontainer.json"] = { glyph = "", hl = "MiniIconsAzure" },
+      },
+      filetype = {
+        dotenv = { glyph = "", hl = "MiniIconsYellow" },
+      },
+    },
+    init = function()
+      package.preload["nvim-web-devicons"] = function()
+        require("mini.icons").mock_nvim_web_devicons()
+        return package.loaded["nvim-web-devicons"]
+      end
+    end,
+  },
   -- {
   --   "j-hui/fidget.nvim",
   --   event = "VeryLazy",
@@ -65,7 +84,6 @@ return {
     opts = {
       input = {
         border = "single",
-        insert_only = false,
         default_prompt = "➤ ",
         win_options = { winhighlight = "Normal:Normal,NormalNC:Normal" },
       },
