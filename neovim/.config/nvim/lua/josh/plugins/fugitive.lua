@@ -68,7 +68,7 @@ return {
         vim.keymap.set("n", "<leader>ga", gitsigns.stage_hunk, { buffer = bufnr, desc = "[G]it [A]dd Hunk" })
         vim.keymap.set("n", "<leader>gu", gitsigns.undo_stage_hunk, { buffer = bufnr, desc = "[G]it [U]ndo Stage Hunk" })
         vim.keymap.set("n", "<leader>gr", gitsigns.reset_hunk, { buffer = bufnr, desc = "[G]it [R]eset Hunk" })
-        vim.keymap.set("n", "<leader>gd", gitsigns.toggle_word_diff, { desc = "Toggle word diff" })
+        vim.keymap.set("n", "<leader>gq", gitsigns.setqflist, { desc = "[G]it add changes to quickfix list" })
         vim.keymap.set("n", "<leader>gd", function()
           gitsigns.toggle_linehl()
           gitsigns.toggle_deleted()
