@@ -287,7 +287,7 @@ bindsym $mod+shift+x exec i3lock --color=000000
 
 
 # Set wallpaper
-exec_always /home/joshua/.local/bin/set-wallpaper.sh /home/joshua/Pictures/wallpapers/ocean-wide.jpg
+exec_always /home/joshua/.local/bin/set-wallpaper.sh $(cat /home/joshua/.current-wallpaper)
 
 # Set sound tray icon
 exec --no-startup-id pasystray

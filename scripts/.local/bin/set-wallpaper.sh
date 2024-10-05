@@ -15,6 +15,8 @@ else
 fi
 # selected_file=/home/joshua/Pictures/wallpapers/karman-line-wide.jpg
 
+echo $selected_file > ~/.current-wallpaper
+
 # Set the selected file as the wallpaper
 # Replace 'feh' with your wallpaper setting command if different
 feh --bg-scale --no-xinerama "$selected_file"
