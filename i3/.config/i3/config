@@ -227,7 +227,8 @@ mode "resize" {
 bindsym $mod+Ctrl+r mode "resize"
 
 
-set $indicator #fab387
+# set $indicator #fab387
+set $indicator #ab68ff
 # set $bg-color          #ab68ff // the accent color 
 set $accent-color        #ea999c
 set $inactive-bg-color   #2f343f
@@ -238,9 +239,9 @@ set $urgent-bg-color     #E53935
 # window colors
 #                       border              background         text                 indicator
 client.focused          $accent-color      $accent-color      $text-color          $indicator
-client.unfocused        $inactive-bg-color $inactive-bg-color $inactive-text-olor $accent-color 
-client.focused_inactive $inactive-bg-color $inactive-bg-color $inactive-text-color $accent-color 
-client.urgent           $urgent-bg-color   $urgent-bg-color   $text-color          $accent-color 
+client.unfocused        $inactive-bg-color $inactive-bg-color $inactive-text-olor $indicator 
+client.focused_inactive $inactive-bg-color $inactive-bg-color $inactive-text-color $indicator 
+client.urgent           $urgent-bg-color   $urgent-bg-color   $text-color          $indicator 
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
@@ -258,8 +259,28 @@ gaps inner 10
 gaps outer 10 
 # smart_gaps on
 
-workspace $ws9 output $dpleft
+workspace $ws1 output $dpright
+workspace $ws2 output $dpright
+workspace $ws3 output $dpright
+workspace $ws4 output $dpright
+workspace $ws5 output $dpright
+workspace $ws6 output $dpright
+workspace $ws7 output $dpright
+workspace $ws8 output $dpright
+workspace $ws9 output $dpright
 workspace $ws10 output $dpleft
+
+assign [class="Alacritty"] workspace $ws6 
+assign [class="firefox"] workspace $ws7 
+assign [class="vesktop"] workspace $ws1 
+assign [class="Slack"] workspace $ws1 
+assign [class="Spotify"] workspace $ws10 
+assign [class="Google-chrome"] workspace $ws7 
+assign [class="jetbrains-datagrip"] workspace $ws8 
+assign [class="jetbrains-rider"] workspace $ws8 
+assign [class="Postman"] workspace $ws5 
+for_window [class="Gcr-prompter"] floating enable, focus
+popup_during_fullscreen leave_fullscreen
 
 # Configure locking the screen
 bindsym $mod+shift+x exec i3lock --color=000000
