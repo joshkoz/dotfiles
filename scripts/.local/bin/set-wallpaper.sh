@@ -26,4 +26,6 @@ filename=$(basename "$selected_file")
 
 # Send notification with Dunst
 # Note: Dunst may have limitations on image sizes and types it can display
-dunstify -i "$selected_file" "Wallpaper Changed" "Wallpaper set to $filename"
+if [ -z "$1" ]; then
+  dunstify -i "$selected_file" "Wallpaper Changed" "Wallpaper set to $filename"
+fi
