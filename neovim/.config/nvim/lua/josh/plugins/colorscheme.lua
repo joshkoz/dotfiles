@@ -1,7 +1,8 @@
 return {
   {
     "rebelot/kanagawa.nvim",
-    lazy = true,
+    lazy = false,
+    priority = 1000,
     config = function()
       require("kanagawa").setup({
         colors = {
@@ -19,8 +20,7 @@ return {
   },
   {
     "catppuccin/nvim",
-    lazy = false,
-    priority = 1000,
+    lazy = true,
     name = "catppuccin",
     config = function()
       require("catppuccin").setup({

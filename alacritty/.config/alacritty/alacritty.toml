@@ -1,17 +1,16 @@
 # import = ["/home/joshua/.config/alacritty/colors/nightfly.toml"]
-import = ["/home/joshua/.config/alacritty/colors/catppuccin-mocha.toml"]
-# import = ["/home/joshua/.config/alacritty/colors/kanagawa.toml"]
+# import = ["/home/joshua/.config/alacritty/colors/catppuccin-mocha.toml"]
+import = ["/home/joshua/.config/alacritty/colors/kanagawa.toml"]
 live_config_reload = true
 
 
 [colors]
 draw_bold_text_with_bright_colors = true 
-
 [env]
 TERM = "alacritty"
 
 [font]
-size = 11
+size = 10 
 
 [font.normal]
 family = "CaskaydiaCove NFM SemiLight"
@@ -61,7 +60,7 @@ program = "/usr/bin/zsh"
 
 [window]
 decorations = "full"
-opacity = 0.98 
+# opacity = 0.98 
 
 [window.padding]
 x = 10
