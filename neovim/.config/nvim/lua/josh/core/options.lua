@@ -23,6 +23,7 @@ vim.opt.autoindent = true
 vim.opt.smartindent = true
 
 vim.opt.cursorline = true
+vim.opt.colorcolumn = "100"
 
 -- Show whitespace
 -- vim.opt.list = true
@@ -49,6 +50,7 @@ vim.opt.timeout = false
 
 -- Disable folds in diffs
 vim.opt.diffopt:append("context:99999")
+vim.opt.fillchars:append({ diff = "╱" })
 
 -- Set completeopt to have a better completion experience
 vim.opt.completeopt = "menuone,noselect"
