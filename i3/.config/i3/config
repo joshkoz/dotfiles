@@ -261,7 +261,7 @@ gaps outer 10
 
 workspace $ws1 output $dpright
 workspace $ws2 output $dpright
-workspace $ws3 output $dpright
+workspace $ws3 output $dpleft
 workspace $ws4 output $dpright
 workspace $ws5 output $dpright
 workspace $ws6 output $dpright
@@ -279,6 +279,7 @@ assign [class="Google-chrome"] workspace $ws7
 assign [class="jetbrains-datagrip"] workspace $ws8 
 assign [class="jetbrains-rider"] workspace $ws8 
 assign [class="Postman"] workspace $ws5 
+assign [class="obsidian"] workspace $ws3 
 for_window [class="Gcr-prompter"] floating enable, focus
 popup_during_fullscreen leave_fullscreen
 
