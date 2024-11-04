@@ -1,7 +1,3 @@
-# import = ["/home/joshua/.config/alacritty/colors/nightfly.toml"]
-# import = ["/home/joshua/.config/alacritty/colors/catppuccin-mocha.toml"]
-import = ["/home/joshua/.config/alacritty/colors/kanagawa.toml"]
-live_config_reload = true
 
 
 [colors]
@@ -54,7 +50,7 @@ mods = "Super"
 # key = "V"
 # mods = "Control"
 
-[shell]
+[terminal.shell]
 args = ["--login"]
 program = "/usr/bin/zsh"
 
@@ -65,3 +61,11 @@ decorations = "full"
 [window.padding]
 x = 10
 y = 0
+
+[general]
+live_config_reload = true
+# import = ["/home/joshua/.config/alacritty/colors/nightfly.toml"]
+# import = ["/home/joshua/.config/alacritty/colors/catppuccin-mocha.toml"]
+import = ["/home/joshua/.config/alacritty/colors/kanagawa.toml"]
+
+[terminal]
