@@ -13,7 +13,7 @@ return {
     neotree.setup({
       window = {
         position = "right",
-        width = 100,
+        width = 50,
       },
       close_if_last_window = false, -- This behaviour sucks. It breaks :bd
       filesystem = {
