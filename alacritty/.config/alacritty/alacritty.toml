@@ -55,6 +55,8 @@ program = "/bin/zsh"
 
 [window]
 decorations = "full"
+option_as_alt = "Both"
+
 # opacity = 0.98 
 
 [window.padding]
