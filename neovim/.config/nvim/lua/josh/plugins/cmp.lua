@@ -117,9 +117,14 @@ return {
       -- default list of enabled providers defined so that you can extend it
       -- elsewhere in your config, without redefining it, via `opts_extend`
       sources = {
-        default = { "lsp", "path", "snippets", "buffer" },
+        enabled_providers = { "lsp", "path", "snippets", "buffer", "lazydev" },
         -- optionally disable cmdline completions
         -- cmdline = {},
+      },
+      providers = {
+        -- dont show LuaLS require statements when lazydev has items
+        lsp = { fallback_for = { "lazydev" } },
+        lazydev = { name = "LazyDev", module = "lazydev.integrations.blink" },
       },
 
       -- experimental signature help support
