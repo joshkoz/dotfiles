@@ -3,7 +3,8 @@ return {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
-      "hrsh7th/cmp-nvim-lsp", -- Adds LSP completion capabilities
+      -- "hrsh7th/cmp-nvim-lsp", -- Adds LSP completion capabilities
+      "saghen/blink.cmp",
       { "antosha417/nvim-lsp-file-operations", config = true },
       "williamboman/mason.nvim",
     },
@@ -88,6 +89,9 @@ return {
           opts.desc = "vim.lsp.buf.references()"
           vim.keymap.set("n", "grr", vim.lsp.buf.references, opts)
 
+          opts.desc = "vim.lsp.buf.signature_help()"
+          vim.keymap.set("i", "<C-s>", vim.lsp.buf.signature_help, opts)
+
           opts.desc = "vim.lsp.buf.definition()"
           vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
 
@@ -104,8 +108,7 @@ return {
         end,
       })
 
-      local capabilities = vim.lsp.protocol.make_client_capabilities()
-      capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
+      local capabilities = require("blink.cmp").get_lsp_capabilities(vim.lsp.protocol.make_client_capabilities())
 
       local lspconfig = require("lspconfig")
 
