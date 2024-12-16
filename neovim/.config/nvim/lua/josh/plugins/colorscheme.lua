@@ -1,8 +1,7 @@
 return {
   {
     "rebelot/kanagawa.nvim",
-    lazy = false,
-    priority = 1000,
+    lazy = true,
     config = function()
       require("kanagawa").setup({
         colors = {
@@ -20,12 +19,13 @@ return {
   },
   {
     "catppuccin/nvim",
-    lazy = true,
+    lazy = false,
+    priority = 1000,
     name = "catppuccin",
     config = function()
       require("catppuccin").setup({
         term_colors = true,
-        transparent_background = true,
+        -- transparent_background = true,
         custom_highlights = function(colors)
           return {
             CursorLine = {

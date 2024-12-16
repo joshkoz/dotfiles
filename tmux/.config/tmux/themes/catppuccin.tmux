@@ -1,4 +1,5 @@
 # --> Catppuccin (Mocha)
+thm_bg="#1e1e2e"
 thm_fg="#cdd6f4"
 thm_cyan="#89dceb"
 thm_black="#181825"
@@ -14,16 +15,16 @@ thm_black4="#585b70"
 
 # status
 set -g status "on"
+set -g status-bg "${thm_bg}"
 set -g status-justify "left"
 set -g status-left-length "100"
 set -g status-right-length "100"
-set -g status-style fg=default,bg=default
 
 # Status left and right sections
-set -g status-left "#[fg=${thm_black4},bg=default] #{session_name} | "
+set -g status-left "#[fg=${thm_black4},bg=${thm_bg}] #{session_name} | "
 
 # messages
-set -g message-style "fg=${thm_cyan},bg=default,align=centre"
+set -g message-style "fg=${thm_cyan},bg=${thm_gray},align=centre"
 set -g message-command-style "fg=${thm_cyan},bg=${thm_gray},align=centre"
 
 # panes
@@ -31,9 +32,9 @@ set -g pane-border-style "fg=${thm_gray}"
 set -g pane-active-border-style "fg=${thm_blue}"
 
 # windows
-setw -g window-status-activity-style "fg=${thm_fg},bg=default,none"
+setw -g window-status-activity-style "fg=${thm_fg},bg=${thm_bg},none"
 setw -g window-status-separator ""
-setw -g window-status-style "fg=${thm_fg},bg=default,none"
+setw -g window-status-style "fg=${thm_fg},bg=${thm_bg},none"
 setw -g window-status-current-style "fg=${thm_magenta},bold"
 
 set-option -g window-status-format "#{window_index}:#{pane_current_command}#{window_flags} "
