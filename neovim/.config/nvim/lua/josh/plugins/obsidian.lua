@@ -9,11 +9,10 @@ return {
   },
   dependencies = {
     "nvim-lua/plenary.nvim",
-    "hrsh7th/nvim-cmp",
+    -- "hrsh7th/nvim-cmp",
   },
   opts = {
     disable_frontmatter = true,
-    completion = { nvim_cmp = true },
     daily_notes = {
       folder = "📅 Journal",
     },
