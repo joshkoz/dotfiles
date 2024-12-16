@@ -109,6 +109,7 @@ return {
       })
 
       local capabilities = require("blink.cmp").get_lsp_capabilities(vim.lsp.protocol.make_client_capabilities())
+      -- local capabilities = vim.lsp.protocol.make_client_capabilities()
 
       local lspconfig = require("lspconfig")
 
@@ -149,14 +150,32 @@ return {
             workspace = {
               checkThirdParty = false,
               library = {
-                [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-                [vim.fn.stdpath("config") .. "/lua"] = true,
+                vim.fn.expand("$VIMRUNTIME/lua"),
+                vim.fn.expand("$VIMRUNTIME/lua/vim/lsp"),
+                vim.fn.stdpath("data") .. "/lazy/lazy.nvim/lua/lazy",
+                "${3rd}/luv/library",
               },
+              maxPreload = 100000,
+              preloadFileSize = 10000,
             },
             diagnostics = {
               globals = { "vim" },
             },
             telemetry = { enable = false },
+            codeLens = {
+              enable = true,
+            },
+            doc = {
+              privateName = { "^_" },
+            },
+            hint = {
+              enable = true,
+              setType = false,
+              paramType = true,
+              paramName = "Disable",
+              semicolon = "Disable",
+              arrayIndex = "Disable",
+            },
             completion = {
               callSnippet = "Replace",
             },
@@ -175,8 +194,17 @@ return {
   },
   {
     "folke/lazydev.nvim",
-    ft = "lua",
-    opt = {},
+    ft = "lua", -- only load on lua files
+    opts = {
+      library = {
+        -- See the configuration section for more details
+        -- Load luvit types when the `vim.uv` word is found
+        { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+        "snacks.nvim",
+        "lazy.nvim",
+        "blink.nvim",
+      },
+    },
   },
   {
     "pmizio/typescript-tools.nvim",

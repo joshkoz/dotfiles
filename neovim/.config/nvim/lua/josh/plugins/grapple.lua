@@ -4,6 +4,10 @@ return {
     scope = "git", -- also try out "git_branch"
     icons = true, -- setting to "true" requires "nvim-web-devicons"
     status = true,
+    win_opts = {
+      border = "rounded",
+      title_pos = "center",
+    },
   },
   keys = {
     { "<leader>a", "<cmd>Grapple toggle<cr>", desc = "Tag a file" },

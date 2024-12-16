@@ -78,17 +78,36 @@ return {
     },
   },
   {
+    "folke/snacks.nvim",
+    priority = 1000,
+    lazy = false,
+    ---@type snacks.Config
+    opts = {
+      bigfile = { enabled = true },
+      dashboard = { enabled = false },
+      indent = { enabled = false },
+      scope = { enabled = false },
+      input = { enabled = false },
+      notifier = { enabled = false },
+      quickfile = { enabled = false },
+      scroll = { enabled = false },
+      statuscolumn = { enabled = true, left = { "mark", "sign" }, right = { "fold", "git" } },
+      words = { enabled = false },
+    },
+  },
+  {
     "stevearc/dressing.nvim",
     event = "BufEnter",
     enabled = true,
     opts = {
       input = {
-        border = "single",
+        border = "rounded",
         default_prompt = "➤ ",
         win_options = { winhighlight = "Normal:Normal,NormalNC:Normal" },
       },
       select = {
-        border = "single",
+        telescope = require("telescope.themes").get_cursor(),
+        -- border = "single",
         backend = { "telescope", "builtin" },
         builtin = { win_options = { winhighlight = "Normal:Normal,NormalNC:Normal" } },
       },
