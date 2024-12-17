@@ -32,15 +32,11 @@ return {
     mason_lspconfig.setup({
       ensure_installed = {
         "jsonls",
-        "rust_analyzer",
-        "ts_ls",
         "html",
-        "omnisharp",
         "lua_ls",
         "cssls",
         "emmet_ls",
         "pyright",
-        "omnisharp",
         "biome",
         "dockerls",
         "yamlls",

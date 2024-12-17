@@ -1,10 +1,6 @@
 return {
   { "nvim-lua/plenary.nvim" },
-  {
-    -- Automatically guess and set shiftwidth for the buffer
-    "tpope/vim-sleuth",
-    event = "BufEnter",
-  },
+  { "nmac427/guess-indent.nvim", opts = {} },
   {
     "echasnovski/mini.surround",
     version = "*",
@@ -16,18 +12,6 @@ return {
     version = "*",
     event = "BufEnter",
     opts = {},
-  },
-  {
-    "echasnovski/mini.notify",
-    version = "*",
-    config = function()
-      local win_config = function()
-        local has_statusline = vim.o.laststatus > 0
-        local bottom_space = vim.o.cmdheight + (has_statusline and 1 or 0)
-        return { anchor = "SE", col = vim.o.columns, row = vim.o.lines - bottom_space }
-      end
-      require("mini.notify").setup({ window = { config = win_config } })
-    end,
   },
   {
     "echasnovski/mini.icons",
@@ -48,34 +32,29 @@ return {
       end
     end,
   },
-  -- {
-  --   "j-hui/fidget.nvim",
-  --   event = "VeryLazy",
-  --   opts = {},
-  -- },
+  {
+    "echasnovski/mini.hipatterns",
+    config = function()
+      local hipatterns = require("mini.hipatterns")
+      hipatterns.setup({
+        highlighters = {
+          -- Highlight standalone 'FIXME', 'HACK', 'TODO', 'NOTE'
+          fixme = { pattern = "%f[%w]()FIXME()%f[%W]", group = "MiniHipatternsFixme" },
+          hack = { pattern = "%f[%w]()HACK()%f[%W]", group = "MiniHipatternsHack" },
+          todo = { pattern = "%f[%w]()TODO()%f[%W]", group = "MiniHipatternsTodo" },
+          note = { pattern = "%f[%w]()NOTE()%f[%W]", group = "MiniHipatternsNote" },
+
+          -- Highlight hex color strings (`#rrggbb`) using that color
+          hex_color = hipatterns.gen_highlighter.hex_color(),
+        },
+      })
+    end,
+  },
   {
     "folke/ts-comments.nvim",
     opts = {},
     event = "VeryLazy",
     enabled = vim.fn.has("nvim-0.10.0") == 1,
-  },
-  {
-    -- region Have hex codes show their color
-    "brenoprata10/nvim-highlight-colors",
-    opts = {
-      render = "virtual",
-    },
-  },
-  -- Have todo comments highlight
-  {
-    "folke/todo-comments.nvim",
-    event = "BufReadPre",
-    dependencies = { "nvim-lua/plenary.nvim" },
-    opts = {
-      highlight = {
-        pattern = [[(KEYWORDS)\s*(\([^\)]*\))?:]],
-      },
-    },
   },
   {
     "folke/snacks.nvim",
@@ -87,30 +66,25 @@ return {
       dashboard = { enabled = false },
       indent = { enabled = false },
       scope = { enabled = false },
-      input = { enabled = false },
-      notifier = { enabled = false },
+      input = {
+        enabled = true,
+        win = {
+          style = "minimal",
+          title_pos = "left",
+          relative = "cursor",
+          row = -3,
+          col = 0,
+          keys = {
+            v_esc = { "<esc>", { "cmp_close", "cancel" }, mode = "n" },
+            i_esc = { "<esc>", "stopinsert", mode = "i" },
+          },
+        },
+      },
+      notifier = { enabled = true, style = "minimal", top_down = false, margin = { bottom = 2 } },
       quickfile = { enabled = false },
       scroll = { enabled = false },
       statuscolumn = { enabled = true, left = { "mark", "sign" }, right = { "fold", "git" } },
       words = { enabled = false },
-    },
-  },
-  {
-    "stevearc/dressing.nvim",
-    event = "BufEnter",
-    enabled = true,
-    opts = {
-      input = {
-        border = "rounded",
-        default_prompt = "➤ ",
-        win_options = { winhighlight = "Normal:Normal,NormalNC:Normal" },
-      },
-      select = {
-        telescope = require("telescope.themes").get_cursor(),
-        -- border = "single",
-        backend = { "telescope", "builtin" },
-        builtin = { win_options = { winhighlight = "Normal:Normal,NormalNC:Normal" } },
-      },
     },
   },
 }

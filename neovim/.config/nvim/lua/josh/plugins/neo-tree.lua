@@ -8,9 +8,14 @@ return {
   },
   event = "BufEnter",
   config = function()
-    -- keymaps
     local neotree = require("neo-tree")
-    neotree.setup({
+    local events = require("neo-tree.events")
+
+    local function on_move(data)
+      Snacks.rename.on_rename_file(data.source, data.destination)
+    end
+
+    local opts = {
       window = {
         position = "right",
         width = 50,
@@ -40,7 +45,13 @@ return {
           },
         },
       },
+    }
+    opts.event_handlers = opts.event_handlers or {}
+    vim.list_extend(opts.event_handlers, {
+      { event = events.FILE_MOVED, handler = on_move },
+      { event = events.FILE_RENAMED, handler = on_move },
     })
+    neotree.setup(opts)
 
     vim.keymap.set("n", "<leader>e", "<cmd>Neotree toggle right<cr>", { desc = "Toggle Neo-Tree" })
   end,

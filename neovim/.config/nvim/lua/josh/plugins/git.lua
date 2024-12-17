@@ -3,34 +3,6 @@ return {
     "tpope/vim-fugitive",
     event = "BufEnter",
     config = function()
-      local toggle_fugitive_status = function()
-        local fugitive_win_id = nil
-        local buf_list = vim.api.nvim_list_bufs()
-
-        for _, buf in ipairs(buf_list) do
-          local buf_name = vim.api.nvim_buf_get_name(buf)
-          if string.match(buf_name, "fugitive://") then
-            -- Find the window ID where this buffer is displayed
-            local wins = vim.api.nvim_list_wins()
-            for _, win in ipairs(wins) do
-              if vim.api.nvim_win_get_buf(win) == buf then
-                fugitive_win_id = win
-                break
-              end
-            end
-            break
-          end
-        end
-
-        if fugitive_win_id then
-          -- If the Git window is open, close it
-          vim.api.nvim_win_close(fugitive_win_id, true)
-        else
-          -- Otherwise, open it in a vertical split
-          vim.cmd("Git")
-        end
-      end
-
       -- Keymaps
       vim.keymap.set("n", "<leader>gs", "<cmd>G<CR>", { desc = "[G]it Status" })
       vim.keymap.set("n", "<leader>gb", "<cmd>Git blame -w -C -C -C<CR>", { desc = "[G]it [B]lame" })
@@ -39,10 +11,6 @@ return {
         vim.cmd("Gdiff")
         vim.cmd("norm ]czt")
       end, { desc = "[G]it [D]iff" })
-      -- vim.keymap.set("n", "<leader>gh", function()
-      --   vim.cmd("tabedit %")
-      --   vim.cmd("0Gclog")
-      -- end, { desc = "[G]it [H]istory" })
     end,
   },
   {

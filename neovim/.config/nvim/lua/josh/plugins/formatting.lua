@@ -32,8 +32,6 @@ return {
         quiet = true, -- If there's a syntax error we don't want to report an erroor
       },
     })
-    vim.keymap.set("n", "<leader>crm", conform.format, { desc = "Format" })
-
     vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
   end,
 }
