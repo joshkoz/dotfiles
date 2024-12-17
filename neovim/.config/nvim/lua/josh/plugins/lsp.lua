@@ -70,27 +70,32 @@ return {
         group = vim.api.nvim_create_augroup("LspKeymaps", {}),
         callback = function(ev)
           -- Enable completion triggered by <c-x><c-o>
-          vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
+          -- vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
 
           local opts = { buffer = ev.buf, noremap = true, silent = true }
 
-          opts.desc = "Hover Documentation"
-          vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+          -- opts.desc = "Hover Documentation"
+          -- vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
 
           -- Will be a default in new versions of Neovim. (See https://github.com/neovim/neovim/pull/28650/files)
-          opts.desc = "vim.lsp.buf.rename()"
-          vim.keymap.set("n", "grn", vim.lsp.buf.rename, opts)
+          -- opts.desc = "vim.lsp.buf.rename()"
+          -- vim.keymap.set("n", "grn", vim.lsp.buf.rename, opts)
 
           -- Will be a default in new versions of Neovim. (See https://github.com/neovim/neovim/pull/28650/files)
-          opts.desc = "vim.lsp.buf.code_action()"
-          vim.keymap.set("n", "gra", vim.lsp.buf.code_action, opts)
+          -- opts.desc = "vim.lsp.buf.code_action()"
+          -- vim.keymap.set("n", "gra", vim.lsp.buf.code_action, opts)
 
           -- Will be a default in new versions of Neovim. (See https://github.com/neovim/neovim/pull/28650/files)
-          opts.desc = "vim.lsp.buf.references()"
-          vim.keymap.set("n", "grr", vim.lsp.buf.references, opts)
+          -- opts.desc = "vim.lsp.buf.references()"
+          -- vim.keymap.set("n", "grr", vim.lsp.buf.references, opts)
+          --
+          -- -- Will be a default in new versions of Neovim. (See https://github.com/neovim/neovim/pull/28650/files)
+          -- opts.desc = "vim.lsp.buf.implementation()"
+          -- vim.keymap.set("n", "gri", vim.lsp.buf.implementation, opts)
 
-          opts.desc = "vim.lsp.buf.signature_help()"
-          vim.keymap.set("i", "<C-s>", vim.lsp.buf.signature_help, opts)
+          -- -- Will be a default in new versions of Neovim. (See https://github.com/neovim/neovim/pull/28650/files)
+          -- opts.desc = "vim.lsp.buf.signature_help()"
+          -- vim.keymap.set("i", "<C-s>", vim.lsp.buf.signature_help, opts)
 
           opts.desc = "vim.lsp.buf.definition()"
           vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
@@ -98,11 +103,8 @@ return {
           opts.desc = "vim.lsp.buf.declaration()"
           vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
 
-          opts.desc = "vim.lsp.buf.implementation()"
-          vim.keymap.set("n", "gI", vim.lsp.buf.implementation, opts)
-
-          opts.desc = "LSP: Toggle Inlay Hints"
-          vim.keymap.set("n", "gri", function()
+          opts.desc = "vim.lsp.inlay_hint.toggle()"
+          vim.keymap.set("n", "grh", function()
             vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({}))
           end, opts)
         end,
