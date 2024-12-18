@@ -64,11 +64,26 @@ return {
     opts = {
       bigfile = { enabled = true },
       dashboard = { enabled = false },
-      indent = { enabled = false },
+      indent = {
+        enabled = true,
+        animate = { enabled = false },
+        chunk = { enabled = false },
+        scope = { enabled = true, hl = "LineNr", char = "│" },
+        -- scope = { enabled = true, hl = "Comment", char = "│" },
+        indent = {
+          char = "┆", -- | ¦ ┆ ┊ │
+          hl = "LineNr",
+        },
+      },
       scope = { enabled = false },
       input = {
         enabled = true,
+        icon = "",
         win = {
+          wo = {
+            winhighlight = "NormalFloat:SnacksInputNormal,FloatBorder:FloatBorder,SnacksInputBorder:FloatBorder",
+          },
+          border = "rounded",
           style = "minimal",
           title_pos = "left",
           relative = "cursor",

@@ -27,9 +27,5 @@ vim.keymap.set("n", "<A-k>", "<CMD>cprev<CR>", { desc = "Go to previous item in 
 vim.keymap.set("n", "<A-l>", "<CMD>cnewer<CR>", { desc = "Go to next Quickfix List" })
 vim.keymap.set("n", "<A-h>", "<CMD>colder<CR>", { desc = "Go to previous Quickfix List" })
 
--- Loclist
-vim.keymap.set("n", "<leader>j", "<cmd>lnext<CR>")
-vim.keymap.set("n", "<leader>k", "<cmd>lprev<CR>")
-
 -- Tmux
 vim.keymap.set("n", "<C-f>", "<CMD>silent !tmux neww tmux-sessionizer<CR>")

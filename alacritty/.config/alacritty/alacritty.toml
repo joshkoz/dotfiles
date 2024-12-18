@@ -59,7 +59,7 @@ decorations = "full"
 # opacity = 0.98 
 
 [window.padding]
-x = 10
+x = 0 
 y = 0
 
 [general]

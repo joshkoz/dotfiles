@@ -25,14 +25,7 @@ return {
     config = function()
       require("catppuccin").setup({
         term_colors = true,
-        -- transparent_background = true,
-        custom_highlights = function(colors)
-          return {
-            CursorLine = {
-              bg = "#14141f",
-            },
-          }
-        end,
+        transparent_background = true,
       })
       vim.cmd.colorscheme("catppuccin-mocha")
     end,

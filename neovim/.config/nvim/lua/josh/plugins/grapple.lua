@@ -1,14 +1,7 @@
 return {
   "cbochs/grapple.nvim",
-  opts = {
-    scope = "git", -- also try out "git_branch"
-    icons = true, -- setting to "true" requires "nvim-web-devicons"
-    status = true,
-    win_opts = {
-      border = "rounded",
-      title_pos = "center",
-    },
-  },
+  event = { "BufReadPost", "BufNewFile" },
+  cmd = "Grapple",
   keys = {
     { "<leader>a", "<cmd>Grapple toggle<cr>", desc = "Tag a file" },
     { "<c-e>", "<cmd>Grapple toggle_tags<cr>", desc = "Toggle tags menu" },
@@ -24,4 +17,18 @@ return {
     { "<A-o>", "<cmd>Grapple select index=4<cr>", desc = "Select fourth tag" },
     { "<A-p>", "<cmd>Grapple select index=5<cr>", desc = "Select fifth tag" },
   },
+  config = function()
+    vim.api.nvim_set_hl(0, "GrappleNormal", { link = "Normal" })
+    local opts = {
+      scope = "git", -- also try out "git_branch"
+      icons = true, -- setting to "true" requires "nvim-web-devicons"
+      status = true,
+      win_opts = {
+        border = "rounded",
+        title_pos = "center",
+        footer = "",
+      },
+    }
+    require("grapple").setup(opts)
+  end,
 }

@@ -21,17 +21,29 @@ return {
     opts = {
       -- See `:help gitsigns.txt`
       signs = {
-        add = { text = "+" },
-        change = { text = "~" },
-        delete = { text = "_" },
-        topdelete = { text = "‾" },
-        changedelete = { text = "~" },
+        add = { text = "▎" },
+        change = { text = "▎" },
+        delete = { text = "" },
+        topdelete = { text = "" },
+        changedelete = { text = "▎" },
+        untracked = { text = "▎" },
+      },
+      signs_staged = {
+        add = { text = "▎" },
+        change = { text = "▎" },
+        delete = { text = "" },
+        topdelete = { text = "" },
+        changedelete = { text = "▎" },
       },
       current_line_blame = true,
       on_attach = function(bufnr)
         local gitsigns = require("gitsigns")
-        vim.keymap.set("n", "]n", gitsigns.next_hunk, { buffer = bufnr, desc = "Go to Next Hunk" })
-        vim.keymap.set("n", "[n", gitsigns.prev_hunk, { buffer = bufnr, desc = "Go to Previous Hunk" })
+        vim.keymap.set("n", "]n", function()
+          gitsigns.nav_hunk("next")
+        end, { buffer = bufnr, desc = "Go to Next Hunk" })
+        vim.keymap.set("n", "[n", function()
+          gitsigns.nav_hunk("prev")
+        end, { buffer = bufnr, desc = "Go to Previous Hunk" })
         vim.keymap.set("n", "<leader>gp", gitsigns.preview_hunk, { buffer = bufnr, desc = "[G]it [P]review Hunk" })
         vim.keymap.set("n", "<leader>ga", gitsigns.stage_hunk, { buffer = bufnr, desc = "[G]it [A]dd Hunk" })
         vim.keymap.set("n", "<leader>gu", gitsigns.undo_stage_hunk, { buffer = bufnr, desc = "[G]it [U]ndo Stage Hunk" })
