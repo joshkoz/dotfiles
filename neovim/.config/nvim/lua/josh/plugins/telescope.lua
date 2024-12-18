@@ -61,7 +61,7 @@ return {
 
     opts.desc = "Live Grep The Project"
     vim.keymap.set("n", "<leader>/", function()
-      builtins.live_grep({ hidden = true })
+      builtins.live_grep({ hidden = true, debounce = 300 })
     end, opts)
 
     opts.desc = "Grep the word under the cursor"
