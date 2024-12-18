@@ -17,13 +17,15 @@ return {
       return "\u{f085} " .. table.concat(c, "|")
     end
 
+    local utils = require("lualine.utils.utils")
+    local bg = utils.extract_color_from_hllist("bg", { "Normal", "StatusLineNC" }, "#000000")
     local custom_auto = require("lualine.themes.auto")
-    custom_auto.normal.c.bg = "None"
-    custom_auto.normal.b.bg = "None"
-    custom_auto.insert.b.bg = "None"
-    custom_auto.replace.b.bg = "None"
-    custom_auto.visual.b.bg = "None"
-    custom_auto.command.b.bg = "None"
+    custom_auto.normal.c.bg = bg
+    custom_auto.normal.b.bg = bg
+    custom_auto.insert.b.bg = bg
+    custom_auto.replace.b.bg = bg
+    custom_auto.visual.b.bg = bg
+    custom_auto.command.b.bg = bg
 
     require("lualine").setup({
       options = {

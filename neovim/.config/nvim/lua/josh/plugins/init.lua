@@ -95,7 +95,12 @@ return {
           },
         },
       },
-      notifier = { enabled = true, style = "minimal", top_down = false, margin = { bottom = 2 } },
+      notifier = {
+        enabled = true,
+        style = "minimal",
+        top_down = false,
+        margin = { bottom = 2 },
+      },
       quickfile = { enabled = false },
       scroll = { enabled = false },
       statuscolumn = { enabled = true, left = { "mark", "sign" }, right = { "fold", "git" } },
