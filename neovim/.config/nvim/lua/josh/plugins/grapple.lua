@@ -19,6 +19,8 @@ return {
   },
   config = function()
     vim.api.nvim_set_hl(0, "GrappleNormal", { link = "Normal" })
+    vim.api.nvim_set_hl(0, "GrappleBorder", { link = "TelescopeBorder" })
+    vim.api.nvim_set_hl(0, "GrappleTitle", { link = "TelescopeTitle" })
     local opts = {
       scope = "git", -- also try out "git_branch"
       icons = true, -- setting to "true" requires "nvim-web-devicons"
