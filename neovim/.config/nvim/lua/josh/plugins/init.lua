@@ -51,6 +51,15 @@ return {
     end,
   },
   {
+    "mcauley-penney/visual-whitespace.nvim",
+    config = function()
+      require("visual-whitespace").setup()
+      local comment_fg = vim.fn.synIDattr(vim.fn.hlID("Comment"), "fg#")
+      local visual_bg = vim.fn.synIDattr(vim.fn.hlID("Visual"), "bg#")
+      vim.api.nvim_set_hl(0, "VisualNonText", { fg = comment_fg, bg = visual_bg })
+    end,
+  },
+  {
     "folke/ts-comments.nvim",
     opts = {},
     event = "VeryLazy",
