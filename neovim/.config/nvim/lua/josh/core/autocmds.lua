@@ -24,7 +24,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 })
 
 vim.api.nvim_create_autocmd("LspProgress", {
-  ---@param ev {data: {client_id: integer, params: lsp.ProgressParams}}
+  group = vim.api.nvim_create_augroup("LspProgress", {}),
   callback = function(ev)
     local spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
     vim.notify(vim.lsp.status(), "info", {
@@ -34,5 +34,30 @@ vim.api.nvim_create_autocmd("LspProgress", {
         notif.icon = ev.data.params.value.kind == "end" and " " or spinner[math.floor(vim.uv.hrtime() / (1e6 * 80)) % #spinner + 1]
       end,
     })
+  end,
+})
+
+local ns = vim.api.nvim_create_namespace("visual_line_numbers")
+
+vim.api.nvim_create_autocmd({ "ModeChanged", "CursorMoved" }, {
+  group = vim.api.nvim_create_augroup("VisualLineNumbers", {}),
+  callback = function(args)
+    local mode = vim.fn.mode()
+    if not mode:match("[vV]") then
+      vim.api.nvim_buf_clear_namespace(0, ns, 0, -1)
+    elseif args.event == "CursorMoved" and mode == "v" or mode == "V" or mode == "" then
+      -- -- clear namespace and re-highlight the range
+      vim.api.nvim_buf_clear_namespace(0, ns, 0, -1)
+      local start_line = vim.fn.line("v")
+      local end_line = vim.fn.line(".")
+      -- swap the lines based on if visual selection cursor is at begining or end of visual range
+      if start_line > end_line then
+        start_line, end_line = end_line, start_line
+      end
+      vim.api.nvim_buf_set_extmark(0, ns, start_line - 1, 0, {
+        end_line = end_line - 1,
+        number_hl_group = "CursorLineNr",
+      })
+    end
   end,
 })

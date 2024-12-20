@@ -22,7 +22,8 @@ vim.opt.smartcase = true
 vim.opt.autoindent = true
 vim.opt.smartindent = true
 
--- vim.opt.cursorline = true
+vim.opt.cursorline = true
+vim.opt.cursorlineopt = "number"
 -- vim.opt.colorcolumn = "100"
 
 -- Show whitespace

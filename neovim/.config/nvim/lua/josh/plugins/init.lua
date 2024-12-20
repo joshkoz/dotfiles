@@ -52,6 +52,7 @@ return {
   },
   {
     "mcauley-penney/visual-whitespace.nvim",
+    branch = "getregionpos", -- Remove this branch
     config = function()
       require("visual-whitespace").setup()
       local comment_fg = vim.fn.synIDattr(vim.fn.hlID("Comment"), "fg#")
@@ -106,8 +107,8 @@ return {
       },
       notifier = {
         enabled = true,
-        style = "minimal",
         top_down = false,
+        style = "minimal",
         margin = { bottom = 2 },
       },
       quickfile = { enabled = false },

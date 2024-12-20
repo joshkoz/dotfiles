@@ -6,10 +6,15 @@ return {
   },
   config = function()
     local miniclue = require("mini.clue")
+    vim.api.nvim_set_hl(0, "MiniClueDescSingle", { link = "Normal" })
+    vim.api.nvim_set_hl(0, "MiniClueDescGroup", { link = "Normal" })
+    vim.api.nvim_set_hl(0, "MiniClueNextKey", { link = "Normal" })
     miniclue.setup({
       window = {
         config = {
+          border = "rounded",
           width = 50,
+          style = "minimal",
         },
       },
       triggers = {

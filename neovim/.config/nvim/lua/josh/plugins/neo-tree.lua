@@ -10,7 +10,8 @@ return {
   config = function()
     local neotree = require("neo-tree")
     local events = require("neo-tree.events")
-
+    vim.api.nvim_set_hl(0, "NeoTreeNormal", { link = "Normal" })
+    vim.api.nvim_set_hl(0, "NeoTreeNormalNC", { link = "Normal" })
     local function on_move(data)
       Snacks.rename.on_rename_file(data.source, data.destination)
     end
@@ -56,3 +57,25 @@ return {
     vim.keymap.set("n", "<leader>e", "<cmd>Neotree toggle right<cr>", { desc = "Toggle Neo-Tree" })
   end,
 }
+
+-- -- vim.keymap.set("n", "<leader>th", "<CMD>Telescope highlights<CR>");
+-- --   vim.api.nvim_set_hl(0, "FloatFooter", { link = "Normal" })
+-- vim.api.nvim_set_hl(0, "NormalFloat", { link = "Normal" })
+-- --   vim.api.nvim_set_hl(0, "FloatFooter", { link = "Normal" })
+-- --   vim.api.nvim_set_hl(0, "SnacksNormalNc", { link = "Normal" })
+-- --   vim.api.nvim_set_hl(0, "SnacksNotifierWarn", { link = "Normal" })
+-- --   vim.api.nvim_set_hl(0, "SnacksNotifierError", { link = "Normal" })
+-- --   vim.api.nvim_set_hl(0, "SnacksNotifierDebug", { link = "Normal" })
+-- --   vim.api.nvim_set_hl(0, "SnacksNotifierTrace", { link = "Normal" })
+-- --   vim.api.nvim_set_hl(0, "SnacksNotifierBorderInfo", { link = "Normal" })
+-- --   vim.api.nvim_set_hl(0, "SnacksNotifierBorderWarn", { link = "Normal" })
+-- --   vim.api.nvim_set_hl(0, "SnacksNotifierBorderError", { link = "Normal" })
+-- --   vim.api.nvim_set_hl(0, "SnacksNotifierBorderDebug", { link = "Normal" })
+-- --   vim.api.nvim_set_hl(0, "SnacksNotifierBorderTrace", { link = "Normal" })
+-- --   vim.api.nvim_set_hl(0, "SnacksNotifierTitleInfo", { link = "Normal" })
+-- --   vim.api.nvim_set_hl(0, "SnacksNotifierTitleWarn", { link = "Normal" })
+-- --   vim.api.nvim_set_hl(0, "SnacksNotifierTitleError", { link = "Normal" })
+-- --   vim.api.nvim_set_hl(0, "SnacksNotifierTitleDebug", { link = "Normal" })
+-- --   vim.api.nvim_set_hl(0, "SnacksNotifierTitleTrace", { link = "Normal" })
+-- --
+-- --
