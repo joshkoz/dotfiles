@@ -308,11 +308,11 @@ bindsym Ctrl+$mod+Print exec --no-startup-id maim --window $(xdotool getactivewi
 bindsym Ctrl+Shift+S exec --no-startup-id maim --select | xclip -selection clipboard -t image/png
 
 ## Pick audio output
-bindsym Ctrl+Shift+A exec --no-startup-id /home/joshua/.local/bin/pick-output-audio.sh
-bindsym Ctrl+Shift+M exec --no-startup-id /home/joshua/.local/bin/pick-input-audio.sh
+bindsym Ctrl+Shift+A exec --no-startup-id /home/joshua/.bin/pick-output-audio.sh
+bindsym Ctrl+Shift+M exec --no-startup-id /home/joshua/.bin/pick-input-audio.sh
 
 ## Swap out the wallpaper
-bindsym $mod+Shift+W exec --no-startup-id /home/joshua/.local/bin/set-wallpaper.sh 
+bindsym $mod+Shift+W exec --no-startup-id /home/joshua/.bin/set-wallpaper.sh 
 
 smart_borders no_gaps  
 smart_gaps on

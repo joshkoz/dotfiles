@@ -21,6 +21,6 @@
     # Get the color for the current session, defaulting if not found
     COLOR="${session_colors[$SESSION_NAME]:-$default_color}"
 
-    /home/joshua/.local/bin/colors.sh $COLOR 
+    /home/joshua/.bin/colors.sh $COLOR 
 } &> /dev/null
 
