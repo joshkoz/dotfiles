@@ -43,6 +43,9 @@ return {
       lspconfig["bashls"].setup({
         capabilities = capabilities,
       })
+      lspconfig["clangd"].setup({
+        capabilities = capabilities,
+      })
 
       lspconfig["lua_ls"].setup({
         capabilities = capabilities,
