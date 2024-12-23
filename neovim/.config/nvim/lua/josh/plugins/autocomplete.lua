@@ -4,7 +4,12 @@ return {
     dependencies = { "rafamadriz/friendly-snippets" },
     version = "*",
     opts = {
-      keymap = { preset = "default", ["<CR>"] = { "accept", "fallback" } },
+      keymap = {
+        preset = "default",
+        ["<CR>"] = { "accept", "fallback" },
+        ["<Up>"] = { "select_prev", "fallback" },
+        ["<Down>"] = { "select_next", "fallback" },
+      },
       appearance = {
         use_nvim_cmp_as_default = true,
         nerd_font_variant = "mono",
@@ -13,6 +18,7 @@ return {
         list = {
           selection = "manual",
         },
+        documentation = { auto_show = true, auto_show_delay_ms = 500 },
       },
       signature = { enabled = true },
       sources = {
