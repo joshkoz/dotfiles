@@ -56,14 +56,19 @@ return {
         },
       },
       sections = {
-        lualine_a = { "mode" },
+        lualine_a = { {
+          "mode",
+          fmt = function(str)
+            return str:sub(1, 1)
+          end,
+        } },
         lualine_b = { { "branch", icon = "" }, "filename" },
         lualine_c = {
           "grapple",
         },
         lualine_x = { { "diagnostics", symbols = { error = " ", warn = " ", info = " " }, colored = false }, "diff", "filetype" },
-        lualine_y = { "progress", "location" },
-        lualine_z = { clients_lsp },
+        lualine_y = { "progress", "location", clients_lsp },
+        lualine_z = {},
       },
       inactive_sections = {
         lualine_a = {},

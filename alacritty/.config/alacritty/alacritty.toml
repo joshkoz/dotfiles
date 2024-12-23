@@ -6,17 +6,18 @@ draw_bold_text_with_bright_colors = true
 TERM = "alacritty"
 
 [font]
-size = 10 
+size = 11
 
 [font.normal]
-family = "CaskaydiaCove NFM SemiLight"
+# family = "CaskaydiaCove NFM SemiLight"
+family = "JetBrainsMono NF"
 
 [font.offset]
 x = 0
 y = 10 
 
 [font.glyph_offset]
-y = 5 
+y =  5 
 
 [hints]
 alphabet = "jfkdls;ahgurieowpq"
@@ -65,7 +66,7 @@ y = 0
 [general]
 live_config_reload = true
 # import = ["/home/joshua/.config/alacritty/colors/nightfly.toml"]
-import = ["/home/joshua/.config/alacritty/colors/catppuccin-mocha.toml"]
-# import = ["/home/joshua/.config/alacritty/colors/kanagawa.toml"]
+# import = ["/home/joshua/.config/alacritty/colors/catppuccin-mocha.toml"]
+import = ["/home/joshua/.config/alacritty/colors/kanagawa.toml"]
 
 [terminal]
