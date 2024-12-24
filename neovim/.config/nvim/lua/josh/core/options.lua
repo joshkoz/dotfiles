@@ -61,7 +61,9 @@ vim.opt.smoothscroll = true
 
 vim.opt.scrolloff = 8
 vim.opt.wrap = false
+vim.opt.spell = true
 vim.opt.spelllang = { "en_au", "en_us" }
+vim.opt.spelloptions = "camel,noplainbuffer"
 
 -- Only suggest a maximum of 15 options
 vim.opt.pumheight = 15
