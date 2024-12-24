@@ -1,0 +1,6 @@
+{
+  "todo": {
+    "prefix": "todo",
+    "body": ["// TODO(Josh): ${1}"]
+  }
+}
