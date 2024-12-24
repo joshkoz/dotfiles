@@ -1,6 +1,7 @@
 return {
   {
     "iamcco/markdown-preview.nvim",
+    enabled = false,
     cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
     ft = { "markdown" },
     build = function()
@@ -9,24 +10,18 @@ return {
   },
   {
     "OXY2DEV/markview.nvim",
-    lazy = false, -- Recommended
-    -- ft = "markdown" -- If you decide to lazy-load anyway
-
+    enabled = true,
+    lazy = false,
     dependencies = {
-      -- You will not need this if you installed the
-      -- parsers manually
-      -- Or if the parsers are in your $RUNTIMEPATH
       "nvim-treesitter/nvim-treesitter",
     },
-    config = function()
+    config = function(opts)
       local markview = require("markview")
-      local presets = require("markview.presets")
 
       markview.setup({
-        headings = presets.headings.glow_labels,
+        hybrid_modes = { "n" },
+        initial_state = false,
       })
-
-      vim.cmd("Markview enableAll")
     end,
   },
 }
