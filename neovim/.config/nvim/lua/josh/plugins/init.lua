@@ -4,7 +4,6 @@ return {
     "echasnovski/mini.surround",
     version = false,
     event = "BufEnter",
-    enabled = false,
     opts = {},
   },
   {
