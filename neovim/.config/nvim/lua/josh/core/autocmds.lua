@@ -1,19 +1,22 @@
+local autocmd = vim.api.nvim_create_autocmd
+local augroup = vim.api.nvim_create_augroup
+
 -- Highlight on yank
-vim.api.nvim_create_autocmd("TextYankPost", {
+autocmd("TextYankPost", {
   callback = function()
     vim.highlight.on_yank()
   end,
-  group = vim.api.nvim_create_augroup("YankHighlight", { clear = true }),
+  group = augroup("YankHighlight", { clear = true }),
   pattern = "*",
 })
 
-vim.api.nvim_create_autocmd("FileType", {
+autocmd("FileType", {
   pattern = "gitcommit",
   command = "setlocal textwidth=72 colorcolumn=50,72 formatexpr=",
 })
 
-vim.api.nvim_create_autocmd("LspAttach", {
-  group = vim.api.nvim_create_augroup("LspKeymaps", {}),
+autocmd("LspAttach", {
+  group = augroup("LspKeymaps", { clear = true }),
   callback = function(ev)
     vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = ev.buf, noremap = true, silent = true, desc = "vim.lsp.buf.definition()" })
     vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = ev.buf, noremap = true, silent = true, desc = "vim.diagnostic.setqflist()" })
@@ -23,8 +26,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end,
 })
 
-vim.api.nvim_create_autocmd("LspProgress", {
-  group = vim.api.nvim_create_augroup("LspProgress", {}),
+autocmd("LspProgress", {
+  group = augroup("LspProgress", { clear = true }),
   callback = function(ev)
     local spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
     vim.notify(vim.lsp.status(), "info", {
@@ -38,9 +41,8 @@ vim.api.nvim_create_autocmd("LspProgress", {
 })
 
 local ns = vim.api.nvim_create_namespace("visual_line_numbers")
-
-vim.api.nvim_create_autocmd({ "ModeChanged", "CursorMoved" }, {
-  group = vim.api.nvim_create_augroup("VisualLineNumbers", {}),
+autocmd({ "ModeChanged", "CursorMoved" }, {
+  group = augroup("VisualLineNumbers", { clear = true }),
   callback = function(args)
     local mode = vim.fn.mode()
     if not mode:match("[vV]") then

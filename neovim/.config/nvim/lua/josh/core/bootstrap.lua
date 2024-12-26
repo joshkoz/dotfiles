@@ -24,7 +24,7 @@ require("lazy").setup({
   install = {
     -- try to load one of these colorschemes when starting an installation during startup.
     -- This is the theme for the Lazy UI before everything is set up.
-    colorscheme = { "catppuccin-mocha" },
+    colorscheme = { "kanagawa" },
   },
   checker = {
     -- check for updates but don't notify about them on launch
