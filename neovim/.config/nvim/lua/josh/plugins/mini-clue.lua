@@ -6,6 +6,9 @@ return {
     vim.api.nvim_set_hl(0, "MiniClueDescSingle", { link = "Normal" })
     vim.api.nvim_set_hl(0, "MiniClueDescGroup", { link = "Normal" })
     vim.api.nvim_set_hl(0, "MiniClueNextKey", { link = "Normal" })
+    vim.api.nvim_set_hl(0, "MiniClueBorder", { link = "Normal" })
+    vim.api.nvim_set_hl(0, "MiniClueBorder", { link = "Normal" })
+    vim.api.nvim_set_hl(0, "MiniClueTitle", { link = "Title" })
     miniclue.setup({
       window = {
         config = {
