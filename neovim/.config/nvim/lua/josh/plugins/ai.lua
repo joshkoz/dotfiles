@@ -6,6 +6,5 @@ return {
     gp.setup({
       openai_api_key = os.getenv("OPENAI_API_KEY"),
     })
-    vim.keymap.set("n", "<leader>cp", "<CMD>GpChatNew vsplit<CR>", { desc = "" })
   end,
 }

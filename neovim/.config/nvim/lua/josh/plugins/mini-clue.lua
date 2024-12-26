@@ -1,9 +1,6 @@
 return {
   "echasnovski/mini.clue",
-  version = "*",
-  dependencies = {
-    "nvim-neotest/neotest",
-  },
+  version = false,
   config = function()
     local miniclue = require("mini.clue")
     vim.api.nvim_set_hl(0, "MiniClueDescSingle", { link = "Normal" })

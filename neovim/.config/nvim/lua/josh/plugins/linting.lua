@@ -6,7 +6,6 @@ return {
   },
   config = function()
     local lint = require("lint")
-
     lint.linters_by_ft = {
       javascript = { "eslint_d" },
       typescript = { "eslint_d" },
@@ -18,13 +17,8 @@ return {
     vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
       group = vim.api.nvim_create_augroup("lint", { clear = true }),
       callback = function()
-        lint.try_lint()
+        require("lint").try_lint()
       end,
     })
-
-    vim.keymap.set("n", "<leader>ll", function()
-      lint.try_lint()
-      vim.print("Linted complete")
-    end, { desc = "Trigger [l]inting for current file" })
   end,
 }

@@ -1,21 +1,22 @@
 return {
-  { "nvim-lua/plenary.nvim" },
   { "nmac427/guess-indent.nvim", opts = {} },
   {
     "echasnovski/mini.surround",
-    version = "*",
+    version = false,
     event = "BufEnter",
+    enabled = false,
     opts = {},
   },
   {
     "echasnovski/mini.ai",
-    version = "*",
+    version = false,
     event = "BufEnter",
     opts = {},
   },
   {
     "echasnovski/mini.icons",
     lazy = true,
+    version = false,
     opts = {
       file = {
         [".keep"] = { glyph = "󰊢", hl = "MiniIconsGrey" },
@@ -34,6 +35,7 @@ return {
   },
   {
     "echasnovski/mini.hipatterns",
+    version = false,
     config = function()
       local hipatterns = require("mini.hipatterns")
       hipatterns.setup({
@@ -48,16 +50,6 @@ return {
           hex_color = hipatterns.gen_highlighter.hex_color(),
         },
       })
-    end,
-  },
-  {
-    "mcauley-penney/visual-whitespace.nvim",
-    branch = "getregionpos", -- Remove this branch
-    config = function()
-      require("visual-whitespace").setup()
-      local comment_fg = vim.fn.synIDattr(vim.fn.hlID("Comment"), "fg#")
-      local visual_bg = vim.fn.synIDattr(vim.fn.hlID("Visual"), "bg#")
-      vim.api.nvim_set_hl(0, "VisualNonText", { fg = comment_fg, bg = visual_bg })
     end,
   },
   {

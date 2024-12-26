@@ -16,13 +16,28 @@ return {
       },
       completion = {
         list = {
-          selection = "manual",
+          selection = function(ctx)
+            return ctx.mode == "cmdline" and "auto_insert" or "manual"
+          end,
         },
-        documentation = { auto_show = true, auto_show_delay_ms = 500 },
+        documentation = { auto_show = true, auto_show_delay_ms = 500, treesitter_highlighting = true },
       },
       signature = { enabled = true },
       sources = {
         default = { "lazydev", "lsp", "path", "snippets", "buffer" },
+        cmdline = function()
+          local type = vim.fn.getcmdtype()
+          -- Search forward and backward
+          if type == "/" or type == "?" then
+            return { "buffer" }
+          end
+          -- Commands
+          if type == ":" then
+            return { "cmdline" }
+          end
+          return {}
+        end,
+
         providers = {
           lazydev = {
             name = "LazyDev",

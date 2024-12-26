@@ -1,62 +1,59 @@
 return {
   "williamboman/mason.nvim",
-  dependencies = {
-    "williamboman/mason-lspconfig.nvim",
-    "WhoIsSethDaniel/mason-tool-installer.nvim",
-  },
   cmd = {
     "Mason",
-    "MasonInstall",
-    "MasonUninstall",
-    "MasonUninstallAll",
-    "MasonLog",
-    "MasonUpdate",
-    "MasonUpdateAll",
   },
   build = ":MasonUpdate",
-  config = function()
-    local mason = require("mason")
-    local mason_lspconfig = require("mason-lspconfig")
-    local mason_tool_installer = require("mason-tool-installer")
+  opts_extend = { "ensure_installed" },
+  opts = {
+    PATH = "prepend",
+    ensure_installed = {
+      "html-lsp",
+      "css-lsp",
+      "json-lsp", -- jsonls
+      "lua-language-server",
+      "emmet-ls",
+      "pyright",
+      "biome",
+      "dockerfile-language-server", -- dockerls
+      "yaml-language-server", -- yamlls
+      "marksman",
+      "bash-language-server",
+      "prettier", -- prettier formatter
+      "stylua", -- lua formatter
+      "isort", -- python formatter
+      "black", -- python formatter
+      "pylint", -- python linter
+      "eslint_d", -- js linter
+      "csharpier", -- csharp formatter
+      "netcoredbg", -- csharp debugger
+      "clangd",
+      "clang-format",
+    },
+  },
+  ---@param opts MasonSettings | {ensure_installed: string[]}
+  config = function(_, opts)
+    require("mason").setup(opts)
 
-    mason.setup({
-      ui = {
-        icons = {
-          package_installed = "✓",
-          package_uninstalled = "✗",
-          package_pending = "⟳",
-        },
-      },
-    })
+    -- AutoInstallation
+    local mr = require("mason-registry")
+    mr:on("package:install:success", function()
+      vim.defer_fn(function()
+        -- trigger FileType event to possibly load this newly installed LSP server
+        require("lazy.core.handler.event").trigger({
+          event = "FileType",
+          buf = vim.api.nvim_get_current_buf(),
+        })
+      end, 100)
+    end)
 
-    mason_lspconfig.setup({
-      ensure_installed = {
-        "jsonls",
-        "html",
-        "lua_ls",
-        "cssls",
-        "emmet_ls",
-        "pyright",
-        "biome",
-        "dockerls",
-        "yamlls",
-        "marksman",
-        "bashls",
-      },
-      automatic_installation = true,
-    })
-
-    mason_tool_installer.setup({
-      ensure_installed = {
-        "prettier", -- prettier formatter
-        "stylua", -- lua formatter
-        "isort", -- python formatter
-        "black", -- python formatter
-        "pylint", -- python linter
-        "eslint_d", -- js linter
-        "csharpier", -- csharp formatter
-        "netcoredbg", -- csharp debugger
-      },
-    })
+    mr.refresh(function()
+      for _, tool in ipairs(opts.ensure_installed) do
+        local p = mr.get_package(tool)
+        if not p:is_installed() then
+          p:install()
+        end
+      end
+    end)
   end,
 }

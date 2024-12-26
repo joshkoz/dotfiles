@@ -1,9 +1,6 @@
 return {
   -- Highlight, edit, and navigate code
   "nvim-treesitter/nvim-treesitter",
-  dependencies = {
-    { "windwp/nvim-ts-autotag", opts = {} },
-  },
   event = { "BufReadPost", "BufNewFile" },
   build = ":TSUpdate",
   config = function()
@@ -47,7 +44,6 @@ return {
       },
       auto_install = true,
       indent = { enable = true },
-      auto_tag = { enable = true },
       incremental_selection = {
         enable = true,
       },

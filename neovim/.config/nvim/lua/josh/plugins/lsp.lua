@@ -4,6 +4,7 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       "saghen/blink.cmp",
+      "williamboman/mason.nvim", -- ensure mason binaries are added to the runtime path
     },
     config = function()
       local capabilities = require("blink.cmp").get_lsp_capabilities()
@@ -142,6 +143,7 @@ return {
   },
   {
     "seblj/roslyn.nvim",
+    ft = "cs",
     opts = {
       config = {
         on_attach = function()
