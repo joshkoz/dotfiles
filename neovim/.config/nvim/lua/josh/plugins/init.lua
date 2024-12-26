@@ -7,7 +7,7 @@ return {
     opts = {},
   },
   {
-    "echasnovski/mini.ai",
+    "echasnovskw/mini.ai",
     version = false,
     event = "BufEnter",
     opts = {},
@@ -55,7 +55,7 @@ return {
     "folke/ts-comments.nvim",
     opts = {},
     event = "VeryLazy",
-    enabled = vim.fn.has("nvim-0.10.0") == 1,
+    enabled = true,
   },
   {
     "folke/snacks.nvim",
