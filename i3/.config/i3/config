@@ -270,7 +270,7 @@ workspace $ws8 output $dpright
 workspace $ws9 output $dpright
 workspace $ws10 output $dpleft
 
-assign [class="Alacritty"] workspace $ws6 
+assign [class="ghostty"] workspace $ws6 
 assign [class="firefox"] workspace $ws7 
 assign [class="vesktop"] workspace $ws1 
 assign [class="Slack"] workspace $ws1 
