@@ -1,4 +1,4 @@
-theme = kanagawabones  
+theme = catppuccin-mocha 
 font-family = "JetBrains Mono NFM Medium"
 window-decoration = false
 shell-integration-features = no-cursor

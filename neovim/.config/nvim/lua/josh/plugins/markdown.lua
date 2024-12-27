@@ -8,7 +8,7 @@ return {
     },
     opts = {
       hybrid_modes = { "n" },
-      initial_state = false,
+      -- initial_state = false,
     },
   },
 }
