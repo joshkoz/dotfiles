@@ -47,9 +47,9 @@ return {
         theme = buildcolor(),
         icons_enabled = true,
         globalstatus = true,
+        section_separators = { left = "", right = "" },
         component_separators = {},
         always_divide_middle = true,
-        section_separators = {},
         disabled_filetypes = {
           statusline = {},
           winbar = {},
@@ -63,10 +63,8 @@ return {
           end,
         } },
         lualine_b = { { "branch", icon = "" }, "filename" },
-        lualine_c = {
-          "grapple",
-        },
-        lualine_x = { { "diagnostics", symbols = { error = " ", warn = " ", info = " " }, colored = false }, "diff", "filetype" },
+        lualine_c = {},
+        lualine_x = { { "diagnostics", symbols = { error = " ", warn = " ", info = " " }, colored = false }, "diff", "grapple", "filetype" },
         lualine_y = { "progress", "location", clients_lsp },
         lualine_z = {},
       },
