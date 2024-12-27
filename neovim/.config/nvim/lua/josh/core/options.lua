@@ -61,7 +61,7 @@ vim.opt.smoothscroll = true
 
 vim.opt.scrolloff = 8
 vim.opt.wrap = false
-vim.opt.spell = true
+vim.opt.spell = false
 vim.opt.spelllang = { "en_au", "en_us" }
 vim.opt.spelloptions = "camel,noplainbuffer"
 

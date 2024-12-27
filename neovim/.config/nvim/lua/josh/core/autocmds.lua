@@ -63,3 +63,12 @@ autocmd({ "ModeChanged", "CursorMoved" }, {
     end
   end,
 })
+
+autocmd("BufEnter", {
+  group = augroup("set-spelling", {}),
+  pattern = { "*.cs", "*.md", "*.lua" },
+  callback = function()
+    local win = vim.api.nvim_get_current_win()
+    vim.wo[win][0].spell = true
+  end,
+})

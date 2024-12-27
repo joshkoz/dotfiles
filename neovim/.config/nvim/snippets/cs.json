@@ -2,5 +2,9 @@
   "todo": {
     "prefix": "todo",
     "body": ["// TODO(Josh): ${1}"]
+  },
+  "doc": {
+    "prefix": "doc",
+    "body": ["/// <summary>\n///    ${1}\n///</summary>"]
   }
 }
