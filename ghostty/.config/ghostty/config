@@ -1,0 +1,14 @@
+theme = kanagawabones  
+font-family = "JetBrains Mono NFM Medium"
+window-decoration = false
+shell-integration-features = no-cursor
+cursor-style-blink = false
+confirm-close-surface = false
+font-size = 10 
+adjust-cell-height = 40% 
+window-padding-x = 5 
+window-padding-y = 5 
+window-padding-color = extend
+
+# Keybinds
+keybind = ctrl+shift+r=reload_config
