@@ -40,6 +40,7 @@ return {
           theme = theme,
         } })
       end,
+      vim.api.nvim_set_hl(0, "NormalFloat", { link = "Normal" }),
     })
 
     require("lualine").setup({
