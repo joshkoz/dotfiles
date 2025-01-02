@@ -78,8 +78,6 @@ vim.opt.pumheight = 15
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
-vim.opt.messagesopt = "wait:2000,history:500"
-
 -- Disable the statusline and sets the status line as a line: https://github.com/neovim/neovim/issues/18965
 -- vim.opt.statusline = "%#WinSeparator#%{repeat('─',winwidth('.'))}%*"
 vim.opt.laststatus = 3
