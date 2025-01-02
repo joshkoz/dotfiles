@@ -7,7 +7,12 @@ return {
       "williamboman/mason.nvim", -- ensure mason binaries are added to the runtime path
     },
     config = function()
-      local capabilities = require("blink.cmp").get_lsp_capabilities()
+      local capabilities = vim.lsp.protocol.make_client_capabilities()
+      local loaded, blink = pcall(require, "blink.cmp")
+      if loaded then
+        capabilities = blink.get_lsp_capabilities()
+      end
+
       local lspconfig = require("lspconfig")
 
       lspconfig["html"].setup({
@@ -147,9 +152,7 @@ return {
     ft = "cs",
     opts = {
       config = {
-        on_attach = function()
-          vim.cmd([[compiler dotnet]])
-        end,
+        on_attach = function() end,
         settings = {
           ["csharp|symbol_search"] = {
             ["dotnet_search_reference_assemblies"] = true,

@@ -12,6 +12,7 @@ vim.opt.breakindent = true
 
 -- Save undo history
 vim.opt.undofile = true
+vim.opt.undolevels = 10000 -- 10x more undo levels
 vim.opt.swapfile = false
 
 -- Case-insensitive searching UNLESS \C or capital in search
@@ -49,12 +50,17 @@ vim.opt.timeoutlen = 300
 vim.opt.ttimeout = false
 vim.opt.timeout = false
 
+-- Folds
+vim.opt.foldmethod = "expr" -- use tree-sitter for folding method
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.opt.foldlevel = 99
+
 -- Disable folds in diffs
 vim.opt.diffopt:append("context:99999")
 vim.opt.fillchars:append({ diff = "╱" })
 
 -- Set completeopt to have a better completion experience
-vim.opt.completeopt = "menuone,noselect"
+vim.opt.completeopt = "menu,menuone,noselect,popup,fuzzy"
 vim.opt.wildmode = "longest,full,full"
 vim.opt.wildoptions = "pum,fuzzy"
 vim.opt.smoothscroll = true
@@ -71,6 +77,8 @@ vim.opt.pumheight = 15
 -- Ensure split opens to the right or below
 vim.opt.splitright = true
 vim.opt.splitbelow = true
+
+vim.opt.messagesopt = "wait:2000,history:500"
 
 -- Disable the statusline and sets the status line as a line: https://github.com/neovim/neovim/issues/18965
 -- vim.opt.statusline = "%#WinSeparator#%{repeat('─',winwidth('.'))}%*"

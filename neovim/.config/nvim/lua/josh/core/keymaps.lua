@@ -1,5 +1,5 @@
 -- Set space as the leader key
-vim.g.mapleader = " "
+vim.g.mapleader = vim.keycode("<space>")
 
 vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true, desc = "Unmap space from moving right" })
 vim.keymap.set({ "n", "v" }, "-", vim.cmd.Ex, { silent = true, desc = "Open the file explorer" })
