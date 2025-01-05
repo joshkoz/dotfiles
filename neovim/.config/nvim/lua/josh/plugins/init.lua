@@ -1,5 +1,5 @@
 return {
-  { "nmac427/guess-indent.nvim", opts = {} },
+  -- { "nmac427/guess-indent.nvim", opts = {} },
   {
     "echasnovski/mini.surround",
     version = false,
