@@ -27,20 +27,6 @@ autocmd("LspAttach", {
   end,
 })
 
-autocmd("LspProgress", {
-  group = augroup("LspProgress", { clear = true }),
-  callback = function(ev)
-    local spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
-    vim.notify(vim.lsp.status(), "info", {
-      id = "lsp_progress",
-      title = "LSP Progress",
-      opts = function(notif)
-        notif.icon = ev.data.params.value.kind == "end" and " " or spinner[math.floor(vim.uv.hrtime() / (1e6 * 80)) % #spinner + 1]
-      end,
-    })
-  end,
-})
-
 local ns = vim.api.nvim_create_namespace("visual_line_numbers")
 autocmd({ "ModeChanged", "CursorMoved" }, {
   group = augroup("VisualLineNumbers", { clear = true }),
