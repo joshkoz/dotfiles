@@ -92,6 +92,37 @@ return {
           },
         },
       })
+
+      lspconfig["vtsls"].setup({
+        capabilities = capabilities,
+        settings = {
+          complete_function_calls = true,
+          vtsls = {
+            enableMoveToFileCodeAction = true,
+            autoUseWorkspaceTsdk = true,
+            experimental = {
+              maxInlayHintLength = 30,
+              completion = {
+                enableServerSideFuzzyMatch = true,
+              },
+            },
+          },
+          typescript = {
+            updateImportsOnFileMove = { enabled = "always" },
+            suggest = {
+              completeFunctionCalls = true,
+            },
+            inlayHints = {
+              enumMemberValues = { enabled = true },
+              functionLikeReturnTypes = { enabled = true },
+              parameterNames = { enabled = "literals" },
+              parameterTypes = { enabled = true },
+              propertyDeclarationTypes = { enabled = true },
+              variableTypes = { enabled = false },
+            },
+          },
+        },
+      })
     end,
   },
   {
@@ -108,45 +139,55 @@ return {
       },
     },
   },
-  {
-    "pmizio/typescript-tools.nvim",
-    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-    event = "VeryLazy",
-    opts = {
-      filetypes = {
-        "javascript",
-        "javascriptreact",
-        "json",
-        "jsonc",
-        "typescript",
-        "typescript.tsx",
-        "typescriptreact",
-      },
-      on_attach = function() end,
-      settings = {
-        separate_diagnostic_server = true,
-        tsserver_max_memory = "auto",
-        expose_as_code_action = "all",
-        tsserver_plugins = {
-          "@styled/typescript-styled-plugin",
-        },
-        include_completions_with_insert_text = true,
-        tsserver_file_preferences = {
-          includeInlayParameterNameHints = "all",
-          includeCompletionsForModuleExports = true,
-          quotePreference = "auto",
-          includeInlayEnumMemberValueHints = true,
-          includeInlayFunctionLikeReturnTypeHints = true,
-          includeInlayVariableTypeHints = true,
-        },
-        code_lens = "off",
-        jsx_close_tag = {
-          enable = false,
-          filetypes = { "javascriptreact", "typescriptreact" },
-        },
-      },
-    },
-  },
+  -- {
+  --   "pmizio/typescript-tools.nvim",
+  --   dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+  --   event = "VeryLazy",
+  --   opts = {
+  --     filetypes = {
+  --       "javascript",
+  --       "javascriptreact",
+  --       "json",
+  --       "jsonc",
+  --       "typescript",
+  --       "typescript.tsx",
+  --       "typescriptreact",
+  --     },
+  --     on_attach = function() end,
+  --     settings = {
+  --       separate_diagnostic_server = true,
+  --       tsserver_max_memory = "auto",
+  --       expose_as_code_action = "all",
+  --       tsserver_plugins = {
+  --         "@styled/typescript-styled-plugin",
+  --       },
+  --       typescript = { preferences = {
+  --         includePackageJsonAutoImports = "off",
+  --       } },
+  --       include_completions_with_insert_text = true,
+  --       tsserver_file_preferences = {
+  --         includeInlayParameterNameHints = "all",
+  --         includeCompletionsForModuleExports = true,
+  --         quotePreference = "auto",
+  --         includeInlayEnumMemberValueHints = true,
+  --         includeInlayFunctionLikeReturnTypeHints = true,
+  --         includeInlayVariableTypeHints = true,
+  --       },
+  --       vtsls = {
+  --         experimental = {
+  --           completion = {
+  --             enableServerSideFuzzyMatch = true,
+  --           },
+  --         },
+  --       },
+  --       code_lens = "off",
+  --       jsx_close_tag = {
+  --         enable = false,
+  --         filetypes = { "javascriptreact", "typescriptreact" },
+  --       },
+  --     },
+  --   },
+  -- },
   {
     "seblj/roslyn.nvim",
     ft = "cs",
