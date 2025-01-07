@@ -10,6 +10,7 @@ return {
         fzf_colors = true,
         fzf_opts = {
           ["--no-scrollbar"] = true,
+          ["--history"] = vim.fn.stdpath("data") .. "/fzf-lua-history",
         },
         defaults = {
           formatter = "path.dirname_first",
@@ -37,6 +38,9 @@ return {
           },
         },
         grep = {
+          fzf_opts = {
+            ["--history"] = vim.fn.stdpath("data") .. "/fzf-lua-grep-history",
+          },
           actions = {
             ["alt-i"] = { actions.toggle_ignore },
             ["alt-h"] = { actions.toggle_hidden },
