@@ -1,5 +1,6 @@
-theme = catppuccin-mocha 
+theme = kanagawabones 
 font-family = "JetBrains Mono NFM Medium"
+font-feature = -calt
 window-decoration = false
 shell-integration-features = no-cursor
 cursor-style-blink = false
