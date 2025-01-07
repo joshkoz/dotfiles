@@ -52,10 +52,35 @@ autocmd({ "ModeChanged", "CursorMoved" }, {
 })
 
 autocmd("BufEnter", {
-  group = augroup("set-spelling", {}),
+  group = augroup("set-spelling", { clear = true }),
   pattern = { "*.cs", "*.md", "*.lua" },
   callback = function()
     local win = vim.api.nvim_get_current_win()
     vim.wo[win][0].spell = true
+  end,
+})
+
+autocmd("RecordingEnter", {
+  group = augroup("start-macro-recording", { clear = true }),
+  callback = function()
+    vim.opt.cmdheight = 1
+  end,
+})
+
+autocmd("RecordingLeave", {
+  group = augroup("stop-macro-recording", { clear = true }),
+  callback = function()
+    vim.opt.cmdheight = 0
+  end,
+})
+
+autocmd("ColorScheme", {
+  group = augroup("set-highlights", { clear = true }),
+  callback = function()
+    local winsep = vim.api.nvim_get_hl(0, { name = "WinSeparator" })
+    local norm = vim.api.nvim_get_hl(0, { name = "Normal" })
+    vim.api.nvim_set_hl(0, "MyLine", { fg = winsep.fg, bg = norm.bg })
+    vim.api.nvim_set_hl(0, "StatusLine", { link = "Normal" })
+    vim.api.nvim_set_hl(0, "StatusLineNC", { link = "Normal" })
   end,
 })

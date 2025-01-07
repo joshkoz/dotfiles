@@ -1,5 +1,6 @@
 return {
   "nvim-lualine/lualine.nvim",
+  enabled = false,
   config = function()
     -- LSP clients attached to buffer
     local clients_lsp = function()
@@ -48,7 +49,8 @@ return {
         theme = buildcolor(),
         icons_enabled = true,
         globalstatus = true,
-        section_separators = { left = "", right = "" },
+        -- section_separators = { left = "", right = "" },
+        section_separators = {},
         component_separators = {},
         always_divide_middle = true,
         disabled_filetypes = {
@@ -60,7 +62,7 @@ return {
         lualine_a = { {
           "mode",
           fmt = function(str)
-            return str:sub(1, 1)
+            return str:sub(1, 1) .. " "
           end,
         } },
         lualine_b = { { "branch", icon = "" }, "filename" },

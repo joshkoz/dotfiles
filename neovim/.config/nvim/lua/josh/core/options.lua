@@ -79,9 +79,10 @@ vim.opt.splitright = true
 vim.opt.splitbelow = true
 
 -- Disable the statusline and sets the status line as a line: https://github.com/neovim/neovim/issues/18965
--- vim.opt.statusline = "%#WinSeparator#%{repeat('─',winwidth('.'))}%*"
-vim.opt.laststatus = 3
-vim.opt.showmode = false
+vim.opt.statusline = "%#MyLine#%{repeat('─',winwidth('.'))}%*"
+vim.opt.laststatus = 0
+vim.opt.showmode = true
+vim.opt.cmdheight = 0
 
 vim.g.loaded_python3_provider = 0
 vim.g.loaded_perl_provider = 0

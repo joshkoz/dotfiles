@@ -8,7 +8,7 @@ confirm-close-surface = false
 font-size = 10 
 adjust-cell-height = 40% 
 window-padding-x = 5 
-window-padding-y = 5 
+window-padding-y = 0 
 window-padding-color = extend
 
 # Keybinds
