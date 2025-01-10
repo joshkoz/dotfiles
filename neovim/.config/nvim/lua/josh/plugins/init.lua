@@ -72,7 +72,7 @@ return {
         -- scope = { enabled = true, hl = "Comment", char = "│" },
         indent = {
           char = "┆", -- | ¦ ┆ ┊ │
-          hl = "LineNr",
+          -- hl = "LineNr",
         },
       },
       scope = { enabled = false },

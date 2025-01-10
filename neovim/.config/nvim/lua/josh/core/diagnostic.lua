@@ -1,5 +1,10 @@
 vim.diagnostic.config({
-  underline = true,
+  underline = {
+    severity = {
+      vim.diagnostic.severity.HINT,
+      vim.diagnostic.severity.INFO,
+    },
+  },
   severity_sort = true,
   virtual_text = {
     spacing = 4,
@@ -19,5 +24,3 @@ vim.diagnostic.config({
     },
   },
 })
-vim.keymap.set("n", "<leader>ld", vim.diagnostic.setloclist, { desc = "Open File Diagnostics" })
-vim.keymap.set("n", "<leader>wd", vim.diagnostic.setqflist, { desc = "Open Workspace Quickfix Diagnostics" })
