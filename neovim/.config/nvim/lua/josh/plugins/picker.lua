@@ -63,7 +63,9 @@ return {
             child_prefix = false,
           },
           code_actions = {
-            previewer = vim.fn.executable("delta") == 1 and "codeaction_native" or nil,
+            previewer = false,
+            -- The previewer is nice, but it's too slow
+            -- previewer = vim.fn.executable("delta") == 1 and "codeaction_native" or nil,
             preview_pager = "delta --hunk-header-style omit --file-style omit --file-decoration-style omit",
             winopts = {
               layout = "vertical",

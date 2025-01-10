@@ -14,15 +14,14 @@ return {
             },
           },
         },
+        keywordStyle = { italic = false },
       })
       vim.cmd.colorscheme("kanagawa")
     end,
   },
   {
     "catppuccin/nvim",
-    enabled = false,
-    lazy = false,
-    priority = 1000,
+    lazy = true,
     name = "catppuccin",
     config = function()
       require("catppuccin").setup({

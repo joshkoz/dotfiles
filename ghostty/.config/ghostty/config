@@ -1,4 +1,4 @@
-theme = kanagawabones 
+theme = kanagawa-dragon 
 font-family = "JetBrains Mono NFM Medium"
 font-feature = -calt
 window-decoration = false
@@ -6,7 +6,7 @@ shell-integration-features = no-cursor
 cursor-style-blink = false
 confirm-close-surface = false
 font-size = 10 
-adjust-cell-height = 40% 
+adjust-cell-height = 20% 
 window-padding-x = 5 
 window-padding-y = 0 
 window-padding-color = extend

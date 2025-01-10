@@ -16,13 +16,15 @@ return {
       },
       completion = {
         list = {
-          selection = function(ctx)
-            return ctx.mode == "cmdline" and "auto_insert" or "manual"
-          end,
+          selection = {
+            preselect = false,
+            auto_insert = false,
+          },
         },
         documentation = { auto_show = true, auto_show_delay_ms = 500, treesitter_highlighting = true },
       },
       signature = { enabled = true },
+
       sources = {
         default = { "lazydev", "lsp", "path", "snippets", "buffer" },
         cmdline = {},

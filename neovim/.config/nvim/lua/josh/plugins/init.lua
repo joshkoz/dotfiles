@@ -77,7 +77,7 @@ return {
       },
       scope = { enabled = false },
       input = {
-        enabled = true,
+        enabled = false,
         icon = "",
         win = {
           wo = {

@@ -76,7 +76,7 @@ local bootstrap = function(namespace, type_keyword, file_name, mode)
     return {
       string.format("namespace %s;", namespace),
       "",
-      string.format("public %s %s", type_keyword, file_name),
+      string.format("internal sealed %s %s", type_keyword, file_name),
       "{",
       "",
       "}",
@@ -85,7 +85,7 @@ local bootstrap = function(namespace, type_keyword, file_name, mode)
     return {
       string.format("namespace %s", namespace),
       "{",
-      string.format("  public %s %s", type_keyword, file_name),
+      string.format("  internal sealed %s %s", type_keyword, file_name),
       "  {",
       "",
       "  }",
