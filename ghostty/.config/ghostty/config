@@ -1,5 +1,5 @@
-theme = kanagawa-dragon 
-font-family = "JetBrains Mono NFM Medium"
+theme = kanagawabones
+font-family = "JetBrains Mono NFM SemiBold"
 font-feature = -calt
 window-decoration = false
 shell-integration-features = no-cursor
