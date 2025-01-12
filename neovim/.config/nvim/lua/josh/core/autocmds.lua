@@ -3,10 +3,10 @@ local augroup = vim.api.nvim_create_augroup
 
 -- Highlight on yank
 autocmd("TextYankPost", {
+  group = augroup("joshkoz/yank-highlight", { clear = true }),
   callback = function()
     vim.highlight.on_yank()
   end,
-  group = augroup("YankHighlight", { clear = true }),
   pattern = "*",
 })
 
@@ -16,7 +16,7 @@ autocmd("FileType", {
 })
 
 autocmd("LspAttach", {
-  group = augroup("LspKeymaps", { clear = true }),
+  group = augroup("joshkoz/lsp-Keymaps", { clear = true }),
   callback = function(ev)
     -- vim.lsp.completion.enable(true, ev.data.client_id, ev.buf, { autotrigger = true })
     vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = ev.buf, noremap = true, silent = true, desc = "vim.lsp.buf.definition()" })
@@ -27,10 +27,10 @@ autocmd("LspAttach", {
   end,
 })
 
-local ns = vim.api.nvim_create_namespace("visual_line_numbers")
 autocmd({ "ModeChanged", "CursorMoved" }, {
-  group = augroup("VisualLineNumbers", { clear = true }),
+  group = augroup("joshkoz/visual-line-numbers", { clear = true }),
   callback = function(args)
+    local ns = vim.api.nvim_create_namespace("visual_line_numbers")
     local mode = vim.fn.mode()
     if not mode:match("[vV]") then
       vim.api.nvim_buf_clear_namespace(0, ns, 0, -1)
@@ -61,26 +61,36 @@ autocmd("BufEnter", {
 })
 
 autocmd("RecordingEnter", {
-  group = augroup("start-macro-recording", { clear = true }),
+  group = augroup("joshkoz/start-macro-recording", { clear = true }),
   callback = function()
     vim.opt.cmdheight = 1
   end,
 })
 
 autocmd("RecordingLeave", {
-  group = augroup("stop-macro-recording", { clear = true }),
+  group = augroup("joshkoz/stop-macro-recording", { clear = true }),
   callback = function()
     vim.opt.cmdheight = 0
   end,
 })
 
 autocmd("ColorScheme", {
-  group = augroup("set-highlights", { clear = true }),
+  group = augroup("joshkoz/set-highlights", { clear = true }),
   callback = function()
     local winsep = vim.api.nvim_get_hl(0, { name = "WinSeparator" })
     local norm = vim.api.nvim_get_hl(0, { name = "Normal" })
     vim.api.nvim_set_hl(0, "MyLine", { fg = winsep.fg, bg = norm.bg })
     vim.api.nvim_set_hl(0, "StatusLine", { link = "Normal" })
     vim.api.nvim_set_hl(0, "StatusLineNC", { link = "Normal" })
+  end,
+})
+
+autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
+  group = augroup("joshkoz/lint", { clear = true }),
+  callback = function()
+    local loaded, nvimlint = pcall(require, "lint")
+    if loaded then
+      nvimlint.try_lint()
+    end
   end,
 })
