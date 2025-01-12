@@ -1,7 +1,35 @@
 return {
-  "echasnovski/mini.clue",
+  "echasnovski/mini.nvim",
   version = false,
   config = function()
+    require("mini.surround").setup({})
+
+    require("mini.ai").setup({})
+
+    local hipatterns = require("mini.hipatterns")
+    hipatterns.setup({
+      highlighters = {
+        -- Highlight standalone 'FIXME', 'HACK', 'TODO', 'NOTE'
+        fixme = { pattern = "%f[%w]()FIXME()%f[%W]", group = "MiniHipatternsFixme" },
+        hack = { pattern = "%f[%w]()HACK()%f[%W]", group = "MiniHipatternsHack" },
+        todo = { pattern = "%f[%w]()TODO()%f[%W]", group = "MiniHipatternsTodo" },
+        note = { pattern = "%f[%w]()NOTE()%f[%W]", group = "MiniHipatternsNote" },
+
+        -- Highlight hex color strings (`#rrggbb`) using that color
+        hex_color = hipatterns.gen_highlighter.hex_color(),
+      },
+    })
+
+    require("mini.icons").setup({
+      file = {
+        [".keep"] = { glyph = "󰊢", hl = "MiniIconsGrey" },
+        ["devcontainer.json"] = { glyph = "", hl = "MiniIconsAzure" },
+      },
+      filetype = {
+        dotenv = { glyph = "", hl = "MiniIconsYellow" },
+      },
+    })
+
     local miniclue = require("mini.clue")
     vim.api.nvim_set_hl(0, "MiniClueDescSingle", { link = "Normal" })
     vim.api.nvim_set_hl(0, "MiniClueDescGroup", { link = "Normal" })
@@ -9,7 +37,7 @@ return {
     vim.api.nvim_set_hl(0, "MiniClueBorder", { link = "Normal" })
     vim.api.nvim_set_hl(0, "MiniClueBorder", { link = "Normal" })
     vim.api.nvim_set_hl(0, "MiniClueTitle", { link = "Title" })
-    miniclue.setup({
+    require("mini.clue").setup({
       window = {
         config = {
           border = "rounded",
@@ -59,5 +87,11 @@ return {
         miniclue.gen_clues.z(),
       },
     })
+  end,
+  init = function()
+    package.preload["nvim-web-devicons"] = function()
+      require("mini.icons").mock_nvim_web_devicons()
+      return package.loaded["nvim-web-devicons"]
+    end
   end,
 }

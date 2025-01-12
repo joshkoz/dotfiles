@@ -1,7 +1,7 @@
 return {
   {
     "ibhagwan/fzf-lua",
-    dependencies = { "echasnovski/mini.icons" },
+    dependencies = { "echasnovski/mini.nvim" },
     config = function()
       -- calling `setup` is optional for customization
       local fzflua = require("fzf-lua")
