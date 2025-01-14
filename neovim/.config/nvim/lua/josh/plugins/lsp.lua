@@ -15,10 +15,6 @@ return {
 
       local lspconfig = require("lspconfig")
 
-      lspconfig["html"].setup({
-        capabilities = capabilities,
-      })
-
       lspconfig["cssls"].setup({
         capabilities = capabilities,
       })

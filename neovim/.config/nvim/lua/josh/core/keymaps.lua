@@ -23,10 +23,10 @@ vim.keymap.set({ "n", "i" }, "<C-h>", "<CMD>wincmd h<CR>", { desc = "Move to lef
 vim.keymap.set({ "n", "i" }, "<C-j>", "<CMD>wincmd j<CR>", { desc = "Move to below split", silent = true })
 vim.keymap.set({ "n", "i" }, "<C-k>", "<CMD>wincmd k<CR>", { desc = "Move to above split", silent = true })
 vim.keymap.set({ "n", "i" }, "<C-l>", "<CMD>wincmd l<CR>", { desc = "Move to right split", silent = true })
-vim.keymap.set({ "n", "i" }, "<C-Left>", [[<cmd>vertical resize +5<cr>]], { desc = "Resize split left", silent = true })
-vim.keymap.set({ "n", "i" }, "<C-Down>", [[<cmd>horizontal resize +2<cr>]], { desc = "Resize split down", silent = true })
-vim.keymap.set({ "n", "i" }, "<C-Up>", [[<cmd>horizontal resize -2<cr>]], { desc = "Resize split up", silent = true })
-vim.keymap.set({ "n", "i" }, "<C-Right>", [[<cmd>vertical resize -5<cr>]], { desc = "Resize split right", silent = true })
+vim.keymap.set({ "n", "i" }, "<C-Left>", [[<cmd>vertical resize -5<cr>]], { desc = "Resize split left", silent = true })
+vim.keymap.set({ "n", "i" }, "<C-Down>", [[<cmd>horizontal resize -2<cr>]], { desc = "Resize split down", silent = true })
+vim.keymap.set({ "n", "i" }, "<C-Up>", [[<cmd>horizontal resize +2<cr>]], { desc = "Resize split up", silent = true })
+vim.keymap.set({ "n", "i" }, "<C-Right>", [[<cmd>vertical resize +5<cr>]], { desc = "Resize split right", silent = true })
 
 -- Tabs
 vim.keymap.set("n", "<leader>z", "<CMD>tabclose<CR>", { desc = "Close tab" })

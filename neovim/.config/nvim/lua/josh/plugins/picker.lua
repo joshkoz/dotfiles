@@ -1,6 +1,7 @@
 return {
   {
     "ibhagwan/fzf-lua",
+    event = "VeryLazy",
     dependencies = { "echasnovski/mini.nvim" },
     config = function()
       -- calling `setup` is optional for customization

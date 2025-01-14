@@ -59,6 +59,7 @@ return {
   },
   {
     "sindrets/diffview.nvim",
+    enabled = false,
     config = function()
       vim.keymap.set("n", "<leader>dp", "<cmd>DiffviewFileHistory<cr>", { desc = "[D]iff view [p]roject history" })
       vim.keymap.set("n", "<leader>df", "<cmd>DiffviewFileHistory --follow %<cr>", { desc = "[D]iff view [f]ile history" })

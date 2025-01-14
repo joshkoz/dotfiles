@@ -8,7 +8,6 @@ return {
   opts = {
     PATH = "prepend",
     ensure_installed = {
-      "html-lsp",
       "css-lsp",
       "json-lsp", -- jsonls
       "lua-language-server",

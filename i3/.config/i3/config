@@ -231,7 +231,7 @@ bindsym $mod+Ctrl+r mode "resize"
 set $indicator #ab68ff
 # set $bg-color          #ab68ff // the accent color 
 set $accent-color        #ea999c
-set $accent-color        #a066
+set $accent-color        #ffa066
 set $inactive-bg-color   #2f343f
 set $text-color          #f3f4f5
 set $inactive-text-color #676E7D
