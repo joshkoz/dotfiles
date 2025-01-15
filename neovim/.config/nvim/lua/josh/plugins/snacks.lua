@@ -17,6 +17,32 @@ return {
           -- hl = "LineNr",
         },
       },
+      picker = {
+        ui_select = true,
+        layout = {
+          box = "horizontal",
+          backdrop = false,
+          width = 0.8,
+          min_width = 120,
+          height = 0.8,
+          {
+            box = "vertical",
+            border = "rounded",
+            title = "{source} {live}",
+            title_pos = "center",
+            { win = "input", height = 1, border = "bottom" },
+            { win = "list", border = "none" },
+          },
+          { win = "preview", border = "rounded", width = 0.5 },
+        },
+        win = {
+          input = {
+            keys = {
+              ["<Esc>"] = { "close", mode = { "n", "i" } },
+            },
+          },
+        },
+      },
       scope = { enabled = false },
       input = {
         enabled = false,
@@ -48,5 +74,16 @@ return {
       statuscolumn = { enabled = true, left = { "mark", "sign" }, right = { "fold", "git" } },
       words = { enabled = false },
     },
+    config = function(_, opts)
+      vim.keymap.set("n", "<c-p>", function()
+        Snacks.picker.git_files({})
+      end, { desc = "Fzf Git Files" })
+      vim.keymap.set("n", "<leader>f", Snacks.picker.files, { desc = "Find Files" })
+      vim.keymap.set("n", "<leader>h", Snacks.picker.help, { desc = "Find Help" })
+      vim.keymap.set("n", "<leader>/", function()
+        Snacks.picker.grep({ hidden = true, ignored = false })
+      end, { desc = "Find Live Grep" })
+      require("snacks").setup(opts)
+    end,
   },
 }
