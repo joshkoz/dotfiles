@@ -24,22 +24,6 @@ return {
             filename_first = true, -- display filename before the filepath
           },
         },
-        layout = {
-          box = "horizontal",
-          backdrop = false,
-          width = 0.8,
-          min_width = 120,
-          height = 0.8,
-          {
-            box = "vertical",
-            border = "rounded",
-            title = "{source} {live}",
-            title_pos = "center",
-            { win = "input", height = 1, border = "bottom" },
-            { win = "list", border = "none" },
-          },
-          { win = "preview", border = "rounded", width = 0.5 },
-        },
         win = {
           input = {
             keys = {

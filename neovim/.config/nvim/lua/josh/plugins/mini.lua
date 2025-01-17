@@ -2,9 +2,30 @@ return {
   "echasnovski/mini.nvim",
   version = false,
   config = function()
-    require("mini.surround").setup({})
+    require("mini.surround").setup()
 
-    require("mini.ai").setup({})
+    require("mini.comment").setup()
+
+    require("mini.ai").setup()
+
+    require("mini.diff").setup({
+      view = {
+        style = "sign",
+        -- Signs used for hunks with 'sign' view
+        signs = {
+          add = "▎",
+          change = "▎",
+          delete = "",
+          topdelete = "",
+          changedelete = "▎",
+          untracked = "▎",
+        },
+        priority = 199,
+      },
+    })
+    vim.keymap.set("n", "<leader>gp", function()
+      MiniDiff.toggle_overlay(0)
+    end, { desc = "[G]it Hunk [P]review" })
 
     local hipatterns = require("mini.hipatterns")
     hipatterns.setup({
