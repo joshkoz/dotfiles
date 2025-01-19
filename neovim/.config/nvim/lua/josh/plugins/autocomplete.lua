@@ -44,6 +44,12 @@ return {
         -- end,
 
         providers = {
+          lsp = {
+            min_keyword_length = 2,
+          },
+          snippets = {
+            min_keyword_length = 2,
+          },
           lazydev = {
             name = "LazyDev",
             module = "lazydev.integrations.blink",
