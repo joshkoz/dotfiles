@@ -64,6 +64,8 @@ return {
       words = { enabled = false },
     },
     config = function(_, opts)
+      vim.api.nvim_set_hl(0, "SnacksNotifierMinimal", { link = "Normal" })
+
       vim.keymap.set("n", "<c-p>", function()
         Snacks.picker.git_files({})
       end, { desc = "Fzf Git Files" })
