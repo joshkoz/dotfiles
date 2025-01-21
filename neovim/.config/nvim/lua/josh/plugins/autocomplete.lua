@@ -17,6 +17,7 @@ return {
         nerd_font_variant = "mono",
       },
       completion = {
+        accept = { auto_brackets = { enabled = false } },
         list = {
           selection = {
             preselect = false,
@@ -26,30 +27,10 @@ return {
         documentation = { auto_show = true, auto_show_delay_ms = 500, treesitter_highlighting = true },
       },
       signature = { enabled = true },
-
       sources = {
         default = { "lazydev", "lsp", "path", "snippets", "buffer" },
         cmdline = {},
-        -- cmdline = function()
-        --   local type = vim.fn.getcmdtype()
-        --   -- Search forward and backward
-        --   if type == "/" or type == "?" then
-        --     return { "buffer" }
-        --   end
-        --   -- Commands
-        --   if type == ":" then
-        --     return { "cmdline" }
-        --   end
-        --   return {}
-        -- end,
-
         providers = {
-          lsp = {
-            min_keyword_length = 2,
-          },
-          snippets = {
-            min_keyword_length = 2,
-          },
           lazydev = {
             name = "LazyDev",
             module = "lazydev.integrations.blink",
