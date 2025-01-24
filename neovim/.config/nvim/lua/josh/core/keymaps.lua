@@ -18,16 +18,6 @@ vim.keymap.set("v", "<Down>", ":m '>+1<CR>gv=gv", { desc = "Move visual selectio
 vim.keymap.set("n", "<leader>d<Left>", "<CMD>diffget //2<CR><CMD>diffupdate<CR>", { desc = "Diffget from the left" })
 vim.keymap.set("n", "<leader>d<Right>", "<CMD>diffget //3<CR><CMD>diffupdate<CR>", { desc = "Diffget from the right" })
 
--- Windows
-vim.keymap.set({ "n", "i" }, "<C-h>", "<CMD>wincmd h<CR>", { desc = "Move to left split", silent = true })
-vim.keymap.set({ "n", "i" }, "<C-j>", "<CMD>wincmd j<CR>", { desc = "Move to below split", silent = true })
-vim.keymap.set({ "n", "i" }, "<C-k>", "<CMD>wincmd k<CR>", { desc = "Move to above split", silent = true })
-vim.keymap.set({ "n", "i" }, "<C-l>", "<CMD>wincmd l<CR>", { desc = "Move to right split", silent = true })
-vim.keymap.set({ "n", "i" }, "<C-Left>", [[<cmd>vertical resize -5<cr>]], { desc = "Resize split left", silent = true })
-vim.keymap.set({ "n", "i" }, "<C-Down>", [[<cmd>horizontal resize -2<cr>]], { desc = "Resize split down", silent = true })
-vim.keymap.set({ "n", "i" }, "<C-Up>", [[<cmd>horizontal resize +2<cr>]], { desc = "Resize split up", silent = true })
-vim.keymap.set({ "n", "i" }, "<C-Right>", [[<cmd>vertical resize +5<cr>]], { desc = "Resize split right", silent = true })
-
 -- Tabs
 vim.keymap.set("n", "<leader>z", "<CMD>tabclose<CR>", { desc = "Close tab" })
 
