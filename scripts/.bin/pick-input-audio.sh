@@ -56,9 +56,9 @@ fi
 # Generate the menu with descriptions
 if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
     echo "Session type is Wayland."
-    menu=$(printf '%s\n' "${menu_entries[@]}" | wofi --dmenu -i -p "Select Audio Source:")
+    menu=$(printf '%s\n' "${menu_entries[@]}" | wofi --dmenu -i -p "🎙")
 else
-    menu=$(printf '%s\n' "${menu_entries[@]}" | rofi -dmenu -i -p "Select Audio Source:")
+    menu=$(printf '%s\n' "${menu_entries[@]}" | rofi -dmenu -i -p "🎙")
 fi
 
 # Get the selected source name and set it as the default

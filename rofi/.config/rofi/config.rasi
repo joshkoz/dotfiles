@@ -1,19 +1,25 @@
 configuration{
-    modi: "run,drun,window";
-    icon-theme: "Oranchelo";
-    show-icons: true;
+    font: "JetBrains Mono 18";
+    icon-theme: "Papirus-Dark";
+    show-icons:     true;
+    dpi: 120;
+    // modi: "run,drun,window";
+    // icon-theme: "Oranchelo";
     terminal: "ghostty";
-    drun-display-format: "{icon} {name}";
-    location: 0;
-    disable-history: false;
-    hide-scrollbar: true;
-    display-drun: "   Apps ";
-    display-run: "   Run ";
-    display-window: "   Window ";
-    display-Network: " 󰤨  Network ";
-    sidebar-mode: true;
+    // drun-display-format: "{icon} {name}";
+    // location: 0;
+    // disable-history: false;
+    // hide-scrollbar: true;
+    display-ssh:    "";
+    display-run:    "";
+    display-drun:   "";
+    display-window: "";
+    display-combi:  "";
+    // sidebar-mode: true;
 }
 
-@theme "~/.config/rofi/catppuccin-mocha.rasi"
+// @theme "~/.config/rofi/catppuccin-mocha.rasi"
+@theme "~/.config/rofi/kanagawa-paper.rasi"
+
 
 
