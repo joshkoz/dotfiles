@@ -6,7 +6,9 @@ return {
       "nvim-treesitter/nvim-treesitter",
     },
     opts = {
-      hybrid_modes = { "n" },
+      preview = {
+        hybrid_modes = { "n" },
+      },
       -- initial_state = false,
     },
   },

@@ -1,7 +1,6 @@
 return {
   {
     "saghen/blink.cmp",
-
     event = "VeryLazy",
     dependencies = { "rafamadriz/friendly-snippets" },
     version = "*",
@@ -9,8 +8,6 @@ return {
       keymap = {
         preset = "default",
         ["<CR>"] = { "accept", "fallback" },
-        ["<Up>"] = { "select_prev", "fallback" },
-        ["<Down>"] = { "select_next", "fallback" },
       },
       appearance = {
         use_nvim_cmp_as_default = true,
