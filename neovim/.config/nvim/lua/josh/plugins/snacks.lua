@@ -68,12 +68,21 @@ return {
 
       vim.keymap.set("n", "<c-p>", function()
         Snacks.picker.git_files({})
-      end, { desc = "Fzf Git Files" })
+      end, { desc = "Find Git Files" })
+
       vim.keymap.set("n", "<leader>f", Snacks.picker.files, { desc = "Find Files" })
       vim.keymap.set("n", "<leader>h", Snacks.picker.help, { desc = "Find Help" })
+      vim.keymap.set("n", "<leader>e", function()
+        Snacks.picker.explorer({ hidden = true })
+      end, { desc = "Open Explorer" })
+      vim.keymap.set("n", "<leader>u", Snacks.picker.undo, { desc = "Open Undo" })
       vim.keymap.set("n", "<leader>/", function()
         Snacks.picker.grep({ hidden = true, ignored = false })
       end, { desc = "Find Live Grep" })
+      vim.keymap.set("n", "<leader>w", Snacks.picker.diagnostics, { desc = "Workspace diagnostics" })
+      vim.keymap.set("n", "<leader>j", function()
+        Snacks.picker()
+      end, { desc = "Find pickers" })
       require("snacks").setup(opts)
     end,
   },

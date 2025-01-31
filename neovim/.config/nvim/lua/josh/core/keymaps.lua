@@ -26,8 +26,6 @@ vim.keymap.set("n", "<A-j>", "<CMD>cnext<CR>", { desc = "Go to next item in Quic
 vim.keymap.set("n", "<A-k>", "<CMD>cprev<CR>", { desc = "Go to previous item in Quickfix List" })
 vim.keymap.set("n", "<A-l>", "<CMD>cnewer<CR>", { desc = "Go to next Quickfix List" })
 vim.keymap.set("n", "<A-h>", "<CMD>colder<CR>", { desc = "Go to previous Quickfix List" })
-vim.keymap.set("n", "<leader>ld", vim.diagnostic.setloclist, { desc = "Open File Diagnostics" })
-vim.keymap.set("n", "<leader>wd", vim.diagnostic.setqflist, { desc = "Open Workspace Quickfix Diagnostics" })
 
 -- Tmux
 vim.keymap.set("n", "<C-f>", "<CMD>silent !tmux neww tmux-sessionizer<CR>")
