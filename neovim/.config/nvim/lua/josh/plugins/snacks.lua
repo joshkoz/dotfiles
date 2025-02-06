@@ -31,6 +31,36 @@ return {
             },
           },
         },
+        sources = {
+          explorer = {
+            hidden = true,
+            layout = { layout = { position = "right" } },
+            win = {
+              list = {
+                keys = {
+                  ["<ESC>"] = function() end,
+                  ["<C-l>"] = function()
+                    require("smart-splits").move_cursor_left()
+                  end,
+                  ["<C-h>"] = function()
+                    vim.cmd("wincmd h")
+                  end,
+                },
+              },
+            },
+          },
+          git_files = {
+            untracked = true,
+          },
+          files = {
+            hidden = true,
+            ignored = false,
+          },
+          grep = {
+            hidden = true,
+            ignored = false,
+          },
+        },
       },
       scope = { enabled = false },
       input = {
@@ -66,19 +96,12 @@ return {
     config = function(_, opts)
       vim.api.nvim_set_hl(0, "SnacksNotifierMinimal", { link = "Normal" })
 
-      vim.keymap.set("n", "<c-p>", function()
-        Snacks.picker.git_files({})
-      end, { desc = "Find Git Files" })
-
+      vim.keymap.set("n", "<c-p>", Snacks.picker.git_files, { desc = "Find Git Files" })
       vim.keymap.set("n", "<leader>f", Snacks.picker.files, { desc = "Find Files" })
       vim.keymap.set("n", "<leader>h", Snacks.picker.help, { desc = "Find Help" })
-      vim.keymap.set("n", "<leader>e", function()
-        Snacks.picker.explorer({ hidden = true })
-      end, { desc = "Open Explorer" })
+      vim.keymap.set("n", "<leader>e", Snacks.picker.explorer, { desc = "Open Explorer" })
       vim.keymap.set("n", "<leader>u", Snacks.picker.undo, { desc = "Open Undo" })
-      vim.keymap.set("n", "<leader>/", function()
-        Snacks.picker.grep({ hidden = true, ignored = false })
-      end, { desc = "Find Live Grep" })
+      vim.keymap.set("n", "<leader>/", Snacks.picker.grep, { desc = "Find Live Grep" })
       vim.keymap.set("n", "<leader>w", Snacks.picker.diagnostics, { desc = "Workspace diagnostics" })
       vim.keymap.set("n", "<leader>j", function()
         Snacks.picker()

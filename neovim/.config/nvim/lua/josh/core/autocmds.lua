@@ -21,6 +21,7 @@ autocmd("LspAttach", {
     -- vim.lsp.completion.enable(true, ev.data.client_id, ev.buf, { autotrigger = true })
     vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = ev.buf, noremap = true, silent = true, desc = "vim.lsp.buf.definition()" })
     vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = ev.buf, noremap = true, silent = true, desc = "vim.diagnostic.setqflist()" })
+    vim.keymap.set("n", "gI", vim.lsp.buf.implementation, { buffer = ev.buf, noremap = true, silent = true, desc = "vim.lsp.buf.implementation()" })
     vim.keymap.set("n", "grh", function()
       vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({}))
     end, { buffer = ev.buf, noremap = true, silent = true, desc = "vim.lsp.inlay_hint.toggle()" })

@@ -51,9 +51,9 @@ vim.opt.ttimeout = false
 vim.opt.timeout = false
 
 -- Folds
-vim.opt.foldmethod = "expr" -- use tree-sitter for folding method
-vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-vim.opt.foldlevel = 99
+-- vim.opt.foldmethod = "expr" -- use tree-sitter for folding method
+-- vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+-- vim.opt.foldlevel = 99
 
 -- Disable folds in diffs
 vim.opt.diffopt:append("context:99999")
