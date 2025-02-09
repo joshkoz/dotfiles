@@ -202,7 +202,6 @@ return {
     ft = "cs",
     opts = {
       config = {
-        -- on_attach = function() end,
         settings = {
           ["csharp|background_analysis"] = {
             dotnet_analyzer_diagnostics_scope = "fullSolution",
