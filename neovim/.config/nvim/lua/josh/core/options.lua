@@ -51,12 +51,12 @@ vim.opt.ttimeout = false
 vim.opt.timeout = false
 
 -- Folds
--- vim.opt.foldmethod = "expr" -- use tree-sitter for folding method
--- vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
--- vim.opt.foldlevel = 99
+vim.opt.foldmethod = "expr" -- use tree-sitter for folding method
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.opt.foldlevel = 99
 
 -- Disable folds in diffs
-vim.opt.diffopt:append("context:99999")
+vim.o.diffopt = "internal,filler,closeoff,indent-heuristic,linematch:60,algorithm:histogram,context:99999"
 vim.opt.fillchars:append({ diff = "╱" })
 
 -- Set completeopt to have a better completion experience
