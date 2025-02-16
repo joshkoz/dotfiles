@@ -24,9 +24,11 @@ return {
         documentation = { auto_show = true, auto_show_delay_ms = 500, treesitter_highlighting = true },
       },
       signature = { enabled = true },
+      cmdline = {
+        sources = {},
+      },
       sources = {
         default = { "lazydev", "lsp", "path", "snippets", "buffer" },
-        cmdline = {},
         providers = {
           lazydev = {
             name = "LazyDev",
