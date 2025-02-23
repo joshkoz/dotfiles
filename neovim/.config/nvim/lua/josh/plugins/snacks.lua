@@ -4,8 +4,6 @@ return {
     priority = 1000,
     lazy = false,
     opts = {
-      bigfile = { enabled = true },
-      dashboard = { enabled = false },
       indent = {
         enabled = true,
         animate = { enabled = false },
@@ -62,36 +60,25 @@ return {
           },
         },
       },
-      scope = { enabled = false },
-      input = {
-        enabled = false,
-        icon = "",
-        win = {
-          wo = {
-            winhighlight = "NormalFloat:SnacksInputNormal,FloatBorder:FloatBorder,SnacksInputBorder:FloatBorder",
-          },
-          border = "rounded",
-          style = "minimal",
-          title_pos = "left",
-          relative = "cursor",
-          row = -3,
-          col = 0,
-          keys = {
-            v_esc = { "<esc>", { "cmp_close", "cancel" }, mode = "n" },
-            i_esc = { "<esc>", "stopinsert", mode = "i" },
-          },
-        },
+      statuscolumn = {
+        enabled = true,
+        left = { "mark", "sign" },
+        right = { "fold", "git" },
       },
       notifier = {
-        enabled = true,
+        enabled = false,
         top_down = false,
         style = "minimal",
         margin = { bottom = 2 },
       },
+      -- Not Enabled
+      input = { enabled = false },
+      scope = { enabled = false },
       quickfile = { enabled = false },
       scroll = { enabled = false },
-      statuscolumn = { enabled = true, left = { "mark", "sign" }, right = { "fold", "git" } },
       words = { enabled = false },
+      bigfile = { enabled = false },
+      dashboard = { enabled = false },
     },
     config = function(_, opts)
       vim.api.nvim_set_hl(0, "SnacksNotifierMinimal", { link = "Normal" })
