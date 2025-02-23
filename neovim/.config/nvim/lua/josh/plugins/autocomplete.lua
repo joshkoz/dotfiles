@@ -2,7 +2,7 @@ return {
   {
     "saghen/blink.cmp",
     event = "VeryLazy",
-    dependencies = { "rafamadriz/friendly-snippets" },
+    -- dependencies = { "rafamadriz/friendly-snippets" },
     version = "*",
     opts = {
       keymap = {
@@ -25,10 +25,23 @@ return {
       },
       signature = { enabled = true },
       cmdline = {
-        sources = {},
+        enabled = true,
+        keymap = {
+          ["<Tab>"] = { "select_next", "fallback" },
+          ["<S-Tab>"] = { "select_prev", "fallback" },
+          ["<Up>"] = { "select_prev", "fallback" },
+          ["<Down>"] = { "select_next", "fallback" },
+          ["<CR>"] = { "accept_and_enter", "fallback" },
+        },
       },
       sources = {
-        default = { "lazydev", "lsp", "path", "snippets", "buffer" },
+        default = {
+          "lazydev",
+          "lsp",
+          "path",
+          -- "snippets",
+          "buffer",
+        },
         providers = {
           lazydev = {
             name = "LazyDev",
