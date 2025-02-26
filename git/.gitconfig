@@ -5,6 +5,7 @@
 [commit]
 	template = ~/.git-templates/git-commit-template
 	gpgsign = true
+    verbose = true
 [gpg]
 	format = ssh
 [gpg "ssh"]
@@ -21,6 +22,10 @@
 	autoSetupRemote = true
 [pull]
 	ff = only
+[fetch]
+    prune = true
+    pruneTags = true
+    all = true
 [alias]
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 	bl = blame -w -C -C -C
@@ -32,22 +37,28 @@
     light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
     side-by-side = false 
 [merge]
-	conflictStyle = zdiff3
+	# conflictStyle = zdiff3
+	conflictStyle = merge 
     tool = vimdiff
+[rebase]
+    updateRefs = true
 [mergetool]
     keepBackup = false
 [mergetool "vimdiff"]
     cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
 [diff]
-    colorMoved = default
+    colorMoved = plain 
 	algorithm = histogram
+    renames = true
 [maintenance]
 	repo = /home/joshua/work/core-api
 	repo = /home/joshua/projects/dotfiles
 [rerere]
 	enabled = true
+    autoupdate = true
 [tag]
 	gpgsign = true
+    sort = version:refname
 
 [includeIf "gitdir:~/work/"]
 	path = ~/work/.gitconfig
