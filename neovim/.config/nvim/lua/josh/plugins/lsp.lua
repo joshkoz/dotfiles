@@ -237,9 +237,9 @@ return {
       },
     },
   },
-  {
-    "mrcjkb/rustaceanvim",
-    version = "^5",
-    ft = { "rust" },
-  },
+  -- {
+  --   "mrcjkb/rustaceanvim",
+  --   version = "^5",
+  --   ft = { "rust" },
+  -- },
 }

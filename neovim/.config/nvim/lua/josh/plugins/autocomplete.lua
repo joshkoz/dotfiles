@@ -25,7 +25,7 @@ return {
       },
       signature = { enabled = true },
       cmdline = {
-        enabled = true,
+        enabled = false,
         keymap = {
           ["<Tab>"] = { "select_next", "fallback" },
           ["<S-Tab>"] = { "select_prev", "fallback" },

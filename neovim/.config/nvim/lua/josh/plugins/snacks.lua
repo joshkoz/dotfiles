@@ -4,17 +4,6 @@ return {
     priority = 1000,
     lazy = false,
     opts = {
-      indent = {
-        enabled = true,
-        animate = { enabled = false },
-        chunk = { enabled = false },
-        scope = { enabled = true, hl = "LineNr", char = "│" },
-        -- scope = { enabled = true, hl = "Comment", char = "│" },
-        indent = {
-          char = "┆", -- | ¦ ┆ ┊ │
-          -- hl = "LineNr",
-        },
-      },
       picker = {
         ui_select = true,
         formatters = {
@@ -62,8 +51,20 @@ return {
       },
       statuscolumn = {
         enabled = true,
-        left = { "mark", "sign" },
-        right = { "fold", "git" },
+        left = { "sign" },
+        right = { "git" },
+      },
+      -- Not Enabled
+      indent = {
+        enabled = false,
+        animate = { enabled = false },
+        chunk = { enabled = false },
+        scope = { enabled = true, hl = "LineNr", char = "│" },
+        -- scope = { enabled = true, hl = "Comment", char = "│" },
+        indent = {
+          char = "┆", -- | ¦ ┆ ┊ │
+          -- hl = "LineNr",
+        },
       },
       notifier = {
         enabled = false,
@@ -71,7 +72,6 @@ return {
         style = "minimal",
         margin = { bottom = 2 },
       },
-      -- Not Enabled
       input = { enabled = false },
       scope = { enabled = false },
       quickfile = { enabled = false },
