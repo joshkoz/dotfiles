@@ -2,9 +2,9 @@ return {
   "echasnovski/mini.nvim",
   version = false,
   config = function()
-    -- require("mini.surround").setup()
+    require("mini.surround").setup()
 
-    -- require("mini.comment").setup()
+    require("mini.comment").setup()
 
     require("mini.ai").setup()
 
@@ -39,6 +39,7 @@ return {
         priority = 199,
       },
     })
+
     vim.keymap.set("n", "<leader>gp", function()
       MiniDiff.toggle_overlay(0)
     end, { desc = "[G]it Hunk [P]review" })

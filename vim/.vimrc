@@ -97,7 +97,7 @@ nnoremap <C-k> <C-W><C-k>
 
 nnoremap <Leader> <Nop> 
 vnoremap <Leader> <Nop> 
-nnoremap <Leader>e :Ex<CR>
+nnoremap - :Ex<CR>
 nnoremap <silent> <Leader><Leader> :b#<CR> 
 nnoremap <ESC> :noh<CR> 
 
