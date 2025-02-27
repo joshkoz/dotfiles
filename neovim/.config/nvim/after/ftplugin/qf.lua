@@ -19,4 +19,4 @@ end, { range = true })
 
 vim.keymap.set("n", "dd", ":RemoveQFItem<CR>", { noremap = true, silent = true, buffer = 0 })
 vim.keymap.set("x", "dd", ":RemoveQFItems<CR>", { noremap = true, silent = true, buffer = 0 })
-vim.opt.spell = false
+vim.o.spell = false

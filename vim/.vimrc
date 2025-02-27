@@ -65,7 +65,7 @@ set splitbelow
 set hidden
 set history=10000
 " set termguicolors
-set laststatus=2
+set laststatus=0
 set encoding=utf8              " Set utf8 as standard encoding and en_US as the standard language
 "  set spell                      " enable spell check (may need to download language package)
 "  set ffs=unix,dos,mac           " Use Unix as the standard file type
@@ -78,8 +78,6 @@ set tm=500
 set viminfo^=%                  " Remember info about open buffers on close
 
 set termguicolors
-
-
 "  _  __
 "  | |/ /___ _   _ _ __ ___   __ _ _ __  ___
 "  | ' // _ \ | | | '_ ` _ \ / _` | '_ \/ __|
@@ -88,7 +86,7 @@ set termguicolors
 "            |___/                |_|
 "
 
-" Discard when using 'd' to delete
+
 let mapleader = " "
 
 " Move cursor to left and right pane with Ctrl+L and Ctrl+H
@@ -148,8 +146,8 @@ Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-commentary'
 Plug 'catppuccin/vim', { 'as': 'catppuccin' }
 
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+" Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline-themes'
 
 Plug 'machakann/vim-highlightedyank'
 
