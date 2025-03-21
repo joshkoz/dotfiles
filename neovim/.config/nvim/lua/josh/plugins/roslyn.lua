@@ -5,6 +5,7 @@ return {
     config = {
       settings = {
         ["csharp|background_analysis"] = {
+          -- Setting the below, whilst useful slows everything to a crawl
           -- dotnet_analyzer_diagnostics_scope = "fullSolution",
           -- dotnet_compiler_diagnostics_scope = "fullSolution",
         },
