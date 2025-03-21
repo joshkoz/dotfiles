@@ -8,26 +8,14 @@ return {
   opts = {
     PATH = "prepend",
     ensure_installed = {
-      "css-lsp",
-      "json-lsp", -- jsonls
       "lua-language-server",
-      "emmet-ls",
-      "pyright",
-      "biome",
-      "dockerfile-language-server", -- dockerls
-      "yaml-language-server", -- yamlls
       "marksman",
-      "bash-language-server",
       "prettier", -- prettier formatter
       "stylua", -- lua formatter
       "isort", -- python formatter
       "black", -- python formatter
-      "pylint", -- python linter
       "eslint_d", -- js linter
       "csharpier", -- csharp formatter
-      "netcoredbg", -- csharp debugger
-      "clangd",
-      "clang-format",
     },
   },
   ---@param opts MasonSettings | {ensure_installed: string[]}

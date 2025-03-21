@@ -4,6 +4,7 @@ return {
     priority = 1000,
     lazy = false,
     opts = {
+      -- Only using the picker and the statuscolumn from folke/Snacks.
       picker = {
         ui_select = true,
         formatters = {
@@ -66,12 +67,7 @@ return {
           -- hl = "LineNr",
         },
       },
-      notifier = {
-        enabled = false,
-        top_down = false,
-        style = "minimal",
-        margin = { bottom = 2 },
-      },
+      notifier = { enabled = false },
       input = { enabled = false },
       scope = { enabled = false },
       quickfile = { enabled = false },
