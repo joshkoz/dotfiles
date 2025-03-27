@@ -8,7 +8,7 @@ return {
     "typescriptreact",
     "typescript.tsx",
   },
-  root_dir = vim.fs.root(0, { "tsconfig.json", "package.json", "jsconfig.json", ".git" }),
+  root_markers = { "tsconfig.json", "package.json", "jsconfig.json", ".git" },
   single_file_support = true,
   settings = {
     complete_function_calls = true,

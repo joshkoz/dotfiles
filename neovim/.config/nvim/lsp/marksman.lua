@@ -1,6 +1,6 @@
 return {
   cmd = { "marksman", "server" },
   filetypes = { "markdown", "markdown.mdx" },
-  root_dir = vim.fs.root(0, { ".marksman.toml", ".git" }),
+  root_markers = { ".marksman.toml", ".git" },
   single_file_support = true,
 }

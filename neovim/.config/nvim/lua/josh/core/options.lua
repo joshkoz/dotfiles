@@ -6,6 +6,7 @@ vim.o.number = true
 
 -- Enable mouse mode
 vim.o.mouse = "a"
+vim.opt.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20,a:blinkon0"
 
 -- Enable break indent
 vim.o.breakindent = true
@@ -37,8 +38,9 @@ vim.o.softtabstop = 4
 vim.o.shiftwidth = 4
 vim.o.expandtab = true
 
--- Keep signcolumn on by default
 vim.o.signcolumn = "yes"
+vim.o.numberwidth = 4
+vim.o.statuscolumn = " %l %s "
 
 -- Enable Relative Line Numbers
 vim.o.relativenumber = true
@@ -94,17 +96,4 @@ vim.g.netrw_banner = 0
 vim.o.inccommand = "nosplit"
 vim.o.winheight = 5
 
--- Per project shada file
--- vim.opt.shadafile = (function()
---   local data = vim.fn.stdpath("data")
---
---   local cwd = vim.fn.getcwd()
---   cwd = vim.fs.root(cwd, ".git") or cwd
---
---   local cwd_b64 = vim.base64.encode(cwd)
---
---   local file = vim.fs.joinpath(data, "project_shada", cwd_b64)
---   vim.fn.mkdir(vim.fs.dirname(file), "p")
---
---   return file
--- end)()
+vim.o.winborder = "solid"

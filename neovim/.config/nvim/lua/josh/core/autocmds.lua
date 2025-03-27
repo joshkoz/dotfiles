@@ -17,14 +17,23 @@ autocmd("FileType", {
 
 autocmd("LspAttach", {
   group = augroup("joshkoz/lsp-Keymaps", { clear = true }),
-  callback = function(ev)
-    -- vim.lsp.completion.enable(true, ev.data.client_id, ev.buf, { autotrigger = true })
-    vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = ev.buf, noremap = true, silent = true, desc = "vim.lsp.buf.definition()" })
-    vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = ev.buf, noremap = true, silent = true, desc = "vim.diagnostic.setqflist()" })
-    vim.keymap.set("n", "gI", vim.lsp.buf.implementation, { buffer = ev.buf, noremap = true, silent = true, desc = "vim.lsp.buf.implementation()" })
+  callback = function(args)
+    local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
+    if client:supports_method("textDocument/completion") then
+      -- Optional: trigger autocompletion on EVERY keypress. May be slow!
+      -- local chars = {}
+      -- for i = 32, 126 do
+      --   table.insert(chars, string.char(i))
+      -- end
+      -- client.server_capabilities.completionProvider.triggerCharacters = chars
+      -- vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = true })
+    end
+    vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = args.buf, noremap = true, silent = true, desc = "vim.lsp.buf.definition()" })
+    vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = args.buf, noremap = true, silent = true, desc = "vim.lsp.buf.declaration()" })
+    vim.keymap.set("n", "gI", vim.lsp.buf.implementation, { buffer = args.buf, noremap = true, silent = true, desc = "vim.lsp.buf.implementation()" })
     vim.keymap.set("n", "grh", function()
       vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({}))
-    end, { buffer = ev.buf, noremap = true, silent = true, desc = "vim.lsp.inlay_hint.toggle()" })
+    end, { buffer = args.buf, noremap = true, silent = true, desc = "vim.lsp.inlay_hint.toggle()" })
   end,
 })
 
