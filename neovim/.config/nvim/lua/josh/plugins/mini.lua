@@ -68,7 +68,6 @@ return {
   },
   {
     "echasnovski/mini.icons",
-    enabled = false,
     version = false,
     opts = {
       file = {
@@ -90,9 +89,9 @@ return {
     "echasnovski/mini.clue",
     version = false,
     config = function()
-      -- vim.keymap.set("n", "<leader>gp", function()
-      --   MiniDiff.toggle_overlay(0)
-      -- end, { desc = "[G]it Hunk [P]review" })
+      vim.keymap.set("n", "<leader>dh", function()
+        MiniDiff.toggle_overlay(0)
+      end, { desc = "Git Diff Hunk Preview" })
 
       local miniclue = require("mini.clue")
       vim.api.nvim_set_hl(0, "MiniClueDescSingle", { link = "Normal" })

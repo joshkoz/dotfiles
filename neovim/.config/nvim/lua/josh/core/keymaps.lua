@@ -26,7 +26,7 @@ vim.keymap.set("n", "<A-j>", "<CMD>cnext<CR>", { desc = "Go to next item in Quic
 vim.keymap.set("n", "<A-k>", "<CMD>cprev<CR>", { desc = "Go to previous item in Quickfix List" })
 
 -- Marks
-vim.keymap.set("n", "`", "<CMD>marks<CR>:normal! `", { remap = false, desc = "Preview marks before jump" })
+-- vim.keymap.set("n", "`", "<CMD>marks<CR>:normal! `", { remap = false, desc = "Preview marks before jump" })
 
 -- Tmux
 vim.keymap.set("n", "<C-f>", "<CMD>!tmux neww tmux-sessionizer<CR>", { silent = true })

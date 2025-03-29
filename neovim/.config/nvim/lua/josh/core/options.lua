@@ -39,8 +39,8 @@ vim.o.shiftwidth = 4
 vim.o.expandtab = true
 
 vim.o.signcolumn = "yes"
-vim.o.numberwidth = 4
-vim.o.statuscolumn = " %l %s "
+-- vim.o.numberwidth = 4
+-- vim.o.statuscolumn = " %l %s "
 
 -- Enable Relative Line Numbers
 vim.o.relativenumber = true
@@ -95,5 +95,3 @@ vim.g.netrw_banner = 0
 
 vim.o.inccommand = "nosplit"
 vim.o.winheight = 5
-
-vim.o.winborder = "solid"

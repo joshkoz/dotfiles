@@ -50,6 +50,11 @@ return {
           },
         },
       },
+      statuscolumn = {
+        enabled = true,
+        left = { "sign" },
+        right = { "git" },
+      },
     },
     config = function(_, opts)
       vim.keymap.set("n", "<c-p>", Snacks.picker.git_files, { desc = "Find Git Files" })
