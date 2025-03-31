@@ -15,52 +15,6 @@ autocmd("FileType", {
   command = "setlocal textwidth=72 colorcolumn=50,72 formatexpr=",
 })
 
-autocmd("LspAttach", {
-  group = augroup("joshkoz/lsp-Keymaps", { clear = true }),
-  callback = function(args)
-    local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
-    if client:supports_method("textDocument/completion") then
-      -- Optional: trigger autocompletion on EVERY keypress. May be slow!
-      -- local chars = {}
-      -- for i = 32, 126 do
-      --   table.insert(chars, string.char(i))
-      -- end
-      -- client.server_capabilities.completionProvider.triggerCharacters = chars
-      -- vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = true })
-    end
-    vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = args.buf, noremap = true, silent = true, desc = "vim.lsp.buf.definition()" })
-    vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = args.buf, noremap = true, silent = true, desc = "vim.lsp.buf.declaration()" })
-    vim.keymap.set("n", "gI", vim.lsp.buf.implementation, { buffer = args.buf, noremap = true, silent = true, desc = "vim.lsp.buf.implementation()" })
-    vim.keymap.set("n", "grh", function()
-      vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({}))
-    end, { buffer = args.buf, noremap = true, silent = true, desc = "vim.lsp.inlay_hint.toggle()" })
-  end,
-})
-
-autocmd({ "ModeChanged", "CursorMoved" }, {
-  group = augroup("joshkoz/visual-line-numbers", { clear = true }),
-  callback = function(args)
-    local ns = vim.api.nvim_create_namespace("visual_line_numbers")
-    local mode = vim.fn.mode()
-    if not mode:match("[vV]") then
-      vim.api.nvim_buf_clear_namespace(0, ns, 0, -1)
-    elseif args.event == "CursorMoved" and mode == "v" or mode == "V" or mode == "" then
-      -- -- clear namespace and re-highlight the range
-      vim.api.nvim_buf_clear_namespace(0, ns, 0, -1)
-      local start_line = vim.fn.line("v")
-      local end_line = vim.fn.line(".")
-      -- swap the lines based on if visual selection cursor is at begining or end of visual range
-      if start_line > end_line then
-        start_line, end_line = end_line, start_line
-      end
-      vim.api.nvim_buf_set_extmark(0, ns, start_line - 1, 0, {
-        end_line = end_line - 1,
-        number_hl_group = "CursorLineNr",
-      })
-    end
-  end,
-})
-
 autocmd("BufEnter", {
   group = augroup("set-spelling", { clear = true }),
   pattern = { "*.cs", "*.md", "*.lua" },
@@ -95,12 +49,26 @@ autocmd("ColorScheme", {
   end,
 })
 
-autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
-  group = augroup("joshkoz/lint", { clear = true }),
-  callback = function()
-    local loaded, nvimlint = pcall(require, "lint")
-    if loaded then
-      nvimlint.try_lint()
-    end
-  end,
-})
+-- autocmd({ "ModeChanged", "CursorMoved" }, {
+--   group = augroup("joshkoz/visual-line-numbers", { clear = true }),
+--   callback = function(args)
+--     local ns = vim.api.nvim_create_namespace("visual_line_numbers")
+--     local mode = vim.fn.mode()
+--     if not mode:match("[vV]") then
+--       vim.api.nvim_buf_clear_namespace(0, ns, 0, -1)
+--     elseif args.event == "CursorMoved" and mode == "v" or mode == "V" or mode == "" then
+--       -- -- clear namespace and re-highlight the range
+--       vim.api.nvim_buf_clear_namespace(0, ns, 0, -1)
+--       local start_line = vim.fn.line("v")
+--       local end_line = vim.fn.line(".")
+--       -- swap the lines based on if visual selection cursor is at begining or end of visual range
+--       if start_line > end_line then
+--         start_line, end_line = end_line, start_line
+--       end
+--       vim.api.nvim_buf_set_extmark(0, ns, start_line - 1, 0, {
+--         end_line = end_line - 1,
+--         number_hl_group = "CursorLineNr",
+--       })
+--     end
+--   end,
+-- })

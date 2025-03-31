@@ -51,7 +51,17 @@ set noswapfile                 " disable creating swap file
 set nobackup                   " Turn backup off, since most stuff is in SVN, git et.c anyway...
 
 set signcolumn=yes 
-set scrolloff=10
+set scrolloff=8
+
+
+set fillchars+=diff:╱
+set fillchars+=vert:│
+
+
+set statusline=%#MyLine#%{repeat('─',winwidth('.'))}%*
+set pumheight=15
+let g:netrw_banner=0
+
 
 set updatetime=50
 set timeoutlen=300
@@ -94,6 +104,10 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 nnoremap <C-j> <C-W><C-j>
 nnoremap <C-k> <C-W><C-k>
+nnoremap <C-Left> :call win_move_separator(winnr('h'), -2)<CR>
+nnoremap <C-Right> :call win_move_separator(winnr('h'), 2)<CR>
+nnoremap <C-Up> :call win_move_statusline(winnr('k'), -2)<CR>
+nnoremap <C-Down> :call win_move_statusline(winnr('k'), 2)<CR>
 
 nnoremap <Leader> <Nop> 
 vnoremap <Leader> <Nop> 
@@ -108,12 +122,15 @@ nnoremap <Leader>y "+y
 xnoremap <Leader>y "+y
 
 nnoremap <C-f> :silent !tmux neww tmux-sessionizer<CR>
-xnoremap <Leader>x :copen<CR> 
+
 nnoremap <A-j> :cnext<CR>
 nnoremap <A-k> :cprev<CR>
 
 vnoremap <Up> :m '<-2<CR>gv=gv 
 vnoremap <Down> :m '>+1<CR>gv=gv
+nnoremap <Leader>z :tabclose<CR>
+
+nnoremap <silent> <Leader>gs :G<CR>
 
 
 "      _         _                                                      _     
@@ -132,10 +149,9 @@ let &t_EI = "\e[2 q"
 " augroup END
 
 
+
 packadd! matchit
 call plug#begin()
-Plug 'junegunn/vim-easy-align'
-
 " Using a non-default branch
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 
@@ -146,39 +162,40 @@ Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-commentary'
 Plug 'catppuccin/vim', { 'as': 'catppuccin' }
 
-" Plug 'vim-airline/vim-airline'
-" Plug 'vim-airline/vim-airline-themes'
-
 Plug 'machakann/vim-highlightedyank'
-
 " Use 'dir' option to install plugin in a non-default directory
-Plug 'junegunn/fzf', { 'dir': '~/.fzf' }
-
-" Post-update hook: run a shell command after installing or updating the plugin
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-
-" Post-update hook can be a lambda expression
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-
-" On-demand loading: loaded when the specified command is executed
-Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
- 
-Plug 'mbbill/undotree'
+" Plug 'junegunn/fzf', { 'dir': '~/.fzf' }
+" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf'
 
 call plug#end()
 
 colorscheme catppuccin_mocha
-
-nnoremap <C-p> :FZF<CR>
-" Toggle File Explorer with Ctrl+B
-map <leader>e :NERDTreeToggle<CR>
+highlight link MyLine VertSplit
 
 if !exists('##TextYankPost')
   nmap y <Plug>(highlightedyank)
   xmap y <Plug>(highlightedyank)
   omap y <Plug>(highlightedyank)
 endif
+
 let g:highlightedyank_highlight_duration = 200 
 
-nnoremap <silent> <Leader>gs :vert G<CR>
-nnoremap <silent> <Leader>u :UndotreeToggle<CR>
+nnoremap <C-P> :FZF<CR>
+let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+
