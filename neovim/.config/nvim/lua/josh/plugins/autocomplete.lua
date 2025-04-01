@@ -47,53 +47,7 @@ return {
           "snippets",
           "buffer",
         },
-        providers = {
-          lsp = {
-            transform_items = function(_, items)
-              local cmp_item_kind = require("blink.cmp.types").CompletionItemKind
-              local current_buffer_content = vim.api.nvim_buf_get_lines(0, 0, -1, false)
-              local buffer_text = table.concat(current_buffer_content, "\n")
-              for _, item in ipairs(items) do
-                -- Initialize score_offset with a base value
-                item.score_offset = 0
-                local has_label_description = (item.labelDetails and item.labelDetails.description)
-
-                -- Apply prioritization rules
-                if item.kind == cmp_item_kind.Method then
-                  -- Rule 1: Methods that appear in the current buffer (highest priority)
-                  if item.label and buffer_text:find(item.label) then
-                    item.score_offset = 50
-
-                    -- Additional boost for methods appearing earlier in the file
-                    local first_pos = buffer_text:find(item.label)
-                    if first_pos then
-                      local position_boost = math.max(5 - (first_pos / 1000), 0)
-                      item.score_offset = item.score_offset + position_boost
-                    end
-                    -- Rule 4: has no label description
-                  elseif not has_label_description then
-                    item.score_offset = 30
-                  -- Rule 3: All other methods (lowest priority)
-                  else
-                    item.score_offset = 10
-                  end
-                -- Rule 2: Properties (second highest priority)
-                elseif item.kind == cmp_item_kind.Property or item.kind == cmp_item_kind.Field then
-                  item.score_offset = 40
-                end
-
-                -- Deprioritize operators
-                if item.kind == cmp_item_kind.Operator then
-                  item.score_offset = item.score_offset - 5
-                end
-              end
-
-              return vim.tbl_filter(function(item)
-                return item.kind ~= require("blink.cmp.types").CompletionItemKind.Text
-              end, items)
-            end,
-          },
-        },
+        providers = {},
       },
     },
     opts_extend = { "sources.default" },
