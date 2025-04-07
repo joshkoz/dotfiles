@@ -45,3 +45,12 @@ source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zs
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 source <(fzf --zsh)
+
+backward-kill-dir () {
+    local WORDCHARS=${WORDCHARS/\/}
+    local WORDCHARS=${WORDCHARS/./}
+    zle backward-kill-word
+    zle -f kill
+}
+zle -N backward-kill-dir
+bindkey '^[^?' backward-kill-dir
