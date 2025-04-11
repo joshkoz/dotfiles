@@ -5,7 +5,7 @@ return {
     local oil = require("oil")
 
     oil.setup({
-      columns = { "icon" },
+      columns = {},
       view_options = {
         show_hidden = true,
       },
