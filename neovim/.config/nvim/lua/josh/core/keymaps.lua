@@ -32,10 +32,10 @@ vim.keymap.set("n", "<A-k>", "<CMD>cprev<CR>", { desc = "Go to previous item in 
 vim.keymap.set("n", "<C-f>", "<CMD>!tmux neww tmux-sessionizer<CR>", { silent = true })
 
 -- Splits
-vim.keymap.set({ "n", "i" }, "<C-h>", "<CMD>wincmd h<CR>")
-vim.keymap.set({ "n", "i" }, "<C-j>", "<CMD>wincmd j<CR>")
-vim.keymap.set({ "n", "i" }, "<C-k>", "<CMD>wincmd k<CR>")
-vim.keymap.set({ "n", "i" }, "<C-l>", "<CMD>wincmd l<CR>")
+-- vim.keymap.set({ "n", "i" }, "<C-h>", "<CMD>wincmd h<CR>")
+-- vim.keymap.set({ "n", "i" }, "<C-j>", "<CMD>wincmd j<CR>")
+-- vim.keymap.set({ "n", "i" }, "<C-k>", "<CMD>wincmd k<CR>")
+-- vim.keymap.set({ "n", "i" }, "<C-l>", "<CMD>wincmd l<CR>")
 vim.keymap.set({ "n", "i" }, "<C-Left>", "<cmd>call win_move_separator(winnr('h'), -2)<CR>")
 vim.keymap.set({ "n", "i" }, "<C-Right>", "<cmd>call win_move_separator(winnr('h'), 2)<CR>")
 vim.keymap.set({ "n", "i" }, "<C-Up>", "<cmd>call win_move_statusline(winnr('k'), -2)<CR>")
