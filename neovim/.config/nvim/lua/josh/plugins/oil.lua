@@ -13,6 +13,7 @@ return {
         ["<C-h>"] = false, -- "actions.select_split",
         ["<C-p>"] = false, -- "actions.preview",
         ["<C-l>"] = false, --"actions.refresh",
+        ["_"] = false, --"actions.refresh",
       },
     })
 
