@@ -27,7 +27,7 @@
     pruneTags = true
     all = true
 [alias]
-	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	lg = log --reverse --color -20 --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 	bl = blame -w -C -C -C
 	fs = "!git switch $(git branch | fzf)" # Fuzzy Switch branches
     dt = "! args=$@; shift $#; nvim -c \"DiffviewOpen $args\""
