@@ -26,14 +26,6 @@ zstyle :compinstall filename '/home/joshua/.zshrc'
 autoload -Uz compinit
 compinit
 
-# pnpm
-export PNPM_HOME="/home/joshua/.local/share/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
-
 touch $HOME/.config/zsh/secrets.zsh
 source $HOME/.config/zsh/secrets.zsh
 
