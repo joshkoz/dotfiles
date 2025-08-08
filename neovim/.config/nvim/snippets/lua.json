@@ -1,0 +1,14 @@
+{
+  "todo": {
+    "prefix": "todo",
+    "body": ["-- TODO(josh): ${1}"]
+  },
+  "fixme": {
+    "prefix": "fixme",
+    "body": ["-- FIXME(josh): ${1}"]
+  },
+  "note": {
+    "prefix": "note",
+    "body": ["-- NOTE(josh): ${1}"]
+  }
+}

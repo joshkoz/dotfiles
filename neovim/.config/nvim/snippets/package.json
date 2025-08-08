@@ -3,8 +3,16 @@
   "contributes": {
     "snippets": [
       {
+        "language": "all",
+        "path": "./all.json"
+      },
+      {
         "language": "cs",
         "path": "./cs.json"
+      },
+      {
+        "language": "lua",
+        "path": "./lua.json"
       }
     ]
   }
