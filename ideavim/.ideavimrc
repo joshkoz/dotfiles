@@ -11,6 +11,11 @@ nnoremap <C-h> :action NextSplitter<CR>
 noremap <C-l> :action NextSplitter<CR>
 nnoremap <Leader><Leader> <C-6>
 nnoremap gra :action ShowIntentionActions<CR>
+
+
+nnoremap gq :action com.intellij.csharpier.ReformatWithCSharpierAction<CR>
+
+
 " nnoremap <leader>e :action ActivateProjectToolWindow<CR>
 nnoremap grn :action RenameElement<CR>
 map <leader>e :NERDTreeToggle<CR>
