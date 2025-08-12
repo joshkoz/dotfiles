@@ -96,3 +96,5 @@ vim.g.netrw_banner = 0
 
 vim.o.inccommand = "nosplit"
 vim.o.winheight = 5
+
+vim.o.jumpoptions = "stack"
