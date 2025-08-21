@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+opencode run '
+    - Use the current staged changes for information about what has changed: "git diff --cached"
+    - Only show me the commit description and body.
+    - When asked for a commit description generate it using "Conventional Commits"
+    - Have the first line of the commit be 50 characters MAXIMUM
+    - Have a new line, following by the rest of the description. Have 72 MAXIMUM per line
+    - Generate the commit description ONLY. Very important to provide NO OTHER OUTPUT.
+    ' -m openai/gpt-4.1

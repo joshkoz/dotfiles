@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+opencode run '
+        You are an expert developer assistant tasked with generating a comprehensive Pull Request description by analyzing the git diff between the current branch and the 'main' branch. Follow these requirements precisely:
+
+        ## Analysis Steps:
+        1. Run `git diff main...HEAD` to get the complete diff
+        2. Extract the current branch name using `git branch --show-current`
+        3. Analyze all changed files, additions, deletions, and modifications
+        4. Identify the primary purpose and scope of the changes
+        5. Only output the Pull request description. No other text.
+        6. Add "@coderabbitai ignore" to the end of the PR description.
+
+        ## PR Title & First Line (50 char max):
+        - Format: `feat(jira-issue): description` or `feat: description`
+        - Extract JIRA issue from branch name (pattern: `ad-1234`, `AD-1234`, etc.)
+        - If JIRA issue found in branch: `feat(ad-1234): short description`
+        - If no JIRA issue found: `feat: short description`
+        - Use conventional commit types: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`
+        - Keep total length ≤50 characters
+        - This becomes both the PR title and the squashed commit message first line
+
+        ## PR Description Structure (Max line length 72 char):
+        ```
+        feat(ad-1234): add user authentication system
+
+        Brief summary of what this PR accomplishes.
+
+        Context and motivation for these changes.
+
+        Changes:
+        - List key modifications made
+        - Include file changes and their purposes
+        - Mention any new dependencies or configurations
+
+        ## Testing (optional, only if relevant)
+        - Describe how changes were tested
+        - Include any new test files or test scenarios added
+
+        ## Notes (optional, only if relevant)
+        - Any additional context, considerations, or follow-up items
+        - Breaking changes (if any)
+        - Migration steps (if needed)
+        ```
+
+        ## Requirements:
+        - Generate the complete PR description ready to copy-paste
+        - Ensure the first line follows conventional commits and is ≤50 chars
+        - Make the description informative but concise
+        - Focus on the "what" and "why", not implementation details
+        - Use present tense for consistency
+        - If multiple types of changes exist, choose the most significant one for the type
+
+        Generate the PR description now based on the current git state.
+    ' -m openai/gpt-4.1
