@@ -51,9 +51,6 @@
     colorMoved = plain 
 	algorithm = histogram
     renames = true
-[maintenance]
-	repo = /home/joshua/work/core-api
-	repo = /home/joshua/projects/dotfiles
 [rerere]
 	enabled = true
     autoupdate = true
