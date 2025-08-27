@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
+
+BASE_BRANCH=${1:-main}
 opencode run '
-        You are an expert developer assistant tasked with generating a comprehensive Pull Request description by analyzing the git diff between the current branch and the 'main' branch. Follow these requirements precisely:
+        You are an expert developer assistant tasked with generating a comprehensive Pull Request description by analyzing the git diff between the current branch and the '${BASE_BRANCH}' branch. Follow these requirements precisely:
 
         ## Analysis Steps:
-        1. Run `git diff main...HEAD` to get the complete diff
+        1. Run `git diff '${BASE_BRANCH}'...HEAD` to get the complete diff
         2. Extract the current branch name using `git branch --show-current`
         3. Analyze all changed files, additions, deletions, and modifications
         4. Identify the primary purpose and scope of the changes
