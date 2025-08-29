@@ -285,6 +285,8 @@ assign [class="obsidian"] workspace $ws3
 for_window [class="Gcr-prompter"] floating enable, focus
 popup_during_fullscreen leave_fullscreen
 
+for_window [class="satty"] floating enable, move position center
+
 # Configure locking the screen
 bindsym $mod+shift+x exec i3lock --color=000000
 
@@ -300,15 +302,12 @@ for_window [class="^.*"] border pixel 2
 
 for_window [urgent="latest"] focus
 
-## Screenshots
-bindsym Print exec --no-startup-id maim "/home/$USER/Pictures/$(date)"
-bindsym $mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) "/home/$USER/Pictures/$(date)"
-bindsym Shift+Print exec --no-startup-id maim --select "/home/$USER/Pictures/$(date)"
-
-## Clipboard Screenshots
-bindsym Ctrl+Print exec --no-startup-id maim | xclip -selection clipboard -t image/png
-bindsym Ctrl+$mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) | xclip -selection clipboard -t image/png
-bindsym Ctrl+Shift+S exec --no-startup-id maim --select | xclip -selection clipboard -t image/png
+ # Region (default):
+ bindsym Ctrl+Shift+S exec --no-startup-id screenshot.sh region
+ # Active window:
+ bindsym $mod+Print exec --no-startup-id screenshot.sh window
+ # Fullscreen:
+ bindsym Shift+Print exec --no-startup-id screenshot.sh fullscreen
 
 ## Pick audio output
 bindsym Ctrl+Shift+A exec --no-startup-id /home/joshua/.bin/pick-output-audio.sh
