@@ -1,16 +1,16 @@
 return {
   {
-    "echasnovski/mini.surround",
+    "nvim-mini/mini.surround",
     version = false,
     opts = {},
   },
   {
-    "echasnovski/mini.ai",
+    "nvim-mini/mini.ai",
     version = false,
     opts = {},
   },
   {
-    "echasnovski/mini.hipatterns",
+    "nvim-mini/mini.hipatterns",
     version = false,
     config = function()
       local hipatterns = require("mini.hipatterns")
@@ -29,7 +29,7 @@ return {
     end,
   },
   {
-    "echasnovski/mini.diff",
+    "nvim-mini/mini.diff",
     version = false,
     opts = {
       view = {
@@ -48,7 +48,7 @@ return {
     },
   },
   {
-    "echasnovski/mini.notify",
+    "nvim-mini/mini.notify",
     version = false,
     opts = {
       window = {
@@ -67,7 +67,7 @@ return {
     },
   },
   {
-    "echasnovski/mini.icons",
+    "nvim-mini/mini.icons",
     version = false,
     opts = {
       file = {
@@ -86,7 +86,7 @@ return {
     end,
   },
   {
-    "echasnovski/mini.clue",
+    "nvim-mini/mini.clue",
     version = false,
     config = function()
       vim.keymap.set("n", "<leader>dh", function()
