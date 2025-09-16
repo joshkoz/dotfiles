@@ -51,6 +51,8 @@
     colorMoved = plain 
 	algorithm = histogram
     renames = true
+[diff "sqldiff"]
+    command = gitsqldiff
 [rerere]
 	enabled = true
     autoupdate = true
