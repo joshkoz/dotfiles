@@ -1,68 +1,74 @@
-
 #!/bin/bash
-
 # List of device descriptions to exclude
 declare -a exclude_list=(
     "fifine Microphone"
-    # "MH752"
-    # "Family 17h/19h HD Audio Controller"
     "GA102 High Definition Audio Controller"
 )
-
 declare -A sink_map
 active_sink=$(pactl get-default-sink)
 
+# Build map: description -> sink name and preserve order
+menu_entries=()
+active_description=""
+
 while IFS= read -r line; do
-    # Extract the sink name
     if [[ $line == *Name:* ]]; then
         sink_name=$(echo "$line" | awk '{print $NF}')
     fi
-
-    # Extract and map the description to the sink name
     if [[ $line == *Description:* ]]; then
         description=$(echo "$line" | cut -d ':' -f2- | xargs)
-
-        # Check if this sink should be excluded
+        # Check exclusion
         exclude=false
         for exclude_item in "${exclude_list[@]}"; do
-             if [[ $description == *"$exclude_item"* ]]; then
+            if [[ $description == *"$exclude_item"* ]]; then
                 exclude=true
                 break
             fi
         done
-
         if [ "$exclude" = false ]; then
             sink_map["$description"]=$sink_name
+            if [[ $sink_name == "$active_sink" ]]; then
+                active_description=$description
+            else
+                menu_entries+=("$description")
+            fi
         fi
     fi
 done < <(pactl list sinks)
 
-# Prepare the menu entries, putting the active sink first
-menu_entries=()
-active_description=""
+# Build numbered entries for display, with active sink first
+display_entries=()
+if [ -n "$active_description" ]; then
+    display_entries+=("1. $active_description")
+    counter=2
+else
+    counter=1
+fi
 
-for description in "${!sink_map[@]}"; do
-    if [[ ${sink_map[$description]} == "$active_sink" ]]; then
-        active_description=$description
-    else
-        menu_entries+=("$description")
-    fi
+for entry in "${menu_entries[@]}"; do
+    display_entries+=("$counter. $entry")
+    ((counter++))
 done
 
-# If there is an active sink, prepend it to the menu entries
-if [ -n "$active_description" ]; then
-    menu_entries=("$active_description" "${menu_entries[@]}")
-fi
-
+# Show menu
 if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
-    echo "Session type is Wayland."
-    menu=$(printf '%s\n' "${menu_entries[@]}" | wofi --dmenu -i -p "🕪")
+    menu=$(printf '%s\n' "${display_entries[@]}" | wofi --dmenu -i -p "🕪 Audio Output")
 else
-    menu=$(printf '%s\n' "${menu_entries[@]}" | rofi -dmenu -i -p "🕪")
+    menu=$(printf '%s\n' "${display_entries[@]}" | rofi -dmenu -i -p "🕪" -no-sort)
 fi
-# Generate the menu with descriptions
 
-# Get the selected sink name and set it as the default
+# Strip the number prefix from selection
+menu=$(echo "$menu" | sed 's/^[0-9]*\. //')
+
+# Trim whitespace
+menu=$(echo "$menu" | xargs)
+
+# Fallback to active sink if nothing selected
+if [ -z "$menu" ]; then
+    menu=$active_description
+fi
+
+# Set selected sink
 selected_sink=${sink_map[$menu]}
 if [ -n "$selected_sink" ]; then
     pactl set-default-sink "$selected_sink"
