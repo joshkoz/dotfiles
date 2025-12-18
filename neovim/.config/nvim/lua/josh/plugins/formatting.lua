@@ -17,6 +17,7 @@ return {
           markdown = { "prettier" },
           lua = { "stylua" },
           python = { "isort", "black" },
+          terraform = { "terraform_fmt" },
           cs = { "csharpier" },
         },
         format = {
