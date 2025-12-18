@@ -9,3 +9,15 @@ add_newline = true
 #vimcmd_symbol = '[❮](bold purple)'
 vimcmd_symbol = '[V](bold purple)'
 
+[gcloud]
+disabled = false 
+format = "on [$symbol($project)](bold yellow) as $symbol[$account](bold blue) "
+
+[custom.gcp_adc]
+when = "test -f ~/.config/gcloud/application_default_credentials.json"
+command = "jq -r '.type // empty' ~/.config/gcloud/application_default_credentials.json"
+format = "[ADC: $output ](bold green)"
+disabled = false
+
+[aws]
+disabled = true 
