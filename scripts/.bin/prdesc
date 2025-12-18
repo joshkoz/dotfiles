@@ -1,56 +1,86 @@
 #!/usr/bin/env bash
 
-BASE_BRANCH=${1:-main}
-opencode run '
-        You are an expert developer assistant tasked with generating a comprehensive Pull Request description by analyzing the git diff between the current branch and the '${BASE_BRANCH}' branch. Follow these requirements precisely:
+# Configurable model
+MODEL="openai/gpt-5-codex"
 
-        ## Analysis Steps:
-        1. Run `git diff '${BASE_BRANCH}'...HEAD` to get the complete diff
-        2. Extract the current branch name using `git branch --show-current`
-        3. Analyze all changed files, additions, deletions, and modifications
-        4. Identify the primary purpose and scope of the changes
-        5. Only output the Pull request description. No other text.
-        6. Add "@coderabbitai ignore" to the end of the PR description.
+# Base branch for diff
+BASE_BRANCH="origin/main"
 
-        ## PR Title & First Line (50 char max):
-        - Format: `feat(jira-issue): description` or `feat: description`
-        - Extract JIRA issue from branch name (pattern: `ad-1234`, `AD-1234`, etc.)
-        - If JIRA issue found in branch: `feat(ad-1234): short description`
-        - If no JIRA issue found: `feat: short description`
-        - Use conventional commit types: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`
-        - Keep total length ≤50 characters
-        - This becomes both the PR title and the squashed commit message first line
+# Initialize variables
+ISSUE_CONTEXT=""
+EXTRA_INSTRUCTION=""
 
-        ## PR Description Structure (Max line length 72 char):
-        ```
-        feat(ad-1234): add user authentication system
+# Parse arguments
+ARGS=()
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        --instruction)
+            shift
+            EXTRA_INSTRUCTION="$1"
+            ;;
+        *)
+            ARGS+=("$1")
+            ;;
+    esac
+    shift
+done
 
-        Brief summary of what this PR accomplishes.
+# All positional args are treated as context
+ISSUE_CONTEXT="${ARGS[*]}"
 
-        Context and motivation for these changes.
+# Construct the prompt
+PROMPT=$(cat <<EOF
+You are an expert developer assistant tasked with generating a Pull Request description
+by analyzing the git diff between the current branch and '${BASE_BRANCH}'.
 
-        Changes:
-        - List key modifications made
-        - Include file changes and their purposes
-        - Mention any new dependencies or configurations
+Instructions:
 
-        ## Testing (optional, only if relevant)
-        - Describe how changes were tested
-        - Include any new test files or test scenarios added
+1. Analyze the diff from 'git diff ${BASE_BRANCH}...HEAD'.
+2. Extract the current branch name using 'git branch --show-current'.
+3. Base the PR description entirely on the diff and the provided context.
+4. Output a GitHub-flavored markdown PR description using the following headers:
 
-        ## Notes (optional, only if relevant)
-        - Any additional context, considerations, or follow-up items
-        - Breaking changes (if any)
-        - Migration steps (if needed)
-        ```
+# PR Title (≤50 chars, conventional commit format)
+- Use conventional commit type: feat, fix, docs, style, refactor, test, chore
+- If branch contains JIRA ID (ad-1234), include it: feat(ad-1234): description
+- Otherwise: feat: description
+- Title ≤50 characters
+- Must use imperative mood
 
-        ## Requirements:
-        - Generate the complete PR description ready to copy-paste
-        - Ensure the first line follows conventional commits and is ≤50 chars
-        - Make the description informative but concise
-        - Focus on the "what" and "why", not implementation details
-        - Use present tense for consistency
-        - If multiple types of changes exist, choose the most significant one for the type
+## Summary
+Write a brief one or two paragraph summary of what this PR accomplishes.
 
-        Generate the PR description now based on the current git state.
-    ' -m openai/gpt-4.1
+## Key Changes
+- List major additions, deletions, modifications
+- Include any new dependencies or configuration changes
+
+## Testing (optional)
+- Describe how changes were tested
+- Include any new test files or test scenarios added
+
+## Notes (optional)
+- Any follow-ups, migration steps, or breaking changes
+
+Hard wrap all lines at 72 characters.
+Context about the issue: ${ISSUE_CONTEXT}
+Additional instructions: ${EXTRA_INSTRUCTION}
+Append "@coderabbitai ignore" at the end.
+
+Only output the markdown PR description — do not include explanations, code fences, or any extra text.
+EOF
+)
+
+# Run opencode
+opencode run "$PROMPT" -m "$MODEL" --format json \
+| jq -r '
+      select(
+        .type=="response.output_text" or 
+        .type=="text" or 
+        .type=="response.message.delta"
+      ) 
+      | (
+          if has("data") then .data 
+          elif has("part") and (.part | has("text")) then .part.text
+          else "" end
+        )
+    '

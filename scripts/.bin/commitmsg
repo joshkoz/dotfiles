@@ -1,9 +1,65 @@
 #!/usr/bin/env bash
-opencode run '
-    - Use the current staged changes for information about what has changed: "git diff --cached"
-    - Only show me the commit description and body.
-    - When asked for a commit description generate it using "Conventional Commits"
-    - Have the first line of the commit be 50 characters MAXIMUM
-    - Have a new line, following by the rest of the description. Have 72 MAXIMUM per line
-    - Generate the commit description ONLY. Very important to provide NO OTHER OUTPUT.
-    ' -m openai/gpt-4.1
+
+# ----------------------------
+# Config: set your Codex model here
+# Examples: gpt-5-codex, gpt-5.1-codex-mini, gpt-5.1-codex-max
+MODEL="openai/gpt-5-codex"
+# ----------------------------
+
+# Default values
+ISSUE_CONTEXT=""
+EXTRA_INSTRUCTION=""
+
+# Parse arguments
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        --instruction)
+            shift
+            EXTRA_INSTRUCTION="$1"
+            ;;
+        *)
+            # All other args are context
+            ISSUE_CONTEXT="$ISSUE_CONTEXT $1"
+            ;;
+    esac
+    shift
+done
+
+# Trim leading/trailing whitespace
+ISSUE_CONTEXT=$(echo "$ISSUE_CONTEXT" | xargs)
+EXTRA_INSTRUCTION=$(echo "$EXTRA_INSTRUCTION" | xargs)
+
+opencode run "
+        You are generating a Git commit message.
+
+        INPUT:
+        - Use ONLY the output of: git diff --cached
+        - Context about the issue: ${ISSUE_CONTEXT}
+        - Additional instruction: ${EXTRA_INSTRUCTION}
+
+        REQUIREMENTS:
+        1. Output ONLY the commit message. No explanations, no markdown, no code fences.
+        2. Follow Conventional Commit types (feat, fix, chore, refactor, docs, test, perf, build, ci).
+        3. The first line must be a summary with:
+           - Maximum 50 characters
+           - No trailing period
+        4. After the summary, output a blank line.
+        5. Then output the commit body:
+           - Hard-wrap at 72 characters
+           - Explain what changed and why (based only on diff and provided context).
+        6. DO NOT output diffs, analysis, bullet points, or anything else.
+
+        Your entire and only output must be the commit summary and body, nothing more.
+    " -m "$MODEL" --format json \
+    | jq -r '
+          select(
+            .type=="response.output_text" or 
+            .type=="text" or 
+            .type=="response.message.delta"
+          ) 
+          | (
+              if has("data") then .data 
+              elif has("part") and (.part | has("text")) then .part.text
+              else "" end
+            )
+        '
