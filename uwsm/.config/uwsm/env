@@ -1,0 +1,16 @@
+
+export XCURSOR_SIZE=24
+export HYPRCURSOR_SIZE=24
+
+# Nvidia specific
+export LIBVA_DRIVER_NAME=nvidia
+export XDG_SESSION_TYPE=wayland
+export GBM_BACKEND=nvidia-drm
+export __GLX_VENDOR_LIBRARY_NAME=nvidia
+
+export MOZ_ENABLE_WAYLAND=1
+
+# toolkit-specific scale
+export GDK_SCALE=2
+export XCURSOR_SIZE=16
+export ELECTRON_OZONE_PLATFORM_HINT=x11

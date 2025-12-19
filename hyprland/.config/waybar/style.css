@@ -1,8 +1,7 @@
 @import "mocha.css";
 
 * {
-  /* font-family: FantasqueSansMono Nerd Font; */
-  font-family: FSF Pro Display;
+  font-family: FantasqueSansM Nerd Font;
   font-size: 12px;
   min-height: 0;
 }
@@ -30,13 +29,6 @@
   color: @peach;
   font-weight: bold;
   border-radius: 1rem;
-}
-
-#workspaces button.urgent {
-  color: @surface0;
-  font-weight: bold;
-  border-radius: 1rem;
-  background-color: @red;
 }
 
 #workspaces button:hover {
