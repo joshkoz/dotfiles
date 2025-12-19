@@ -102,3 +102,13 @@
   margin-right: 1rem;
   border-radius: 1rem;
 }
+
+#custom-music.Paused {
+  color: @overlay2; /* A muted grey from the Mocha palette */
+  font-style: italic;
+}
+
+/* Optional: Make the icon color stay the same or change separately */
+#custom-music.Playing {
+  color: @mauve; /* Keeps it mauve when playing */
+}
