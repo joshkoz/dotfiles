@@ -32,7 +32,8 @@
 }
 
 #workspaces button:hover {
-  color: @sapphire;
+  background-color: @surface1;
+  border-color: @surface1;
   border-radius: 1rem;
 }
 
@@ -53,6 +54,11 @@
   color: @blue;
   border-radius: 0px 1rem 1rem 0px;
   margin-right: 1rem;
+}
+
+#clock:hover {
+  background-color: @surface1;
+  border-color: @surface1;
 }
 
 #battery {
@@ -82,6 +88,11 @@
   margin-left: 1rem;
 }
 
+#pulseaudio:hover {
+  background-color: @surface1;
+  border-color: @surface1;
+}
+
 #custom-music {
   color: @mauve;
   border-radius: 1rem;
@@ -90,6 +101,11 @@
 #custom-lock {
   border-radius: 1rem 0px 0px 1rem;
   color: @lavender;
+}
+
+#custom-lock:hover {
+  background-color: @surface1;
+  border-color: @surface1;
 }
 
 #custom-power {

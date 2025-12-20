@@ -34,7 +34,7 @@
     "clock": {
         "timezone": "Australia/Melbourne",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format": "{:%I:%M %p  %d %b %Y}",
+        "format": "{:%d %B %Y at %I:%M %p}",
         "format-alt": "󰃭 {:%A, %b %d  Week %W  󱐮 %I:%M:%S %p}"
     },
     "backlight": {
