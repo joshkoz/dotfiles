@@ -38,6 +38,8 @@ source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 source <(fzf --zsh)
 
+eval "$(cd $(mktemp -d) && /usr/share/dotnet/dotnet completions script zsh)"
+
 backward-kill-dir () {
     local WORDCHARS=${WORDCHARS/\/}
     local WORDCHARS=${WORDCHARS/./}

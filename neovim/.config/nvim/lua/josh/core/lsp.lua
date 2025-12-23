@@ -2,6 +2,7 @@ vim.lsp.enable("lua_ls")
 vim.lsp.enable("clangd")
 vim.lsp.enable("vtsls")
 vim.lsp.enable("marksman")
+vim.lsp.enable("sqruff")
 
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("joshkoz/lsp-Keymaps", { clear = true }),

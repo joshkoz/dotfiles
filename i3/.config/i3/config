@@ -274,7 +274,7 @@ workspace $ws10 output $dpleft
 
 assign [class="ghostty"] workspace $ws6 
 assign [class="firefox"] workspace $ws7 
-assign [class="vesktop"] workspace $ws1 
+assign [class="discord"] workspace $ws1 
 assign [class="Slack"] workspace $ws1 
 assign [class="Spotify"] workspace $ws10 
 assign [class="Google-chrome"] workspace $ws7 

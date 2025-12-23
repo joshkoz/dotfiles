@@ -19,6 +19,7 @@ return {
           python = { "isort", "black" },
           terraform = { "terraform_fmt" },
           cs = { "csharpier" },
+          sql = { "sqruff" },
         },
         format = {
           timeout_ms = 3000,
