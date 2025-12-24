@@ -2,3 +2,4 @@ secrets.zsh
 *.add
 *.spl
 spell/
+hyprland/.config/wlogout/themes/*

@@ -64,7 +64,7 @@
     },
     "custom/lock": {
         "tooltip": false,
-        "on-click": "hyprlock --no-fade-in",
+        "on-click": "wlogout",
         "format": "",
     },
 }
