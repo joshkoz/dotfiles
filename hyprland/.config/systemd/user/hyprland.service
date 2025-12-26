@@ -21,7 +21,7 @@ Environment=GBM_BACKEND=nvidia-drm
 Environment=__GLX_VENDOR_LIBRARY_NAME=nvidia
 ExecStart=/usr/bin/Hyprland
 # This is critical: it exports Wayland variables so other services (Waybar, etc) can see them
-ExecStartPost=/usr/bin/systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP HYPRLAND_INSTANCE_SIGNATURE
+ExecStartPost=/usr/bin/sh -c "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP HYPRLAND_INSTANCE_SIGNATURE; dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP HYPRLAND_INSTANCE_SIGNATURE"
 Restart=on-failure
 
 [Install]

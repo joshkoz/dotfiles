@@ -2,6 +2,8 @@
 Description=XDG Autostart for Hyprland Wayland compositor session
 Documentation=man:systemd.special(7)
 BindsTo=hyprland-session.target
+Wants=xdg-desktop-autostart.target
 Conflicts=hyprland-session-shutdown.target
 Before=hyprland-session-shutdown.target
 StopWhenUnneeded=yes 
+After=hyprland.service

@@ -9,43 +9,58 @@ OUTPUT_DIR="${OMARCHY_SCREENSHOT_DIR:-${XDG_PICTURES_DIR:-$HOME/Pictures}}"
 
 if [[ ! -d "$OUTPUT_DIR" ]]; then
   notify-send "Screenshot directory does not exist: $OUTPUT_DIR" -u critical -t 3000 || true
-  echo "Screenshot directory does not exist: $OUTPUT_DIR" >&2
   exit 1
 fi
 
-# Selection mode: region | window | output (fullscreen)
-MODE="${1:-region}"
+# Selection mode: area | active | screen
+MODE="${1:-area}"
 
 # Timestamped filename
 FNAME="screenshot-$(date +'%Y-%m-%d_%H-%M-%S').png"
 OUTPATH="${OUTPUT_DIR}/${FNAME}"
 
-# Clipboard command for X11
-COPY_CMD='xclip -selection clipboard -t image/png -i'
+# Clipboard command for Wayland (Required for Satty)
+COPY_CMD='wl-copy'
 
-# Take the screenshot to stdout with maim based on mode
-screenshot() {
+play_sound() {
+  local SOUND_FILE="/usr/share/sounds/freedesktop/stereo/camera-shutter.oga"
+  [[ -f "$SOUND_FILE" ]] || return 0
+
+  (
+    pw-play "$SOUND_FILE" --volume=0.4 \
+      </dev/null >/dev/null 2>&1
+  ) &
+}
+
+capture() {
   case "$MODE" in
-    region)
-      maim -s -u
+    area)
+      # We play the sound AFTER the selection is made
+      grimblast --freeze save area - 
       ;;
-    window)
-      WIN_ID="$(xdotool getactivewindow)"
-      maim -u -i "$WIN_ID"
+    window|active)
+      grimblast --freeze save active -
       ;;
     output|full|fullscreen)
-      maim -u
+      grimblast --freeze save screen -
       ;;
     *)
-      notify-send "Invalid screenshot mode: $MODE" -u critical -t 3000 || true
-      echo "Invalid screenshot mode: $MODE" >&2
+      notify-send "Invalid screenshot mode" -u critical
       exit 2
       ;;
   esac
 }
+capture_and_chirp() {
+  # 1. Run the capture. This blocks until you finish selecting the area.
+  grimblast --freeze save area - 
+  
+  # 2. As soon as selection is done, fire the sound in the background
+  # and immediately exit the function so Satty gets the data.
+  play_sound 
+}
 
-# Pipe into satty for annotation and saving+copying
-screenshot | GDK_SCALE=2  GTK_THEME=Adwaita:dark satty \
+# Pipe into satty
+capture_and_chirp | satty \
   --filename - \
   --output-filename "$OUTPATH" \
   --early-exit \
@@ -53,7 +68,7 @@ screenshot | GDK_SCALE=2  GTK_THEME=Adwaita:dark satty \
   --initial-tool brush \
   --copy-command "$COPY_CMD"
 
-# Notify success
+# Notify success if the file was actually saved (Satty can exit without saving)
 if [[ -f "$OUTPATH" ]]; then
-  notify-send "Screenshot saved" "$OUTPATH" -t 2000 || true
+  notify-send "Screenshot saved" "$OUTPATH" -i "$OUTPATH" -t 2000 || true
 fi
