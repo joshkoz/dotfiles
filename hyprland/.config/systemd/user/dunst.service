@@ -1,0 +1,14 @@
+[Unit]
+Description=Dunst notification daemon
+Documentation=https://wiki.archlinux.org/title/Dunst
+PartOf=hyprland-session.target
+After=hyprland.service
+
+[Service]
+Type=simple
+# We specify your custom config path here
+ExecStart=/usr/bin/dunst -config %h/.config/dunst/dunstrc
+Restart=on-failure
+
+[Install]
+WantedBy=hyprland-session.target

@@ -1,0 +1,13 @@
+[Unit]
+Description=Cliphist - Text clipboard manager
+PartOf=hyprland-session.target
+After=hyprland.service
+
+[Service]
+Type=simple
+# We use wl-paste to watch the clipboard and pipe it into cliphist
+ExecStart=/usr/bin/wl-paste --type text --watch cliphist store
+Restart=on-failure
+
+[Install]
+WantedBy=hyprland-session.target

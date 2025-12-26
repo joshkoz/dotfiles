@@ -1,0 +1,26 @@
+#!/bin/bash
+# Hyprland Systemd Wrapper
+
+set -euo pipefail
+
+# Optional: Just check if we are in a TTY at all (ignores SSH or serial)
+if [[ ! "$(tty)" =~ /dev/tty[0-9] ]]; then
+    echo "Hyprland session must be started from a virtual terminal (TTY)"
+    exit 1
+fi
+
+# Check if a graphical session is already running
+if systemctl --user is-active --quiet graphical-session.target; then
+    echo "A graphical session is already running"
+    exit 1
+fi
+
+echo "Starting Hyprland session..."
+
+# Clean start
+systemctl --user unset-environment WAYLAND_DISPLAY DISPLAY
+systemctl --user import-environment PATH
+
+# Start the session and WAIT
+# This keeps the TTY open so Hyprland can use it
+exec systemctl --user start --wait hyprland-session.target

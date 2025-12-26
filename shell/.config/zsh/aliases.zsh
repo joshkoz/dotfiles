@@ -13,3 +13,4 @@ function y() {
 	fi
 	rm -f -- "$tmp"
 }
+alias hstat='systemctl --user status "hypr*" waybar dunst vicinae cliphist-images cliphist-text'

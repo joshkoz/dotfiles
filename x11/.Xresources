@@ -1,3 +1,5 @@
 /*2x scaling for 4k monitor*/
 ! Xft.dpi: 192  
 ! Xcursor.size: 36 
+! Xcursor.theme: Adwaita
+! Xcursor.size: 18

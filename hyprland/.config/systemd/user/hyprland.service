@@ -1,0 +1,36 @@
+[Unit]
+Description=Hyprland - A dynamic tiling Wayland compositor
+Documentation=man:hyprland(1)
+BindsTo=hyprland-session.target
+Before=hyprland-session.target graphical-session.target
+PropagatesStopTo=hyprland-session.target graphical-session.target
+After=graphical-session-pre.target
+OnSuccess=hyprland-session-shutdown.target
+OnSuccessJobMode=replace-irreversibly
+OnFailure=hyprland-session-shutdown.target
+OnFailureJobMode=replace-irreversibly
+Conflicts=hyprland-session-shutdown.target
+Before=hyprland-session-shutdown.target
+CollectMode=inactive-or-failed
+
+[Service]
+Type=notify
+Environment=LIBVA_DRIVER_NAME=nvidia
+Environment=XDG_SESSION_TYPE=wayland
+Environment=GBM_BACKEND=nvidia-drm
+Environment=__GLX_VENDOR_LIBRARY_NAME=nvidia
+ExecStart=/usr/bin/Hyprland
+# This is critical: it exports Wayland variables so other services (Waybar, etc) can see them
+ExecStartPost=/usr/bin/systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP HYPRLAND_INSTANCE_SIGNATURE
+Restart=on-failure
+
+[Install]
+# This links the compositor to the main session target
+WantedBy=hyprland-session.target
+
+
+# Hyprland with USES_SYSTEMD handles:
+# - systemd-notify when ready
+# - systemd environment import/export 
+# - dbus-update-activation-environment
+# - environment cleanup on exit 

@@ -1,0 +1,40 @@
+#!/bin/bash
+
+# Path for the exit lockfile
+LOCK_FILE="$XDG_RUNTIME_DIR/hypr/exit.lock"
+
+# --- HYPRIDLE/WLOGOUT BYPASS ---
+if [[ "$1" == "--force" ]]; then
+    systemctl --user stop --wait hyprland-session.target
+    systemctl --user unset-environment WAYLAND_DISPLAY DISPLAY XDG_CURRENT_DESKTOP
+    hyprctl dispatch exit
+    exit 0
+fi
+
+if [ -f "$LOCK_FILE" ]; then
+    # --- SECOND PRESS: EXIT ---
+    # Remove lock immediately
+    rm -f "$LOCK_FILE"
+    
+    # Notify the user
+    hyprctl notify -0 2000 "rgb(ff5555)" "fontsize:16 Closing session..."
+    
+    # Stop the systemd target and wait for all services to exit
+    # This handles Discord, Waybar, etc. cleanly.
+    systemctl --user stop --wait hyprland-session.target
+    
+    # Wipe the environment variables to prevent ghosting on next login
+    systemctl --user unset-environment WAYLAND_DISPLAY DISPLAY XDG_CURRENT_DESKTOP
+    
+    # Final compositor exit
+    hyprctl dispatch exit
+else
+    # --- FIRST PRESS: PROMPT ---
+    touch "$LOCK_FILE"
+    
+    # Show the notification
+    hyprctl notify -0 10000 "rgb(df3f01)" "fontsize:16 Confirm Exit: Press again to stop session"
+    
+    # Auto-remove the lockfile after 10 seconds (runs in background)
+    ( sleep 10 && rm -f "$LOCK_FILE" ) &
+fi

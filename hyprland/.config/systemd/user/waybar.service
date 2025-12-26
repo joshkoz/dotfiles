@@ -1,0 +1,13 @@
+[Unit]
+Description=Waybar status bar
+# Only start Waybar AFTER Hyprland has exported the Wayland socket
+PartOf=hyprland-session.target
+After=hyprland.service
+
+[Service]
+ExecStart=/usr/bin/waybar
+Restart=always
+
+[Install]
+# This makes it start automatically when the session target starts
+WantedBy=hyprland-session.target

@@ -1,0 +1,13 @@
+[Unit]
+Description=Hyprland wallpaper daemon
+Documentation=https://wiki.hyprland.org/Hypr-Ecosystem/hyprpaper/
+PartOf=hyprland-session.target
+After=hyprland.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/hyprpaper
+Restart=on-failure
+
+[Install]
+WantedBy=hyprland-session.target

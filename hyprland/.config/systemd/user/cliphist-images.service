@@ -1,0 +1,12 @@
+[Unit]
+Description=Cliphist - Image clipboard manager
+PartOf=hyprland-session.target
+After=hyprland.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/wl-paste --type image --watch cliphist store
+Restart=on-failure
+
+[Install]
+WantedBy=hyprland-session.target

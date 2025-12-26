@@ -1,0 +1,15 @@
+[Unit]
+Description=Vicinae - Raycast-compatible launcher server
+Documentation=https://github.com/vicinaehq/vicinae
+PartOf=hyprland-session.target
+After=hyprland.service
+
+[Service]
+Type=simple
+# Force QT scaling to 1 for this specific process
+Environment=QT_SCALE_FACTOR=1
+ExecStart=/usr/bin/vicinae server
+Restart=on-failure
+
+[Install]
+WantedBy=hyprland-session.target

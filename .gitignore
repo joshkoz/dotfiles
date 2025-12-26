@@ -3,3 +3,7 @@ secrets.zsh
 *.spl
 spell/
 hyprland/.config/wlogout/themes/*
+
+# Ignore systemd generated symlinks
+*.wants/
+*.requires/
