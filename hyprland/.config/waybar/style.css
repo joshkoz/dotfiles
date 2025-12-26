@@ -1,16 +1,15 @@
 @import "mocha.css";
 
 * {
-  font-family: FantasqueSansM Nerd Font;
-  font-size: 12px;
+  font-family: NotoSans Nerd Font;
+  font-size: 11px;
   min-height: 0;
 }
 
 #waybar {
-  background: @mantle;
-  opacity: 0.95;
+  background-color: alpha(@mantle, 0.8);
   color: @text;
-  margin: 5px 5px;
+  margin: 0px 0px;
 }
 
 #workspaces {
@@ -23,7 +22,7 @@
 #workspaces button {
   color: @lavender;
   border-radius: 1rem;
-  padding: 0.4rem;
+  padding: 0.2rem 0.4rem;
 }
 
 #workspaces button.active {
@@ -47,12 +46,12 @@
 #custom-lock,
 #custom-power {
   background-color: @base;
-  padding: 0.4rem 1rem;
-  margin: 3px 0px;
+  padding: 0rem 1rem;
+  margin: 0px 0px;
 }
 
 #clock {
-  color: @blue;
+  color: @lavender;
   border-radius: 0px 1rem 1rem 0px;
   margin-right: 1rem;
 }
