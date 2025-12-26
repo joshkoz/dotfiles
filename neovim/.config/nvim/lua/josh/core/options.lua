@@ -48,9 +48,10 @@ vim.o.scrolloff = 10
 
 -- Decrease update time
 vim.o.updatetime = 50
+vim.o.timeout = true
 vim.o.timeoutlen = 300
-vim.o.ttimeout = false
-vim.o.timeout = false
+vim.o.ttimeout = true
+vim.o.ttimeoutlen = 10
 
 -- Folds
 vim.o.foldmethod = "expr" -- use tree-sitter for folding method
