@@ -1,0 +1,17 @@
+[Unit]
+Description=LocalSend - File Sharing Client
+After=waybar.service
+Wants=waybar.service
+PartOf=hyprland-session.target
+BindsTo=hyprland-session.target
+
+[Service]
+Type=simple
+# We omit the pkill logic because systemd manages the lifecycle properly
+ExecStartPre=-/usr/bin/pkill -u %u -f localsend
+ExecStart=/usr/bin/flatpak run org.localsend.localsend_app --hidden
+Restart=on-failure
+RestartSec=3s
+
+[Install]
+WantedBy=hyprland-session.target

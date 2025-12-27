@@ -5,6 +5,7 @@ PartOf=hyprland-session.target
 After=hyprland.service
 
 [Service]
+Type=simple
 ExecStart=/usr/bin/waybar
 Restart=always
 
