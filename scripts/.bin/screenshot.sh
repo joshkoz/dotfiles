@@ -50,9 +50,10 @@ capture() {
       ;;
   esac
 }
+
 capture_and_chirp() {
   # 1. Run the capture. This blocks until you finish selecting the area.
-  grimblast --freeze save area - 
+  capture
   
   # 2. As soon as selection is done, fire the sound in the background
   # and immediately exit the function so Satty gets the data.
