@@ -19,10 +19,12 @@ Environment=LIBVA_DRIVER_NAME=nvidia
 Environment=XDG_SESSION_TYPE=wayland
 Environment=GBM_BACKEND=nvidia-drm
 Environment=__GLX_VENDOR_LIBRARY_NAME=nvidia
-ExecStart=/usr/bin/Hyprland
+ExecStart=/usr/bin/start-hyprland
+NotifyAccess=all
 # This is critical: it exports Wayland variables so other services (Waybar, etc) can see them
 ExecStartPost=/usr/bin/sh -c "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP HYPRLAND_INSTANCE_SIGNATURE; dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP HYPRLAND_INSTANCE_SIGNATURE"
 Restart=on-failure
+KillMode=mixed
 
 [Install]
 # This links the compositor to the main session target
