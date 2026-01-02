@@ -1,9 +1,9 @@
 alias k=kubectl
 alias vim=nvim
+alias open='xdg-open'
+alias hstat='systemctl --user status "hypr*" waybar dunst vicinae cliphist-images cliphist-text'
 
 bindkey -s '^f' "^utmux-sessionizer^M"
-
-alias standby="i3lock --color=000000 && systemctl suspend"
 
 function y() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
@@ -13,4 +13,11 @@ function y() {
 	fi
 	rm -f -- "$tmp"
 }
-alias hstat='systemctl --user status "hypr*" waybar dunst vicinae cliphist-images cliphist-text'
+
+alias -s md=bat
+alias -s yaml="bat -l yaml"
+alias -s yml="bat -l yaml"
+alias -s json="jless"
+alias -s conf="$EDITOR"
+
+alias -g C='| wl-copy'
