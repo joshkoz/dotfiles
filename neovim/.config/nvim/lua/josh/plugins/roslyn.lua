@@ -1,5 +1,1 @@
-return {
-  "seblj/roslyn.nvim",
-  ft = "cs",
-  opts = {},
-}
+require("roslyn").setup({})

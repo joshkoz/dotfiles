@@ -1,7 +1,0 @@
-require("josh.core.options")
-require("josh.core.keymaps")
-require("josh.core.autocmds")
-require("josh.core.ft")
-require("josh.core.bootstrap")
-require("josh.core.diagnostic")
-require("josh.core.lsp")

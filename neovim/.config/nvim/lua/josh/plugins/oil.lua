@@ -1,22 +1,14 @@
-return {
-  "stevearc/oil.nvim",
-  opts = {},
-  config = function()
-    local oil = require("oil")
+require("oil").setup({
+  columns = {},
+  view_options = {
+    show_hidden = true,
+  },
+  keymaps = {
+    ["<C-h>"] = false,
+    ["<C-p>"] = false,
+    ["<C-l>"] = false,
+    ["_"] = false,
+  },
+})
 
-    oil.setup({
-      columns = {},
-      view_options = {
-        show_hidden = true,
-      },
-      keymaps = {
-        ["<C-h>"] = false, -- "actions.select_split",
-        ["<C-p>"] = false, -- "actions.preview",
-        ["<C-l>"] = false, --"actions.refresh",
-        ["_"] = false, --"actions.refresh",
-      },
-    })
-
-    vim.keymap.set({ "n", "v" }, "-", "<CMD>Oil<CR>", { silent = true, desc = "Open the parent directory" })
-  end,
-}
+vim.keymap.set({ "n", "v" }, "-", "<CMD>Oil<CR>", { silent = true, desc = "Open the parent directory" })
