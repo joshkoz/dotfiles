@@ -7,22 +7,20 @@
 }
 
 #waybar {
-  background-color: alpha(@mantle, 0.8);
+  background-color: alpha(@mantle, 0);
   color: @text;
   margin: 0px 0px;
 }
 
 #workspaces {
   border-radius: 1rem;
-  margin: 2px 0px;
   background-color: @base;
-  margin-left: 1rem;
+  margin-left: 0.5rem;
 }
 
 #workspaces button {
   color: @lavender;
   border-radius: 1rem;
-  padding: 0.2rem 0.4rem;
 }
 
 #workspaces button.active {
@@ -61,27 +59,6 @@
   border-color: @surface0;
 }
 
-#battery {
-  color: @green;
-}
-
-#battery.charging {
-  color: @green;
-}
-
-#battery.warning:not(.charging) {
-  color: @red;
-}
-
-#backlight {
-  color: @yellow;
-}
-
-#backlight,
-#battery {
-  border-radius: 0;
-}
-
 #pulseaudio {
   color: @maroon;
   border-radius: 1rem 0px 0px 1rem;
@@ -106,12 +83,6 @@
 #custom-lock:hover {
   background-color: @surface0;
   border-color: @surface0;
-}
-
-#custom-power {
-  margin-right: 1rem;
-  border-radius: 0px 1rem 1rem 0px;
-  color: @red;
 }
 
 #tray {

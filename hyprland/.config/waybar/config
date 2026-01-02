@@ -5,7 +5,7 @@
     // Choose the order of the modules
     "modules-left": ["hyprland/workspaces"],
     "modules-center": ["custom/music"],
-    "modules-right": ["tray", "pulseaudio", "backlight", "battery", "clock", "custom/lock", "custom/power"],
+    "modules-right": ["tray", "pulseaudio", "backlight", "clock", "custom/lock"],
     "hyprland/workspaces": {
          "disable-scroll": true,
          "sort-by-name": true,
@@ -60,7 +60,7 @@
         "format-icons": {
             "default": ["", "", " "]
         },
-        "on-click": "ghostty -e pulsemixer"
+        "on-click": "pavucontrol"
     },
     "custom/lock": {
         "tooltip": false,
