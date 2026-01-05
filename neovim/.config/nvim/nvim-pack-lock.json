@@ -30,7 +30,7 @@
       "src": "https://github.com/nvim-mini/mini.ai"
     },
     "mini.clue": {
-      "rev": "5f0f5ca2ab967755ccde80795d7f0f33fe0015b7",
+      "rev": "e2f0c1eb3ce652e34b1e9a9c504a780acf3bd4e3",
       "src": "https://github.com/nvim-mini/mini.clue"
     },
     "mini.diff": {
@@ -54,7 +54,7 @@
       "src": "https://github.com/nvim-mini/mini.surround"
     },
     "nvim-treesitter": {
-      "rev": "1927c76aec829d40dcad24b6469cb639f1334096",
+      "rev": "99dfc5acefd7728cec4ad0d0a6a9720f2c2896ff",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter",
       "version": "'main'"
     },
@@ -66,8 +66,13 @@
       "rev": "4ce6030c82c40b2bee1b6ce1292121ef8354f3a6",
       "src": "https://github.com/seblj/roslyn.nvim"
     },
+    "rustaceanvim": {
+      "rev": "88575b98bb9937fb9983ddec5e532b67e75ce677",
+      "src": "https://github.com/mrcjkb/rustaceanvim",
+      "version": "6.0.0 - 7.0.0"
+    },
     "smart-splits.nvim": {
-      "rev": "1ea2e55bcc0dd2bdec5c5fef0082219f76c532fc",
+      "rev": "d2629b2451649946c95bcc11ea5eaf15c96b23ef",
       "src": "https://github.com/mrjones2014/smart-splits.nvim"
     },
     "snacks.nvim": {

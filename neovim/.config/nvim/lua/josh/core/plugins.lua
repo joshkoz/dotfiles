@@ -15,6 +15,7 @@ vim.pack.add({
   "https://github.com/nvim-mini/mini.clue",
   "https://github.com/stevearc/oil.nvim",
   "https://github.com/seblj/roslyn.nvim",
+  { src = "https://github.com/mrcjkb/rustaceanvim", version = vim.version.range("^6") },
   "https://github.com/mrjones2014/smart-splits.nvim",
   -- "https://github.com/mfussenegger/nvim-lint",
   "https://github.com/folke/snacks.nvim",
