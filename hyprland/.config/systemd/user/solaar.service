@@ -1,0 +1,16 @@
+[Unit]
+Description=Solaar Logitech Manager
+# Ensures it only starts once the Hyprland session is live
+After=waybar.service
+BindsTo=hyprland-session.target
+PartOf=waybar.service
+
+[Service]
+Type=simple
+# --window=hide ensures it starts in the tray without a popup
+ExecStart=/usr/bin/solaar --window=hide
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=hyprland-session.target
