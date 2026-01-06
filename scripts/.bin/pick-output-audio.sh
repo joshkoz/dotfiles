@@ -11,6 +11,11 @@ active_sink=$(pactl get-default-sink)
 menu_entries=()
 active_description=""
 
+# Check if wofi or rofi is already running; if so, kill it and exit
+if pkill -x wofi || pkill -x rofi; then
+    exit 0
+fi
+
 while IFS= read -r line; do
     if [[ $line == *Name:* ]]; then
         sink_name=$(echo "$line" | awk '{print $NF}')
@@ -52,7 +57,7 @@ done
 
 # Show menu
 if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
-    menu=$(printf '%s\n' "${display_entries[@]}" | wofi --dmenu -i -p "🕪 Audio Output")
+    menu=$(printf '%s\n' "${display_entries[@]}" | wofi --dmenu -i -p "🕪  Audio Output")
 else
     menu=$(printf '%s\n' "${display_entries[@]}" | rofi -dmenu -i -p "🕪" -no-sort)
 fi

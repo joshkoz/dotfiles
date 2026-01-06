@@ -11,6 +11,11 @@ declare -a exclude_list=(
 declare -A source_map
 active_source=$(pactl get-default-source)
 
+# Check if wofi or rofi is already running; if so, kill it and exit
+if pkill -x wofi || pkill -x rofi; then
+    exit 0
+fi
+
 while IFS= read -r line; do
     # Extract the source name
     if [[ $line == *Name:* ]]; then
@@ -56,7 +61,7 @@ fi
 # Generate the menu with descriptions
 if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
     echo "Session type is Wayland."
-    menu=$(printf '%s\n' "${menu_entries[@]}" | wofi --dmenu -i -p "🎙")
+    menu=$(printf '%s\n' "${menu_entries[@]}" | wofi --dmenu -i -p "🎙  Audio Input")
 else
     menu=$(printf '%s\n' "${menu_entries[@]}" | rofi -dmenu -i -p "🎙")
 fi
