@@ -1,6 +1,8 @@
 show=drun
-width=750
-height=400
+width=770
+height=405
+y=281
+x=570
 always_parse_args=true
 show_all=false
 term=ghostty
@@ -9,3 +11,4 @@ print_command=true
 insensitive=true
 prompt=
 columns=1
+entry_icon=
