@@ -12,7 +12,8 @@ hipatterns.setup({
   },
 })
 
-require("mini.diff").setup({
+local minidiff = require("mini.diff")
+minidiff.setup({
   view = {
     style = "sign",
     signs = {
@@ -26,6 +27,9 @@ require("mini.diff").setup({
     priority = 199,
   },
 })
+vim.keymap.set("n", "<leader>dh", function()
+  minidiff.toggle_overlay(0)
+end, { desc = "Git Diff Hunk Preview" })
 
 require("mini.notify").setup({
   window = {
@@ -56,9 +60,6 @@ require("mini.icons").setup({
 -----------------------------------------------------------
 -- 4. Mini.clue & Keymaps
 -----------------------------------------------------------
-vim.keymap.set("n", "<leader>dh", function()
-  require("mini.diff").toggle_overlay(0)
-end, { desc = "Git Diff Hunk Preview" })
 
 local miniclue = require("mini.clue")
 vim.api.nvim_set_hl(0, "MiniClueDescSingle", { link = "Normal" })
