@@ -24,6 +24,7 @@ local ts_parsers = {
   "markdown_inline",
   "dockerfile",
   "gitignore",
+  "hurl",
 }
 local nts = require("nvim-treesitter")
 
@@ -42,8 +43,19 @@ autocmd("FileType", {
     local filetype = args.match
     local lang = vim.treesitter.language.get_lang(filetype)
     if lang and vim.treesitter.language.add(lang) then
-      vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+      -- Check if indentation queries exist for this language
+      local indent_query_files = vim.api.nvim_get_runtime_file("queries/" .. lang .. "/indents.scm", false)
+
+      if #indent_query_files > 0 then
+        vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+      else
+        -- Fall back to default indentation
+        -- vim.print("No indentation queries for " .. lang .. ", using default indent")
+      end
+
       vim.treesitter.start()
     end
   end,
 })
+
+require("nvim-treesitter").install("hurl")
