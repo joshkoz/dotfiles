@@ -121,4 +121,4 @@ local function auto_bootstrap_namespace(bufnr, mode)
   vim.cmd.write()
 end
 
-auto_bootstrap_namespace(0, "file_scoped")
+-- auto_bootstrap_namespace(0, "file_scoped")
