@@ -43,9 +43,14 @@ autocmd("ColorScheme", {
   callback = function()
     local winsep = vim.api.nvim_get_hl(0, { name = "WinSeparator" })
     local norm = vim.api.nvim_get_hl(0, { name = "Normal" })
+    local normal_float = vim.api.nvim_get_hl(0, { name = "NormalFloat", link = false })
+    local float_border = vim.api.nvim_get_hl(0, { name = "FloatBorder", link = false })
     vim.api.nvim_set_hl(0, "MyLine", { fg = winsep.fg, bg = norm.bg })
     vim.api.nvim_set_hl(0, "StatusLine", { link = "Normal" })
     vim.api.nvim_set_hl(0, "StatusLineNC", { link = "Normal" })
+    -- Apply the background from NormalFloat to FloatBorder
+    vim.api.nvim_set_hl(0, "FloatBorder", { bg = normal_float.bg, fg = float_border.fg })
+    -- vim.api.nvim_set_hl(0, "NormalFloat", { bg = float_border.bg, fg = normal_float.fg })
   end,
 })
 
