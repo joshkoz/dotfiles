@@ -1,20 +1,20 @@
 local snacks = require("snacks")
 
-vim.keymap.set("n", "<c-p>", Snacks.picker.git_files, { desc = "Find Git Files" })
-vim.keymap.set("n", "<leader>f", Snacks.picker.files, { desc = "Find Files" })
-vim.keymap.set("n", "<leader>h", Snacks.picker.help, { desc = "Find Help" })
-vim.keymap.set("n", "<leader>e", Snacks.picker.explorer, { desc = "Open Explorer" })
-vim.keymap.set("n", "<leader>u", Snacks.picker.undo, { desc = "Open Undo" })
+vim.keymap.set("n", "<c-p>", snacks.picker.git_files, { desc = "Find Git Files" })
+vim.keymap.set("n", "<leader>f", snacks.picker.files, { desc = "Find Files" })
+vim.keymap.set("n", "<leader>h", snacks.picker.help, { desc = "Find Help" })
+vim.keymap.set("n", "<leader>e", snacks.picker.explorer, { desc = "Open Explorer" })
+vim.keymap.set("n", "<leader>u", snacks.picker.undo, { desc = "Open Undo" })
 vim.keymap.set("n", "<leader>/", function()
-  Snacks.picker.grep({ hidden = true })
+  snacks.picker.grep({ hidden = true })
 end, { desc = "Find Live Grep" })
-vim.keymap.set("n", "<leader>w", Snacks.picker.diagnostics, { desc = "Workspace diagnostics" })
+vim.keymap.set("n", "<leader>w", snacks.picker.diagnostics, { desc = "Workspace diagnostics" })
 vim.keymap.set("n", "<leader>j", function()
-  Snacks.picker()
+  snacks.picker()
 end, { desc = "Find pickers" })
 
 snacks.setup({
-  -- Only using the picker from folke/Snacks.
+  -- Only using the picker from folke/snacks.
   picker = {
     ui_select = true,
     formatters = {
@@ -38,7 +38,7 @@ snacks.setup({
             keys = {
               ["<ESC>"] = function() end,
               ["<C-l>"] = function()
-                require("smart-splits").move_cursor_left()
+                -- require("smart-splits").move_cursor_left()
               end,
               ["<C-h>"] = function()
                 vim.cmd("wincmd h")
@@ -66,3 +66,4 @@ snacks.setup({
     right = { "git" },
   },
 })
+snacks.statuscolumn.click_fold = function() end

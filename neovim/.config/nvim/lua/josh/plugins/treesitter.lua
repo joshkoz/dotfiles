@@ -58,5 +58,3 @@ autocmd("FileType", {
     end
   end,
 })
-
-require("nvim-treesitter").install("hurl")
