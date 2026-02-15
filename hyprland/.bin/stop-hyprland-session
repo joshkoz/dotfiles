@@ -5,7 +5,7 @@ LOCK_FILE="$XDG_RUNTIME_DIR/hypr/exit.lock"
 
 # --- HYPRIDLE/WLOGOUT BYPASS ---
 if [[ "$1" == "--force" ]]; then
-    systemctl --user stop --wait hyprland-session.target
+    systemctl --user stop --wait wayland-session.target
     systemctl --user unset-environment WAYLAND_DISPLAY DISPLAY XDG_CURRENT_DESKTOP
     hyprctl dispatch exit
     exit 0
@@ -21,7 +21,7 @@ if [ -f "$LOCK_FILE" ]; then
     
     # Stop the systemd target and wait for all services to exit
     # This handles Discord, Waybar, etc. cleanly.
-    systemctl --user stop --wait hyprland-session.target
+    systemctl --user stop --wait wayland-session.target
     
     # Wipe the environment variables to prevent ghosting on next login
     systemctl --user unset-environment WAYLAND_DISPLAY DISPLAY XDG_CURRENT_DESKTOP

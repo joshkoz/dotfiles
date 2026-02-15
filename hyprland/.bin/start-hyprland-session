@@ -23,4 +23,4 @@ systemctl --user import-environment PATH
 
 # Start the session and WAIT
 # This keeps the TTY open so Hyprland can use it
-exec systemctl --user start --wait hyprland-session.target
+exec systemctl --user start --wait wayland-session.target

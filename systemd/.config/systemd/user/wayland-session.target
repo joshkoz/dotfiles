@@ -1,0 +1,17 @@
+[Unit]
+Description=Wayland compositor session
+Documentation=man:systemd.special(7)
+Wants=wayland-compositor.service wayland-session-xdg-autostart.target
+After=graphical-session-pre.target wayland-compositor.service
+BindsTo=graphical-session.target
+Before=graphical-session.target
+PropagatesStopTo=graphical-session.target
+Conflicts=wayland-session-shutdown.target
+Before=wayland-session-shutdown.target
+StopWhenUnneeded=yes
+
+[Install]
+# WantedBy=default.target
+# Comment out the above line to prevent auto-start on login
+# Enable manually with: systemctl --user enable wayland-session.target
+# Or start from a compositor-specific start script

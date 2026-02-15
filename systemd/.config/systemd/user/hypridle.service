@@ -1,7 +1,7 @@
 [Unit]
 Description=Hyprland idle daemon
 Documentation=https://wiki.hyprland.org/Hypr-Ecosystem/hypridle/
-PartOf=hyprland-session.target
+PartOf=hyprland.service
 After=hyprland.service
 
 [Service]
@@ -10,4 +10,4 @@ ExecStart=/usr/bin/hypridle
 Restart=on-failure
 
 [Install]
-WantedBy=hyprland-session.target
+WantedBy=hyprland.service

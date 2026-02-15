@@ -1,8 +1,8 @@
 [Unit]
 Description=Waybar status bar
-# Only start Waybar AFTER Hyprland has exported the Wayland socket
-PartOf=hyprland-session.target
-After=hyprland.service
+# Only start Waybar AFTER the compositor has exported the Wayland socket
+PartOf=wayland-session.target
+After=wayland-compositor.service
 
 [Service]
 Type=simple
@@ -11,4 +11,4 @@ Restart=always
 
 [Install]
 # This makes it start automatically when the session target starts
-WantedBy=hyprland-session.target
+WantedBy=wayland-session.target

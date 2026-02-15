@@ -2,8 +2,8 @@
 Description=LocalSend - File Sharing Client
 After=waybar.service
 Wants=waybar.service
-PartOf=hyprland-session.target
-BindsTo=hyprland-session.target
+PartOf=wayland-session.target
+BindsTo=wayland-session.target
 
 [Service]
 Type=simple
@@ -14,4 +14,4 @@ Restart=on-failure
 RestartSec=3s
 
 [Install]
-WantedBy=hyprland-session.target
+WantedBy=wayland-session.target

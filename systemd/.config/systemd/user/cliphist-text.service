@@ -1,7 +1,7 @@
 [Unit]
 Description=Cliphist - Text clipboard manager
-PartOf=hyprland-session.target
-After=hyprland.service
+PartOf=wayland-session.target
+After=wayland-compositor.service
 
 [Service]
 Type=simple
@@ -10,4 +10,4 @@ ExecStart=/usr/bin/wl-paste --type text --watch cliphist store
 Restart=on-failure
 
 [Install]
-WantedBy=hyprland-session.target
+WantedBy=wayland-session.target

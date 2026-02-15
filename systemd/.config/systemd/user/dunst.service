@@ -1,8 +1,8 @@
 [Unit]
 Description=Dunst notification daemon
 Documentation=https://wiki.archlinux.org/title/Dunst
-PartOf=hyprland-session.target
-After=hyprland.service
+PartOf=wayland-session.target
+After=wayland-compositor.service
 
 [Service]
 Type=simple
@@ -11,4 +11,4 @@ ExecStart=/usr/bin/dunst -config %h/.config/dunst/dunstrc
 Restart=on-failure
 
 [Install]
-WantedBy=hyprland-session.target
+WantedBy=wayland-session.target
