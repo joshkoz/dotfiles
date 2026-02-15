@@ -19,3 +19,20 @@ end, { desc = "[D]iff against " .. get_default_branch_name() })
 vim.keymap.set("n", "<leader>dM", function()
   vim.cmd("DiffviewOpen HEAD..origin/" .. get_default_branch_name())
 end, { desc = "[D]iff against origin/" .. get_default_branch_name() })
+
+require("diffview").setup({
+  show_help_hints = false,
+  file_panel = {
+    listing_style = "tree", -- One of 'list' or 'tree'
+    -- tree_options = {                    -- Only applies when listing_style is 'tree'
+    --   flatten_dirs = true,              -- Flatten dirs that only contain one single dir
+    --   folder_statuses = "only_folded",  -- One of 'never', 'only_folded' or 'always'.
+    -- },
+    win_config = { -- See |diffview-config-win_config|
+      position = "bottom",
+      -- width = 35,
+      height = 20,
+      win_opts = {},
+    },
+  },
+})

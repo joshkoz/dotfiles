@@ -12,6 +12,7 @@ vim.pack.add({
   { src = "https://github.com/mrcjkb/rustaceanvim", version = vim.version.range("^6") },
   "https://github.com/folke/snacks.nvim",
   { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
+  "https://github.com/mrjones2014/smart-splits.nvim",
 })
 
 -- set color scheme early
@@ -28,6 +29,6 @@ require("josh.plugins.formatting")
 require("josh.plugins.git")
 require("josh.plugins.mini")
 require("josh.plugins.oil")
--- require("josh.plugins.smartsplits")
+require("josh.plugins.smartsplits")
 require("josh.plugins.snacks")
 require("josh.plugins.treesitter")
