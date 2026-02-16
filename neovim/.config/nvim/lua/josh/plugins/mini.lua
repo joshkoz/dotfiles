@@ -2,12 +2,13 @@
 -- require("mini.ai").setup({})
 
 local hipatterns = require("mini.hipatterns")
+vim.api.nvim_set_hl(0, "JoshHipatternsImportant", { fg = "#FFFF00", underline = true })
 hipatterns.setup({
   highlighters = {
-    fixme = { pattern = "%f[%w]()FIXME()%f[%W]", group = "MiniHipatternsFixme" },
-    hack = { pattern = "%f[%w]()HACK()%f[%W]", group = "MiniHipatternsHack" },
+    fixme = { pattern = "%f[%w]()FIXME()%f[%W]", group = "MiniHipatternsHack" },
     todo = { pattern = "%f[%w]()TODO()%f[%W]", group = "MiniHipatternsFixme" },
     note = { pattern = "%f[%w]()NOTE()%f[%W]", group = "MiniHipatternsNote" },
+    important = { pattern = "%f[%w]()IMPORTANT()%f[%W]", group = "JoshHipatternsImportant" },
     hex_color = hipatterns.gen_highlighter.hex_color(),
   },
 })

@@ -1,1 +1,18 @@
-{}
+{
+  "fixme": {
+    "prefix": "fixme",
+    "body": ["// FIXME: ${1}"]
+  },
+  "todo": {
+    "prefix": "todo",
+    "body": ["// TODO(josh): ${1}"]
+  },
+  "note": {
+    "prefix": "note",
+    "body": ["// NOTE(josh): ${1}"]
+  },
+  "important": {
+    "prefix": "important",
+    "body": ["// IMPORTANT: ${1}"]
+  }
+}
