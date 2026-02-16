@@ -1,0 +1,22 @@
+[Unit]
+Description=Niri - A scrollable tiling Wayland compositor
+Documentation=man:niri(1)
+BindsTo=wayland-session.target
+Before=wayland-session.target graphical-session.target
+PropagatesStopTo=wayland-session.target graphical-session.target
+After=graphical-session-pre.target
+OnSuccess=wayland-session-shutdown.target
+OnSuccessJobMode=replace-irreversibly
+OnFailure=wayland-session-shutdown.target
+OnFailureJobMode=replace-irreversibly
+Conflicts=wayland-session-shutdown.target
+Before=wayland-session-shutdown.target
+CollectMode=inactive-or-failed
+
+[Service]
+Type=simple
+Environment=XDG_SESSION_TYPE=wayland
+ExecStart=/usr/bin/niri-session
+ExecStartPost=/usr/bin/sh -c "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP; dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+Restart=on-failure
+KillMode=mixed

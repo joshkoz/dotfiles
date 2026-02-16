@@ -6,4 +6,4 @@ Wants=xdg-desktop-autostart.target
 Conflicts=wayland-session-shutdown.target
 Before=wayland-session-shutdown.target
 StopWhenUnneeded=yes
-After=wayland-compositor.service
+After=wayland-session.target

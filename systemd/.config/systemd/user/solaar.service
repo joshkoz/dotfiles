@@ -1,7 +1,7 @@
 [Unit]
 Description=Solaar Logitech Manager
 # Ensures it only starts once the Hyprland session is live
-After=waybar.service
+After=waybar.service wayland-session.target
 BindsTo=wayland-session.target
 PartOf=waybar.service
 

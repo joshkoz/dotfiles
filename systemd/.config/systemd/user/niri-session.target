@@ -1,0 +1,10 @@
+[Unit]
+Description=Niri Wayland compositor session
+Documentation=man:systemd.special(7)
+Requires=niri.service
+BindsTo=niri.service
+After=niri.service
+Before=wayland-session.target
+Wants=wayland-session.target
+Conflicts=wayland-session-shutdown.target
+Before=wayland-session-shutdown.target

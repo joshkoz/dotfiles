@@ -2,7 +2,7 @@
 Description=Vicinae - Raycast-compatible launcher server
 Documentation=https://github.com/vicinaehq/vicinae
 PartOf=wayland-session.target
-After=wayland-compositor.service
+After=wayland-session.target
 
 [Service]
 Type=simple

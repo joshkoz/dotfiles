@@ -1,6 +1,6 @@
 [Unit]
 Description=LocalSend - File Sharing Client
-After=waybar.service
+After=waybar.service wayland-session.target
 Wants=waybar.service
 PartOf=wayland-session.target
 BindsTo=wayland-session.target

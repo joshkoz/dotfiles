@@ -21,6 +21,6 @@ echo "Starting Hyprland session..."
 systemctl --user unset-environment WAYLAND_DISPLAY DISPLAY
 systemctl --user import-environment PATH
 
-# Start the session and WAIT
-# This keeps the TTY open so Hyprland can use it
-exec systemctl --user start --wait wayland-session.target
+# Start the session and wait for Hyprland to exit
+systemctl --user start hyprland-session.target
+exec systemctl --user start --wait hyprland.service

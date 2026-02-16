@@ -1,0 +1,16 @@
+#!/bin/bash
+set -euo pipefail
+
+# Check if a graphical session is already running
+if systemctl --user is-active --quiet graphical-session.target; then
+    echo "A graphical session is already running"
+    exit 1
+fi
+
+# Clean start
+systemctl --user unset-environment WAYLAND_DISPLAY DISPLAY
+systemctl --user import-environment PATH
+
+# Start the session and wait for Niri to exit
+systemctl --user start niri-session.target
+exec systemctl --user start --wait niri.service

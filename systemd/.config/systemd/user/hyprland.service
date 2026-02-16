@@ -25,7 +25,3 @@ NotifyAccess=all
 ExecStartPost=/usr/bin/sh -c "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP HYPRLAND_INSTANCE_SIGNATURE QT_QPA_PLATFORMTHEME; dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP HYPRLAND_INSTANCE_SIGNATURE"
 Restart=on-failure
 KillMode=mixed
-
-[Install]
-# This links the compositor to the main session target
-WantedBy=wayland-session.target

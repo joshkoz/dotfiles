@@ -2,7 +2,7 @@
 Description=Waybar status bar
 # Only start Waybar AFTER the compositor has exported the Wayland socket
 PartOf=wayland-session.target
-After=wayland-compositor.service
+After=wayland-session.target
 
 [Service]
 Type=simple

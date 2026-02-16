@@ -2,7 +2,7 @@
 Description=Dunst notification daemon
 Documentation=https://wiki.archlinux.org/title/Dunst
 PartOf=wayland-session.target
-After=wayland-compositor.service
+After=wayland-session.target
 
 [Service]
 Type=simple

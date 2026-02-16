@@ -1,7 +1,7 @@
 [Unit]
 Description=Cliphist - Image clipboard manager
 PartOf=wayland-session.target
-After=wayland-compositor.service
+After=wayland-session.target
 
 [Service]
 Type=simple

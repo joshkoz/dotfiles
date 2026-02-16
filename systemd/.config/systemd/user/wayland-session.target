@@ -1,8 +1,8 @@
 [Unit]
 Description=Wayland compositor session
 Documentation=man:systemd.special(7)
-Wants=wayland-compositor.service wayland-session-xdg-autostart.target
-After=graphical-session-pre.target wayland-compositor.service
+Wants=wayland-session-xdg-autostart.target
+After=graphical-session-pre.target
 BindsTo=graphical-session.target
 Before=graphical-session.target
 PropagatesStopTo=graphical-session.target
