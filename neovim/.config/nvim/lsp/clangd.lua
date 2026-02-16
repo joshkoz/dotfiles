@@ -7,6 +7,7 @@ return {
     "--completion-style=detailed",
     "--function-arg-placeholders=0",
     "--fallback-style=llvm",
+    "--header-insertion=never",
   },
   filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
   init_options = {
