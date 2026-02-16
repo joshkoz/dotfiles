@@ -2,6 +2,7 @@ vim.pack.add({
   "https://github.com/rafamadriz/friendly-snippets",
   { src = "https://github.com/saghen/blink.cmp", version = vim.version.range("1.*") },
   "https://github.com/stevearc/conform.nvim",
+  "https://github.com/rebelot/kanagawa.nvim",
   "https://github.com/stevearc/oil.nvim",
   "https://github.com/tpope/vim-fugitive",
   "https://github.com/sindrets/diffview.nvim",

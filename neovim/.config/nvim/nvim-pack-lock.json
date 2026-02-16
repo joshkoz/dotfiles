@@ -38,7 +38,7 @@
       "src": "https://github.com/nvim-mini/mini.hipatterns"
     },
     "mini.icons": {
-      "rev": "efc85e42262cd0c9e1fdbf806c25cb0be6de115c",
+      "rev": "68c178e0958d95b3977a771f3445429b1bded985",
       "src": "https://github.com/nvim-mini/mini.icons"
     },
     "mini.notify": {
@@ -50,7 +50,7 @@
       "src": "https://github.com/nvim-mini/mini.surround"
     },
     "nvim-treesitter": {
-      "rev": "4967fa48b0fe7a7f92cee546c76bb4bb61bb14d5",
+      "rev": "4d9466677a5ceadef104eaa0fe08d60d91c4e9a7",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter",
       "version": "'main'"
     },
@@ -64,7 +64,7 @@
       "version": "6.0.0 - 7.0.0"
     },
     "smart-splits.nvim": {
-      "rev": "0e73ccf1d957c6d7b95435bd195dcbd62f44f8e2",
+      "rev": "b9d563ea52c4926a4d91e5e795c68bb8f89f8ba0",
       "src": "https://github.com/mrjones2014/smart-splits.nvim"
     },
     "snacks.nvim": {
