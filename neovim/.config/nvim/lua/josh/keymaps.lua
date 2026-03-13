@@ -40,3 +40,5 @@ vim.keymap.set({ "n", "i" }, "<C-Left>", "<cmd>call win_move_separator(winnr('h'
 vim.keymap.set({ "n", "i" }, "<C-Right>", "<cmd>call win_move_separator(winnr('h'), 2)<CR>")
 vim.keymap.set({ "n", "i" }, "<C-Up>", "<cmd>call win_move_statusline(winnr('k'), -2)<CR>")
 vim.keymap.set({ "n", "i" }, "<C-Down>", "<cmd>call win_move_statusline(winnr('k'), 2)<CR>")
+
+vim.keymap.set("n", "<leader>m", "<CMD>make<CR>", { desc = "Run makeprg" })
