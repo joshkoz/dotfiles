@@ -1,10 +1,7 @@
 #!/usr/bin/env bash
 
 # Configurable model
-MODEL="openai/gpt-5-codex"
-
-# Base branch for diff
-BASE_BRANCH="origin/main"
+MODEL="openai/gpt-5.2-codex"
 
 # Initialize variables
 ISSUE_CONTEXT=""
@@ -28,17 +25,24 @@ done
 # All positional args are treated as context
 ISSUE_CONTEXT="${ARGS[*]}"
 
+# Read patch content from stdin
+if [[ -t 0 ]]; then
+    echo "error: expected patch content on stdin" >&2
+    exit 1
+fi
+
+PATCH_CONTENT=$(cat)
+
 # Construct the prompt
 PROMPT=$(cat <<EOF
 You are an expert developer assistant tasked with generating a Pull Request description
-by analyzing the git diff between the current branch and '${BASE_BRANCH}'.
+by analyzing the provided git patch.
 
 Instructions:
 
-1. Analyze the diff from 'git diff ${BASE_BRANCH}...HEAD'.
-2. Extract the current branch name using 'git branch --show-current'.
-3. Base the PR description entirely on the diff and the provided context.
-4. Output a GitHub-flavored markdown PR description using the following headers:
+1. Analyze the patch content provided below.
+2. Base the PR description entirely on the patch and the provided context.
+3. Output a GitHub-flavored markdown PR description using the following headers:
 
 # PR Title (≤50 chars, conventional commit format)
 - Use conventional commit type: feat, fix, docs, style, refactor, test, chore
@@ -54,16 +58,22 @@ Write a brief one or two paragraph summary of what this PR accomplishes.
 - List major additions, deletions, modifications
 - Include any new dependencies or configuration changes
 
-## Testing (optional)
+## Testing 
 - Describe how changes were tested
 - Include any new test files or test scenarios added
+- Optional section
 
-## Notes (optional)
+## Notes 
 - Any follow-ups, migration steps, or breaking changes
+- Optional section
 
 Hard wrap all lines at 72 characters.
 Context about the issue: ${ISSUE_CONTEXT}
 Additional instructions: ${EXTRA_INSTRUCTION}
+
+Patch content:
+${PATCH_CONTENT}
+
 Append "@coderabbitai ignore" at the end.
 
 Only output the markdown PR description — do not include explanations, code fences, or any extra text.
