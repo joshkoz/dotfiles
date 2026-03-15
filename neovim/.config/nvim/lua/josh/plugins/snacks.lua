@@ -60,10 +60,4 @@ snacks.setup({
       },
     },
   },
-  statuscolumn = {
-    enabled = true,
-    left = { "sign" },
-    right = { "git" },
-  },
 })
-snacks.statuscolumn.click_fold = function() end

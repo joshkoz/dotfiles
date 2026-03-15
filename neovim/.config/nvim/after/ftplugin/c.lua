@@ -1,4 +1,4 @@
-vim.opt.makeprg = "cmake --build --preset Debug --clean-first"
+-- vim.opt.makeprg = "cmake --build --preset Debug --clean-first"
 vim.opt.errorformat = table.concat({
   [[%f:%l:%c: %t%*[^:]: %m]],
   [[%f:%l:%c: %m]],

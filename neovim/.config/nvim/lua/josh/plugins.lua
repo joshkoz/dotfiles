@@ -11,7 +11,7 @@ vim.pack.add({
   "https://github.com/nvim-mini/mini.notify",
   "https://github.com/nvim-mini/mini.icons",
   { src = "https://github.com/mrcjkb/rustaceanvim", version = vim.version.range("^6") },
-  "https://github.com/folke/snacks.nvim",
+  "https://github.com/folke/snacks.nvim", -- picker only
   { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
   "https://github.com/mrjones2014/smart-splits.nvim",
 })

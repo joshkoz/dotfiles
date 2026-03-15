@@ -1,3 +1,4 @@
+require("josh.statuscolumn")
 require("josh.options")
 require("josh.keymaps")
 require("josh.autocmds")

@@ -41,6 +41,7 @@ vim.o.expandtab = true
 vim.o.signcolumn = "yes"
 -- vim.o.numberwidth = 4
 -- vim.o.statuscolumn = " %l %s "
+vim.o.statuscolumn = "%!v:lua.require'josh.statuscolumn'.get()"
 
 -- Enable Relative Line Numbers
 vim.o.relativenumber = true
