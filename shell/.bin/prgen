@@ -81,7 +81,7 @@ EOF
 )
 
 # Run opencode
-opencode run "$PROMPT" -m "$MODEL" --format json \
+opencode run -m "$MODEL" --format json <<EOF \
 | jq -r '
       select(
         .type=="response.output_text" or 
@@ -94,3 +94,5 @@ opencode run "$PROMPT" -m "$MODEL" --format json \
           else "" end
         )
     '
+${PROMPT}
+EOF
