@@ -77,3 +77,14 @@ autocmd("ColorScheme", {
 --     end
 --   end,
 -- })
+
+-- Get around the annoying W11 warning by forcing  writes on NAS journal paths
+-- to bypass SMB timestamp precision warnings.
+-- Mount options weren't working :/
+vim.api.nvim_create_autocmd("BufRead", {
+  pattern = { "/mnt/NAS/obsidian-vaults/work-journal/*", "/home/joshua/work/journal/*" },
+  callback = function()
+    vim.keymap.set("n", "<leader>w", ":w!<CR>", { buffer = true })
+    vim.cmd("cnoreabbrev <buffer> w w!")
+  end,
+})
