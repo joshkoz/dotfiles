@@ -1,4 +1,5 @@
 vim.pack.add({
+  { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
   "https://github.com/rafamadriz/friendly-snippets",
   { src = "https://github.com/saghen/blink.cmp", version = vim.version.range("1.*") },
   "https://github.com/stevearc/conform.nvim",
@@ -10,10 +11,11 @@ vim.pack.add({
   "https://github.com/nvim-mini/mini.diff",
   "https://github.com/nvim-mini/mini.notify",
   "https://github.com/nvim-mini/mini.icons",
-  { src = "https://github.com/mrcjkb/rustaceanvim", version = vim.version.range("^6") },
-  "https://github.com/folke/snacks.nvim", -- picker only
-  { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
+  "https://github.com/nvim-mini/mini.pick",
   "https://github.com/mrjones2014/smart-splits.nvim",
+
+  -- Language Plugins
+  { src = "https://github.com/mrcjkb/rustaceanvim", version = vim.version.range("^6") },
 })
 
 -- set color scheme early
@@ -31,5 +33,5 @@ require("josh.plugins.git")
 require("josh.plugins.mini")
 require("josh.plugins.oil")
 require("josh.plugins.smartsplits")
-require("josh.plugins.snacks")
+require("josh.plugins.picker")
 require("josh.plugins.treesitter")

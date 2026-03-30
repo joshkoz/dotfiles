@@ -9,15 +9,22 @@ vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("joshkoz/lsp-Keymaps", { clear = true }),
   callback = function(args)
     local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
-    if client:supports_method("textDocument/completion") then
-      -- Optional: trigger autocompletion on EVERY keypress. May be slow!
-      -- local chars = {}
-      -- for i = 32, 126 do
-      --   table.insert(chars, string.char(i))
-      -- end
-      -- client.server_capabilities.completionProvider.triggerCharacters = chars
-      -- vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = true })
+
+    if client.server_capabilities.completionProvider then
+      vim.bo.complete = "o," .. vim.bo.complete
+
+      -- vim.lsp.completion.enable(true, client.id, args.buf, {
+      --   -- autotrigger = true,
+      --   convert = function(item)
+      --     local abbr = item.label:match("[%w_.]+.*") or item.label
+      --     return {
+      --       abbr = #abbr > 25 and abbr:sub(1, 24) .. "…" or abbr,
+      --       menu = "",
+      --     }
+      --   end,
+      -- })
     end
+
     vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = args.buf, noremap = true, silent = true, desc = "vim.lsp.buf.definition()" })
     vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = args.buf, noremap = true, silent = true, desc = "vim.lsp.buf.declaration()" })
     vim.keymap.set("n", "gI", vim.lsp.buf.implementation, { buffer = args.buf, noremap = true, silent = true, desc = "vim.lsp.buf.implementation()" })

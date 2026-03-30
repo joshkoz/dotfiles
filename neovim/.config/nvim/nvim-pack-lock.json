@@ -45,6 +45,10 @@
       "rev": "e506fb6da26c0a31ee6b1d2eb99626cb147f28ca",
       "src": "https://github.com/nvim-mini/mini.notify"
     },
+    "mini.pick": {
+      "rev": "fe079c2bd894a5ee70b62f23d819620ef40c4949",
+      "src": "https://github.com/nvim-mini/mini.pick"
+    },
     "mini.surround": {
       "rev": "d205d1741d1fcc1f3117b4e839bf00f74ad72fa2",
       "src": "https://github.com/nvim-mini/mini.surround"
@@ -66,10 +70,6 @@
     "smart-splits.nvim": {
       "rev": "82d01bb71bc051955654b3af68355f783d872fe0",
       "src": "https://github.com/mrjones2014/smart-splits.nvim"
-    },
-    "snacks.nvim": {
-      "rev": "9912042fc8bca2209105526ac7534e9a0c2071b2",
-      "src": "https://github.com/folke/snacks.nvim"
     },
     "vim-fugitive": {
       "rev": "3b753cf8c6a4dcde6edee8827d464ba9b8c4a6f0",

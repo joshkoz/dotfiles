@@ -42,3 +42,6 @@ vim.keymap.set({ "n", "i" }, "<C-Up>", "<cmd>call win_move_statusline(winnr('k')
 vim.keymap.set({ "n", "i" }, "<C-Down>", "<cmd>call win_move_statusline(winnr('k'), 2)<CR>")
 
 vim.keymap.set("n", "<leader>m", "<CMD>make<CR>", { desc = "Run makeprg" })
+
+vim.cmd("packadd nvim.undotree")
+vim.keymap.set("n", "<leader>u", "<cmd>Undotree<CR>", { desc = "Open Visits/Undo" })

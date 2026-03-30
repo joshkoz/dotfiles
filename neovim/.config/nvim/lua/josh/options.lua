@@ -64,12 +64,13 @@ vim.o.diffopt = "internal,filler,closeoff,indent-heuristic,linematch:60,algorith
 
 vim.o.fillchars = "diff:╱"
 
--- Set completeopt to have a better completion experience
-vim.o.completeopt = "menu,menuone,noselect,popup,fuzzy"
+-- vim.o.autocomplete = true
+-- vim.o.complete = ".,w,b"
+vim.o.completeopt = "menuone,fuzzy,noselect"
 vim.o.wildmode = "longest,full,full"
 vim.o.wildoptions = "fuzzy"
-vim.o.smoothscroll = true
 
+vim.o.smoothscroll = true
 vim.o.scrolloff = 8
 vim.o.wrap = false
 vim.o.spell = false
