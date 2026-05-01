@@ -43,6 +43,7 @@ Instructions:
 1. Analyze the patch content provided below.
 2. Base the PR description entirely on the patch and the provided context.
 3. Output a GitHub-flavored markdown PR description using the following headers:
+4. Use Australian English
 
 # PR Title (≤50 chars, conventional commit format)
 - Use conventional commit type: feat, fix, docs, style, refactor, test, chore
@@ -52,7 +53,7 @@ Instructions:
 - Must use imperative mood
 
 ## Summary
-Write a brief one or two paragraph summary of what this PR accomplishes.
+Write a brief one or two paragraph summary of what this PR accomplishes. Avoid starting with 'This PR..'.
 
 ## Key Changes
 - List major additions, deletions, modifications
@@ -73,8 +74,6 @@ Additional instructions: ${EXTRA_INSTRUCTION}
 
 Patch content:
 ${PATCH_CONTENT}
-
-Append "@coderabbitai ignore" at the end.
 
 Only output the markdown PR description — do not include explanations, code fences, or any extra text.
 EOF

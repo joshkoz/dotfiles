@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+find /proc/*/fd -lname anon_inode:inotify 2>/dev/null \
+  | cut -d/ -f3 \
+  | while read pid; do
+      watches=$(awk '/inotify/{count++} END{print count+0}' /proc/$pid/fdinfo/* 2>/dev/null)
+      comm=$(cat /proc/$pid/comm 2>/dev/null)
+      echo "$watches $comm (pid $pid)"
+    done \
+  | sort -rn | head -20
