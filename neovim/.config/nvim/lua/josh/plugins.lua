@@ -15,7 +15,7 @@ vim.pack.add({
   "https://github.com/mrjones2014/smart-splits.nvim",
 
   -- Language Plugins
-  { src = "https://github.com/mrcjkb/rustaceanvim", version = vim.version.range("^6") },
+  { src = "https://github.com/mrcjkb/rustaceanvim", version = vim.version.range("^9") },
 })
 
 -- set color scheme early
