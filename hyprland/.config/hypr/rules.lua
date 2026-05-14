@@ -59,7 +59,7 @@ hl.window_rule({
 -- --- Media (WS 10) ---
 hl.window_rule({
   name = "Spotify",
-  match = { class = "^(spotify)$" },
+  match = { class = "^(Spotify|spotify)$" },
   workspace = "10",
   tag = "+media",
 })
