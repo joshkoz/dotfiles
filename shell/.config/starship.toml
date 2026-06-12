@@ -2,7 +2,7 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 # Inserts a blank line between shell prompts
-add_newline = true 
+add_newline = true
 # ~/.config/starship.toml
 
 [character]
@@ -10,7 +10,7 @@ add_newline = true
 vimcmd_symbol = '[V](bold purple)'
 
 [gcloud]
-disabled = false 
+disabled = false
 format = "on [$symbol($project)](bold yellow) as $symbol[$account](bold blue) "
 
 [custom.gcp_adc]
@@ -20,4 +20,4 @@ format = "[ADC: $output ](bold green)"
 disabled = false
 
 [aws]
-disabled = true 
+disabled = true

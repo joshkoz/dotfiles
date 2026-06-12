@@ -4,7 +4,7 @@ require("conform").setup({
     javascriptreact = { "oxfmt", "oxlint" },
     typescriptreact = { "oxfmt", "oxlint" },
     typescript = { "oxfmt", "oxlint" },
-    json = { "oxfmt", "eslint" },
+    json = { "oxfmt" },
     css = { "oxfmt" },
     html = { "oxfmt" },
     yaml = { "oxfmt" },

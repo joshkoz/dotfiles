@@ -1,6 +1,3 @@
 {
-    "diagnostics.globals": [
-        "vim",
-        "hl"
-    ]
+  "diagnostics.globals": ["vim", "hl"]
 }
