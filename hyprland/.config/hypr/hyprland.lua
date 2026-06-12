@@ -4,7 +4,7 @@
 local colors = require("mocha")
 
 local terminal = "ghostty"
-local menu = "vicinae toggle"
+local menu = "launcher.sh toggle"
 local mainMod = "SUPER"
 
 ----------------
