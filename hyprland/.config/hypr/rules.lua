@@ -96,13 +96,6 @@ hl.window_rule({
 -- LAYER RULES ---
 -------------------
 
-hl.layer_rule({
-  name = "vicinae_rule",
-  match = { namespace = "^(vicinae)$" },
-  ignore_alpha = 1,
-  no_anim = true,
-  blur = true,
-})
 
 hl.layer_rule({
   name = "wlogout_blur",
