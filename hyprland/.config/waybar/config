@@ -5,7 +5,7 @@
     // Choose the order of the modules
     "modules-left": ["ext/workspaces"],
     "modules-center": ["custom/music"],
-    "modules-right": ["tray", "pulseaudio", "backlight", "clock", "custom/lock"],
+    "modules-right": ["tray", "pulseaudio", "backlight", "clock"],
     "ext/workspaces": {
          "on-click": "activate",
          "sort-by-name": true,
@@ -61,10 +61,5 @@
             "default": ["", "", " "]
         },
         "on-click": "pavucontrol"
-    },
-    "custom/lock": {
-        "tooltip": false,
-        "on-click": "wlogout",
-        "format": "",
     },
 }

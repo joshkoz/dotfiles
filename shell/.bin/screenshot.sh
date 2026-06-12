@@ -36,13 +36,13 @@ capture() {
   case "$MODE" in
     area)
       # We play the sound AFTER the selection is made
-      grimblast --freeze save area - 
+      grim -g "$(slurp)" -
       ;;
     window|active)
-      grimblast --freeze save active -
+      grim -g "$(hyprctl activewindow -j | jq -r '"\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1])"')" -
       ;;
     output|full|fullscreen)
-      grimblast --freeze save screen -
+      grim -
       ;;
     *)
       notify-send "Invalid screenshot mode" -u critical
