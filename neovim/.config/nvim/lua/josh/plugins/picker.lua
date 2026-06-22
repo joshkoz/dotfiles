@@ -33,21 +33,18 @@ pick.setup({
     use_cache = true,
   },
   window = {
-    config = {
-      border = "solid",
-    },
-    -- config = function()
-    --   local height = math.floor(0.618 * vim.o.lines)
-    --   local width = math.floor(0.618 * vim.o.columns)
-    --   return {
-    --     anchor = "NW",
-    --     height = height,
-    --     width = width,
-    --     row = math.floor(0.5 * (vim.o.lines - height)),
-    --     col = math.floor(0.5 * (vim.o.columns - width)),
-    --     border = "solid",
-    --   }
-    -- end,
+    config = function()
+      local height = math.min(18, math.max(vim.o.lines - 2, 1))
+      local width = vim.o.columns
+      return {
+        anchor = "NW",
+        height = height,
+        width = width,
+        row = math.max(vim.o.lines - height, 0),
+        col = 0,
+        border = "solid",
+      }
+    end,
   },
   mappings = {
     stop = "<Esc>",
