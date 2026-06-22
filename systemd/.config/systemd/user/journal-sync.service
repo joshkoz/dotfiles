@@ -1,0 +1,13 @@
+[Unit]
+Description=Watch journal and sync to NAS
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/home/%u/projects/dotfiles/scripts/journal-sync.sh
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=default.target
