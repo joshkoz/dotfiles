@@ -11,7 +11,7 @@ vim.pack.add({
   "https://github.com/nvim-mini/mini.diff",
   "https://github.com/nvim-mini/mini.notify",
   "https://github.com/nvim-mini/mini.icons",
-  "https://github.com/nvim-mini/mini.pick",
+  "https://github.com/ibhagwan/fzf-lua",
   "https://github.com/mrjones2014/smart-splits.nvim",
 
   -- Language Plugins
@@ -33,5 +33,5 @@ require("josh.plugins.git")
 require("josh.plugins.mini")
 require("josh.plugins.oil")
 require("josh.plugins.smartsplits")
-require("josh.plugins.picker")
+require("josh.plugins.fzf-lua-picker")
 require("josh.plugins.treesitter")
