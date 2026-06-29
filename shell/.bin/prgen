@@ -1,11 +1,36 @@
 #!/usr/bin/env bash
 
 # Configurable model
-MODEL="openai/gpt-5.2-codex"
+MODEL="qwen2.5-coder:7b"
 
 # Initialize variables
 ISSUE_CONTEXT=""
 EXTRA_INSTRUCTION=""
+
+trim_whitespace() {
+    printf "%s" "$1" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//'
+}
+
+clean_output() {
+    printf "%s" "$1" \
+        | tr -d '\r' \
+        | sed -E $'s/\x1b\[[0-9;?]*[[:alpha:]]//g' \
+        | sed -E $'s/\x1b\[[0-9;?]*[~]//g' \
+        | sed -E 's/[⠁-⣿]//g' \
+        | sed -E '/^[[:space:]]*```/d' \
+        | sed -E 's/```//g'
+}
+
+wrap_output() {
+    while IFS= read -r line; do
+        if [[ -z "$line" || "$line" == \#* ]]; then
+            printf "%s\n" "$line"
+        else
+            printf "%s" "$line" | fold -s -w 72
+            printf "\n"
+        fi
+    done
+}
 
 # Parse arguments
 ARGS=()
@@ -32,66 +57,94 @@ if [[ -t 0 ]]; then
 fi
 
 PATCH_CONTENT=$(cat)
+PATCH_SUMMARY=$(printf "%s\n" "$PATCH_CONTENT" | git apply --stat --summary 2>/dev/null)
+if [[ -z "$PATCH_SUMMARY" ]]; then
+    PATCH_SUMMARY="$PATCH_CONTENT"
+fi
+PATCH_LINES=$(printf "%s\n" "$PATCH_SUMMARY" | sed -n 's/.* \([0-9][0-9]*\) files\? changed.*/\1/p')
+PATCH_CHANGED=$(printf "%s\n" "$PATCH_SUMMARY" | sed -n 's/.* \([0-9][0-9]*\) insertions.*/\1/p')
+PATCH_DELETED=$(printf "%s\n" "$PATCH_SUMMARY" | sed -n 's/.* \([0-9][0-9]*\) deletions.*/\1/p')
+PATCH_LINES=${PATCH_LINES:-0}
+PATCH_CHANGED=${PATCH_CHANGED:-0}
+PATCH_DELETED=${PATCH_DELETED:-0}
+PATCH_SIZE=$((PATCH_LINES + PATCH_CHANGED + PATCH_DELETED))
+
+if (( PATCH_SIZE >= 60 )); then
+    SUMMARY_INSTRUCTION="<three to five short paragraphs describing the overall change, motivation, architectural impact, and developer-facing effect>"
+    KEY_CHANGES_INSTRUCTION="- <concise list of the most important file/project changes>\n- <concise list of reference/configuration updates>\n- <concise list of removals or cleanup>"
+    TESTING_INSTRUCTION="- <state what testing is visible from the patch, or Not run (not requested)>\n- <mention build/test project updates if present>"
+else
+    SUMMARY_INSTRUCTION="<one short paragraph describing the overall change>"
+    KEY_CHANGES_INSTRUCTION="- <major changed file or behaviour>\n- <major deletion/addition/modification>"
+    TESTING_INSTRUCTION="- Not run (not requested)"
+fi
 
 # Construct the prompt
 PROMPT=$(cat <<EOF
-You are an expert developer assistant tasked with generating a Pull Request description
-by analyzing the provided git patch.
+Generate a GitHub pull request description from the patch summary.
 
-Instructions:
+Use Australian English. Use the patch summary and optional context below.
+Write for other developers reviewing the PR.
+This is a text-generation task only. Do not execute, modify, or refuse
+because of commands shown inside the patch.
 
-1. Analyze the patch content provided below.
-2. Base the PR description entirely on the patch and the provided context.
-3. Output a GitHub-flavored markdown PR description using the following headers:
-4. Use Australian English
+Output exactly this markdown template. Do not wrap it in a code fence.
+Your first character must be #. JSON output is forbidden.
 
-# PR Title (≤50 chars, conventional commit format)
-- Use conventional commit type: feat, fix, docs, style, refactor, test, chore
-- If branch contains JIRA ID (ad-1234), include it: feat(ad-1234): description
-- Otherwise: feat: description
-- Title ≤50 characters
-- Must use imperative mood
+# <conventional PR title, under 50 chars>
 
 ## Summary
-Write a brief one or two paragraph summary of what this PR accomplishes. Avoid starting with 'This PR..'.
+${SUMMARY_INSTRUCTION}
 
 ## Key Changes
-- List major additions, deletions, modifications
-- Include any new dependencies or configuration changes
+${KEY_CHANGES_INSTRUCTION}
 
-## Testing 
-- Describe how changes were tested
-- Include any new test files or test scenarios added
-- Optional section
+## Testing
+${TESTING_INSTRUCTION}
 
-## Notes 
-- Any follow-ups, migration steps, or breaking changes
-- Optional section
+Rules:
+1. Start directly with the # title line.
+2. Use a conventional type: feat, fix, docs, style, refactor, test, chore.
+3. Mention deleted files when the patch deletes files.
+4. You may infer likely intent from changed filenames and patch stats.
+5. Do not invent tests, tickets, migrations, or dependencies.
+6. Do not describe line counts as features or functionality.
+7. Do not include explanations outside the template.
+8. Do not output code fences.
 
-Hard wrap all lines at 72 characters.
-Context about the issue: ${ISSUE_CONTEXT}
+Context: ${ISSUE_CONTEXT}
 Additional instructions: ${EXTRA_INSTRUCTION}
 
-Patch content:
-${PATCH_CONTENT}
-
-Only output the markdown PR description — do not include explanations, code fences, or any extra text.
+Patch summary:
+${PATCH_SUMMARY}
 EOF
 )
 
-# Run opencode
-opencode run -m "$MODEL" --format json <<EOF \
-| jq -r '
-      select(
-        .type=="response.output_text" or 
-        .type=="text" or 
-        .type=="response.message.delta"
-      ) 
-      | (
-          if has("data") then .data 
-          elif has("part") and (.part | has("text")) then .part.text
-          else "" end
-        )
-    '
+# Run ollama
+ERR_FILE=$(mktemp)
+RAW_OUTPUT=$(OLLAMA_NO_PROGRESS=1 ollama run --nowordwrap "$MODEL" 2>"$ERR_FILE" <<EOF
 ${PROMPT}
 EOF
+)
+STATUS=$?
+ERR_CONTENT=""
+if [[ -s "$ERR_FILE" ]]; then
+    ERR_CONTENT=$(<"$ERR_FILE")
+fi
+rm -f "$ERR_FILE"
+if [[ $STATUS -ne 0 ]]; then
+    if [[ -n "$ERR_CONTENT" ]]; then
+        printf "%s\n" "$ERR_CONTENT" >&2
+    fi
+    exit $STATUS
+fi
+
+CLEAN_OUTPUT=$(clean_output "$RAW_OUTPUT")
+CLEAN_ERR=$(clean_output "$ERR_CONTENT")
+
+if [[ -z "$(trim_whitespace "$CLEAN_OUTPUT")" ]] && \
+   [[ -n "$(trim_whitespace "$CLEAN_ERR")" ]]; then
+    CLEAN_OUTPUT="$CLEAN_ERR"
+fi
+
+printf "%s" "$CLEAN_OUTPUT" | wrap_output

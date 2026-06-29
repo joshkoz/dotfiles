@@ -1,16 +1,24 @@
 #!/usr/bin/env bash
 
-# ----------------------------
-# Config: set your Codex model here
-# Examples: gpt-5-codex, gpt-5.1-codex-mini, gpt-5.1-codex-max
-MODEL="openai/gpt-5-codex"
-# ----------------------------
+MODEL="qwen2.5-coder:7b"
 
-# Default values
+trim_whitespace() {
+    printf "%s" "$1" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//'
+}
+
+clean_output() {
+    printf "%s" "$1" \
+        | tr -d '\r' \
+        | sed -E $'s/\x1b\[[0-9;?]*[[:alpha:]]//g' \
+        | sed -E $'s/\x1b\[[0-9;?]*[~]//g' \
+        | sed -E 's/[⠁-⣿]//g' \
+        | sed -E '/^[[:space:]]*```/d' \
+        | sed -E 's/```//g'
+}
+
 ISSUE_CONTEXT=""
 EXTRA_INSTRUCTION=""
 
-# Parse arguments
 while [[ $# -gt 0 ]]; do
     case $1 in
         --instruction)
@@ -18,48 +26,134 @@ while [[ $# -gt 0 ]]; do
             EXTRA_INSTRUCTION="$1"
             ;;
         *)
-            # All other args are context
             ISSUE_CONTEXT="$ISSUE_CONTEXT $1"
             ;;
     esac
     shift
 done
 
-# Trim leading/trailing whitespace
-ISSUE_CONTEXT=$(echo "$ISSUE_CONTEXT" | xargs)
-EXTRA_INSTRUCTION=$(echo "$EXTRA_INSTRUCTION" | xargs)
+ISSUE_CONTEXT=$(trim_whitespace "$ISSUE_CONTEXT")
+EXTRA_INSTRUCTION=$(trim_whitespace "$EXTRA_INSTRUCTION")
 
-opencode run "
-        You are generating a Git commit message.
+CHANGE_STATUS=$(git --no-pager diff --cached --name-status)
+CHANGE_STAT=$(git --no-pager diff --cached --stat)
+CHANGE_DIFF=$(git --no-pager diff --cached --diff-filter=AMCR --unified=1)
+if [[ -z "$CHANGE_STATUS" ]]; then
+    echo "error: no staged changes (git diff --cached empty)" >&2
+    exit 1
+fi
 
-        INPUT:
-        - Use ONLY the output of: git diff --cached
-        - Context about the issue: ${ISSUE_CONTEXT}
-        - Additional instruction: ${EXTRA_INSTRUCTION}
+MODIFIED_FILES=$(git --no-pager diff --cached --name-only --diff-filter=M | tr '\n' ',' | sed 's/,$//')
+ADDED_FILES=$(git --no-pager diff --cached --name-only --diff-filter=A | tr '\n' ',' | sed 's/,$//')
+DELETED_FILES=$(git --no-pager diff --cached --name-only --diff-filter=D | tr '\n' ',' | sed 's/,$//')
 
-        REQUIREMENTS:
-        1. Output ONLY the commit message. No explanations, no markdown, no code fences.
-        2. Follow Conventional Commit types (feat, fix, chore, refactor, docs, test, perf, build, ci).
-        3. The first line must be a summary with:
-           - Maximum 50 characters
-           - No trailing period
-        4. After the summary, output a blank line.
-        5. Then output the commit body:
-           - Hard-wrap at 72 characters
-           - Explain what changed and why (based only on diff and provided context).
-        6. DO NOT output diffs, analysis, bullet points, or anything else.
+PROMPT=$(cat <<EOF
+Generate a Git commit message from the staged changes.
 
-        Your entire and only output must be the commit summary and body, nothing more.
-    " -m "$MODEL" --format json \
-    | jq -r '
-          select(
-            .type=="response.output_text" or 
-            .type=="text" or 
-            .type=="response.message.delta"
-          ) 
-          | (
-              if has("data") then .data 
-              elif has("part") and (.part | has("text")) then .part.text
-              else "" end
-            )
-        '
+Use only the staged change summary, modified-file diff, and optional
+context below.
+
+Context: ${ISSUE_CONTEXT}
+Additional instruction: ${EXTRA_INSTRUCTION}
+
+Output exactly this template, with no labels or markdown:
+
+<type>: <summary>
+
+<sentence about modified/added files>. <sentence about deleted files if
+any are listed>.
+
+Template rules:
+1. <type> must be one of: feat, fix, chore, refactor, docs, test,
+   perf, build, ci.
+2. Prefer chore for script, tooling, or configuration changes.
+3. <summary> must be under 50 characters and have no trailing period.
+4. <body> must be 2-3 plain sentences.
+5. If Deleted files is not empty, the body must include a sentence that
+   says those files were deleted or removed.
+6. Respect Git status codes: M means modified, D means deleted.
+7. Do not guess why unless context says why.
+8. Do not output the diff, bullets, headings, code fences, or markdown.
+
+Changed files:
+${CHANGE_STATUS}
+
+Modified files:
+${MODIFIED_FILES}
+
+Added files:
+${ADDED_FILES}
+
+Deleted files:
+${DELETED_FILES}
+
+Stats:
+${CHANGE_STAT}
+
+Modified file diff:
+${CHANGE_DIFF}
+EOF
+)
+
+ERR_FILE=$(mktemp)
+RAW_OUTPUT=$(TERM=dumb NO_COLOR=1 OLLAMA_NO_PROGRESS=1 \
+    ollama run --nowordwrap "$MODEL" 2>"$ERR_FILE" <<EOF
+${PROMPT}
+EOF
+)
+STATUS=$?
+ERR_CONTENT=""
+if [[ -s "$ERR_FILE" ]]; then
+    ERR_CONTENT=$(<"$ERR_FILE")
+fi
+rm -f "$ERR_FILE"
+
+if [[ $STATUS -ne 0 ]]; then
+    printf "%s\n" "$ERR_CONTENT" >&2
+    exit $STATUS
+fi
+
+CLEAN_OUTPUT=$(clean_output "$RAW_OUTPUT")
+CLEAN_ERR=$(clean_output "$ERR_CONTENT")
+
+if [[ -z "$(trim_whitespace "$CLEAN_OUTPUT")" ]] && \
+   printf "%s" "$CLEAN_ERR" | grep -Eq '^(feat|fix|chore|refactor|docs|test|perf|build|ci)(\([^)]+\))?: '; then
+    CLEAN_OUTPUT="$CLEAN_ERR"
+fi
+
+SUMMARY_LINE=$(printf "%s" "$CLEAN_OUTPUT" | awk 'NF{print; exit}')
+BODY_TEXT=$(printf "%s" "$CLEAN_OUTPUT" \
+    | awk 'BEGIN{seen=0} {if(!seen && NF){seen=1; next} if(seen){print}}' \
+    | sed -e '1{/^[[:space:]]*$/d}')
+
+if [[ -z "$(trim_whitespace "$SUMMARY_LINE")" ]]; then
+    SUMMARY_LINE="chore: update staged files"
+fi
+if [[ ${#SUMMARY_LINE} -gt 50 ]]; then
+    SUMMARY_LINE="chore: update commit tooling"
+fi
+if [[ "$SUMMARY_LINE" == *": "* ]]; then
+    SUMMARY_PREFIX=${SUMMARY_LINE%%: *}
+    SUMMARY_TEXT=${SUMMARY_LINE#*: }
+    SUMMARY_LINE="$SUMMARY_PREFIX: ${SUMMARY_TEXT,}"
+fi
+
+if [[ -z "$(trim_whitespace "$BODY_TEXT")" ]]; then
+    BODY_TEXT=""
+    if [[ -n "$MODIFIED_FILES" ]]; then
+        BODY_TEXT="${BODY_TEXT}Modify staged files: ${MODIFIED_FILES}. "
+    fi
+    if [[ -n "$ADDED_FILES" ]]; then
+        BODY_TEXT="${BODY_TEXT}Add staged files: ${ADDED_FILES}. "
+    fi
+    if [[ -n "$DELETED_FILES" ]]; then
+        BODY_TEXT="${BODY_TEXT}Remove staged files: ${DELETED_FILES}. "
+    fi
+    if [[ -z "$(trim_whitespace "$BODY_TEXT")" ]]; then
+        BODY_TEXT="Update staged changes."
+    fi
+fi
+BODY_TEXT=$(trim_whitespace "$BODY_TEXT")
+
+printf "%s\n\n" "$SUMMARY_LINE"
+printf "%s" "$BODY_TEXT" | fold -s -w 72
