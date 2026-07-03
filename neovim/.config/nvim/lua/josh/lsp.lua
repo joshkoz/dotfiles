@@ -5,6 +5,7 @@ vim.lsp.enable("tsgols")
 vim.lsp.enable("oxlint")
 vim.lsp.enable("marksman")
 vim.lsp.enable("sqruff")
+vim.lsp.enable("tflint")
 vim.lsp.enable("roslyn")
 
 vim.api.nvim_create_autocmd("LspAttach", {
