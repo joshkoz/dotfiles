@@ -35,7 +35,15 @@ pick_theme() {
     exit 1
   fi
 
-  ghostty_theme_names | wofi --conf "$config_home/wofi/config" --style "$config_home/wofi/style.css" --dmenu -i -p "Theme"
+  ghostty_theme_names | wofi \
+    --conf "$config_home/wofi/config" \
+    --style "$config_home/wofi/style.css" \
+    --width 700 \
+    --height 420 \
+    --hide-scroll \
+    --dmenu \
+    -i \
+    -p "Theme"
 }
 
 ghostty_theme_file() {
