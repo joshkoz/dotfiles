@@ -1,10 +1,25 @@
-/* Custom Vicinae Colors */
-@define-color base            #1e1e2e;
-@define-color text            #cdd6f4;
-@define-color subtext         #a6adc8;
-@define-color vicinae-border  #36364B;
-@define-color vicinae-sep     #313244;
-@define-color vicinae-sel     #2B2C3E;
+@define-color base            #181616;
+@define-color text            #c5c9c5;
+@define-color subtext         #c8c093;
+@define-color vicinae-border  #a6a69c;
+@define-color vicinae-sep     #c5c9c5;
+@define-color vicinae-sel     #c5c9c5;
+@define-color vicinae-sel-text #181616;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* Global Reset */
 * {
@@ -13,21 +28,33 @@
 }
 
 /* Window Container */
-window {
-  background-color: transparent;
+window,
+#window,
+.background {
+  background-color: @base;
+  background-image: none;
+  border: 1px solid @vicinae-border;
+  border-radius: 8px;
+}
+
+#main,
+#outer-box,
+#inner-box,
+#scroll,
+#input,
+#entry {
+  background-color: @base;
+  background-image: none;
 }
 
 #outer-box {
   margin: 5px;
-  border: 1px solid @vicinae-border;
-  border-radius: 8px;
-  background-color: @base;
+  border: none;
 }
 
 #inner-box {
   margin: 0px;
   padding: 10px 0px; /* Vertical padding only to allow full-width line */
-  background-color: @base;
 }
 
 /* --- Input Area --- */
@@ -40,7 +67,6 @@ window {
   box-shadow: none;
   color: @text;
   font-size: 16px;
-  background-color: transparent;
 }
 
 /* Ensure no focus ring appears when typing */
@@ -63,7 +89,6 @@ window {
   margin: 2px 10px; /* Keeps the selection highlight slightly away from walls */
   padding: 10px;
   border-radius: 8px;
-  background-color: transparent;
 }
 
 /* Match the Vicinae selection highlight */
@@ -77,7 +102,7 @@ window {
 }
 
 #entry:selected #text {
-  color: @text;
+  color: @vicinae-sel-text;
 }
 
 #input image {

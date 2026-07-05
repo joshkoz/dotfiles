@@ -1,0 +1,19 @@
+[global]
+    frame_color = "#ef9f76"
+    background = "#303446"
+    foreground = "#c6d0f5"
+
+[urgency_low]
+    background = "#303446"
+    foreground = "#c6d0f5"
+    frame_color = "#414559"
+
+[urgency_normal]
+    background = "#303446"
+    foreground = "#c6d0f5"
+    frame_color = "#ef9f76"
+
+[urgency_critical]
+    background = "#e78284"
+    foreground = "#303446"
+    frame_color = "#e78284"
