@@ -21,3 +21,7 @@ alias -s json="jless"
 alias -s conf="$EDITOR"
 
 alias -g C='| wl-copy'
+
+function pwgen(){
+    head -c30 /dev/urandom | base64
+}
