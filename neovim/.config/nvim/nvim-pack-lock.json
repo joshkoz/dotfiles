@@ -18,7 +18,7 @@
       "src": "https://github.com/rafamadriz/friendly-snippets"
     },
     "fzf-lua": {
-      "rev": "532d463f5c83595192fe740572d8fd6902b2217a",
+      "rev": "28440c741e927592877514fba3db21eb188caec8",
       "src": "https://github.com/ibhagwan/fzf-lua"
     },
     "kanagawa.nvim": {
@@ -34,7 +34,7 @@
       "src": "https://github.com/nvim-mini/mini.clue"
     },
     "mini.diff": {
-      "rev": "b3d8507929f8df54ab9b08c77564c1afd7d62110",
+      "rev": "626b8a5b93874c4d05ca25aedec56cfff0b378fb",
       "src": "https://github.com/nvim-mini/mini.diff"
     },
     "mini.hipatterns": {
@@ -58,7 +58,7 @@
       "src": "https://github.com/nvim-mini/mini.surround"
     },
     "nvim-treesitter": {
-      "rev": "4916d6592ede8c07973490d9322f187e07dfefac",
+      "rev": "7b6cc8949f9999c5ed91436cbe24aa5f99c42025",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter",
       "version": "'main'"
     },
@@ -67,12 +67,12 @@
       "src": "https://github.com/stevearc/oil.nvim"
     },
     "rustaceanvim": {
-      "rev": "5a3a4158857ee1f7ec839b6ddd87cc0083a19c5f",
+      "rev": "f4051fb4662c43a568ce809a37e47c0f4e3d7a31",
       "src": "https://github.com/mrcjkb/rustaceanvim",
       "version": "9.0.0 - 10.0.0"
     },
     "smart-splits.nvim": {
-      "rev": "de39b4d75695e2377401c7d05f896657637d244b",
+      "rev": "8c16dc71bf75221793f3f6d83061fee031790c3c",
       "src": "https://github.com/mrjones2014/smart-splits.nvim"
     },
     "vim-fugitive": {
