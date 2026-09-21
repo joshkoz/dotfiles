@@ -1,10 +1,12 @@
-@define-color base            #181616;
-@define-color text            #c5c9c5;
-@define-color subtext         #c8c093;
-@define-color vicinae-border  #a6a69c;
-@define-color vicinae-sep     #c5c9c5;
-@define-color vicinae-sel     #c5c9c5;
-@define-color vicinae-sel-text #181616;
+@define-color base            #1f1f28;
+@define-color text            #ddd8bb;
+@define-color subtext         #ddd8bb;
+@define-color vicinae-border  #49495e;
+@define-color vicinae-sep     #49473e;
+@define-color vicinae-sel     #ddd8bb;
+@define-color vicinae-sel-text #1f1f28;
+
+
 
 
 
