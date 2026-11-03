@@ -1,4 +1,3 @@
-source ~/.zshenv
 source ~/.config/zsh/init.zsh
 
 
@@ -9,3 +8,7 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+
+# Google Cloud CLI
+source "$HOME/google-cloud-sdk/path.zsh.inc"
+source "$HOME/google-cloud-sdk/completion.zsh.inc"
