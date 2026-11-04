@@ -137,6 +137,11 @@ hl.config({
     force_zero_scaling = true,
   },
 
+  -- send logs to the journal so they survive a crash/reboot (default is a tmpfs file in /run/user)
+  debug = {
+    enable_stdout_logs = true,
+  },
+
   cursor = {
     default_monitor = "DP-2",
     no_warps = false,
