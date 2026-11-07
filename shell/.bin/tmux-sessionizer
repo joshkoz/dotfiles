@@ -1,27 +1,77 @@
 #!/usr/bin/env bash
 
+work=${TASK_WORK_ROOT:-$HOME/work}
+tasks=${TASK_ROOT:-$HOME/tasks}
+
+session_name() {
+    local dir=${1%/} parent name
+    parent=$(basename "$(dirname "$dir")")
+
+    if [[ $dir == "$work" ]]; then
+        name=work
+    elif [[ $(dirname "$dir") == "$tasks" ]]; then
+        name="task/$(basename "$dir")"
+    elif [[ $parent == *-worktrees ]]; then
+        # Worktrees of different repos often share a branch dir name, so prefix with the repo.
+        name="${parent%-worktrees}/$(basename "$dir")"
+    else
+        name=$(basename "$dir")
+    fi
+
+    name=${name//./_}
+    echo "${name//:/_}"
+}
+
+candidates() {
+    local dir
+    {
+        echo "$work"
+        find -L "$tasks" -mindepth 1 -maxdepth 1 -type d 2>/dev/null
+        find -L ~/projects ~/vaults ~/experiments -mindepth 1 -maxdepth 1 -type d 2>/dev/null
+        for dir in "$work"/*/; do
+            [[ -e $dir/.git ]] && echo "${dir%/}"
+        done
+        find -L "$work"/*-worktrees -mindepth 1 -maxdepth 1 -type d 2>/dev/null
+    } | while read -r dir; do
+        printf '%s\t%s\n' "$(session_name "$dir")" "$dir"
+    done
+}
+
+# Task folders (made by `task new`) hold one worktree per repo, opened with the agent layout:
+# the agent, an editor window, and a window for the servers you run.
+new_task_session() {
+    local name=$1 dir=$2
+
+    tmux new-session -ds "$name" -c "$dir" -n agent
+    tmux new-window -d -t "=$name:" -c "$dir" -n code
+    tmux new-window -d -t "=$name:" -c "$dir" -n servers
+    # Typed into a shell, so quote the folder name rather than trust it.
+    tmux send-keys -t "=$name:agent" "agent-tmux launch $(printf '%q' "$(basename "$dir")")" Enter
+}
+
 if [[ $# -eq 1 ]]; then
-    selected=$1
+    selected=${1%/}
 else
-    selected=$(find -L ~/projects ~/work/core-api-worktrees ~/work/avarni-dashboard-worktrees/ ~/work ~/vaults ~/experiments -mindepth 1 -maxdepth 1 -type d | fzf --prompt "> ")
+    selected=$(candidates | fzf --prompt "> " --delimiter '\t' --with-nth 1 --tiebreak=begin,length | cut -f2)
 fi
 
 if [[ -z $selected ]]; then
     exit 0
 fi
 
-selected_name=$(basename "$selected" | tr . _)
-tmux_running=$(pgrep tmux)
+selected_name=$(session_name "$selected")
+
+if ! tmux has-session -t="$selected_name" 2> /dev/null; then
+    if [[ $(dirname "$selected") == "$tasks" ]]; then
+        new_task_session "$selected_name" "$selected"
+    else
+        tmux new-session -ds "$selected_name" -c "$selected"
+    fi
+fi
 
 # If we're running outside of tmux.
 if [[ -z $TMUX ]]; then
-    tmux new-session -A -s $selected_name -c $selected
-    exit 0
+    tmux attach-session -t "=$selected_name"
+else
+    tmux switch-client -t "=$selected_name"
 fi
-
-# If we're inside of tmux and there's existing session attach
-if ! tmux has-session -t=$selected_name 2> /dev/null; then
-    tmux new-session -ds $selected_name -c $selected
-fi
-
-tmux switch-client -t $selected_name

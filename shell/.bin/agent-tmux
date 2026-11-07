@@ -1,0 +1,144 @@
+#!/usr/bin/env bash
+# Tracks Claude Code state per tmux window in the @agent window option.
+# States: busy, wait (needs you), done (finished, not yet looked at), idle.
+# @agent_session holds the window's Claude session id so `tasks` can find its background work.
+# `launch` and `tasks` are Claude Code specific; state, summary and pick work for any agent.
+
+state() {
+    local input session
+    input=$(cat)
+    [[ -n ${TMUX_PANE:-} ]] || exit 0
+
+    session=$(jq -r '.session_id // empty' <<<"$input" 2>/dev/null)
+    [[ -n $session && $1 != clear ]] && tmux set -w -t "$TMUX_PANE" @agent_session "$session"
+
+    case $1 in
+        clear)
+            tmux set -wu -t "$TMUX_PANE" @agent
+            tmux set -wu -t "$TMUX_PANE" @agent_session
+            ;;
+        wait)
+            tmux set -w -t "$TMUX_PANE" @agent wait
+            notify-send -a agent "$(tmux display -p -t "$TMUX_PANE" '#S:#W')" "Agent needs you" 2>/dev/null
+            ;;
+        done)
+            # No point flagging a window you're already looking at.
+            if [[ $(tmux display -p -t "$TMUX_PANE" '#{&&:#{window_active},#{session_attached}}') == 1 ]]; then
+                tmux set -w -t "$TMUX_PANE" @agent idle
+            else
+                tmux set -w -t "$TMUX_PANE" @agent "done"
+            fi
+            ;;
+        *)
+            tmux set -w -t "$TMUX_PANE" @agent "$1"
+            ;;
+    esac
+}
+
+summary() {
+    tmux list-windows -a -F '#{@agent}' | awk '
+        $1 == "wait" { w++ } $1 == "busy" { b++ } $1 == "done" { d++ }
+        END {
+            if (w) printf "#[fg=red,bold]!%d#[default] ", w
+            if (b) printf "#[fg=yellow]◐%d#[default] ", b
+            if (d) printf "#[fg=green]✓%d#[default] ", d
+        }'
+}
+
+pick() {
+    local selected
+    selected=$(tmux list-windows -a -F '#{@agent}	#{session_name}:#{window_index}	#{window_name}' |
+        awk -F'\t' '
+            $1 == "wait" { print 0 "\t" $0 } $1 == "done" { print 1 "\t" $0 }
+            $1 == "busy" { print 2 "\t" $0 } $1 == "idle" { print 3 "\t" $0 }' |
+        sort -s -k1,1n | cut -f2- |
+        fzf --prompt 'agent> ' --delimiter '\t' --tiebreak=index) || exit 0
+    [[ -n $selected ]] || exit 0
+
+    tmux switch-client -t "$(cut -f2 <<<"$selected")"
+}
+
+# Claude keeps each session's background work in <tmp>/claude-<uid>/<project>/<session>/tasks/:
+# shell tasks as plain .output files, background agents as .output symlinks to their jsonl transcript.
+render_tasks() {
+    local session=$1 width=$2 dir file age now meta label colour
+    local -a files
+
+    # Session ids are UUIDs; anything else would be glob or path material.
+    if [[ ! $session =~ ^[0-9a-fA-F-]+$ ]]; then
+        echo "No Claude session in this window yet. It shows up after your first prompt."
+        return
+    fi
+    dir=$(compgen -G "${TMPDIR:-/tmp}/claude-$(id -u)/*/$session/tasks" | head -1)
+    if [[ -z $dir ]] || ! compgen -G "$dir/*.output" >/dev/null; then
+        echo "No background tasks for this session."
+        return
+    fi
+
+    now=$(date +%s)
+    mapfile -t files < <(find "$dir" -maxdepth 1 -name '*.output' -printf '%T@\t%p\n' | sort -rn | head -6 | cut -f2-)
+    for file in "${files[@]}"; do
+        age=$((now - $(stat -L -c %Y "$file" 2>/dev/null || echo "$now")))
+        colour=$'\e[90m'
+        ((age < 15)) && colour=$'\e[33m'
+
+        if [[ -L $file ]]; then
+            meta=$(readlink -f "$file")
+            meta=${meta%.jsonl}.meta.json
+            label=$(jq -r '"agent  \(.agentType // "agent"): \(.description // "")"' "$meta" 2>/dev/null || echo agent)
+            printf '%s● %s\e[0m \e[90m(%ss ago)\e[0m\n' "$colour" "$label" "$age"
+            tail -n 300 "$file" | jq -R -r --argjson w "$((width - 4))" '
+                fromjson? | select(.type == "assistant") | .message.content[]? |
+                if .type == "tool_use" then
+                    "→ \(.name) \(.input.command // .input.file_path // .input.pattern // .input.url // .input.description // "" | tostring | gsub("\n"; " "))"
+                elif .type == "text" then .text | gsub("\n"; " ")
+                else empty end | .[0:$w]' 2>/dev/null | tail -n 5 | sed 's/^/  /'
+        else
+            printf '%s● shell  %s\e[0m \e[90m(%ss ago)\e[0m\n' "$colour" "$(basename "$file" .output)" "$age"
+            tail -n 5 "$file" | cut -c1-"$((width - 4))" | sed 's/^/  /'
+        fi
+        echo
+    done
+}
+
+# Live view of the background tasks of the Claude session in this window (or a target window).
+tasks() {
+    local target=${1:-${TMUX_PANE:?run inside tmux}} session frame
+    tput civis
+    trap 'tput cnorm' EXIT
+    while true; do
+        session=$(tmux show -wv -t "$target" @agent_session 2>/dev/null)
+        frame=$(render_tasks "$session" "$(tput cols)")
+        tput cup 0 0
+        printf '%s\n' "$frame" | sed 's/$/\x1b[K/'
+        tput ed
+        sleep 1
+    done
+}
+
+# Starts Claude in a task folder. `task new` leaves .claude/task-prompt (empty without a ticket)
+# so a new task starts a fresh conversation; otherwise pick up where the folder left off.
+launch() {
+    local name=$1 prompt_file=.claude/task-prompt prompt
+
+    if [[ -f $prompt_file ]]; then
+        prompt=$(<"$prompt_file")
+        rm "$prompt_file"
+        if [[ -n $prompt ]]; then
+            claude -n "$name" "$prompt"
+        else
+            claude -n "$name"
+        fi
+    else
+        claude --continue || claude -n "$name"
+    fi
+}
+
+case ${1:-} in
+    state) state "${2:?state name required}" ;;
+    launch) launch "${2:?session name required}" ;;
+    summary) summary ;;
+    pick) pick ;;
+    tasks) tasks "${2:-}" ;;
+    *) echo "usage: agent-tmux state <busy|wait|done|idle|clear> | summary | pick | launch <name> | tasks [window]" >&2; exit 2 ;;
+esac

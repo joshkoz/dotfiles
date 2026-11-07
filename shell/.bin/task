@@ -1,0 +1,405 @@
+#!/usr/bin/env bash
+# A task is a piece of work: ~/tasks/<name>/ with a worktree per repo, a tmux session and Claude.
+#
+#   task new [name]   pick a ticket (enter) or use the typed text as the name (alt-enter);
+#                     with a name (`task new fix/chart totals`) the picker is skipped
+#   task add [repo]   add another repo from the work root to the current task, on the task's branch
+#   task done [name]  remove a task's worktrees and tmux session, keeping the branches
+#   task ls           list tasks with their branches, git state and agent state
+#
+# Settings live in ~/.config/task/config (a bash file, kept out of dotfiles):
+#   TASK_REPOS=(repo-a repo-b)              repos every new task gets, from TASK_WORK_ROOT
+#   TASK_COPY_FILES=("repo-b:.env*.local")  untracked files copied from the main checkout
+#   TASK_WORK_ROOT=~/work  TASK_ROOT=~/tasks  TASK_BASE=main  TASK_JQL="..."
+set -euo pipefail
+
+config=${XDG_CONFIG_HOME:-$HOME/.config}/task/config
+TASK_REPOS=()
+TASK_COPY_FILES=()
+# shellcheck source=/dev/null
+[[ -f $config ]] && source "$config"
+
+work=${TASK_WORK_ROOT:-$HOME/work}
+tasks=${TASK_ROOT:-$HOME/tasks}
+base=${TASK_BASE:-main}
+jql=${TASK_JQL:-"assignee = currentUser() AND statusCategory != Done ORDER BY updated DESC"}
+cache=${XDG_CACHE_HOME:-$HOME/.cache}/task/tickets.tsv
+
+usage() {
+    sed -n '2,13s/^# \{0,1\}//p' "${BASH_SOURCE[0]}"
+}
+
+die() {
+    echo "$*" >&2
+    exit 1
+}
+
+# Task and repo names become paths, tmux session names and shell words, so keep them plain.
+valid_name() {
+    [[ $1 =~ ^[A-Za-z0-9][A-Za-z0-9._-]*$ ]]
+}
+
+require_name() {
+    valid_name "$1" || die "Not a valid name: '$1' (letters, digits, '.', '_' and '-' only)"
+}
+
+is_worktree() {
+    [[ -e $1/.git ]] && git -C "$1" rev-parse --git-dir >/dev/null 2>&1
+}
+
+current_task() {
+    local name
+    [[ $PWD == "$tasks"/* ]] || return 0
+    name=${PWD#"$tasks"/}
+    echo "${name%%/*}"
+}
+
+pick_task() {
+    find "$tasks" -mindepth 1 -maxdepth 1 -type d -printf '%f\n' 2>/dev/null | fzf --prompt "${1:-task}> " || true
+}
+
+# Branch the task is on, read from its first working worktree.
+task_branch() {
+    local wt
+    for wt in "$1"/*/; do
+        if is_worktree "${wt%/}"; then
+            git -C "$wt" branch --show-current
+            return
+        fi
+    done
+}
+
+# Always from origin/<base>: a repo's origin/HEAD can point at a stale default branch.
+add_worktree() {
+    local repo=$1 branch=$2 path=$3
+    echo "== $repo"
+    git -C "$work/$repo" fetch --quiet origin "$base"
+    if git -C "$work/$repo" show-ref --verify --quiet "refs/heads/$branch"; then
+        git -C "$work/$repo" worktree add "$path" "$branch"
+    else
+        git -C "$work/$repo" worktree add --no-track -b "$branch" "$path" "origin/$base"
+    fi
+}
+
+copy_files() {
+    local dir=$1 entry repo pattern file
+    for entry in "${TASK_COPY_FILES[@]}"; do
+        repo=${entry%%:*}
+        pattern=${entry#*:}
+        [[ -d $dir/$repo ]] || continue
+        for file in "$work/$repo"/$pattern; do
+            if [[ -f $file ]]; then
+                cp -n "$file" "$dir/$repo/"
+            fi
+        done
+    done
+}
+
+slugify() {
+    tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9]+/-/g; s/^-+//; s/-+$//' | cut -d- -f1-"${1:-6}"
+}
+
+# Tickets as key<TAB>type<TAB>status<TAB>summary. statusCategory rather than resolution,
+# because some boards move tickets to Done without setting a resolution.
+tickets() {
+    command -v acli >/dev/null || return 1
+    acli jira workitem search --jql "$jql" --limit 50 --json 2>/dev/null |
+        jq -r '.[] | [.key, .fields.issuetype.name, .fields.status.name, .fields.summary] | @tsv'
+}
+
+refresh_cache() {
+    local tmp
+    mkdir -p "$(dirname "$cache")"
+    tmp=$(mktemp "$cache.XXXXXX")
+    if tickets >"$tmp"; then
+        mv "$tmp" "$cache"
+    else
+        rm -f "$tmp"
+    fi
+    touch "$cache.done"
+}
+
+# Claude trusts a folder without asking only when it has no permission rules of its own.
+# Task folders share the work root's settings.local.json, so each one is trusted up front.
+trust_folder() {
+    local dir=$1 config=$HOME/.claude.json tmp
+    [[ $dir == "$tasks"/* && -f $config ]] || return 0
+    tmp=$(mktemp "$config.task.XXXXXX")
+    if jq --arg dir "$dir" '.projects[$dir] = (
+            {allowedTools: [], mcpContextUris: [], mcpServers: {}, enabledMcpjsonServers: [],
+             disabledMcpjsonServers: [], hasClaudeMdExternalIncludesApproved: false,
+             hasClaudeMdExternalIncludesWarningShown: false}
+            + (.projects[$dir] // {}) + {hasTrustDialogAccepted: true})' "$config" >"$tmp"; then
+        mv "$tmp" "$config"
+    else
+        rm -f "$tmp"
+    fi
+}
+
+cmd_new() {
+    local picked="" query="" key_pressed="" ticket="" prompt="" key type summary name prefix branch dir repo wait_for_refresh
+
+    ((${#TASK_REPOS[@]} > 0)) || die "No repos configured. Set TASK_REPOS=(...) in $config"
+
+    if [[ $# -gt 0 ]]; then
+        # `task new some task name` skips the picker and uses the words as the name.
+        query="$*"
+    else
+        # Show the cached tickets straight away and swap in the fresh list when the refresh lands.
+        # The refresh runs detached so the cache still updates if you pick before it finishes.
+        mkdir -p "$(dirname "$cache")"
+        rm -f "$cache.done"
+        setsid -f "${BASH_SOURCE[0]}" refresh-cache >/dev/null 2>&1
+        wait_for_refresh="for _ in \$(seq 150); do [ -e $(printf '%q' "$cache.done") ] && break; sleep 0.2; done; cat $(printf '%q' "$cache") 2>/dev/null || true"
+
+        picked=$({ cat "$cache" 2>/dev/null || true; } | fzf --print-query --expect=alt-enter --delimiter '\t' \
+            --bind "load:reload-sync($wait_for_refresh)+unbind(load)" \
+            --prompt 'ticket or name> ' --header 'enter: ticket   alt-enter: use typed text as the name') || true
+
+        query=$(sed -n 1p <<<"$picked")
+        key_pressed=$(sed -n 2p <<<"$picked")
+        ticket=$(sed -n 3p <<<"$picked")
+    fi
+
+    if [[ -n $ticket && $key_pressed != alt-enter ]]; then
+        IFS=$'\t' read -r key type _ summary <<<"$ticket"
+        [[ $key =~ ^[A-Z][A-Z0-9]*-[0-9]+$ ]] || die "Unexpected ticket key: '$key'"
+        name="$key-$(slugify 5 <<<"$summary")"
+        prefix=feat
+        [[ $type == Bug ]] && prefix=fix
+        branch="$prefix/$name"
+        prompt="Let's work on $key. Read the ticket and its comments, look at the relevant code in ${TASK_REPOS[*]}, then tell me your plan before changing anything."
+    elif [[ -n $query ]]; then
+        if [[ $query =~ ^(feat|fix|chore|refactor|hotfix)/(.*)$ ]]; then
+            prefix=${BASH_REMATCH[1]}
+            name=$(slugify 99 <<<"${BASH_REMATCH[2]}")
+        else
+            prefix=feat
+            name=$(slugify 99 <<<"$query")
+        fi
+        branch="$prefix/$name"
+    else
+        exit 0
+    fi
+
+    # Names given on the command line are used as-is; picked or typed ones can be edited first.
+    if [[ $# -eq 0 ]]; then
+        read -e -r -i "$name" -p "folder: $tasks/" name
+        read -e -r -i "$branch" -p "branch: " branch
+    fi
+    require_name "$name"
+    git check-ref-format --branch "$branch" >/dev/null 2>&1 || die "Not a valid branch name: '$branch'"
+
+    dir=$tasks/$name
+
+    if [[ ! -d $dir ]]; then
+        mkdir -p "$dir/.claude"
+
+        for repo in "${TASK_REPOS[@]}"; do
+            add_worktree "$repo" "$branch" "$dir/$repo" ||
+                die "Couldn't add $repo. Fix the problem, then clean up with: task done $name"
+        done
+
+        copy_files "$dir"
+
+        # Shared with the work root: workspace instructions, plus the same Claude memory and permission allow-list.
+        [[ -f $work/CLAUDE.md ]] && ln -s "$work/CLAUDE.md" "$dir/CLAUDE.md"
+        [[ -f $work/.claude/settings.local.json ]] && ln -s "$work/.claude/settings.local.json" "$dir/.claude/settings.local.json"
+
+        printf '%s' "$prompt" >"$dir/.claude/task-prompt"
+    fi
+
+    trust_folder "$dir"
+    exec tmux-sessionizer "$dir"
+}
+
+cmd_add() {
+    local repo=${1:-} name dir branch candidate
+
+    name=$(current_task)
+    [[ -n $name ]] || name=$(pick_task add)
+    [[ -n $name ]] || exit 0
+    require_name "$name"
+    dir=$tasks/$name
+
+    if [[ -z $repo ]]; then
+        repo=$(for candidate in "$work"/*/; do
+            candidate=$(basename "$candidate")
+            if [[ -e $work/$candidate/.git && ! -e $dir/$candidate ]]; then
+                echo "$candidate"
+            fi
+        done | fzf --prompt 'add repo> ' || true)
+        [[ -n $repo ]] || exit 0
+    fi
+
+    require_name "$repo"
+    [[ -e $work/$repo/.git ]] || die "No git repo at $work/$repo"
+    [[ ! -e $dir/$repo ]] || die "$dir/$repo already exists"
+
+    branch=$(task_branch "$dir")
+    [[ -n $branch ]] || die "Can't tell the task's branch: $dir has no working worktrees"
+
+    add_worktree "$repo" "$branch" "$dir/$repo"
+}
+
+# Processes working inside a task folder, other than this script and the shell that ran it.
+procs_in() {
+    local p pid cwd
+    for p in /proc/[0-9]*; do
+        pid=${p#/proc/}
+        [[ $pid == "$$" || $pid == "$PPID" || $pid == "$BASHPID" ]] && continue
+        cwd=$(readlink "$p/cwd" 2>/dev/null) || continue
+        [[ $cwd == "$1" || $cwd == "$1"/* ]] || continue
+        echo "  $pid $(tr '\0' ' ' <"$p/cmdline" 2>/dev/null | cut -c1-100)"
+    done
+}
+
+cmd_done() {
+    local name dir session wt branch main_repo answer remaining="" yes=0 blocked=0
+    local -a worktrees=() broken=()
+
+    if [[ ${1:-} == --yes ]]; then
+        yes=1
+        shift
+    fi
+
+    if [[ $# -ge 1 ]]; then
+        name=$1
+    else
+        name=$(current_task)
+        [[ -n $name ]] || name=$(pick_task "done")
+    fi
+    [[ -n $name ]] || exit 0
+    require_name "$name"
+
+    dir=$tasks/$name
+    session=task/$name
+
+    if [[ ! -d $dir ]]; then
+        tmux kill-session -t="$session" 2>/dev/null || true
+        die "No task folder at $dir"
+    fi
+
+    for wt in "$dir"/*/; do
+        wt=${wt%/}
+        [[ -e $wt/.git ]] || continue
+        # A worktree git has already forgotten, e.g. from an interrupted removal.
+        if ! is_worktree "$wt"; then
+            broken+=("$wt")
+            continue
+        fi
+        worktrees+=("$wt")
+
+        branch=$(git -C "$wt" branch --show-current)
+        if [[ -n $(git -C "$wt" status --porcelain) ]]; then
+            echo "$(basename "$wt") ($branch) has uncommitted changes" >&2
+            blocked=1
+        fi
+        if [[ -n $(git -C "$wt" log --oneline HEAD --not --remotes) ]]; then
+            echo "$(basename "$wt") ($branch) has commits that aren't pushed" >&2
+            blocked=1
+        fi
+    done
+    [[ $blocked == 0 ]] || exit 1
+
+    if ((yes == 0)); then
+        read -r -p "Remove $dir and its tmux session? [y/N] " answer
+        [[ $answer == [yY] ]] || exit 0
+    fi
+
+    # Killing the task's session from inside it would kill this script too,
+    # so hand the removal to a window in the work session and switch there.
+    if [[ -n ${TMUX_PANE:-} && $(tmux display -p -t "$TMUX_PANE" '#S') == "$session" ]]; then
+        tmux has-session -t =work 2>/dev/null || tmux new-session -d -s work -c "$work"
+        tmux new-window -t '=work:' -n "done $name" -c "$work" \
+            "$(printf '%q ' "${BASH_SOURCE[0]}" "done" --yes "$name"); echo; read -r -n 1 -s -p 'Press any key to close'"
+        tmux switch-client -t '=work'
+        exit 0
+    fi
+
+    # Stop everything running in the task first (servers, Claude, editors).
+    # A dev server still writing into a worktree makes git's delete fail halfway.
+    cd "$work"
+    tmux kill-session -t="$session" 2>/dev/null || true
+    for _ in $(seq 50); do
+        remaining=$(procs_in "$dir")
+        [[ -z $remaining ]] && break
+        sleep 0.2
+    done
+    if [[ -n $remaining ]]; then
+        echo "Still running in $dir, stop these and run task done again:" >&2
+        die "$remaining"
+    fi
+
+    # Remove each worktree via the repo it belongs to, whatever its folder is called.
+    for wt in "${worktrees[@]}"; do
+        main_repo=$(dirname "$(git -C "$wt" rev-parse --path-format=absolute --git-common-dir)")
+        branch=$(git -C "$wt" branch --show-current)
+        git -C "$main_repo" worktree remove "$wt"
+        echo "Removed $(basename "$main_repo") worktree, kept branch $branch"
+    done
+
+    for wt in "${broken[@]}"; do
+        echo "$(basename "$wt") is left over from an interrupted removal and git no longer tracks it." >&2
+        echo "Check nothing in it matters, then delete it with: rm -rf $(printf '%q' "$wt")" >&2
+    done
+
+    # Only remove what task new linked in; a real settings file may hold task-specific rules.
+    [[ -L $dir/CLAUDE.md ]] && rm "$dir/CLAUDE.md"
+    [[ -L $dir/.claude/settings.local.json ]] && rm "$dir/.claude/settings.local.json"
+    rm -f "$dir/.claude/task-prompt"
+    rmdir "$dir/.claude" 2>/dev/null || true
+    rmdir "$dir" 2>/dev/null || echo "Left $dir in place, it still has files in it" >&2
+}
+
+cmd_ls() {
+    local dir name session icons wt branch dirty unpushed joined
+    local -a state
+
+    if ! compgen -G "$tasks/*/" >/dev/null; then
+        echo "No tasks in $tasks"
+        return
+    fi
+
+    for dir in "$tasks"/*/; do
+        dir=${dir%/}
+        name=$(basename "$dir")
+        session=task/$name
+
+        if tmux has-session -t="$session" 2>/dev/null; then
+            icons=$(tmux list-windows -t "=$session" -F '#{@agent}' | awk '
+                $1 == "wait" { printf "! " } $1 == "busy" { printf "◐ " }
+                $1 == "done" { printf "✓ " } $1 == "idle" { printf "· " }')
+            printf '\e[1m%s\e[0m  \e[32mopen\e[0m %s\n' "$name" "$icons"
+        else
+            printf '\e[1m%s\e[0m  \e[90mclosed\e[0m\n' "$name"
+        fi
+
+        for wt in "$dir"/*/; do
+            wt=${wt%/}
+            [[ -e $wt/.git ]] || continue
+            if ! is_worktree "$wt"; then
+                printf '  %-18s \e[31m%s\e[0m\n' "$(basename "$wt")" "broken: git no longer tracks this worktree"
+                continue
+            fi
+            branch=$(git -C "$wt" branch --show-current)
+            dirty=$(git -C "$wt" status --porcelain | wc -l)
+            unpushed=$(git -C "$wt" rev-list --count HEAD --not --remotes)
+            state=()
+            ((dirty > 0)) && state+=("$dirty changed")
+            ((unpushed > 0)) && state+=("$unpushed unpushed")
+            ((${#state[@]} == 0)) && state=(clean)
+            joined=$(IFS=,; echo "${state[*]}")
+            printf '  %-18s %-45s %s\n' "$(basename "$wt")" "$branch" "${joined//,/, }"
+        done
+    done
+}
+
+case ${1:-} in
+    new) shift; cmd_new "$@" ;;
+    add) shift; cmd_add "$@" ;;
+    done) shift; cmd_done "$@" ;;
+    ls) cmd_ls ;;
+    refresh-cache) refresh_cache ;;
+    *) usage; exit 2 ;;
+esac
