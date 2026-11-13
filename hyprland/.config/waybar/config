@@ -5,7 +5,7 @@
     // Choose the order of the modules
     "modules-left": ["ext/workspaces"],
     "modules-center": ["custom/music"],
-    "modules-right": ["tray", "pulseaudio", "backlight", "clock"],
+    "modules-right": ["tray", "pulseaudio", "clock"],
     "ext/workspaces": {
          "on-click": "activate",
          "sort-by-name": true,
@@ -36,11 +36,6 @@
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         "format": "{:%d %B %Y at %I:%M %p}",
         "format-alt": "󰃭 {:%A, %b %d  Week %W  󱐮 %I:%M:%S %p}"
-    },
-    "backlight": {
-        "device": "intel_backlight",
-        "format": "{icon}",
-        "format-icons": ["", "", "", "", "", "", "", "", ""]
     },
     "battery": {
         "states": {
