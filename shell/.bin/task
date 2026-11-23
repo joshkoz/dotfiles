@@ -202,8 +202,10 @@ cmd_new() {
 
         copy_files "$dir"
 
-        # Shared with the work root: workspace instructions, plus the same Claude memory and permission allow-list.
+        # Shared with the work root: workspace instructions and skills, plus the same Claude memory and permission allow-list.
+        [[ -f $work/AGENTS.md ]] && ln -s "$work/AGENTS.md" "$dir/AGENTS.md"
         [[ -f $work/CLAUDE.md ]] && ln -s "$work/CLAUDE.md" "$dir/CLAUDE.md"
+        [[ -d $work/.claude/skills ]] && ln -s "$work/.claude/skills" "$dir/.claude/skills"
         [[ -f $work/.claude/settings.local.json ]] && ln -s "$work/.claude/settings.local.json" "$dir/.claude/settings.local.json"
 
         printf '%s' "$prompt" >"$dir/.claude/task-prompt"
@@ -345,7 +347,9 @@ cmd_done() {
     done
 
     # Only remove what task new linked in; a real settings file may hold task-specific rules.
+    [[ -L $dir/AGENTS.md ]] && rm "$dir/AGENTS.md"
     [[ -L $dir/CLAUDE.md ]] && rm "$dir/CLAUDE.md"
+    [[ -L $dir/.claude/skills ]] && rm "$dir/.claude/skills"
     [[ -L $dir/.claude/settings.local.json ]] && rm "$dir/.claude/settings.local.json"
     rm -f "$dir/.claude/task-prompt"
     rmdir "$dir/.claude" 2>/dev/null || true
