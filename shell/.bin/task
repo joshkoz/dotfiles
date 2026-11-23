@@ -205,6 +205,9 @@ cmd_new() {
         # Shared with the work root: workspace instructions and skills, plus the same Claude memory and permission allow-list.
         [[ -f $work/AGENTS.md ]] && ln -s "$work/AGENTS.md" "$dir/AGENTS.md"
         [[ -f $work/CLAUDE.md ]] && ln -s "$work/CLAUDE.md" "$dir/CLAUDE.md"
+        # Skills look for the glossary and ADRs at the folder root, so point those back at the work root too.
+        [[ -f $work/GLOSSARY.md ]] && ln -s "$work/GLOSSARY.md" "$dir/GLOSSARY.md"
+        [[ -d $work/docs ]] && ln -s "$work/docs" "$dir/docs"
         [[ -d $work/.claude/skills ]] && ln -s "$work/.claude/skills" "$dir/.claude/skills"
         [[ -f $work/.claude/settings.local.json ]] && ln -s "$work/.claude/settings.local.json" "$dir/.claude/settings.local.json"
 
@@ -349,6 +352,8 @@ cmd_done() {
     # Only remove what task new linked in; a real settings file may hold task-specific rules.
     [[ -L $dir/AGENTS.md ]] && rm "$dir/AGENTS.md"
     [[ -L $dir/CLAUDE.md ]] && rm "$dir/CLAUDE.md"
+    [[ -L $dir/GLOSSARY.md ]] && rm "$dir/GLOSSARY.md"
+    [[ -L $dir/docs ]] && rm "$dir/docs"
     [[ -L $dir/.claude/skills ]] && rm "$dir/.claude/skills"
     [[ -L $dir/.claude/settings.local.json ]] && rm "$dir/.claude/settings.local.json"
     rm -f "$dir/.claude/task-prompt"
