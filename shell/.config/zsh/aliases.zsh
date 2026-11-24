@@ -25,3 +25,5 @@ alias -g C='| wl-copy'
 function pwgen(){
     head -c30 /dev/urandom | base64
 }
+
+alias agent-local='ln -sfn ~/.1password/agent.sock ~/.ssh/agent.sock'

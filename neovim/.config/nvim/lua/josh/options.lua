@@ -91,6 +91,25 @@ vim.o.laststatus = 3
 vim.o.showmode = true
 vim.o.cmdheight = 0
 
+-- Copy with OSC 52 so yanks reach whichever terminal is attached, including over SSH.
+-- Paste reads the Wayland clipboard when there is one (the terminal put OSC 52 copies there),
+-- otherwise nvim's own register; paste from a remote machine with the terminal instead.
+local osc52 = require("vim.ui.clipboard.osc52")
+local function paste()
+    if vim.env.WAYLAND_DISPLAY and vim.fn.executable("wl-paste") == 1 then
+        local lines = vim.fn.systemlist({ "wl-paste", "--no-newline" })
+        if vim.v.shell_error == 0 then
+            return lines
+        end
+    end
+    return { vim.fn.split(vim.fn.getreg(""), "\n"), vim.fn.getregtype("") }
+end
+vim.g.clipboard = {
+    name = "OSC 52 copy",
+    copy = { ["+"] = osc52.copy("+"), ["*"] = osc52.copy("*") },
+    paste = { ["+"] = paste, ["*"] = paste },
+}
+
 vim.g.loaded_python3_provider = 0
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0

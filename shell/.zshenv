@@ -11,3 +11,15 @@ export TESTCONTAINERS_RYUK_DISABLED=true
 export TESTCONTAINERS_HOST_OVERRIDE=127.0.0.1
 export CLOUDSDK_PYTHON_SITEPACKAGES=1
 
+
+# git and ssh use whichever agent ~/.ssh/agent.sock points at. A shell started by an SSH login
+# with a forwarded agent takes the link over, so the connecting machine's 1Password signs and
+# pushes. Once that agent is gone, the link falls back to the local 1Password agent.
+if [[ $OSTYPE == linux* ]]; then
+	if [[ -n $SSH_CONNECTION && -S $SSH_AUTH_SOCK && $SSH_AUTH_SOCK != $HOME/.ssh/agent.sock ]]; then
+		ln -sfn "$SSH_AUTH_SOCK" "$HOME/.ssh/agent.sock"
+	elif [[ ! -S $HOME/.ssh/agent.sock ]]; then
+		ln -sfn "$HOME/.1password/agent.sock" "$HOME/.ssh/agent.sock"
+	fi
+	export SSH_AUTH_SOCK=$HOME/.ssh/agent.sock
+fi
