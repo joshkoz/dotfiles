@@ -60,7 +60,7 @@ directory = "/home/joshua/Pictures/wallpapers"
 
 # hyprlock can't span, so this keeps ~/.current-wallpaper-{left,right} as the two halves
 [hooks]
-started = "~/.config/noctalia/hooks/lock-wallpaper.sh"
+started = [ "~/.config/noctalia/hooks/lock-wallpaper.sh", "~/.config/noctalia/hooks/hypr-rounding.sh" ]
 wallpaper_changed = "~/.config/noctalia/hooks/lock-wallpaper.sh"
 session_locked = "pidof 1password >/dev/null && 1password --lock || true"
 

@@ -1,0 +1,12 @@
+[Unit]
+Description=Watch Noctalia settings to sync Hyprland window rounding
+PartOf=wayland-session.target
+After=wayland-session.target
+
+[Path]
+# GUI changes (the Corner roundness slider) land in settings.toml; hand edits in config.toml
+PathChanged=%h/.local/state/noctalia/settings.toml
+PathChanged=%h/projects/dotfiles/noctalia/.config/noctalia/config.toml
+
+[Install]
+WantedBy=wayland-session.target

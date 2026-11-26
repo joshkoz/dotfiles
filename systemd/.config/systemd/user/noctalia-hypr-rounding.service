@@ -1,0 +1,8 @@
+[Unit]
+Description=Sync Hyprland window rounding with Noctalia's corner radius
+
+[Service]
+Type=oneshot
+# give noctalia a moment to reload the changed settings before asking it for the value
+ExecStartPre=/usr/bin/sleep 0.5
+ExecStart=%h/.config/noctalia/hooks/hypr-rounding.sh
