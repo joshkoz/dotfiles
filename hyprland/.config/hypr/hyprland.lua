@@ -230,7 +230,7 @@ hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
 hl.bind(mainMod .. " + CTRL + L", hl.dsp.workspace.move({ monitor = "+1" }))
 hl.bind(mainMod .. " + CTRL + H", hl.dsp.workspace.move({ monitor = "-1" }))
-hl.bind("CTRL + SHIFT + S", hl.dsp.exec_cmd("screenshot.sh area"))
+hl.bind("CTRL + SHIFT + S", hl.dsp.exec_cmd("noctalia msg screenshot-region"))
 hl.bind("CTRL + SHIFT + A", hl.dsp.exec_cmd("/home/joshua/.bin/pick-output-audio.sh"))
 hl.bind("CTRL + SHIFT + M", hl.dsp.exec_cmd("/home/joshua/.bin/pick-input-audio.sh"))
 hl.bind("CTRL + SHIFT + D", hl.dsp.exec_cmd("hyprpicker --autocopy"))

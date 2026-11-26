@@ -25,6 +25,13 @@ clipboard_enabled = false                # cliphist-text/images services already
 polkit_agent = true                      # admin password prompts (replaces hyprpolkitagent)
 time_format = "{:%-I:%M %p}"             # 12-hour time across the shell UI (lock screen etc.)
 
+    # Screenshots (CTRL+SHIFT+S): select a region, then the annotator opens like Satty did.
+    # In the annotator, Enter (or Ctrl+C) copies and Ctrl+S saves to ~/Pictures (each closes it).
+    [shell.screenshot]
+    annotate = true
+    filename_pattern = "screenshot-%Y-%m-%d_%H-%M-%S"   # same names as the old screenshot.sh
+    append_mode_suffix = false
+
     # Session menu: the default five actions, but Log out goes through stop-hyprland-session
     # (stops hyprland-session.target before exiting Hyprland, like the old wlogout button).
     # systemd-run puts it in its own unit: the script stops noctalia.service, which would
@@ -123,6 +130,11 @@ format = "{:%-I:%M %p}"          # bar clock, 12-hour (e.g. 9:05 PM)
 [location]
 address = "Melbourne, Australia"
 auto_locate = false
+
+# Enter copies in the screenshot annotator (like Satty). The copy keybind is only used by the
+# screenshot region overlay and annotator, so this doesn't change Enter anywhere else.
+[keybinds]
+copy = [ "Ctrl+c", "Return", "KP_Enter" ]
 
 # Volume/brightness/etc. popups: bottom middle, just above the bar
 [osd]
