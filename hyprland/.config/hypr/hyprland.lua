@@ -1,8 +1,6 @@
 -- Hyprland Lua config
 -- https://wiki.hypr.land/Configuring/Start/
 
-local colors = require("mocha")
-
 local terminal = "ghostty"
 local menu = "noctalia msg panel-toggle launcher"
 local mainMod = "SUPER"
@@ -65,9 +63,10 @@ hl.config({
     gaps_in = 5,
     gaps_out = 10,
     border_size = 2,
+    -- neutral fallback; Noctalia's hyprland template (noctalia.apply_theme below) sets the real colours
     col = {
-      active_border = { colors = { colors.peach, colors.maroon }, angle = 45 },
-      inactive_border = colors.base,
+      active_border = "rgb(d4d4d4)",
+      inactive_border = "rgb(121212)",
     },
     resize_on_border = true,
     allow_tearing = false,
