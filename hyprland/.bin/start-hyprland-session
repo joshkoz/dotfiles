@@ -16,7 +16,7 @@ if systemctl --user is-active --quiet graphical-session.target; then
     exit 1
 fi
 
-echo "Starting Hyprland session..."
+# No "Starting..." message: under greetd stdout is the VT, so it flashed on screen after login.
 
 # Clean start
 systemctl --user unset-environment WAYLAND_DISPLAY DISPLAY
