@@ -7,8 +7,8 @@ export EDITOR=nvim
 export VISUAL=nvim
 export TERMINAL=ghostty
 export DOCKER_HOST=unix:///run/user/$(id -u)/podman/podman.sock
-export TESTCONTAINERS_RYUK_DISABLED=true
-export TESTCONTAINERS_HOST_OVERRIDE=127.0.0.1
+# Testcontainers settings live in ~/.testcontainers.properties (testcontainers/ package) so IDEs
+# launched outside a shell pick them up too. Don't set TESTCONTAINERS_* here: env vars override that file.
 export CLOUDSDK_PYTHON_SITEPACKAGES=1
 
 
