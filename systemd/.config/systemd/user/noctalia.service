@@ -1,0 +1,17 @@
+[Unit]
+Description=Noctalia Wayland shell (bar, notifications, launcher)
+Documentation=https://docs.noctalia.dev/noctalia/compositor-settings/systemd-service/
+# Same lifecycle as the old waybar/dunst units: start once the compositor has exported
+# WAYLAND_DISPLAY, stop with the session.
+PartOf=wayland-session.target
+After=wayland-session.target
+
+[Service]
+# Noctalia signals readiness, so units ordered After=noctalia.service wait until the
+# tray (StatusNotifierWatcher) is actually listening.
+Type=notify
+ExecStart=/usr/bin/noctalia
+Restart=on-failure
+
+[Install]
+WantedBy=wayland-session.target

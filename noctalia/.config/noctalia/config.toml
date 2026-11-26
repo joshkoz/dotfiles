@@ -1,0 +1,72 @@
+# Noctalia v5 config. Replaces waybar + dunst + wofi (as the launcher).
+# Docs: https://docs.noctalia.dev/noctalia/configuration/
+# Settings changed in the GUI are saved to ~/.local/state/noctalia/settings.toml and win over this file.
+
+[theme]
+source = "builtin"
+builtin = "Kanagawa"          # closest to the Kanagawabones theme-picker setup
+mode = "dark"
+
+    # Apps that follow Noctalia's palette:
+    # - hyprland: window borders (writes hypr/noctalia.lua)
+    # - gtk3/gtk4: writes gtk-{3,4}.0/noctalia.css, imports it from gtk.css, and selects
+    #   the adw-gtk3(-dark) theme (needs the adw-gtk-theme package)
+    # ghostty etc. stay with theme-picker.sh.
+    [theme.templates]
+    enable_builtin_templates = true
+    builtin_ids = [ "hyprland", "gtk3", "gtk4" ]
+    enable_community_templates = false
+
+[shell]
+launch_apps_as_systemd_services = true   # apps launched from Noctalia survive a Noctalia restart
+clipboard_enabled = false                # cliphist-text/images services already keep clipboard history
+
+    [shell.animation]
+    speed = 3.0                          # multiplier: 1.0 = default, higher = snappier panels/launcher
+
+# hyprpaper + set-wallpaper.sh keep handling wallpapers
+[wallpaper]
+enabled = false
+
+# ---------------------------------------------------------------------------
+# Bar: laid out like the old waybar. Full width along the bottom, flat edges,
+# workspaces left, now playing in the middle, tray/volume/clock on the right.
+# ---------------------------------------------------------------------------
+[bar]
+order = [ "default" ]
+
+    [bar.default]
+    position = "bottom"
+    margin_ends = 0              # span the whole screen (default 100 makes it a floating island)
+    margin_edge = 0
+    radius = 0                   # square ends, like waybar
+    concave_edge_corners = false
+    thickness = 30
+    padding = 12
+    widget_spacing = 12
+
+    # Same left/middle/right split as waybar, plus most of Noctalia's default widgets.
+    # Left out: wallpaper + clipboard (those jobs stay with hyprpaper/cliphist),
+    # brightness (no backlight on this desktop) and battery (no system battery).
+    start = [ "launcher", "workspaces" ]
+    center = [ "media" ]
+    end = [
+        "tray",
+        "notifications",
+        "network",
+        "bluetooth",
+        "volume",
+        "clock",
+        "control-center",
+        "session"
+    ]
+
+# Volume/brightness/etc. popups: bottom middle, just above the bar
+[osd]
+position = "bottom_center"
+
+# ---------------------------------------------------------------------------
+# Notifications (replaces dunst; dunst was top-right too)
+# ---------------------------------------------------------------------------
+[notification]
+position = "top_right"

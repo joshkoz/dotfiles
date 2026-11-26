@@ -1,14 +1,15 @@
 [Unit]
 Description=LocalSend - File Sharing Client
-After=waybar.service wayland-session.target
-Wants=waybar.service
+After=noctalia.service wayland-session.target
 PartOf=wayland-session.target
 BindsTo=wayland-session.target
 
 [Service]
 Type=simple
 # We omit the pkill logic because systemd manages the lifecycle properly
-ExecStartPre=-/usr/bin/pkill -u %u -f localsend
+# -x matches the process name exactly. The old `-f localsend` matched any command line
+# containing "localsend", including `systemctl --user restart localsend` itself.
+ExecStartPre=-/usr/bin/pkill -u %u -x localsend
 ExecStart=/usr/bin/flatpak run org.localsend.localsend_app --hidden
 Restart=on-failure
 RestartSec=3s

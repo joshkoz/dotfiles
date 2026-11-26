@@ -103,6 +103,29 @@ hl.layer_rule({
   blur = true,
 })
 
+-- Noctalia animates its own surfaces; Hyprland's layer animations on top cause glitches
+-- https://docs.noctalia.dev/noctalia/compositor-settings/hyprland/
+hl.layer_rule({
+  name = "noctalia-no-anim",
+  match = { namespace = "^noctalia-(bar-.+|notification|dock|panel|attached-panel|osd|window-switcher)$" },
+  no_anim = true,
+})
+
+hl.layer_rule({
+  name = "noctalia-blur",
+  match = { namespace = "^noctalia-(bar-.+|notification|dock|panel|attached-panel|osd|window-switcher)$" },
+  ignore_alpha = 0.5,
+  blur = true,
+  blur_popups = true,
+})
+
+hl.window_rule({
+  name = "Noctalia settings",
+  match = { class = "dev.noctalia.Noctalia" },
+  float = true,
+  size = "monitor_w*0.5625 monitor_h*0.85",
+})
+
 -- --- Smart Gaps (No gaps when only one window is open) ---
 hl.workspace_rule({ workspace = "w[tv1]", gaps_out = 0, gaps_in = 0 })
 hl.workspace_rule({ workspace = "f[1]", gaps_out = 0, gaps_in = 0 })

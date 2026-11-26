@@ -4,11 +4,6 @@
 STEP="0.05"  # wpctl uses floating point (0.05 = 5%)
 SOUND_FILE="/usr/share/sounds/freedesktop/stereo/audio-volume-change.oga"
 
-# Function to get current volume (extracts 0.XX from "Volume: 0.XX")
-get_vol() {
-    wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print $2 * 100}' | cut -d. -f1
-}
-
 case $1 in
     up)
         # Increase volume, but limit to 1.0 (100%)
@@ -25,14 +20,7 @@ case $1 in
         ;;
 esac
 
-# Get new volume for notification
-VOLUME=$(get_vol)
-
-# Send Notification
-notify-send -a "System" -t 1000 -r 999 \
-    -h int:value:"$VOLUME" \
-    -h string:x-canonical-private-synchronous:volume \
-    "Volume: ${VOLUME}%"
+# No notification here: Noctalia shows its own volume OSD whenever the volume changes
 
 # Play the feedback sound
 if [ -f "$SOUND_FILE" ]; then
