@@ -3,8 +3,9 @@
 
 set -euo pipefail
 
-# Optional: Just check if we are in a TTY at all (ignores SSH or serial)
-if [[ ! "$(tty)" =~ /dev/tty[0-9] ]]; then
+# Only start from a local seat session: a virtual terminal (login prompt, ly) or a session
+# logind placed on a VT (XDG_VTNR, set by pam_systemd, e.g. greetd). Rejects SSH and serial.
+if [[ ! "$(tty)" =~ /dev/tty[0-9] && -z "${XDG_VTNR:-}" ]]; then
     echo "Hyprland session must be started from a virtual terminal (TTY)"
     exit 1
 fi
