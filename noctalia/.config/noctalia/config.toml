@@ -40,6 +40,7 @@ directory = "/home/joshua/Pictures/wallpapers"
 [hooks]
 started = "~/.config/noctalia/hooks/lock-wallpaper.sh"
 wallpaper_changed = "~/.config/noctalia/hooks/lock-wallpaper.sh"
+session_locked = "pidof 1password >/dev/null && 1password --lock || true"
 
 # ---------------------------------------------------------------------------
 # Bar: laid out like the old waybar. Full width along the bottom, flat edges,
@@ -73,6 +74,24 @@ order = [ "default" ]
         "control-center",
         "session"
     ]
+
+# Lock screen + idle (replaces hyprlock/hypridle). Also locks on `loginctl lock-session`
+# and before suspend (lock_before_suspend, on by default).
+[lockscreen]
+transition = [ "fade" ]          # lock/unlock animation; [] = instant
+transition_duration = 600        # milliseconds (default 1500)
+blur_intensity = 0.8             # wallpaper blur behind the lock UI (default 0.5)
+
+[idle.behavior.lock]
+action = "lock"
+timeout = 300                    # 5 minutes, same as the old hypridle setup
+enabled = true
+
+# Screen-off stays disabled: DPMS off crashes Hyprland intermittently on NVIDIA (dies in the
+# DRM connector probe aquamarine runs after outputs are disabled; started Nov 2026, possibly
+# kernel 7.2.14). Re-enable once fixed upstream.
+[idle.behavior.screen-off]
+enabled = false
 
 # Volume/brightness/etc. popups: bottom middle, just above the bar
 [osd]

@@ -19,7 +19,9 @@ echo "Starting Hyprland session..."
 
 # Clean start
 systemctl --user unset-environment WAYLAND_DISPLAY DISPLAY
-systemctl --user import-environment PATH
+# XDG_SESSION_ID: services in the user manager (noctalia) aren't inside the logind session,
+# so they need it to find the session for `loginctl lock-session`, lock hints, etc.
+systemctl --user import-environment PATH XDG_SESSION_ID
 
 # Start the session and wait for Hyprland to exit
 systemctl --user start hyprland-session.target

@@ -6,7 +6,7 @@ LOCK_FILE="$XDG_RUNTIME_DIR/hypr/exit.lock"
 # --- HYPRIDLE/WLOGOUT BYPASS ---
 if [[ "$1" == "--force" ]]; then
     systemctl --user stop --wait hyprland-session.target
-    systemctl --user unset-environment WAYLAND_DISPLAY DISPLAY XDG_CURRENT_DESKTOP
+    systemctl --user unset-environment WAYLAND_DISPLAY DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_ID
     hyprctl dispatch exit
     exit 0
 fi
@@ -24,7 +24,7 @@ if [ -f "$LOCK_FILE" ]; then
     systemctl --user stop --wait hyprland-session.target
     
     # Wipe the environment variables to prevent ghosting on next login
-    systemctl --user unset-environment WAYLAND_DISPLAY DISPLAY XDG_CURRENT_DESKTOP
+    systemctl --user unset-environment WAYLAND_DISPLAY DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_ID
     
     # Final compositor exit
     hyprctl dispatch exit

@@ -232,7 +232,7 @@ hl.bind("CTRL + SHIFT + D", hl.dsp.exec_cmd("hyprpicker --autocopy"))
 
 hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd("noctalia msg panel-toggle wallpaper"))
 hl.bind(mainMod .. " + SHIFT + T", hl.dsp.exec_cmd("noctalia msg settings-toggle theme"))
-hl.bind(mainMod .. " + SHIFT + X", hl.dsp.exec_cmd("/home/joshua/.bin/hyprlock-wrapper.sh --no-fade-in"))
+hl.bind(mainMod .. " + SHIFT + X", hl.dsp.exec_cmd("noctalia msg session lock"))
 
 -- Multimedia controls
 -- Noctalia steps 5%, caps at 100% and shows its OSD (volume-change.sh is kept but unused)
