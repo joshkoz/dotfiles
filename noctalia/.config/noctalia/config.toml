@@ -109,7 +109,9 @@ order = [ "default" ]
         "network",
         "bluetooth",
         "volume",
+        "clock-gap",
         "clock",
+        "clock-gap",
         "session"
     ]
 
@@ -131,8 +133,19 @@ enabled = true
 [idle.behavior.screen-off]
 enabled = false
 
+[widget.media]
+hide_when_no_media = true        # nothing at all when no player is running
+
 [widget.network]
 show_label = false               # icon only; hover for the network name
+
+[widget.volume]
+show_label = false               # icon only; the OSD shows the level when it changes
+
+# extra breathing room either side of the clock (on top of widget_spacing)
+[widget.clock-gap]
+type = "spacer"
+length = 24
 
 [widget.clock]
 format = "{:%-I:%M %p}"          # bar clock, 12-hour (e.g. 9:05 PM)
