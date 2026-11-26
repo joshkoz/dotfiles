@@ -22,6 +22,7 @@ mode = "dark"
 [shell]
 launch_apps_as_systemd_services = true   # apps launched from Noctalia survive a Noctalia restart
 clipboard_enabled = false                # cliphist-text/images services already keep clipboard history
+polkit_agent = true                      # admin password prompts (replaces hyprpolkitagent)
 
     [shell.animation]
     speed = 3.0                          # multiplier: 1.0 = default, higher = snappier panels/launcher
