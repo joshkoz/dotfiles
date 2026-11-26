@@ -4,14 +4,14 @@
 
 [theme]
 source = "builtin"
-builtin = "Kanagawa"          # closest to the Kanagawabones theme-picker setup
+builtin = "Kanagawa"          # pick themes with SUPER+SHIFT+T (opens Noctalia's theme settings)
 mode = "dark"
 
     # Apps that follow Noctalia's palette:
     # - hyprland: window borders (writes hypr/noctalia.lua)
     # - gtk3/gtk4: writes gtk-{3,4}.0/noctalia.css, imports it from gtk.css, and selects
     #   the adw-gtk3(-dark) theme (needs the adw-gtk-theme package)
-    # ghostty etc. stay with theme-picker.sh.
+    # ghostty keeps its own fixed theme (ghostty/.config/ghostty/config).
     [theme.templates]
     enable_builtin_templates = true
     builtin_ids = [ "hyprland", "gtk3", "gtk4" ]

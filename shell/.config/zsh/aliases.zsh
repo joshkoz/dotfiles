@@ -1,7 +1,6 @@
 alias k=kubectl
 alias vim=nvim
 alias open='xdg-open'
-alias hstat='systemctl --user status "hypr*" waybar dunst cliphist-images cliphist-text'
 
 bindkey -s '^f' "^utmux-sessionizer^M"
 

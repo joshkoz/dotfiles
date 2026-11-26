@@ -11,8 +11,11 @@ active_sink=$(pactl get-default-sink)
 menu_entries=()
 active_description=""
 
-# Check if wofi or rofi is already running; if so, kill it and exit
-if pkill -x wofi || pkill -x rofi; then
+# Pressing the hotkey again closes an open picker instead of opening a second one
+if [ "$XDG_SESSION_TYPE" = "wayland" ] && pgrep -u "$USER" -f '^noctalia dmenu' >/dev/null; then
+    noctalia msg panel-close >/dev/null
+    exit 0
+elif pkill -x rofi; then
     exit 0
 fi
 
@@ -57,7 +60,7 @@ done
 
 # Show menu
 if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
-    menu=$(printf '%s\n' "${display_entries[@]}" | wofi --dmenu -i -p "🕪  Audio Output")
+    menu=$(printf '%s\n' "${display_entries[@]}" | noctalia dmenu -p "Audio Output")
 else
     menu=$(printf '%s\n' "${display_entries[@]}" | rofi -dmenu -i -p "🕪" -no-sort)
 fi

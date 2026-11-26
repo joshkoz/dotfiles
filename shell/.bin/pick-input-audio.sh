@@ -11,8 +11,11 @@ declare -a exclude_list=(
 declare -A source_map
 active_source=$(pactl get-default-source)
 
-# Check if wofi or rofi is already running; if so, kill it and exit
-if pkill -x wofi || pkill -x rofi; then
+# Pressing the hotkey again closes an open picker instead of opening a second one
+if [ "$XDG_SESSION_TYPE" = "wayland" ] && pgrep -u "$USER" -f '^noctalia dmenu' >/dev/null; then
+    noctalia msg panel-close >/dev/null
+    exit 0
+elif pkill -x rofi; then
     exit 0
 fi
 
@@ -61,7 +64,7 @@ fi
 # Generate the menu with descriptions
 if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
     echo "Session type is Wayland."
-    menu=$(printf '%s\n' "${menu_entries[@]}" | wofi --dmenu -i -p "🎙  Audio Input")
+    menu=$(printf '%s\n' "${menu_entries[@]}" | noctalia dmenu -p "Audio Input")
 else
     menu=$(printf '%s\n' "${menu_entries[@]}" | rofi -dmenu -i -p "🎙")
 fi

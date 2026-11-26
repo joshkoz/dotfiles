@@ -231,14 +231,15 @@ hl.bind("CTRL + SHIFT + M", hl.dsp.exec_cmd("/home/joshua/.bin/pick-input-audio.
 hl.bind("CTRL + SHIFT + D", hl.dsp.exec_cmd("hyprpicker --autocopy"))
 
 hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd("/home/joshua/.bin/set-wallpaper.sh"))
-hl.bind(mainMod .. " + SHIFT + T", hl.dsp.exec_cmd("/home/joshua/.bin/theme-picker.sh"))
+hl.bind(mainMod .. " + SHIFT + T", hl.dsp.exec_cmd("noctalia msg settings-toggle theme"))
 hl.bind(mainMod .. " + SHIFT + X", hl.dsp.exec_cmd("/home/joshua/.bin/hyprlock-wrapper.sh --no-fade-in"))
 
 -- Multimedia controls
-hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("volume-change.sh up"))
-hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("volume-change.sh down"))
-hl.bind("XF86AudioMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"))
-hl.bind("XF86AudioMicMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"))
+-- Noctalia steps 5%, caps at 100% and shows its OSD (volume-change.sh is kept but unused)
+hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("noctalia msg volume-up"))
+hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("noctalia msg volume-down"))
+hl.bind("XF86AudioMute", hl.dsp.exec_cmd("noctalia msg volume-mute"))
+hl.bind("XF86AudioMicMute", hl.dsp.exec_cmd("noctalia msg mic-mute"))
 
 -- Media player controls
 hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"))
