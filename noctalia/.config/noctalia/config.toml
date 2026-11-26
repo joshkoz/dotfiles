@@ -14,9 +14,12 @@ mode = "dark"
     # - gtk3/gtk4: writes gtk-{3,4}.0/noctalia.css, imports it from gtk.css, and selects
     #   the adw-gtk3(-dark) theme (needs the adw-gtk-theme package)
     # - ghostty: writes ghostty/themes/noctalia and sets `theme = noctalia` in the ghostty config
+    # - cava: audio visualiser colours
+    # - qt: writes qt{5,6}ct/colors/noctalia.conf; qt5ct.conf/qt6ct.conf point color_scheme_path
+    #   at it (style = Fusion, custom_palette = true)
     [theme.templates]
     enable_builtin_templates = true
-    builtin_ids = [ "hyprland", "gtk3", "gtk4", "ghostty" ]
+    builtin_ids = [ "hyprland", "gtk3", "gtk4", "ghostty", "cava", "qt" ]
     enable_community_templates = false
 
 [shell]
