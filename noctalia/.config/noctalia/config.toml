@@ -24,6 +24,27 @@ launch_apps_as_systemd_services = true   # apps launched from Noctalia survive a
 clipboard_enabled = false                # cliphist-text/images services already keep clipboard history
 polkit_agent = true                      # admin password prompts (replaces hyprpolkitagent)
 
+    # Session menu: the default five actions, but Log out goes through stop-hyprland-session
+    # (stops hyprland-session.target before exiting Hyprland, like the old wlogout button).
+    # systemd-run puts it in its own unit: the script stops noctalia.service, which would
+    # otherwise kill the script halfway through.
+    [[shell.session.actions]]
+    action = "lock"
+
+    [[shell.session.actions]]
+    action = "logout"
+    command = "systemd-run --user --collect --quiet /home/joshua/.bin/stop-hyprland-session --force"
+
+    [[shell.session.actions]]
+    action = "lock_and_suspend"
+
+    [[shell.session.actions]]
+    action = "reboot"
+
+    [[shell.session.actions]]
+    action = "shutdown"
+    variant = "destructive"
+
     [shell.animation]
     speed = 3.0                          # multiplier: 1.0 = default, higher = snappier panels/launcher
 

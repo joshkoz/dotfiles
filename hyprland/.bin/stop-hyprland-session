@@ -1,40 +1,42 @@
 #!/bin/bash
+# End the Hyprland session cleanly: stop the session's services first, then Hyprland.
+#   stop-hyprland-session          press twice within 10s to confirm
+#   stop-hyprland-session --force  no confirmation (noctalia's Log out button)
 
 # Path for the exit lockfile
 LOCK_FILE="$XDG_RUNTIME_DIR/hypr/exit.lock"
 
-# --- HYPRIDLE/WLOGOUT BYPASS ---
-if [[ "$1" == "--force" ]]; then
-    systemctl --user stop --wait hyprland-session.target
+stop_session() {
+    # Clear the session's variables first: if this script was started from a Hyprland
+    # keybind it lives in hyprland.service and is killed when that unit stops.
     systemctl --user unset-environment WAYLAND_DISPLAY DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_ID
-    hyprctl dispatch exit
+
+    # Stopping wayland-session.target stops every service that is PartOf/BindsTo it
+    # (noctalia, 1password, solaar, cliphist, ...) while the compositor is still up, then
+    # hyprland.service last (it is BindsTo= the target and ordered Before= it).
+    systemctl --user stop wayland-session.target
+
+    # Fallback in case Hyprland is still running (e.g. started outside systemd).
+    # Hyprland's Lua config mode needs dispatchers written as Lua.
+    hyprctl dispatch 'hl.dsp.exit()' >/dev/null 2>&1 || true
+}
+
+# --- NO CONFIRMATION (noctalia session menu) ---
+if [[ "$1" == "--force" ]]; then
+    stop_session
     exit 0
 fi
 
 if [ -f "$LOCK_FILE" ]; then
     # --- SECOND PRESS: EXIT ---
-    # Remove lock immediately
     rm -f "$LOCK_FILE"
-    
-    # Notify the user
     hyprctl notify -0 2000 "rgb(ff5555)" "fontsize:16 Closing session..."
-    
-    # Stop the systemd target and wait for all services to exit
-    # This handles Discord, Waybar, etc. cleanly.
-    systemctl --user stop --wait hyprland-session.target
-    
-    # Wipe the environment variables to prevent ghosting on next login
-    systemctl --user unset-environment WAYLAND_DISPLAY DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_ID
-    
-    # Final compositor exit
-    hyprctl dispatch exit
+    stop_session
 else
     # --- FIRST PRESS: PROMPT ---
     touch "$LOCK_FILE"
-    
-    # Show the notification
     hyprctl notify -0 10000 "rgb(df3f01)" "fontsize:16 Confirm Exit: Press again to stop session"
-    
+
     # Auto-remove the lockfile after 10 seconds (runs in background)
     ( sleep 10 && rm -f "$LOCK_FILE" ) &
 fi
