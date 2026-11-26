@@ -1,4 +1,5 @@
 require("kanagawa").setup({
+  transparent = true,
   colors = {
     theme = {
       all = {
