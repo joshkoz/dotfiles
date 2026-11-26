@@ -98,9 +98,10 @@ order = [ "default" ]
     widget_spacing = 12
 
     # Same left/middle/right split as waybar, plus most of Noctalia's default widgets.
-    # Left out: clipboard (SUPER+V opens it instead), brightness (no backlight on this
-    # desktop) and battery (no system battery).
-    start = [ "launcher", "wallpaper", "workspaces" ]
+    # Left out: launcher (SUPER+SPACE), wallpaper (SUPER+SHIFT+W), clipboard (SUPER+V),
+    # control-center (media/network/volume widgets open its tabs),
+    # brightness (no backlight on this desktop) and battery (no system battery).
+    start = [ "workspaces" ]
     center = [ "media" ]
     end = [
         "tray",
@@ -109,7 +110,6 @@ order = [ "default" ]
         "bluetooth",
         "volume",
         "clock",
-        "control-center",
         "session"
     ]
 
@@ -130,6 +130,9 @@ enabled = true
 # kernel 7.2.14). Re-enable once fixed upstream.
 [idle.behavior.screen-off]
 enabled = false
+
+[widget.network]
+show_label = false               # icon only; hover for the network name
 
 [widget.clock]
 format = "{:%-I:%M %p}"          # bar clock, 12-hour (e.g. 9:05 PM)
