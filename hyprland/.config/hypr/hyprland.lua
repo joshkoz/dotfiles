@@ -230,7 +230,7 @@ hl.bind("CTRL + SHIFT + A", hl.dsp.exec_cmd("/home/joshua/.bin/pick-output-audio
 hl.bind("CTRL + SHIFT + M", hl.dsp.exec_cmd("/home/joshua/.bin/pick-input-audio.sh"))
 hl.bind("CTRL + SHIFT + D", hl.dsp.exec_cmd("hyprpicker --autocopy"))
 
-hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd("/home/joshua/.bin/set-wallpaper.sh"))
+hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd("noctalia msg panel-toggle wallpaper"))
 hl.bind(mainMod .. " + SHIFT + T", hl.dsp.exec_cmd("noctalia msg settings-toggle theme"))
 hl.bind(mainMod .. " + SHIFT + X", hl.dsp.exec_cmd("/home/joshua/.bin/hyprlock-wrapper.sh --no-fade-in"))
 

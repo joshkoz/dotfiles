@@ -3,18 +3,20 @@
 # Settings changed in the GUI are saved to ~/.local/state/noctalia/settings.toml and win over this file.
 
 [theme]
-source = "builtin"
-builtin = "Kanagawa"          # pick themes with SUPER+SHIFT+T (opens Noctalia's theme settings)
+source = "custom"
+custom_palette = "Kanagawabones"   # palettes/Kanagawabones.json: Ghostty's Kanagawabones colours
+builtin = "Kanagawa"               # used if source is switched back to "builtin"
+# pick themes with SUPER+SHIFT+T (opens Noctalia's theme settings)
 mode = "dark"
 
     # Apps that follow Noctalia's palette:
     # - hyprland: window borders (writes hypr/noctalia.lua)
     # - gtk3/gtk4: writes gtk-{3,4}.0/noctalia.css, imports it from gtk.css, and selects
     #   the adw-gtk3(-dark) theme (needs the adw-gtk-theme package)
-    # ghostty keeps its own fixed theme (ghostty/.config/ghostty/config).
+    # - ghostty: writes ghostty/themes/noctalia and sets `theme = noctalia` in the ghostty config
     [theme.templates]
     enable_builtin_templates = true
-    builtin_ids = [ "hyprland", "gtk3", "gtk4" ]
+    builtin_ids = [ "hyprland", "gtk3", "gtk4", "ghostty" ]
     enable_community_templates = false
 
 [shell]
@@ -24,9 +26,20 @@ clipboard_enabled = false                # cliphist-text/images services already
     [shell.animation]
     speed = 3.0                          # multiplier: 1.0 = default, higher = snappier panels/launcher
 
-# hyprpaper + set-wallpaper.sh keep handling wallpapers
+# Wallpapers: one 7680x2160 image spans both 4K monitors (DP-1 left, DP-2 right).
+# Pick with SUPER+SHIFT+W, the bar's wallpaper button, or "/wall" in the launcher.
 [wallpaper]
-enabled = false
+enabled = true
+fill_mode = "span"
+directory = "/home/joshua/Pictures/wallpapers"
+
+    [wallpaper.default]
+    path = "/home/joshua/Pictures/wallpapers/forest-wide.jpg"
+
+# hyprlock can't span, so this keeps ~/.current-wallpaper-{left,right} as the two halves
+[hooks]
+started = "~/.config/noctalia/hooks/lock-wallpaper.sh"
+wallpaper_changed = "~/.config/noctalia/hooks/lock-wallpaper.sh"
 
 # ---------------------------------------------------------------------------
 # Bar: laid out like the old waybar. Full width along the bottom, flat edges,
@@ -46,9 +59,9 @@ order = [ "default" ]
     widget_spacing = 12
 
     # Same left/middle/right split as waybar, plus most of Noctalia's default widgets.
-    # Left out: wallpaper + clipboard (those jobs stay with hyprpaper/cliphist),
-    # brightness (no backlight on this desktop) and battery (no system battery).
-    start = [ "launcher", "workspaces" ]
+    # Left out: clipboard (cliphist keeps that job), brightness (no backlight on this
+    # desktop) and battery (no system battery).
+    start = [ "launcher", "wallpaper", "workspaces" ]
     center = [ "media" ]
     end = [
         "tray",
