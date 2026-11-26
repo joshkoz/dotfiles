@@ -234,6 +234,7 @@ hl.bind("CTRL + SHIFT + S", hl.dsp.exec_cmd("noctalia msg screenshot-region"))
 hl.bind("CTRL + SHIFT + A", hl.dsp.exec_cmd("/home/joshua/.bin/pick-output-audio.sh"))
 hl.bind("CTRL + SHIFT + M", hl.dsp.exec_cmd("/home/joshua/.bin/pick-input-audio.sh"))
 hl.bind("CTRL + SHIFT + D", hl.dsp.exec_cmd("hyprpicker --autocopy"))
+hl.bind(mainMod .. " + V", hl.dsp.exec_cmd("noctalia msg panel-toggle clipboard"))
 
 hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd("noctalia msg panel-toggle wallpaper"))
 hl.bind(mainMod .. " + SHIFT + T", hl.dsp.exec_cmd("noctalia msg settings-toggle theme"))

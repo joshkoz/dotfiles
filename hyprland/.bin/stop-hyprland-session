@@ -12,7 +12,7 @@ stop_session() {
     systemctl --user unset-environment WAYLAND_DISPLAY DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_ID
 
     # Stopping wayland-session.target stops every service that is PartOf/BindsTo it
-    # (noctalia, 1password, solaar, cliphist, ...) while the compositor is still up, then
+    # (noctalia, 1password, solaar, ...) while the compositor is still up, then
     # hyprland.service last (it is BindsTo= the target and ordered Before= it).
     systemctl --user stop wayland-session.target
 

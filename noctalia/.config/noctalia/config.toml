@@ -21,7 +21,7 @@ mode = "dark"
 
 [shell]
 launch_apps_as_systemd_services = true   # apps launched from Noctalia survive a Noctalia restart
-clipboard_enabled = false                # cliphist-text/images services already keep clipboard history
+clipboard_enabled = true                 # clipboard history panel on SUPER+V (replaces cliphist)
 polkit_agent = true                      # admin password prompts (replaces hyprpolkitagent)
 time_format = "{:%-I:%M %p}"             # 12-hour time across the shell UI (lock screen etc.)
 
@@ -90,7 +90,7 @@ order = [ "default" ]
     widget_spacing = 12
 
     # Same left/middle/right split as waybar, plus most of Noctalia's default widgets.
-    # Left out: clipboard (cliphist keeps that job), brightness (no backlight on this
+    # Left out: clipboard (SUPER+V opens it instead), brightness (no backlight on this
     # desktop) and battery (no system battery).
     start = [ "launcher", "wallpaper", "workspaces" ]
     center = [ "media" ]
