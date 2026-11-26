@@ -23,6 +23,7 @@ mode = "dark"
 launch_apps_as_systemd_services = true   # apps launched from Noctalia survive a Noctalia restart
 clipboard_enabled = false                # cliphist-text/images services already keep clipboard history
 polkit_agent = true                      # admin password prompts (replaces hyprpolkitagent)
+time_format = "{:%-I:%M %p}"             # 12-hour time across the shell UI (lock screen etc.)
 
     # Session menu: the default five actions, but Log out goes through stop-hyprland-session
     # (stops hyprland-session.target before exiting Hyprland, like the old wlogout button).
@@ -114,6 +115,14 @@ enabled = true
 # kernel 7.2.14). Re-enable once fixed upstream.
 [idle.behavior.screen-off]
 enabled = false
+
+[widget.clock]
+format = "{:%-I:%M %p}"          # bar clock, 12-hour (e.g. 9:05 PM)
+
+# Weather and night light (sunset/sunrise) use a fixed location instead of IP lookup
+[location]
+address = "Melbourne, Australia"
+auto_locate = false
 
 # Volume/brightness/etc. popups: bottom middle, just above the bar
 [osd]
