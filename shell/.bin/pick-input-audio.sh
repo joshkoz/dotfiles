@@ -12,10 +12,8 @@ declare -A source_map
 active_source=$(pactl get-default-source)
 
 # Pressing the hotkey again closes an open picker instead of opening a second one
-if [ "$XDG_SESSION_TYPE" = "wayland" ] && pgrep -u "$USER" -f '^noctalia dmenu' >/dev/null; then
+if pgrep -u "$USER" -f '^noctalia dmenu' >/dev/null; then
     noctalia msg panel-close >/dev/null
-    exit 0
-elif pkill -x rofi; then
     exit 0
 fi
 
@@ -62,12 +60,7 @@ if [ -n "$active_description" ]; then
 fi
 
 # Generate the menu with descriptions
-if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
-    echo "Session type is Wayland."
-    menu=$(printf '%s\n' "${menu_entries[@]}" | noctalia dmenu -p "Audio Input")
-else
-    menu=$(printf '%s\n' "${menu_entries[@]}" | rofi -dmenu -i -p "🎙")
-fi
+menu=$(printf '%s\n' "${menu_entries[@]}" | noctalia dmenu -p "Audio Input")
 
 # Get the selected source name and set it as the default
 selected_source=${source_map[$menu]}

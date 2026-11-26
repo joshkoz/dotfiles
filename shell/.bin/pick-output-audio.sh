@@ -12,10 +12,8 @@ menu_entries=()
 active_description=""
 
 # Pressing the hotkey again closes an open picker instead of opening a second one
-if [ "$XDG_SESSION_TYPE" = "wayland" ] && pgrep -u "$USER" -f '^noctalia dmenu' >/dev/null; then
+if pgrep -u "$USER" -f '^noctalia dmenu' >/dev/null; then
     noctalia msg panel-close >/dev/null
-    exit 0
-elif pkill -x rofi; then
     exit 0
 fi
 
@@ -59,11 +57,7 @@ for entry in "${menu_entries[@]}"; do
 done
 
 # Show menu
-if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
-    menu=$(printf '%s\n' "${display_entries[@]}" | noctalia dmenu -p "Audio Output")
-else
-    menu=$(printf '%s\n' "${display_entries[@]}" | rofi -dmenu -i -p "🕪" -no-sort)
-fi
+menu=$(printf '%s\n' "${display_entries[@]}" | noctalia dmenu -p "Audio Output")
 
 # Strip the number prefix from selection
 menu=$(echo "$menu" | sed 's/^[0-9]*\. //')
