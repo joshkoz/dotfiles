@@ -56,6 +56,11 @@ time_format = "{:%-I:%M %p}"             # 12-hour time across the shell UI (loc
     action = "shutdown"
     variant = "destructive"
 
+    # Keep the login screen (noctalia-greeter) in step with wallpaper/palette/font/monitor
+    # changes. Passwordless needs: sudo noctalia-greeter passwordless-sync enable "$USER"
+    [shell.greeter_sync]
+    auto_sync = true
+
     [shell.animation]
     speed = 3.0                          # multiplier: 1.0 = default, higher = snappier panels/launcher
 
