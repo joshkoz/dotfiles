@@ -27,8 +27,6 @@ zstyle :compinstall filename '/home/joshua/.zshrc'
 autoload -Uz compinit
 compinit
 
-touch $HOME/.config/zsh/secrets.zsh
-source $HOME/.config/zsh/secrets.zsh
 
 source $HOME/.config/zsh/aliases.zsh
 
