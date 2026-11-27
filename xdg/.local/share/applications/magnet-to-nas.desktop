@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=qBittorrent (NAS)
+Comment=Add magnet links in the NAS qBittorrent web UI
+Exec=/home/joshua/.bin/magnet-to-nas %u
+Icon=folder-download
+Terminal=false
+NoDisplay=true
+MimeType=x-scheme-handler/magnet;

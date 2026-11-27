@@ -1,0 +1,23 @@
+#!/usr/bin/env sh
+# Open a magnet link in the qBittorrent web UI on the NAS (Add Torrent dialog, prefilled).
+# Registered as the x-scheme-handler/magnet default via
+# ~/.local/share/applications/magnet-to-nas.desktop.
+# The web UI needs no login from 192.168.1.0/24, so this only works on the home LAN.
+set -eu
+
+QBIT_URL="${QBIT_URL:-http://192.168.1.208:8090}"
+
+if [ $# -lt 1 ] || [ -z "$1" ]; then
+  xdg-open "${QBIT_URL}/"
+  exit 0
+fi
+
+# Percent-encode the whole magnet link, like encodeURIComponent; the web UI decodes it.
+encoded=$(printf '%s' "$1" | python3 -I -c 'import sys, urllib.parse; print(urllib.parse.quote(sys.stdin.read(), safe=""))')
+target="${QBIT_URL}/#download=${encoded}"
+
+if [ -n "${MAGNET_TO_NAS_DRY_RUN:-}" ]; then
+  printf '%s\n' "$target"
+else
+  xdg-open "$target"
+fi
